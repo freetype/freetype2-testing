@@ -1,0 +1,33 @@
+# Copyright 2018 by
+# Armin Hasitzka.
+#
+# This file is part of the FreeType project, and may only be used, modified,
+# and distributed under the terms of the FreeType project license,
+# LICENSE.TXT.  By continuing to use, modify, or distribute this file you
+# indicate that you have read the license and understand and accept it
+# fully.
+
+git:
+  depth: 1
+
+matrix:
+  include:
+    - os: linux
+      language: cpp
+      compiler: clang
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - clang-5.0
+      env:
+        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+        - TRAVIS_CI_ROW="fuzzing"
+
+before_install:
+  - sudo apt-get -qq update && sudo apt-get install -y autoconf cmake libarchive-dev libtool
+  - eval "${MATRIX_EVAL}"
+
+script:
+  - if [[ "${TRAVIS_CI_ROW}" == "fuzzing" ]]; then bash fuzzing/scripts/run-travis-ci.sh; fi
