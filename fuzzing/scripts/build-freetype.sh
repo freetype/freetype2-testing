@@ -11,11 +11,21 @@ set -exo pipefail
 # fully.
 
 dir=$PWD
-cd ../../freetype2
+pathToFreeType="../../external/freetype2"
+
+git submodule init "${pathToFreeType}"
+# We always want to run the latest version of FreeType.
+git submodule update --remote "${pathToFreeType}"
+
+cd "${pathToFreeType}"
 
 git clean -dfqx
+git reset --hard
+git rev-parse HEAD
+
 sh autogen.sh
 sh configure
+
 make -j$(nproc)
 
 cd "${dir}"

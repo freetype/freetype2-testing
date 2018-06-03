@@ -9,8 +9,14 @@
 # indicate that you have read the license and understand and accept it
 # fully.
 
-add_executable(driver
-  driver.cc
-  ../../freetype2/src/tools/ftfuzzer/ftfuzzer.cc)
+add_subdirectory(targets)
 
-target_link_libraries(driver PRIVATE archive freetype)
+if("${FUZZ_TARGET_TYPE}" STREQUAL "driver")
+
+  add_subdirectory(driver)
+
+elseif("${FUZZ_TARGET_TYPE}" STREQUAL "libfuzzer")
+
+  add_subdirectory(libfuzzer)
+
+endif()

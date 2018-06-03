@@ -13,21 +13,20 @@ set -exo pipefail
 dir=$PWD
 cd "${0%/*}" # go to /fuzzing/scripts
 
-# the CI should always run on the latest versions of everything
-git submodule update --recursive --remote
-
 export CC="clang"
 export CXX="clang++"
+
+bash build-glog.sh
 
 sanitize_flags="-fsanitize=address,undefined -fsanitize-address-use-after-scope"
 
 export CFLAGS="${CFLAGS} -g -O1 ${sanitize_flags}"
-export CXXFLAGS="${CFLAGS} -g -O1 -std=c++11 ${sanitize_flags}"
+export CXXFLAGS="${CXXFLAGS} -g -O1 -std=c++14 ${sanitize_flags}"
 export LDFLAGS="${LDFLAGS} ${sanitize_flags}"
 
 bash build-freetype.sh
 
-# used by CMake to decide what to build
+# used by CMake to decide what to build:
 export CMAKE_FUZZ_TARGET_TYPE="driver"
 
 bash build-targets.sh

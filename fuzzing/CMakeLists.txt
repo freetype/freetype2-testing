@@ -15,47 +15,29 @@ project(fuzzing)
 
 set(FUZZ_TARGET_TYPE "$ENV{CMAKE_FUZZ_TARGET_TYPE}")
 
-set(FREETYPE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../freetype2")
+set(FREETYPE_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external/freetype2")
+set(FREETYPE_SRC_DIR  "${FREETYPE_BASE_DIR}/src")
 
-set(FUZZING_CORPORA_DIR "${CMAKE_CURRENT_SOURCE_DIR}/corpora")
+set(GLOG_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external/glog")
+set(GLOG_SRC_DIR  "${GLOG_BASE_DIR}/src")
+
+set(FUZZING_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(FUZZING_SRC_DIR  "${FUZZING_BASE_DIR}/src")
+
+set(FUZZING_CORPORA_DIR    "${FUZZING_BASE_DIR}/corpora")
 set(FUZZING_CORPORA_SUITES "legacy")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-include_directories("${FREETYPE_SOURCE_DIR}/include")
-link_directories("${FREETYPE_SOURCE_DIR}/objs/.libs")
+include_directories("${FREETYPE_BASE_DIR}/include")
+include_directories("${GLOG_SRC_DIR}")
+include_directories("${FUZZING_SRC_DIR}")
+
+link_directories("${FREETYPE_BASE_DIR}/objs/.libs")
+link_directories("${GLOG_BASE_DIR}/.libs")
 
 enable_testing()
 
-if("${FUZZ_TARGET_TYPE}" STREQUAL "driver")
-
-  add_subdirectory(targets)
-  add_subdirectory(driver)
-
-  foreach(suite ${FUZZING_CORPORA_SUITES})
-    set(suite_dir "${FUZZING_CORPORA_DIR}/${suite}")
-    file(GLOB_RECURSE test_input_paths "${suite_dir}/*")
-    foreach(test_input_path ${test_input_paths})
-      string(REPLACE "${suite_dir}/" "" test_name "${test_input_path}")
-      add_test(
-        NAME "${suite}:${test_name}"
-        COMMAND driver "--${suite}" "${test_input_path}")
-    endforeach()
-  endforeach()
-
-elseif("${FUZZ_TARGET_TYPE}" STREQUAL "libfuzzer")
-
-  # These flags cannot be set earlier since CMake defines a main function
-  # itself when testing the compiler. Clang (obviously) fails when being
-  # confronted with two main functions.
-
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=fuzzer")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=fuzzer")
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=fuzzer")
-
-  add_subdirectory(targets)
-  add_subdirectory(libfuzzer)
-
-endif()
+add_subdirectory(src)

@@ -9,5 +9,4 @@
 # indicate that you have read the license and understand and accept it
 # fully.
 
-add_executable(libfuzzer-legacy ../../freetype2/src/tools/ftfuzzer/ftfuzzer.cc)
-target_link_libraries(libfuzzer-legacy PRIVATE archive freetype)
+add_subdirectory(font-drivers)
