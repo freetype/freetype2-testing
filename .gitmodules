@@ -1,3 +1,8 @@
 [submodule "freetype2"]
-	path = freetype2
+	path = external/freetype2
 	url = http://git.sv.nongnu.org/r/freetype/freetype2.git
+	branch = master
+[submodule "glog"]
+	path = external/glog
+	url = https://github.com/google/glog
+	branch = master
