@@ -18,9 +18,6 @@ set(FUZZ_TARGET_TYPE "$ENV{CMAKE_FUZZ_TARGET_TYPE}")
 set(FREETYPE_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external/freetype2")
 set(FREETYPE_SRC_DIR  "${FREETYPE_BASE_DIR}/src")
 
-set(GLOG_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external/glog")
-set(GLOG_SRC_DIR  "${GLOG_BASE_DIR}/src")
-
 set(FUZZING_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(FUZZING_SRC_DIR  "${FUZZING_BASE_DIR}/src")
 
@@ -32,11 +29,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 include_directories("${FREETYPE_BASE_DIR}/include")
-include_directories("${GLOG_SRC_DIR}")
 include_directories("${FUZZING_SRC_DIR}")
 
 link_directories("${FREETYPE_BASE_DIR}/objs/.libs")
-link_directories("${GLOG_BASE_DIR}/.libs")
 
 enable_testing()
 

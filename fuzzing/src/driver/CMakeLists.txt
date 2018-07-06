@@ -17,6 +17,7 @@ target_link_libraries(driver PRIVATE
   archive
   fontdriver-targets
   freetype
+  gflags
   glog)
 
 foreach(suite ${FUZZING_CORPORA_SUITES})

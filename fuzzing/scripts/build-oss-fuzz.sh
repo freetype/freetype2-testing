@@ -19,12 +19,6 @@ cd "${0%/*}" # go to /fuzzing/scripts
 # we build a few libraries that do not react well to the fuzzers' main
 # function.
 
-# Google's logging module has many issues with automated instrumentation.
-# See `scripts/build-glog.sh' for details.  Thankfully, we're not interested
-# in glog's internals and can simply skip the fuzzer instrumentation here.
-
-bash build-glog.sh
-
 cflags="${CFLAGS}"
 cxxflags="${CXXFLAGS}"
 ldflags="${LDFLAGS}"

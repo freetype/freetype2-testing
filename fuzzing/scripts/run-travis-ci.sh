@@ -13,12 +13,10 @@ set -exo pipefail
 dir=$PWD
 cd "${0%/*}" # go to /fuzzing/scripts
 
+sanitize_flags="-fsanitize=address,undefined -fsanitize-address-use-after-scope"
+
 export CC="clang"
 export CXX="clang++"
-
-bash build-glog.sh
-
-sanitize_flags="-fsanitize=address,undefined -fsanitize-address-use-after-scope"
 
 export CFLAGS="${CFLAGS} -g -O1 ${sanitize_flags}"
 export CXXFLAGS="${CXXFLAGS} -g -O1 -std=c++14 ${sanitize_flags}"
