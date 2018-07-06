@@ -20,7 +20,6 @@
 
 #include <ft2build.h>
 #include FT_FONT_FORMATS_H
-#include FT_FREETYPE_H
 
 
   void
@@ -62,13 +61,22 @@
 
     (void) files.clear();
 
-    (void) tarreader.extract_data( data, size );
+    if ( accept_tar_archives )
+      (void) tarreader.extract_data( data, size );
 
     if ( files.size() == 0 )
       (void) files.emplace_back( data, data + size );
 
     num_faces     = -1;
     num_instances = -1;
+  }
+
+
+  void
+  FaceLoader::
+  set_accept_tar_archives( bool  accept )
+  {
+    accept_tar_archives = accept;
   }
 
 
@@ -81,7 +89,7 @@
 
     if ( index < 0 || index >= get_num_faces() )
     {
-      LOG( ERROR ) << "Invalid face index: " << index;
+      LOG( ERROR ) << "invalid face index: " << index;
       face_index = 0;
     }
     else
@@ -95,7 +103,7 @@
   {
     if ( index < 0 || index >= get_num_instances() )
     {
-      LOG( ERROR ) << "Invalid instance index: " << index;
+      LOG( ERROR ) << "invalid instance index: " << index;
       instance_index = 0;
     }
     else
@@ -167,10 +175,10 @@
 
     error = FT_New_Memory_Face( library,
                                 files[0].data(),
-                                (FT_Long)files[0].size(),
+                                files[0].size(),
                                 face_index,
                                 &face );
-    
+
     if ( error != 0 )
     {
       LOG( ERROR ) << "FT_New_Memory_face failed: " << error;
@@ -180,6 +188,7 @@
     // If we have more than a single input file coming from an archive,
     // attach them (starting with the second file) using the order given
     // in the archive.
+    
     for ( size_t  i = 1; i < files.size(); i++ )
     {
       FT_Error  error;
@@ -188,7 +197,7 @@
       {
         .flags       = FT_OPEN_MEMORY,
         .memory_base = files[i].data(),
-        .memory_size = (FT_Long)files[i].size(),
+        .memory_size = static_cast<FT_Long>( files[i].size() )
       };
 
 
@@ -204,9 +213,9 @@
     string  font_format( FT_Get_Font_Format( face ) );
     if ( font_format != supported_font_format_string )
     {
-      LOG( ERROR ) << "Invalid font format: "
-                   << "received '" << font_format
-                   << "', expected '" << supported_font_format_string << "'";
+      LOG( ERROR ) << "invalid font format: "
+                   << "received '" << font_format << "' but "
+                   << "expected '" << supported_font_format_string << "'";
       (void) FT_Done_Face( face );
       return make_unique_face();
     }

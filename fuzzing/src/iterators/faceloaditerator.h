@@ -39,34 +39,29 @@
     FaceLoadIterator& operator= ( const FaceLoadIterator& ) = delete;
 
 
+    // @See: FaceLoader::set_supported_font_format
+
     void
     set_supported_font_format( FaceLoader::FontFormat  format );
 
 
-    // @Description:
-    //   Set the FreeType library that drives font face creation.
-    //
-    // @Input:
-    //   library ::
-    //     A library that is initialised already.
+    // @See: FaceLoader::set_library
 
     void
     set_library( FT_Library  library );
 
 
-    // @Description:
-    //   Set the raw bytes that are handled as font files.
-    //
-    // @Input:
-    //   data ::
-    //     ...
-    //
-    //   size ::
-    //     ...
+    // @See: FaceLoader::set_raw_bytes
 
     void
     set_raw_bytes( const uint8_t*  data,
                    size_t          size );
+
+
+    // @See: FaceLoader::set_accept_tar_archives
+
+    void
+    set_accept_tar_archives( bool  accept );
     
 
     // @Description:
@@ -102,6 +97,10 @@
     void
     add_iterator( unique_ptr<FacePrepIterator>  iterator );
 
+
+    // @Description:
+    //   Iterate over every font + instance and call all subiterators and
+    //   visitors.
 
     void
     run( void );

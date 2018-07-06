@@ -13,7 +13,8 @@ set(libfuzzer_exes
   legacy
   cff
   cidtype1
-  truetype)
+  truetype
+  type1)
 
 add_executable(libfuzzer-legacy
   "${FREETYPE_SRC_DIR}/tools/ftfuzzer/ftfuzzer.cc")

@@ -27,6 +27,7 @@
   FaceLoadIterator::
   set_supported_font_format( FaceLoader::FontFormat  format )
   {
+    assert( face_loader != nullptr );
     (void) face_loader->set_supported_font_format( format );
   }
 
@@ -35,6 +36,7 @@
   FaceLoadIterator::
   set_library( FT_Library  library )
   {
+    assert( face_loader != nullptr );
     (void) face_loader->set_library( library );
   }
 
@@ -44,7 +46,17 @@
   set_raw_bytes( const uint8_t*  data,
                  size_t          size )
   {
+    assert( face_loader != nullptr );
     (void) face_loader->set_raw_bytes( data, size );
+  }
+
+
+  void
+  FaceLoadIterator::
+  set_accept_tar_archives( bool  accept )
+  {
+    assert( face_loader != nullptr );
+    (void) face_loader->set_accept_tar_archives( accept );
   }
 
 

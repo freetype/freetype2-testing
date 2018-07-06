@@ -21,6 +21,7 @@ add_library(fontdriver-targets STATIC
   "${FUZZING_SRC_DIR}/targets/font-drivers/cff.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cidtype1.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/truetype.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/type1.cpp"
   "${FUZZING_SRC_DIR}/utils/faceloader.cpp"
   "${FUZZING_SRC_DIR}/utils/tarreader.cpp"
   "${FUZZING_SRC_DIR}/utils/utils.cpp"

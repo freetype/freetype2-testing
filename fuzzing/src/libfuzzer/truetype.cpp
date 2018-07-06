@@ -22,6 +22,6 @@
   LLVMFuzzerTestOneInput( const uint8_t*  data,
                           size_t          size )
   {
-    ( void ) target.run( data, size );
+    (void) target.run( data, size );
     return 0;
   }

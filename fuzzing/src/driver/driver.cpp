@@ -22,15 +22,16 @@
 #include "targets/font-drivers/cff.h"
 #include "targets/font-drivers/cidtype1.h"
 #include "targets/font-drivers/truetype.h"
+#include "targets/font-drivers/type1.h"
 
 
   using namespace std;
 
 
-  // The legacy version is a monolith but it is the only
-  // target that calls LLVMFuzzerTestOneInput(...) directly
-  // which is why we get away with using it to invoke the
-  // legacy target.
+  // The legacy fuzzer is a monolith but it is the only target that calls
+  // LLVMFuzzerTestOneInput( ... ) directly which is why we get away with
+  // using it to invoke the legacy target.
+
   extern "C" int
   LLVMFuzzerTestOneInput( const uint8_t*  data,
                           size_t          size );
@@ -47,13 +48,15 @@
   int
   print_usage( void )
   {
-    return print_error( "\nUsage: driver TYPE FILE\n\n"         \
-                        "Type:\n"                               \
-                        "  --legacy\n"                          \
-                        "  --cff\n"                             \
-                        "  --cidtyp1\n"                         \
-                        "  --truetype\n\n"                      \
-                        "File: location of an input file\n" );
+    return print_error( "\nUsage: driver TYPE FILE\n\n"                 \
+                        "Type:\n"                                       \
+                        "  --legacy\n"                                  \
+                        "  --cff\n"                                     \
+                        "  --cidtyp1\n"                                 \
+                        "  --truetype\n"                                \
+                        "  --type1\n\n"                                 \
+                        "File:\n"                                       \
+                        "  The location (path) of an input file.\n" );
   }
 
 
@@ -70,26 +73,28 @@
 
     ifstream  input_file( input_file_arg, ios_base::binary );
     if ( input_file.is_open() == false )
-      return print_error( "error: invalid file: " + input_file_arg );
+      return print_error( "error: invalid file '" + input_file_arg + "'");
 
     vector<char>  input( ( istreambuf_iterator<char>( input_file ) ),
                          istreambuf_iterator<char>() );
 
     (void) input_file.close();
 
-    uint8_t*  data = reinterpret_cast<uint8_t*>( &input[0] );
+    uint8_t*  data = reinterpret_cast<uint8_t*>( input.data() );
     size_t  size = input.size();
 
     string  type_arg( argv[1] );
 
-    if ( type_arg.compare( "--legacy" ) == 0 )
+    if ( type_arg == "--legacy" )
       (void) LLVMFuzzerTestOneInput( data, size );
-    else if ( type_arg.compare( "--cff" ) == 0 )
+    else if ( type_arg == "--cff" )
       (void) ( CffFuzzTarget() ).run( data, size );
-    else if ( type_arg.compare( "--cidtype1" ) == 0 )
+    else if ( type_arg == "--cidtype1" )
       (void) ( CidType1FuzzTarget() ).run( data, size );
-    else if ( type_arg.compare( "--truetype" ) == 0 )
+    else if ( type_arg == "--truetype" )
       (void) ( TrueTypeFuzzTarget() ).run( data, size );
+    else if ( type_arg == "--type1" )
+      (void) ( Type1FuzzTarget() ).run( data, size );
     else
       return print_usage();
 

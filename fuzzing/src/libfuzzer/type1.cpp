@@ -1,6 +1,6 @@
-// cff.cpp
+// type1.cpp
 //
-//   Fuzz target for TrueType fonts.
+//   Fuzz target for Type 1 fonts.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,10 +12,10 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/cff.h"
+#include "targets/font-drivers/type1.h"
 
 
-  static CffFuzzTarget  target;
+  static Type1FuzzTarget  target;
 
 
   extern "C" int

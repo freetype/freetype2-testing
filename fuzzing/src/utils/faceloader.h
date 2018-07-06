@@ -55,6 +55,16 @@
     FaceLoader& operator= ( const FaceLoader& ) = delete;
 
 
+    // @Description:
+    //   Set the supported font format / font driver.  This face loader will
+    //   only load faces which are of the specified font format / require the
+    //   specified font driver.
+    //
+    // @Input:
+    //   format ::
+    //     Use one of the predefined formats.  Setting the format `NONE' will
+    //     result in this face loader rejecting every possible input.
+
     void
     set_supported_font_format( FontFormat  format );
     
@@ -71,7 +81,8 @@
 
 
     // @Description:
-    //   Set the raw bytes that are handled as font files.
+    //   Set the raw bytes that are interpreted as a font file or an archive
+    //   of files that descript a specific font (e.g. used by Type 1 fonts).
     //
     // @Input:
     //   data ::
@@ -83,6 +94,22 @@
     void
     set_raw_bytes( const uint8_t*  data,
                    size_t          size );
+
+
+    // @Description:
+    //   Tries to interpret fuzzing data as tar archives if `true'.  If the
+    //   input data can somehow be opened by libarchve, it will be used that
+    //   way, otherwise the input gets interpreted as a single input file.
+    //   Note: only enable this if needed since it adds a considerable (and
+    //   unnecessary) overhead when not needed.
+    //
+    // @Input:
+    //   accept ::
+    //     Try to interpret fuzzing input as tar archives if `true'. Skip that
+    //     step if `false'.  Default: `false'.
+
+    void
+    set_accept_tar_archives( bool  accept );
 
 
     void
@@ -138,6 +165,8 @@
 
     FontFormat  supported_font_format        = FontFormat::NONE;
     string      supported_font_format_string = "";
+
+    bool  accept_tar_archives = false;
 
     FT_Long  num_faces  = -1;
     FT_Long  face_index =  0;
