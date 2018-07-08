@@ -26,6 +26,7 @@
 #include "visitors/facevisitor-kerning.h"
 #include "visitors/facevisitor-multiplemasters.h"
 #include "visitors/facevisitor-truetypetables.h"
+#include "visitors/facevisitor-variants.h"
 #include "visitors/glyphvisitor-transform.h"
 
 
@@ -87,6 +88,8 @@
     (void) fli
       ->add_once_visitor(
         fuzzing::make_unique<FaceVisitorTrueTypeTables>() );
+    (void) fli
+      ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:

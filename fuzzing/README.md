@@ -100,13 +100,13 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-glyph_variants.html
 
-|       | Function                          | Used | Extensively |
-| ----- | --------------------------------- | :--: | :---------: |
-| 3.1.1 | `FT_Face_GetCharVariantIndex`     |      |             |
-| 3.1.2 | `FT_Face_GetCharVariantIsDefault` |      |             |
-| 3.1.3 | `FT_Face_GetVariantSelectors`     |      |             |
-| 3.1.4 | `FT_Face_GetVariantsOfChar`       |      |             |
-| 3.1.5 | `FT_Face_GetCharsOfVariant`       |      |             |
+|       | Function                          | Used               | Extensively        | Resources                             |
+| ----- | --------------------------------- | :----------------: | :----------------: | :-----------------------------------: |
+| 3.1.1 | `FT_Face_GetCharVariantIndex`     | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Code <br> Var Selector |
+| 3.1.2 | `FT_Face_GetCharVariantIsDefault` | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Code <br> Var Selector |
+| 3.1.3 | `FT_Face_GetVariantSelectors`     | :heavy_check_mark: | :heavy_check_mark: | Face                                  |
+| 3.1.4 | `FT_Face_GetVariantsOfChar`       | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Code                   |
+| 3.1.5 | `FT_Face_GetCharsOfVariant`       | :heavy_check_mark: | :heavy_check_mark: | Face <br> Var Selector                |
 
 ### Glyph Management
 
