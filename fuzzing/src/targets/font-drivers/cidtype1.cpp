@@ -22,6 +22,7 @@
 #include "iterators/glyphloaditerator-naive.h"
 #include "visitors/facevisitor-cid.h"
 #include "visitors/facevisitor-charcodes.h"
+#include "visitors/facevisitor-type1tables.h"
 #include "visitors/facevisitor-variants.h"
 #include "visitors/glyphvisitor-transform.h"
 
@@ -70,6 +71,9 @@
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
+
+    (void) fli
+      ->add_always_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:

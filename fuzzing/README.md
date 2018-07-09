@@ -179,12 +179,12 @@ https://www.freetype.org/freetype2/docs/reference/ft2-truetype_tables.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-type1_tables.html
 
-|       | Function                 | Used | Extensively |
-| ----- | ------------------------ | :--: | :---------: |
-| 9.1.1 | `FT_Has_PS_Glyph_Names`  |      |             |
-| 9.1.2 | `FT_Get_PS_Font_Info`    |      |             |
-| 9.1.3 | `FT_Get_PS_Font_Private` |      |             |
-| 9.1.4 | `FT_Get_PS_Font_Value`   |      |             |
+|       | Function                 | Used               | Extensively        | Resources  |
+| ----- | ------------------------ | :----------------: | :----------------: | :--------: |
+| 9.1.1 | `FT_Has_PS_Glyph_Names`  | :heavy_check_mark: | :heavy_check_mark: | Face       |
+| 9.1.2 | `FT_Get_PS_Font_Info`    | :heavy_check_mark: | :heavy_check_mark: | Face       |
+| 9.1.3 | `FT_Get_PS_Font_Private` | :heavy_check_mark: | :heavy_check_mark: | Face       |
+| 9.1.4 | `FT_Get_PS_Font_Value`   |                    |                    | Face       |
 
 ### SFNT Names
 

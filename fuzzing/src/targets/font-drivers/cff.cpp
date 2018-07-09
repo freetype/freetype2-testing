@@ -26,6 +26,7 @@
 #include "visitors/facevisitor-kerning.h"
 #include "visitors/facevisitor-multiplemasters.h"
 #include "visitors/facevisitor-truetypetables.h"
+#include "visitors/facevisitor-type1tables.h"
 #include "visitors/facevisitor-variants.h"
 #include "visitors/glyphvisitor-transform.h"
 
@@ -73,6 +74,9 @@
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>() );
 
+    (void) fpi_mm
+      ->add_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
+
     // -----------------------------------------------------------------------
     // Face load iterators:
 
@@ -90,6 +94,9 @@
         fuzzing::make_unique<FaceVisitorTrueTypeTables>() );
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
+
+    (void) fli
+      ->add_always_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
