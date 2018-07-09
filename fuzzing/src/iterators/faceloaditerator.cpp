@@ -115,6 +115,9 @@
 
       if ( face_index == 0 )
       {
+        LOG( INFO ) << "fs type flags: 0x" << hex
+                    << FT_Get_FSType_Flags( face.get() );
+
         for ( auto&  visitor : once_face_visitors )
           visitor->run( face_loader->load() );
       }

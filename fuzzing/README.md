@@ -91,10 +91,10 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 | 2.8.2 | `FT_Set_Charmap`       | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Map |
 | 2.8.3 | `FT_Get_Charmap_Index` | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Map |
 
-|       | Function               | Used | Extensively | Resources                      |
-| ----- | ---------------------- | :--: | :---------: | ------------------------------ |
-| 2.9.1 | `FT_Get_FSType_Flags`  |      |             | Face                           |
-| 2.9.2 | `FT_Get_SubGlyph_Info` |      |             | Glyph Slot <br> Subglyph Index |
+|       | Function               | Used               | Extensively        | Resources                      |
+| ----- | ---------------------- | :----------------: | :----------------: | ------------------------------ |
+| 2.9.1 | `FT_Get_FSType_Flags`  | :heavy_check_mark: | :heavy_check_mark: | Face                           |
+| 2.9.2 | `FT_Get_SubGlyph_Info` |                    |                    | Glyph Slot <br> Subglyph Index |
 
 ### Unicode Variation Sequences
 
