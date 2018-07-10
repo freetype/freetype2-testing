@@ -3,13 +3,16 @@
 
 # FreeType
 
-FreeType is a freely available software library to render fonts.
-
 https://www.freetype.org/
+
+FreeType is a freely available software library to render fonts.
 
 # Fuzzing
 
-We run FreeType against test cases that [OSS-Fuzz](https://bugs.chromium.org/p/oss-fuzz/issues/list?can=1&q=proj=freetype2) created to trigger verified bugs that have been fixed officially.
+This subproject has two main purposes:
+
+- **[OSS-Fuzz](https://github.com/google/oss-fuzz)**: Provide the source code and build scripts for the fuzz targets.
+- **[Travis CI](https://travis-ci.org/cherusker/freetype2-testing)**: Provide settings, source code, and build scripts for the regression test suite.
 
 ## Fuzzed API Functions
 
