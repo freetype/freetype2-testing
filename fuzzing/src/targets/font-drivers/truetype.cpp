@@ -28,6 +28,7 @@
 #include "visitors/facevisitor-truetypepatents.h"
 #include "visitors/facevisitor-truetypetables.h"
 #include "visitors/facevisitor-variants.h"
+#include "visitors/glyphvisitor-cbox.h"
 #include "visitors/glyphvisitor-transform.h"
 
 
@@ -56,8 +57,16 @@
     (void) gli_outlines->add_load_flags( FT_LOAD_NO_BITMAP );
     (void) gli_mm      ->add_load_flags( FT_LOAD_NO_BITMAP );
 
+    (void) gli_bitmaps
+      ->add_visitor( fuzzing::make_unique<GlyphVisitorCBox>() );
+    
+    (void) gli_outlines
+      ->add_visitor( fuzzing::make_unique<GlyphVisitorCBox>() );
     (void) gli_outlines
       ->add_visitor( fuzzing::make_unique<GlyphVisitorTransform>() );
+
+    (void) gli_mm
+      ->add_visitor( fuzzing::make_unique<GlyphVisitorCBox>() );
 
     // -----------------------------------------------------------------------
     // Face preparation iterators:

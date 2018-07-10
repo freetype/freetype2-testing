@@ -34,6 +34,7 @@ add_library(fontdriver-targets STATIC
   "${FUZZING_SRC_DIR}/visitors/facevisitor-truetypetables.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-type1tables.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-variants.cpp"
+  "${FUZZING_SRC_DIR}/visitors/glyphvisitor-cbox.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-transform.cpp")
 
 if("${FUZZ_TARGET_TYPE}" STREQUAL "libfuzzer")
