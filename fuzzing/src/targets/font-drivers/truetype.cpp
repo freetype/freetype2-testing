@@ -24,6 +24,7 @@
 #include "visitors/facevisitor-charcodes.h"
 #include "visitors/facevisitor-kerning.h"
 #include "visitors/facevisitor-multiplemasters.h"
+#include "visitors/facevisitor-sfntnames.h"
 #include "visitors/facevisitor-truetypepatents.h"
 #include "visitors/facevisitor-truetypetables.h"
 #include "visitors/facevisitor-variants.h"
@@ -84,6 +85,8 @@
 
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
+    (void) fli
+      ->add_once_visitor( fuzzing::make_unique<FaceVisitorSfntNames>() );
     (void) fli
       ->add_once_visitor(
         fuzzing::make_unique<FaceVisitorTrueTypePatents>() );

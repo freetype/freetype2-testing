@@ -29,6 +29,7 @@ add_library(fontdriver-targets STATIC
   "${FUZZING_SRC_DIR}/visitors/facevisitor-charcodes.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-kerning.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-multiplemasters.cpp"
+  "${FUZZING_SRC_DIR}/visitors/facevisitor-sfntnames.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-truetypepatents.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-truetypetables.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-type1tables.cpp"

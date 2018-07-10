@@ -190,12 +190,11 @@ https://www.freetype.org/freetype2/docs/reference/ft2-type1_tables.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-sfnt_names.html
 
-|        | Function                 | Used | Extensively |
-| ------ | ------------------------ | :--: | :---------: |
-| 10.1.1 | `FT_Get_Sfnt_Name_Count` |      |             |
-| 10.1.2 | `FT_Get_Sfnt_Name`       |      |             |
-| 10.1.3 | `FT_SfntLangTag`         |      |             |
-| 10.1.4 | `FT_Get_Sfnt_LangTag`    |      |             |
+|        | Function                 | Used               | Extensively        | Resources |
+| ------ | ------------------------ | :----------------: | :----------------: | :-------: |
+| 10.1.1 | `FT_Get_Sfnt_Name_Count` | :heavy_check_mark: | :heavy_check_mark: | Face      |
+| 10.1.2 | `FT_Get_Sfnt_Name`       | :heavy_check_mark: | :heavy_check_mark: | Face      |
+| 10.1.3 | `FT_Get_Sfnt_LangTag`    | :heavy_check_mark: | :heavy_check_mark: | Face      |
 
 ### BDF and PCF Files
 
