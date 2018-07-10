@@ -29,5 +29,5 @@
   GlyphLoadIterator::
   add_visitor( unique_ptr<GlyphVisitor>  visitor )
   {
-    (void) glyph_visitors.emplace_back( move ( visitor ) );
+    (void) glyph_visitors.emplace_back( move( visitor ) );
   }

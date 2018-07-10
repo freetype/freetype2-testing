@@ -59,6 +59,13 @@
         << "'" << string( reinterpret_cast<char*>( sfnt_name.string ),
                           sfnt_name.string_len ) << "'";
 
+      // [...] values equal or larger than 0x8000 [...] indicate a language
+      // tag string [...]. Use [...] `FT_Get_Sfnt_LangTag' [...] to retrieve
+      // the [...] language tag.
+
+      if ( sfnt_name.language_id <= 0x8000U )
+        continue;
+
       error = FT_Get_Sfnt_LangTag( face.get(),
                                    sfnt_name.language_id,
                                    &sfnt_lang );

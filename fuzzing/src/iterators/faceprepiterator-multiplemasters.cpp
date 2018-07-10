@@ -72,5 +72,5 @@
                    Unique_FT_Face  face )
   {
     (void) FT_Done_MM_Var( library, master );
-    return move ( face );
+    return move( face );
   }

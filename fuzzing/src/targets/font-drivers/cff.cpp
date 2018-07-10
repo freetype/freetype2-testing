@@ -92,9 +92,9 @@
 
     (void) fli->set_supported_font_format( FaceLoader::FontFormat::CFF );
     
-    (void) fli->add_iterator( move ( fpi_bitmaps  ) );
-    (void) fli->add_iterator( move ( fpi_outlines ) );
-    (void) fli->add_iterator( move ( fpi_mm       ) );
+    (void) fli->add_iterator( move( fpi_bitmaps  ) );
+    (void) fli->add_iterator( move( fpi_outlines ) );
+    (void) fli->add_iterator( move( fpi_mm       ) );
     
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
@@ -113,5 +113,5 @@
     // -----------------------------------------------------------------------
     // Fuzz target:
 
-    (void) set_iterator( move ( fli ) );
+    (void) set_iterator( move( fli ) );
   }

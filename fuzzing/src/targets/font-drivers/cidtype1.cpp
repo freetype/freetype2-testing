@@ -84,5 +84,5 @@
     // -----------------------------------------------------------------------
     // Fuzz target:
 
-    (void) set_iterator( move ( fli ) );
+    (void) set_iterator( move( fli ) );
   }
