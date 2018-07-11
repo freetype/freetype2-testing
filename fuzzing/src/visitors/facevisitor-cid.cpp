@@ -14,7 +14,7 @@
 
 #include "visitors/facevisitor-cid.h"
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 #include <ft2build.h>
 #include FT_CID_H

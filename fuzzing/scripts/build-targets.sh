@@ -1,5 +1,5 @@
 #!/bin/bash
-set -exo pipefail
+set -euxo pipefail
 
 # Copyright 2018 by
 # Armin Hasitzka.

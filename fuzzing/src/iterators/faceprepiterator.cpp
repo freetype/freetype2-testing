@@ -17,7 +17,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   void

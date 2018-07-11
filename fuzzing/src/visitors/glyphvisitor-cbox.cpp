@@ -16,7 +16,7 @@
 
 #include <cassert>
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   void

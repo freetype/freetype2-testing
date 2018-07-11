@@ -14,8 +14,6 @@
 
 #include "targets/font-drivers/type1.h"
 
-#include <glog/logging.h>
-
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
 #include "iterators/faceprepiterator-multiplemasters.h"
@@ -28,6 +26,7 @@
 #include "visitors/facevisitor-variants.h"
 #include "visitors/glyphvisitor-cbox.h"
 #include "visitors/glyphvisitor-transform.h"
+#include "utils/logging.h"
 
 
   using namespace std;

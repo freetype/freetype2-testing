@@ -10,11 +10,19 @@ set -exo pipefail
 # indicate that you have read the license and understand and accept it
 # fully.
 
+dir="${PWD}"
+cd "${0%/*}" # go to `fuzzing/scripts'
+
 # ----------------------------------------------------------------------------
 # system settings:
 
-SRC=$(readlink -f "../..")            # root of the repository
-OUT=$(readlink -f "../oss-fuzz-mock") # root of the fuzzer
+export SRC=$(readlink -f "../..")             # checkout source files
+export WORK=$(readlink -f "../oss-fuzz-mock") # storing intermediate files
+export OUT=$(readlink -f "../oss-fuzz-mock")  # store build artifacts
+
+# this mock: OUT == WORK
+rm -rf "${OUT}"
+mkdir "${OUT}"
 
 # This script should only be used to verify that fuzzing works in general.
 # All the heavy lifting will be done by OSS-Fuzz which is why 100 runs are
@@ -28,7 +36,7 @@ do_fuzz=1    # run the fuzzers on the prepared corpora
 do_analyse=1 # prepare and print analysis of the fuzzing phase
 
 # ----------------------------------------------------------------------------
-# flags that are set by OSS-Fuzz:
+# (important) flags that are set by OSS-Fuzz:
 
 cflags=(
     "-O1"
@@ -39,11 +47,16 @@ cflags=(
 ldflags=(
 )
 
-sanitize_flags=(
+sanitize_cflags=(
+    "-fsanitize=fuzzer-no-link"
     "-fsanitize=address,undefined"
     "-fsanitize-address-use-after-scope"
 )
 
+sanitize_ldflags=(
+    "-fsanitize=address,undefined"
+)
+    
 coverage_cflags=(
     "-fprofile-instr-generate"
     "-fcoverage-mapping"
@@ -56,20 +69,16 @@ coverage_ldflags=(
 export CC="clang"
 export CXX="clang++"
 
-export CFLAGS="${CFLAGS} ${cflags} ${sanitize_flags} ${coverage_cflags}"
-export CXXFLAGS="${CXXFLAGS} ${cflags} ${sanitize_flags} ${coverage_cflags}"
+export CFLAGS="${CFLAGS} ${cflags[@]} ${sanitize_cflags[@]} ${coverage_cflags[@]}"
+export CXXFLAGS="${CXXFLAGS} ${cflags[@]} ${sanitize_cflags[@]} ${coverage_cflags[@]}"
 
-export LDFLAGS="${LDFLAGS} ${ldflags} ${sanitize_flags} ${coverage_ldflags}"
+export LDFLAGS="${LDFLAGS} ${ldflags[@]} ${sanitize_ldflags[@]} ${coverage_ldflags[@]}"
 
 # ----------------------------------------------------------------------------
 # helpful defines:
 
-fuzzing_base_dir="${SRC}/fuzzing"
-corpora_base_dir="${fuzzing_base_dir}/corpora"
-bin_base_dir="${fuzzing_base_dir}/build/bin"
-freetype_base_dir="${SRC}/external/freetype2"
-
 fuzzers=(
+    "legacy"
     "cff"
     "cidtype1"
     "truetype"
@@ -79,26 +88,18 @@ fuzzers=(
 # ----------------------------------------------------------------------------
 # build the fuzzers:
 
+# Tell CMake what fuzzing engine to link:
+export CMAKE_FUZZING_ENGINE="-fsanitize=fuzzer"
+
 if [[ "${do_build}" == "1" ]]; then
-    bash "${fuzzing_base_dir}/scripts/build-oss-fuzz.sh"
+    bash "${SRC}/fuzzing/scripts/build-fuzzers.sh"
 fi
 
 # ----------------------------------------------------------------------------
-# prepare the corpora:
+# prepare the fuzzers and corpora:
 
 if [[ "${do_prepare}" == "1" ]]; then
-
-    rm -rf "${OUT}"
-    mkdir "${OUT}"
-
-    for fuzzer in "${fuzzers[@]}"; do
-        cp "${bin_base_dir}/${fuzzer}" "${OUT}/${fuzzer}"
-        mkdir "${OUT}/${fuzzer}_seed_corpus"
-        find "${corpora_base_dir}/${fuzzer}" \
-             -type f \
-             ! -name "README.md" \
-             -exec cp {} "${OUT}/${fuzzer}_seed_corpus" \;
-    done
+    bash "${SRC}/fuzzing/scripts/prepare-oss-fuzz.sh"
 fi
 
 # ----------------------------------------------------------------------------
@@ -122,5 +123,7 @@ if [[ "${do_fuzz}" == "1" && "${do_analyse}" == "1" ]]; then
     llvm-profdata merge -sparse *.profraw -o fuzzing.profdata
     llvm-cov report \
              -instr-profile=fuzzing.profdata \
-             "${freetype_base_dir}"/objs/.libs/libfreetype.so
+             "${SRC}/external/freetype2/objs/.libs/libfreetype.so"
 fi
+
+cd "${dir}"

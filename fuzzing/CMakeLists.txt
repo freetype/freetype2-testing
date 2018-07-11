@@ -13,7 +13,11 @@ cmake_minimum_required(VERSION 3.0)
 
 project(fuzzing)
 
-set(FUZZ_TARGET_TYPE "$ENV{CMAKE_FUZZ_TARGET_TYPE}")
+set(FUZZING_ENGINE "$ENV{CMAKE_FUZZING_ENGINE}")
+
+if("$ENV{CMAKE_USE_LOGGER_GLOG}")
+  set(LOGGER_NAME "LOGGER_GLOG")
+endif()
 
 set(FREETYPE_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external/freetype2")
 set(FREETYPE_SRC_DIR  "${FREETYPE_BASE_DIR}/src")

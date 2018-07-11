@@ -1,5 +1,5 @@
 #!/bin/bash
-set -exo pipefail
+set -euxo pipefail
 
 # Copyright 2018 by
 # Armin Hasitzka.
@@ -10,11 +10,12 @@ set -exo pipefail
 # indicate that you have read the license and understand and accept it
 # fully.
 
-dir=$PWD
-pathToFreeType="../../external/freetype2"
+dir="${PWD}"
+pathToFreeType=$(readlink -f "../../external/freetype2")
 
 git submodule init "${pathToFreeType}"
-# We always want to run the latest version of FreeType.
+
+# We always want to run the latest version of FreeType:
 git submodule update --remote "${pathToFreeType}"
 
 cd "${pathToFreeType}"

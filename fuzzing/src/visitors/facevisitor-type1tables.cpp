@@ -16,7 +16,7 @@
 
 #include <cassert>
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 #include <ft2build.h>
 #include FT_TYPE1_TABLES_H

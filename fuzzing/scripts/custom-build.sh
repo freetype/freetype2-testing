@@ -10,6 +10,9 @@ set -eo pipefail
 # indicate that you have read the license and understand and accept it
 # fully.
 
+dir="${PWD}"
+cd "${0%/*}" # go to `fuzzing/scripts'
+
 # ----------------------------------------------------------------------------
 # settings:
 
@@ -183,4 +186,8 @@ else
     exit 66
 fi
 
+export CMAKE_USE_LOGGER_GLOG=1
+
 bash build-targets.sh
+
+cd "${dir}"

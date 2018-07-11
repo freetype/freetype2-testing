@@ -19,7 +19,7 @@
 #include <archive.h>
 #include <archive_entry.h>
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   using namespace fuzzing;

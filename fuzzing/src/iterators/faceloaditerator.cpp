@@ -17,10 +17,10 @@
 #include <cassert>
 #include <memory>
 
-#include <glog/logging.h>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
+
+#include "utils/logging.h"
 
 
   void

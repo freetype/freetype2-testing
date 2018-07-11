@@ -14,7 +14,7 @@
 
 #include "iterators/faceprepiterator-multiplemasters.h"
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   Unique_FT_Face

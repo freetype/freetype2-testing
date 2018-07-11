@@ -16,10 +16,10 @@
 
 #include <cassert>
 
-#include <glog/logging.h>
-
 #include <ft2build.h>
 #include FT_FONT_FORMATS_H
+
+#include "utils/logging.h"
 
 
   void

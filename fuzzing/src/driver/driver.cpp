@@ -17,12 +17,11 @@
 #include <iostream>
 #include <vector>
 
-#include <glog/logging.h>
-
 #include "targets/font-drivers/cff.h"
 #include "targets/font-drivers/cidtype1.h"
 #include "targets/font-drivers/truetype.h"
 #include "targets/font-drivers/type1.h"
+#include "utils/logging.h"
 
 
   using namespace std;
@@ -41,6 +40,11 @@
   print_error( const string&  message )
   {
     cerr << message << "\n";
+
+#ifdef LOGGER_GLOG
+    gflags::ShutDownCommandLineFlags();
+#endif // LOGGER_GLOG
+
     return EXIT_FAILURE;
   }
 
@@ -64,7 +68,10 @@
   main( int     argc,
         char**  argv )
   {
+
+#ifdef LOGGER_GLOG
     (void) google::InitGoogleLogging( argv[0] );
+#endif // LOGGER_GLOG
 
     if ( argc != 3 )
       return print_usage();
@@ -97,6 +104,10 @@
       (void) ( Type1FuzzTarget() ).run( data, size );
     else
       return print_usage();
+
+#ifdef LOGGER_GLOG
+    gflags::ShutDownCommandLineFlags();
+#endif // LOGGER_GLOG
 
     return EXIT_SUCCESS;
   }

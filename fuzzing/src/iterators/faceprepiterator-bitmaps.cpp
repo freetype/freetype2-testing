@@ -14,7 +14,7 @@
 
 #include "iterators/faceprepiterator-bitmaps.h"
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   void

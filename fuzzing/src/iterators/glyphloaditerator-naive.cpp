@@ -14,7 +14,7 @@
 
 #include "iterators/glyphloaditerator-naive.h"
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   void

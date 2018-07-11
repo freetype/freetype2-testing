@@ -14,7 +14,7 @@
 
 #include "iterators/faceprepiterator-outlines.h"
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   FacePrepIteratorOutlines::

@@ -16,6 +16,7 @@
 #define UTILS_FACE_LOADER_H_
 
 
+#include <string>
 #include <vector>
 
 #include "utils/tarreader.h"

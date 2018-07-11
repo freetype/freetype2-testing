@@ -14,7 +14,7 @@
 
 #include "visitors/facevisitor-multiplemasters.h"
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   void

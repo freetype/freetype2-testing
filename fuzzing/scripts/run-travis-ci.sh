@@ -10,22 +10,22 @@ set -exo pipefail
 # indicate that you have read the license and understand and accept it
 # fully.
 
-dir=$PWD
-cd "${0%/*}" # go to /fuzzing/scripts
+dir="${PWD}"
+cd "${0%/*}" # go to `fuzzing/scripts'
 
-sanitize_flags="-fsanitize=address,undefined -fsanitize-address-use-after-scope"
+sanitize_flags=(
+    "-fsanitize=address,undefined"
+    "-fsanitize-address-use-after-scope"
+)
 
 export CC="clang"
 export CXX="clang++"
 
-export CFLAGS="${CFLAGS} -g -O1 ${sanitize_flags}"
-export CXXFLAGS="${CXXFLAGS} -g -O1 -std=c++14 ${sanitize_flags}"
-export LDFLAGS="${LDFLAGS} ${sanitize_flags}"
+export CFLAGS="${CFLAGS} -g -O1 ${sanitize_flags[@]}"
+export CXXFLAGS="${CXXFLAGS} -g -O1 -std=c++14 ${sanitize_flags[@]}"
+export LDFLAGS="${LDFLAGS} ${sanitize_flags[@]}"
 
 bash build-freetype.sh
-
-# used by CMake to decide what to build:
-export CMAKE_FUZZ_TARGET_TYPE="driver"
 
 bash build-targets.sh
 

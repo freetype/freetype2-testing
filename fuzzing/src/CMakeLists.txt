@@ -11,12 +11,8 @@
 
 add_subdirectory(targets)
 
-if("${FUZZ_TARGET_TYPE}" STREQUAL "driver")
-
+if("${FUZZING_ENGINE}" STREQUAL "")
   add_subdirectory(driver)
-
-elseif("${FUZZ_TARGET_TYPE}" STREQUAL "libfuzzer")
-
-  add_subdirectory(libfuzzer)
-
+else()
+  add_subdirectory(fuzzers)
 endif()

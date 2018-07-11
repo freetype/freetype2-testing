@@ -17,7 +17,7 @@
 #include <cassert>
 #include <iostream>
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   FontDriverFuzzTarget::

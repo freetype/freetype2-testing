@@ -15,8 +15,9 @@
 #include "visitors/facevisitor-variants.h"
 
 #include <set>
+#include <vector>
 
-#include <glog/logging.h>
+#include "utils/logging.h"
 
 
   void

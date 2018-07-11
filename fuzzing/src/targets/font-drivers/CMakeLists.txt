@@ -9,7 +9,8 @@
 # indicate that you have read the license and understand and accept it
 # fully.
 
-add_library(fontdriver-targets STATIC
+add_library(fontdriver-targets
+  STATIC
   "${FUZZING_SRC_DIR}/iterators/faceloaditerator.cpp"
   "${FUZZING_SRC_DIR}/iterators/faceprepiterator.cpp"
   "${FUZZING_SRC_DIR}/iterators/faceprepiterator-bitmaps.cpp"
@@ -36,6 +37,10 @@ add_library(fontdriver-targets STATIC
   "${FUZZING_SRC_DIR}/visitors/facevisitor-variants.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-cbox.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-transform.cpp")
+
+target_compile_definitions(fontdriver-targets
+  PRIVATE
+  "${LOGGER_NAME}")
 
 if("${FUZZ_TARGET_TYPE}" STREQUAL "libfuzzer")
 
