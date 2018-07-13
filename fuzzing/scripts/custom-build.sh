@@ -110,8 +110,15 @@ else
     build_debugging=$(ask_user "y" "n")
 fi
 
+print_q "Use Glog logger?"
+print_url "https://github.com/google/glog"
+print_i "no" "logging will be compiled out and glog will not be linked"
+printf "\n"
+
+build_glog=$(ask_user "y" "n")
+
 print_q "Add FreeType tracing?"
-print_i "yes" "activate 'FT_DEBUG_LEVEL_\{TRACE,ERROR\}'"
+print_i "yes" "activate 'FT_DEBUG_LEVEL_{TRACE,ERROR}'"
 printf "\n"
 
 build_ft_trace=$(ask_user "y" "n")
@@ -151,42 +158,38 @@ if [[ "${build_trace}" == "y" ]]; then
     cxxflags="${cxxflags} -DFT_DEBUG_LEVEL_TRACE -DFT_DEBUG_LEVEL_ERROR"
 fi
 
-# ----------------------------------------------------------------------------
-# build FreeType:
-
 export CC="clang"
 export CXX="clang++"
 
 if [[ "${build_type}" == "d" ]]; then
     export CFLAGS="${cflags}"
     export CXXFLAGS="${cxxflags}"
-    export LDFLAGS="${ldflags}"
 elif [[ "${build_type}" == "f" ]]; then
     export CFLAGS="${cflags} -fsanitize=fuzzer-no-link"
     export CXXFLAGS="${cxxflags} -fsanitize=fuzzer-no-link"
-    export LDFLAGS="${ldflags} -fsanitize=fuzzer-no-link"
 else
     exit 66
 fi
+
+export LDFLAGS="${ldflags}"
+
+# ----------------------------------------------------------------------------
+# build FreeType:
 
 bash build-freetype.sh
 
 # ----------------------------------------------------------------------------
 # build the targets:
 
-export CFLAGS="${cflags}"
-export CXXFLAGS="${cxxflags}"
-export LDFLAGS="${ldflags}"
-
-if [[ "${build_type}" == "d" ]]; then
-    export CMAKE_FUZZ_TARGET_TYPE="driver"
-elif [[ "${build_type}" == "f" ]]; then
-    export CMAKE_FUZZ_TARGET_TYPE="libfuzzer"
-else
+if [[ "${build_type}" == "f" ]]; then
+    export CMAKE_FUZZING_ENGINE="-fsanitize=fuzzer"
+elif [[ "${build_type}" != "d" ]]; then
     exit 66
 fi
 
-export CMAKE_USE_LOGGER_GLOG=1
+if [[ "${build_glog}" == "y" ]]; then
+    export CMAKE_USE_LOGGER_GLOG=1
+fi
 
 bash build-targets.sh
 

@@ -13,17 +13,16 @@ add_executable(driver
   "${FUZZING_SRC_DIR}/driver/driver.cpp"
   "${FREETYPE_SRC_DIR}/tools/ftfuzzer/ftfuzzer.cc")
 
-target_compile_definitions(driver
-  PRIVATE
-  "${LOGGER_NAME}")
-
 target_link_libraries(driver
   PRIVATE
   archive
   fontdriver-targets
-  freetype
-  gflags
-  glog)
+  freetype)
+
+if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")
+  target_compile_definitions(driver PRIVATE "LOGGER_GLOG")
+  target_link_libraries(     driver PRIVATE gflags glog)
+endif()
 
 foreach(suite ${FUZZING_CORPORA_SUITES})
 
