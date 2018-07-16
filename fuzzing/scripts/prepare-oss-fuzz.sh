@@ -15,6 +15,7 @@ cd "${0%/*}" # go to `fuzzing/scripts'
 
 bin_base_dir=$(readlink -f "../build/bin")
 corpora_base_dir=$(readlink -f "../corpora")
+settings_base_dir=$(readlink -f "../settings")
 
 fuzzers=(
     "legacy"
@@ -27,13 +28,14 @@ fuzzers=(
 #   - `$OUT':  directory to store build artifacts
 #   - `$WORK': directory for storing intermediate files
 
+cp -a "${settings_base_dir}/." "${OUT}"
+
 for fuzzer in "${fuzzers[@]}"; do
 
     cp "${bin_base_dir}/${fuzzer}" "${OUT}/${fuzzer}"
 
     seed_dir="${WORK}/${fuzzer}_seed_corpus"
     seed_zip="${OUT}/${fuzzer}_seed_corpus.zip"
-    options_file="${OUT}/${fuzzer}.options"
 
     mkdir -p "${seed_dir}"
 
@@ -43,11 +45,6 @@ for fuzzer in "${fuzzers[@]}"; do
          -exec cp {} "${seed_dir}" \;
 
     zip -j "${seed_zip}" "${seed_dir}/"*
-
-    cat >"${options_file}" <<EOF
-[libfuzzer]
-max_len = 30000
-EOF
 
 done
 
