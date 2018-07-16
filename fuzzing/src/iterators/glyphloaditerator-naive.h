@@ -54,8 +54,6 @@
     FT_Long  num_glyphs  = 0;
     FT_Long  glyph_index = 0;
 
-    FT_Int32  load_flags;
-
     bool  last_load_successful = false;
   };
 
