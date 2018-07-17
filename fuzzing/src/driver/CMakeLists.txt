@@ -31,6 +31,10 @@ foreach(suite ${FUZZING_CORPORA_SUITES})
 
   foreach(test_input_path ${test_input_paths})
 
+    if("${test_input_path}" MATCHES "/README\\.md$")
+      continue()
+    endif()
+
     string(REPLACE "${suite_dir}/" "" test_name "${test_input_path}")
     set(full_test_name "${suite}:${test_name}")
 
