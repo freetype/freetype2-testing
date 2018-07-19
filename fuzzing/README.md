@@ -1,5 +1,5 @@
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
-[![Build Status](https://travis-ci.org/cherusker/freetype2-testing.svg?branch=master)](https://travis-ci.org/cherusker/freetype2-testing)
+[![Build Status](https://travis-ci.org/freetype/freetype2-testing.svg?branch=master)](https://travis-ci.org/freetype/freetype2-testing)
 
 # FreeType
 
@@ -12,7 +12,7 @@ FreeType is a freely available software library to render fonts.
 This subproject has two main purposes:
 
 - **[OSS-Fuzz](https://github.com/google/oss-fuzz)**: Provide the source code and build scripts for the fuzz targets.
-- **[Travis CI](https://travis-ci.org/cherusker/freetype2-testing)**: Provide settings, source code, and build scripts for the regression test suite.
+- **[Travis CI](https://travis-ci.org/freetype/freetype2-testing)**: Provide settings, source code, and build scripts for the regression test suite.
 
 ## Fuzzed API Functions
 
