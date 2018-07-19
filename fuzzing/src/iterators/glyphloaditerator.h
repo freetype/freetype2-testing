@@ -17,6 +17,7 @@
 
 #include <vector>
 
+#include "iterators/glyphrenderiterator.h"
 #include "utils/utils.h"
 #include "visitors/glyphvisitor.h"
 
@@ -61,13 +62,40 @@
     void
     add_visitor( unique_ptr<GlyphVisitor>  visitor );
 
+
+    // @Description:
+    //   Add a glyph render iterator that is called with every loaded glyph.
+    //
+    // @Input:
+    //   iterator ::
+    //     A glyph render iterator.
+    //
+    // @Return:
+    //   A reference to the added iterator.
+
+    void
+    add_iterator( unique_ptr<GlyphRenderIterator>  iterator );
+
     
   protected:
 
 
     FT_Int32  load_flags = FT_LOAD_DEFAULT;
 
-    vector<unique_ptr<GlyphVisitor>>  glyph_visitors;
+    vector<unique_ptr<GlyphVisitor>>         glyph_visitors;
+    vector<unique_ptr<GlyphRenderIterator>>  glyph_render_iterators;
+
+
+    // @Description:
+    //   Invoke all visitors and iterators with a copy of the glyph.
+    //
+    // @Input:
+    //   glyph ::
+    //     Basic glyph that will be copied for every visitor and every
+    //     iterator.
+
+    void
+    invoke_visitors_and_iterators( const Unique_FT_Glyph&  glyph );
   };
 
 

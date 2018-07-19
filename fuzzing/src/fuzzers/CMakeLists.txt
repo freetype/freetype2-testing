@@ -40,8 +40,8 @@ foreach(exe ${libfuzzer_exes})
 
     target_link_libraries("libfuzzer-${exe}"
       PRIVATE
-      # `fontdriver-targets' are statically linked at all times:
-      fontdriver-targets)
+      # `fuzztargets' are statically linked at all times:
+      fuzztargets)
 
   endif()
 

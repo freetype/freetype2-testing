@@ -58,6 +58,20 @@
     make_unique_glyph( FT_Glyph  glyph=nullptr );
 
 
+    // Description:
+    //   Creates a copy of a glyph.
+    //
+    // Input:
+    //   glyph ::
+    //     A glyph that will be copied.
+    //
+    // Return:
+    //   A freshly created copy of the glyph.
+
+    Unique_FT_Glyph
+    copy_unique_glyph( const Unique_FT_Glyph&  glyph );
+
+
     // @Description:
     //   As of today (Summer 2018), `std::make_unique' is still not reliably
     //   available.  This version of `make_unique' helps to bridge the gap

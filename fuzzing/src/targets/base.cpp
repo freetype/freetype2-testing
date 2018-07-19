@@ -12,7 +12,7 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/base.h"
+#include "targets/base.h"
 
 #include <cassert>
 #include <iostream>
@@ -20,8 +20,8 @@
 #include "utils/logging.h"
 
 
-  FontDriverFuzzTarget::
-  FontDriverFuzzTarget( void )
+  FuzzTarget::
+  FuzzTarget( void )
   {
     FT_Error  error;
 
@@ -51,8 +51,8 @@
   }
 
 
-  FontDriverFuzzTarget::
-  ~FontDriverFuzzTarget( void )
+  FuzzTarget::
+  ~FuzzTarget( void )
   {
     (void) FT_Done_FreeType( library );
     library = nullptr;
@@ -60,11 +60,11 @@
 
 
   void
-  FontDriverFuzzTarget::
+  FuzzTarget::
   run( const uint8_t*  data,
        size_t          size )
   {
-    if ( size < 1)
+    if ( size < 1 )
       return;
 
     assert( face_load_iterator != nullptr );
@@ -76,7 +76,7 @@
 
 
   unique_ptr<FaceLoadIterator>&
-  FontDriverFuzzTarget::
+  FuzzTarget::
   set_iterator( unique_ptr<FaceLoadIterator>  iterator )
   {
     face_load_iterator = move( iterator );

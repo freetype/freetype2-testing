@@ -1,7 +1,6 @@
 // base.h
 //
-//   Base class of fuzz targets that are specifically built to fuzz font
-//   drivers.
+//   Base class of fuzz targets.
 //
 // Copyright 2018 by
 // Armin Hasitzka.
@@ -13,8 +12,8 @@
 // understand and accept it fully.
 
 
-#ifndef TARGETS_FONT_DRIVERS_BASE_H_
-#define TARGETS_FONT_DRIVERS_BASE_H_
+#ifndef TARGETS_BASE_H_
+#define TARGETS_BASE_H_
 
 
 #include <cstdint>
@@ -37,20 +36,20 @@
   using namespace std;
 
 
-  class FontDriverFuzzTarget
+  class FuzzTarget
   {
   public:
 
 
-    FontDriverFuzzTarget( void );
+    FuzzTarget( void );
 
 
-    FontDriverFuzzTarget( const FontDriverFuzzTarget& ) = delete;
-    FontDriverFuzzTarget& operator= ( const FontDriverFuzzTarget& ) = delete;
+    FuzzTarget( const FuzzTarget& ) = delete;
+    FuzzTarget& operator= ( const FuzzTarget& ) = delete;
 
 
     virtual
-    ~FontDriverFuzzTarget( void );
+    ~FuzzTarget( void );
 
 
     // @Input:
@@ -92,4 +91,4 @@
   };
 
 
-#endif // TARGETS_FONT_DRIVERS_BASE_H_
+#endif // TARGETS_BASE_H_

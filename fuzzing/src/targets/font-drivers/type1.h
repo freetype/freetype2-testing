@@ -16,11 +16,11 @@
 #define TARGETS_FONT_DRIVERS_TYPE_1_H_
 
 
-#include "targets/font-drivers/base.h"
+#include "targets/base.h"
 
 
   class Type1FuzzTarget
-  : public FontDriverFuzzTarget
+  : public FuzzTarget
   {
   public:
 

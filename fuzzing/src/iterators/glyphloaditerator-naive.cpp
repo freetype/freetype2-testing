@@ -25,9 +25,8 @@
     
     FT_Long  num_glyphs = face->num_glyphs;
 
-    FT_Glyph         glyph;
-    FT_Glyph         glyph_fake;
-    Unique_FT_Glyph  uglyph = make_unique_glyph();
+    FT_Glyph         raw_glyph;
+    Unique_FT_Glyph  glyph = make_unique_glyph();
     
 
     for ( auto  index = 0;
@@ -45,7 +44,7 @@
         continue; // try the next glyph; it might work better.
       }
 
-      error = FT_Get_Glyph( face->glyph, &glyph );
+      error = FT_Get_Glyph( face->glyph, &raw_glyph );
 
       if ( error != 0 )
       {
@@ -53,20 +52,8 @@
         continue; // try the next glyph; it might work better.
       }
 
-      uglyph = make_unique_glyph( glyph );
-
-      for ( auto&  visitor : glyph_visitors )
-      {
-        error = FT_Glyph_Copy( uglyph.get(), &glyph_fake );
-
-        if ( error != 0 )
-        {
-          LOG( ERROR ) << "FT_Glyph_Copy failed: " << error;
-          break; // we can expect this action to fail again; bail out!
-        }
-        
-        visitor->run( make_unique_glyph( glyph_fake ) );
-      }
+      glyph = make_unique_glyph( raw_glyph );
+      (void) invoke_visitors_and_iterators( glyph );
     }
 
     WARN_ABOUT_IGNORED_VALUES( num_glyphs, GLYPH_INDEX_MAX, "glyphs" );

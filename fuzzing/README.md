@@ -121,7 +121,7 @@ https://www.freetype.org/freetype2/docs/reference/ft2-glyph_management.html
 | 4.1.2 | `FT_Glyph_Copy`      | :heavy_check_mark: | :heavy_check_mark: | Glyph      |
 | 4.1.3 | `FT_Glyph_Transform` | :heavy_check_mark: | :heavy_check_mark: | Glyph      |
 | 4.1.4 | `FT_Glyph_Get_CBox`  | :heavy_check_mark: | :heavy_check_mark: | Glyph      |
-| 4.1.5 | `FT_Glyph_To_Bitmap` |                    |                    | Glyph      |
+| 4.1.5 | `FT_Glyph_To_Bitmap` | :heavy_check_mark: | :heavy_check_mark: | Glyph      |
 | 4.1.6 | `FT_Done_Glyph`      | :heavy_check_mark: | :heavy_check_mark: | Glyph      |
 
 ### Mac Specific Interface

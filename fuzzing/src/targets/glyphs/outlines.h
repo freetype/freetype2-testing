@@ -1,6 +1,6 @@
-// cff.h
+// outlines.h
 //
-//   Fuzz target for CFF faces.
+//   Fuzz target for glyph outlines.
 //
 // Copyright 2018 by
 // Armin Hasitzka.
@@ -12,21 +12,21 @@
 // understand and accept it fully.
 
 
-#ifndef TARGETS_FONT_DRIVERS_CFF_H_
-#define TARGETS_FONT_DRIVERS_CFF_H_
+#ifndef TARGETS_GLYPHS_OUTLINES_H_
+#define TARGETS_GLYPHS_OUTLINES_H_
 
 
 #include "targets/base.h"
 
 
-  class CffFuzzTarget
+  class GlyphsOutlinesFuzzTarget
   : public FuzzTarget
   {
   public:
 
 
-    CffFuzzTarget( void );
+    GlyphsOutlinesFuzzTarget( void );
   };
 
 
-#endif // TARGETS_FONT_DRIVERS_CFF_H_
+#endif // TARGETS_GLYPHS_OUTLINES_H_

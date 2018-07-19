@@ -1,9 +1,9 @@
-// cff.h
+// glyphrenderiterator.cpp
 //
-//   Fuzz target for CFF faces.
+//   Implementation of GlyphRenderIterator.
 //
 // Copyright 2018 by
-// Armin Hasitzka.
+// Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
 // modified, and distributed under the terms of the FreeType project
@@ -12,21 +12,12 @@
 // understand and accept it fully.
 
 
-#ifndef TARGETS_FONT_DRIVERS_CFF_H_
-#define TARGETS_FONT_DRIVERS_CFF_H_
+#include "iterators/glyphrenderiterator.h"
 
 
-#include "targets/base.h"
-
-
-  class CffFuzzTarget
-  : public FuzzTarget
+  void
+  GlyphRenderIterator::
+  add_visitor( unique_ptr<GlyphVisitor>  visitor )
   {
-  public:
-
-
-    CffFuzzTarget( void );
-  };
-
-
-#endif // TARGETS_FONT_DRIVERS_CFF_H_
+    (void) glyph_visitors.emplace_back( move( visitor ) );
+  }

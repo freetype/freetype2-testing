@@ -21,6 +21,7 @@
 #include "targets/font-drivers/cidtype1.h"
 #include "targets/font-drivers/truetype.h"
 #include "targets/font-drivers/type1.h"
+#include "targets/glyphs/outlines.h"
 #include "utils/logging.h"
 
 
@@ -59,6 +60,7 @@
                         "  --cidtyp1\n"                                 \
                         "  --truetype\n"                                \
                         "  --type1\n\n"                                 \
+                        "  --glyphs:outlines\n\n"                       \
                         "File:\n"                                       \
                         "  The location (path) of an input file.\n" );
   }
@@ -102,6 +104,8 @@
       (void) ( TrueTypeFuzzTarget() ).run( data, size );
     else if ( type_arg == "--type1" )
       (void) ( Type1FuzzTarget() ).run( data, size );
+    else if ( type_arg == "--glyphs:outlines" )
+      (void) ( GlyphsOutlinesFuzzTarget() ).run( data, size );
     else
       return print_usage();
 

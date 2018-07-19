@@ -16,7 +16,7 @@ add_executable(driver
 target_link_libraries(driver
   PRIVATE
   archive
-  fontdriver-targets
+  fuzztargets
   freetype)
 
 if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")

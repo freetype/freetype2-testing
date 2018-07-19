@@ -31,3 +31,38 @@
   {
     (void) glyph_visitors.emplace_back( move( visitor ) );
   }
+
+
+  void
+  GlyphLoadIterator::
+  add_iterator( unique_ptr<GlyphRenderIterator>  iterator )
+  {
+    (void) glyph_render_iterators.emplace_back( move( iterator ) );
+  }
+
+
+  void
+  GlyphLoadIterator::
+  invoke_visitors_and_iterators( const Unique_FT_Glyph&  glyph )
+  {
+    Unique_FT_Glyph  buffer_glyph = make_unique_glyph();
+
+
+    for ( auto&  visitor : glyph_visitors )
+    {
+      buffer_glyph = copy_unique_glyph( glyph );
+      if ( buffer_glyph == nullptr )
+        return; // we can expect this to fail again; bail out!
+      
+      visitor->run( move( buffer_glyph ) );
+    }
+
+    for ( auto&  iterator : glyph_render_iterators )
+    {
+      buffer_glyph = copy_unique_glyph( glyph );
+      if ( buffer_glyph == nullptr )
+        return; // we can expect this to fail again; bail out!
+      
+      iterator->run( move( buffer_glyph ) );
+    }
+  }

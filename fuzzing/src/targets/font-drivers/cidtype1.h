@@ -16,11 +16,11 @@
 #define TARGETS_FONT_DRIVERS_CID_TYPE_1_H_
 
 
-#include "targets/font-drivers/base.h"
+#include "targets/base.h"
 
 
   class CidType1FuzzTarget
-  : public FontDriverFuzzTarget
+  : public FuzzTarget
   {
   public:
 

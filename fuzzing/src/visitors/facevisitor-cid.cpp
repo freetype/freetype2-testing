@@ -72,7 +72,8 @@
         break; // we can expect this call to fail again.
       }
 
-      LOG_IF( INFO, error == 0 ) << index << " (glyph index) <-> "
+      LOG_IF( INFO, error == 0 ) << index << "/" << num_glyphs
+                                 << " (glyph index) <-> "
                                  << cid   << " (cid)";
     }
 
