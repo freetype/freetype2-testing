@@ -60,7 +60,7 @@
                         "  --cidtyp1\n"                                 \
                         "  --truetype\n"                                \
                         "  --type1\n\n"                                 \
-                        "  --glyphs:outlines\n\n"                       \
+                        "  --glyphs-outlines\n\n"                       \
                         "File:\n"                                       \
                         "  The location (path) of an input file.\n" );
   }
@@ -90,7 +90,7 @@
     (void) input_file.close();
 
     uint8_t*  data = reinterpret_cast<uint8_t*>( input.data() );
-    size_t  size = input.size();
+    size_t    size = input.size();
 
     string  type_arg( argv[1] );
 
@@ -104,7 +104,7 @@
       (void) ( TrueTypeFuzzTarget() ).run( data, size );
     else if ( type_arg == "--type1" )
       (void) ( Type1FuzzTarget() ).run( data, size );
-    else if ( type_arg == "--glyphs:outlines" )
+    else if ( type_arg == "--glyphs-outlines" )
       (void) ( GlyphsOutlinesFuzzTarget() ).run( data, size );
     else
       return print_usage();

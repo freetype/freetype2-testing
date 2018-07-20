@@ -22,6 +22,7 @@ fuzzers=(
     "cff"
     "cidtype1"
     "truetype"
+    "glyphs-outlines"
 )
 
 # This script relies on:
