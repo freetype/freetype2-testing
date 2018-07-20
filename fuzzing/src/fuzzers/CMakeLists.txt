@@ -34,7 +34,7 @@ if (EXISTS "${oss_path_libarchive}")
 endif()
 
 add_executable(libfuzzer-legacy
-  "${FREETYPE_SRC_DIR}/tools/ftfuzzer/ftfuzzer.cc")
+  "${FUZZING_SRC_DIR}/legacy/ftfuzzer.cc")
 
 foreach(exe ${libfuzzer_exes})
   
