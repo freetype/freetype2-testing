@@ -11,15 +11,19 @@
 
 set(libfuzzer_exes
   legacy
+  
   cff
   cidtype1
   truetype
-  type1)
+  type1
+
+  glyphs-outlines)
 
 # OSS-Fuzz does not allow shared objects.  Thus we have to link the fuzz
-# targets as static as possible.  Since this only affects builds on OSS-Fuzz's
-# machines at the moment, we test for specific paths of static libraries of
-# that environment and fall back to dynamic linking if all else fails.
+# targets as statically as possible.  Since this only affects builds on
+# OSS-Fuzz's machines at the moment, we test for specific paths of static
+# libraries of that environment and fall back to dynamic linking if all else
+# fails.
 
 set("link_libarchive" "archive")
 
