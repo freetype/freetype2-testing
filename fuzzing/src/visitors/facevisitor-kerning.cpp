@@ -1,6 +1,6 @@
 // facevisitor-kerning.cpp
 //
-//   Implementation of FaceVisitorCharCodes.
+//   Implementation of FaceVisitorKerning.
 //
 // Copyright 2018 by
 // Armin Hasitzka.

@@ -21,6 +21,7 @@
 #ifndef VISITORS_FACE_VISITOR_KERNING_H_
 #define VISITORS_FACE_VISITOR_KERNING_H_
 
+
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
@@ -37,10 +38,8 @@
     FaceVisitorKerning( void ) {}
 
 
-    FaceVisitorKerning(
-      const FaceVisitorKerning& ) = delete;
-    FaceVisitorKerning& operator= (
-      const FaceVisitorKerning& ) = delete;
+    FaceVisitorKerning( const FaceVisitorKerning& ) = delete;
+    FaceVisitorKerning& operator= ( const FaceVisitorKerning& ) = delete;
 
     
     virtual

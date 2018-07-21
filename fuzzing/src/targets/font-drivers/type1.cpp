@@ -24,6 +24,7 @@
 #include "visitors/facevisitor-loadglyphs-bitmaps.h"
 #include "visitors/facevisitor-loadglyphs-outlines.h"
 #include "visitors/facevisitor-multiplemasters.h"
+#include "visitors/facevisitor-trackkerning.h"
 #include "visitors/facevisitor-type1tables.h"
 #include "visitors/facevisitor-variants.h"
 #include "utils/logging.h"
@@ -59,7 +60,8 @@
       ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
 
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>() );
+      ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>(
+                       FaceLoader::FontFormat::TYPE_1) );
 
     (void) fpi_mm
       ->add_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
@@ -79,6 +81,8 @@
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
 
+    (void) fli
+      ->add_always_visitor( fuzzing::make_unique<FaceVisitorTrackKerning>() );
     (void) fli
       ->add_always_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
     

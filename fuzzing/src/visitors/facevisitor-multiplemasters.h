@@ -21,11 +21,13 @@
 #ifndef VISITORS_FACE_VISITOR_MULTIPLE_MASTERS_H_
 #define VISITORS_FACE_VISITOR_MULTIPLE_MASTERS_H_
 
+
 #include <vector>
 
 #include <ft2build.h>
 #include FT_MULTIPLE_MASTERS_H
 
+#include "utils/faceloader.h"
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
@@ -39,7 +41,16 @@
   public:
 
 
-    FaceVisitorMultipleMasters( void ) {}
+    // @Description:
+    //   This visitor distinguishes between different drivers:
+    //   `FT_Get_Multi_Master' and `FT_Set_MM_Design_Coordinates' are not
+    //   available with TrueType GX or OpenType variation fonts.
+    //
+    // @Input:
+    //   format ::
+    //     Set the format.
+
+    FaceVisitorMultipleMasters( FaceLoader::FontFormat  format );
 
 
     FaceVisitorMultipleMasters(
@@ -58,6 +69,9 @@
 
 
   private:
+
+
+    bool  is_adobe_mm;
 
 
     // @Description:

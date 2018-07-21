@@ -123,6 +123,13 @@
       if ( glyph_index != FT_Get_Char_Index ( face.get(), char_code ) )
         LOG( ERROR ) << "FT_Get_Char_Index failed";
 
+      // More advanced logic with load flags happens in
+      // `FaceVisitorLoadGlyphs*'.  Here, we mainly want to invoke
+      // `FT_Load_Char' a few times.
+
+      error = FT_Load_Char( face.get(), char_code, FT_LOAD_DEFAULT );
+      LOG_IF( ERROR, error != 0) << "FT_Load_Char failed: " << error;
+
       if ( FT_HAS_GLYPH_NAMES( face.get() ) != 1 )
       {
         LOG( INFO ) << "char code: " << char_code << ", "

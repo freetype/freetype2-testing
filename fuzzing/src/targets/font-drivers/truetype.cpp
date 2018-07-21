@@ -19,6 +19,7 @@
 #include "iterators/faceprepiterator-multiplemasters.h"
 #include "iterators/faceprepiterator-outlines.h"
 #include "visitors/facevisitor-charcodes.h"
+#include "visitors/facevisitor-gasp.h"
 #include "visitors/facevisitor-kerning.h"
 #include "visitors/facevisitor-loadglyphs-bitmaps.h"
 #include "visitors/facevisitor-loadglyphs-outlines.h"
@@ -60,7 +61,8 @@
       ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
 
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>() );
+      ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>(
+                       FaceLoader::FontFormat::TRUETYPE) );
 
     // -----------------------------------------------------------------------
     // Face load iterators:
@@ -73,6 +75,8 @@
 
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
+    (void) fli
+      ->add_once_visitor( fuzzing::make_unique<FaceVisitorGasp>() );
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorSfntNames>() );
     (void) fli
