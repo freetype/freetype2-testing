@@ -24,36 +24,20 @@
 # indicate that you have read the license and understand and accept it
 # fully.
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.0.2)
 
 project(fuzzing)
 
-set(FUZZING_ENGINE "$ENV{CMAKE_FUZZING_ENGINE}")
+# ----------------------------------------------------------------------------
+# defines:
 
-set(DRIVER_EXE_NAME "driver")
-if(NOT "$ENV{CMAKE_DRIVER_EXE_NAME}" STREQUAL "")
-  set(DRIVER_EXE_NAME "$ENV{CMAKE_DRIVER_EXE_NAME}")
-endif()
-
-if("$ENV{CMAKE_USE_LOGGER_GLOG}")
-  set(LOGGER_NAME "LOGGER_GLOG")
-endif()
-
-set(FREETYPE_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external/freetype2")
-set(FREETYPE_SRC_DIR        "${FREETYPE_BASE_DIR}/src")
-set(FREETYPE_STATIC_LIBRARY "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
-
-set(LIBARCHIVE_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external/libarchive")
-set(LIBARCHIVE_SRC_DIR        "${LIBARCHIVE_BASE_DIR}/src")
-set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
-
-set(FUZZING_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-set(FUZZING_SRC_DIR  "${FUZZING_BASE_DIR}/src")
+set(FUZZING_BASE_DIR    "${CMAKE_CURRENT_SOURCE_DIR}")
+set(FUZZING_SRC_DIR     "${FUZZING_BASE_DIR}/src")
+set(FUZZING_CORPORA_DIR "${FUZZING_BASE_DIR}/corpora")
 
 # ${FUZZING_CORPORA_SUITES} is used to automatically detect and register
 # regression tests.
 
-set(FUZZING_CORPORA_DIR    "${FUZZING_BASE_DIR}/corpora")
 set(FUZZING_CORPORA_SUITES
   "legacy"
 
@@ -75,6 +59,33 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+set(SUBMODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external")
+
+set(FREETYPE_BASE_DIR       "${SUBMODULES_DIR}/freetype2")
+set(FREETYPE_SRC_DIR        "${FREETYPE_BASE_DIR}/src")
+set(FREETYPE_STATIC_LIBRARY "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
+
+set(LIBARCHIVE_BASE_DIR       "${SUBMODULES_DIR}/libarchive")
+set(LIBARCHIVE_SRC_DIR        "${LIBARCHIVE_BASE_DIR}/src")
+set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
+
+# ----------------------------------------------------------------------------
+# options:
+
+set(FUZZING_ENGINE "$ENV{CMAKE_FUZZING_ENGINE}")
+
+set(DRIVER_EXE_NAME "driver")
+if(NOT "$ENV{CMAKE_DRIVER_EXE_NAME}" STREQUAL "")
+  set(DRIVER_EXE_NAME "$ENV{CMAKE_DRIVER_EXE_NAME}")
+endif()
+
+if("$ENV{CMAKE_USE_LOGGER_GLOG}")
+  set(LOGGER_NAME "LOGGER_GLOG")
+endif()
+
+# ----------------------------------------------------------------------------
+# build logic:
+
 include_directories(
   "${FREETYPE_BASE_DIR}/include"
   "${FUZZING_SRC_DIR}"
@@ -84,4 +95,4 @@ link_directories("${FREETYPE_BASE_DIR}/objs/.libs")
 
 enable_testing()
 
-add_subdirectory(src)
+add_subdirectory("${FUZZING_SRC_DIR}")
