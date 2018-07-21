@@ -251,3 +251,25 @@ https://www.freetype.org/freetype2/docs/reference/ft2-gasp_table.html
 |        | Function      | Used | Extensively | Resources |
 | ------ | ------------- | :--: | :---------: | --------- |
 | 16.1.1 | `FT_Get_Gasp` |      |             | Face      |
+
+### Cache Sub-System
+
+https://www.freetype.org/freetype2/docs/reference/ft2-cache_subsystem.html
+
+|         | Function                      | Used | Extensively |
+| ------- | ----------------------------- | :--: | :---------: |
+| 17.1.1  | `FTC_Manager_New`             |      |             |
+| 17.1.2  | `FTC_Manager_Reset`           |      |             |
+| 17.1.3  | `FTC_Manager_Done`            |      |             |
+| 17.1.4  | `FTC_Manager_LookupFace`      |      |             |
+| 17.1.5  | `FTC_Manager_LookupSize`      |      |             |
+| 17.1.6  | `FTC_Manager_RemoveFaceID`    |      |             |
+| 17.1.7  | `FTC_Node_Unref`              |      |             |
+| 17.1.8  | `FTC_ImageCache_New`          |      |             |
+| 17.1.9  | `FTC_ImageCache_Lookup`       |      |             |
+| 17.1.10 | `FTC_SBitCache_New`           |      |             |
+| 17.1.11 | `FTC_SBitCache_Lookup`        |      |             |
+| 17.1.12 | `FTC_CMapCache_New`           |      |             |
+| 17.1.13 | `FTC_CMapCache_Lookup`        |      |             |
+| 17.1.14 | `FTC_ImageCache_LookupScaler` |      |             |
+| 17.1.15 | `FTC_SBitCache_LookupScaler`  |      |             |
