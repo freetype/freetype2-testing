@@ -18,9 +18,10 @@
 #include "iterators/faceprepiterator-bitmaps.h"
 #include "iterators/faceprepiterator-multiplemasters.h"
 #include "iterators/faceprepiterator-outlines.h"
-#include "iterators/glyphloaditerator-naive.h"
 #include "visitors/facevisitor-charcodes.h"
 #include "visitors/facevisitor-kerning.h"
+#include "visitors/facevisitor-loadglyphs-bitmaps.h"
+#include "visitors/facevisitor-loadglyphs-outlines.h"
 #include "visitors/facevisitor-multiplemasters.h"
 #include "visitors/facevisitor-sfntnames.h"
 #include "visitors/facevisitor-truetypepatents.h"
@@ -42,30 +43,22 @@
     auto  fpi_mm =
       fuzzing::make_unique<FacePrepIteratorMultipleMasters>();
 
-    auto  gli_bitmaps  = fuzzing::make_unique<GlyphLoadIteratorNaive>();
-    auto  gli_outlines = fuzzing::make_unique<GlyphLoadIteratorNaive>();
-    auto  gli_mm       = fuzzing::make_unique<GlyphLoadIteratorNaive>();
-
-
-    // -----------------------------------------------------------------------
-    // Glyph load iterators:
-    
-    (void) gli_bitmaps ->add_load_flags( FT_LOAD_COLOR     );
-    (void) gli_outlines->add_load_flags( FT_LOAD_NO_BITMAP );
-    (void) gli_mm      ->add_load_flags( FT_LOAD_NO_BITMAP );
 
     // -----------------------------------------------------------------------
     // Face preparation iterators:
-
-    (void) fpi_bitmaps ->add_iterator( move( gli_bitmaps  ) );
-    (void) fpi_outlines->add_iterator( move( gli_outlines ) );
-    (void) fpi_mm      ->add_iterator( move( gli_mm       ) );
     
     (void) fpi_bitmaps
       ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
     
+    (void) fpi_bitmaps
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+    (void) fpi_mm
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>() );
 

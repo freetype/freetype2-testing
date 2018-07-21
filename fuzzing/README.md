@@ -67,16 +67,16 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 
 |       | Function            | Used               | Extensively        | Resources                             | Calls            | Called by |
 | ----- | ------------------- | :----------------: | :----------------: | ------------------------------------- | ---------------- | --------- |
-| 2.4.1 | `FT_Load_Glyph`     | :heavy_check_mark: |                    | Face <br> Glyph Index <br> Load Flags |                  | 2.4.6     |
+| 2.4.1 | `FT_Load_Glyph`     | :heavy_check_mark: | :heavy_check_mark: | Face <br> Glyph Index <br> Load Flags | 2.5.1            | 2.4.6     |
 | 2.4.2 | `FT_Get_Char_Index` | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Code                   |                  | 2.4.6     |
 | 2.4.3 | `FT_Get_First_Char` | :heavy_check_mark: | :heavy_check_mark: | Face                                  |                  |           |
 | 2.4.4 | `FT_Get_Next_Char`  | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Code                   |                  |           |
 | 2.4.5 | `FT_Get_Name_Index` | :heavy_check_mark: | :heavy_check_mark: | Face                                  |                  |           |
 | 2.4.6 | `FT_Load_Char`      |                    |                    | Face <br> Char Code <br> Load Flags   | 2.4.1 <br> 2.4.2 |           |
 
-|       | Function            | Used | Extensively | Resources  |
-| ----- | ------------------- | :--: | :---------: | ---------- |
-| 2.5.1 | `FT_Render_Glyph`   |      |             | Glyph Slot |
+|       | Function            | Used               | Extensively        | Resources  | Called by |
+| ----- | ------------------- | :----------------: | :----------------: | ---------- | --------- |
+| 2.5.1 | `FT_Render_Glyph`   | :heavy_check_mark: | :heavy_check_mark: | Glyph Slot | 2.4.1     |
 
 |       | Function               | Used               | Extensively        | Resources                |
 | ----- | ---------------------- | :----------------: | :----------------: | ------------------------ |

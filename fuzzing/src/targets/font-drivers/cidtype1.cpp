@@ -17,9 +17,10 @@
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
 #include "iterators/faceprepiterator-outlines.h"
-#include "iterators/glyphloaditerator-naive.h"
 #include "visitors/facevisitor-cid.h"
 #include "visitors/facevisitor-charcodes.h"
+#include "visitors/facevisitor-loadglyphs-bitmaps.h"
+#include "visitors/facevisitor-loadglyphs-outlines.h"
 #include "visitors/facevisitor-type1tables.h"
 #include "visitors/facevisitor-variants.h"
 #include "utils/logging.h"
@@ -36,21 +37,14 @@
     auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
     auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
 
-    auto  gli_bitmaps  = fuzzing::make_unique<GlyphLoadIteratorNaive>();
-    auto  gli_outlines = fuzzing::make_unique<GlyphLoadIteratorNaive>();
-
-
-    // -----------------------------------------------------------------------
-    // Glyph load iterators:
-    
-    (void) gli_bitmaps ->add_load_flags( FT_LOAD_COLOR     );
-    (void) gli_outlines->add_load_flags( FT_LOAD_NO_BITMAP );
 
     // -----------------------------------------------------------------------
     // Face preparation iterators:
 
-    (void) fpi_bitmaps ->add_iterator( move( gli_bitmaps  ) );
-    (void) fpi_outlines->add_iterator( move( gli_outlines ) );
+    (void) fpi_bitmaps
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
 
     // -----------------------------------------------------------------------
     // Face load iterators:
