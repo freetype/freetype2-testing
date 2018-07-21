@@ -72,7 +72,7 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 | 2.4.3 | `FT_Get_First_Char` | :heavy_check_mark: | :heavy_check_mark: | Face                                  |                  |           |
 | 2.4.4 | `FT_Get_Next_Char`  | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Code                   |                  |           |
 | 2.4.5 | `FT_Get_Name_Index` | :heavy_check_mark: | :heavy_check_mark: | Face                                  |                  |           |
-| 2.4.6 | `FT_Load_Char`      |                    |                    | Face <br> Char Code <br> Load Flags   | 2.4.1 <br> 2.4.2 |           |
+| 2.4.6 | `FT_Load_Char`      | :heavy_check_mark: | :heavy_check_mark: | Face <br> Char Code <br> Load Flags   | 2.4.1 <br> 2.4.2 |           |
 
 |       | Function            | Used               | Extensively        | Resources  | Called by |
 | ----- | ------------------- | :----------------: | :----------------: | ---------- | --------- |
@@ -81,7 +81,7 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 |       | Function               | Used               | Extensively        | Resources                |
 | ----- | ---------------------- | :----------------: | :----------------: | ------------------------ |
 | 2.6.1 | `FT_Get_Kerning`       | :heavy_check_mark: | :heavy_check_mark: | Face <br> 2x Glyph Index |
-| 2.6.2 | `FT_Get_Track_Kerning` |                    |                    | Face                     |
+| 2.6.2 | `FT_Get_Track_Kerning` | :heavy_check_mark: | :heavy_check_mark: | Face                     |
 
 |       | Function                 | Used               | Extensively        | Resources             |
 | ----- | ------------------------ | :----------------: | :----------------: | --------------------- |
@@ -153,10 +153,10 @@ https://www.freetype.org/freetype2/docs/reference/ft2-multiple_masters.html
 
 |        | Function                        | Used               | Extensively        | Resources           | Alias  |
 | ------ | ------------------------------- | :----------------: | :----------------: | :-----------------: | :----: |
-| 7.1.1  | `FT_Get_Multi_Master`           |                    |                    | Face                |        |
+| 7.1.1  | `FT_Get_Multi_Master`           | :heavy_check_mark: | :heavy_check_mark: | Face                |        |
 | 7.1.2  | `FT_Get_MM_Var`                 | :heavy_check_mark: | :heavy_check_mark: | Face                |        |
 | 7.1.3  | `FT_Done_MM_Var`                | :heavy_check_mark: | :heavy_check_mark: | Library <br> MM Var |        |
-| 7.1.4  | `FT_Set_MM_Design_Coordinates`  |                    |                    | Face                |        |
+| 7.1.4  | `FT_Set_MM_Design_Coordinates`  | :heavy_check_mark: | :heavy_check_mark: | Face                |        |
 | 7.1.5  | `FT_Set_Var_Design_Coordinates` | :heavy_check_mark: | :heavy_check_mark: | Face                |        |
 | 7.1.6  | `FT_Get_Var_Design_Coordinates` | :heavy_check_mark: | :heavy_check_mark: | Face                |        |
 | 7.1.7  | `FT_Set_MM_Blend_Coordinates`   | :heavy_check_mark: |                    | Face                | 7.1.9  |
@@ -248,9 +248,9 @@ https://www.freetype.org/freetype2/docs/reference/ft2-font_formats.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-gasp_table.html
 
-|        | Function      | Used | Extensively | Resources |
-| ------ | ------------- | :--: | :---------: | --------- |
-| 16.1.1 | `FT_Get_Gasp` |      |             | Face      |
+|        | Function      | Used               | Extensively        | Resources |
+| ------ | ------------- | :----------------: | :----------------: | --------- |
+| 16.1.1 | `FT_Get_Gasp` | :heavy_check_mark: | :heavy_check_mark: | Face      |
 
 ### Cache Sub-System
 
