@@ -51,7 +51,7 @@ build_debugging= # 0|1|2|3|n
 build_ft_trace=  # y|n
 
 cflags="${CFLAGS}"
-cxxflags="${CXXFLAGS}"
+cxxflags="${CXXFLAGS} -std=c++11"
 ldflags="${LDFLAGS}"
 
 # Base name of the driver:

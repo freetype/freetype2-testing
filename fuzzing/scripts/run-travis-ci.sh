@@ -21,14 +21,12 @@ sanitize_flags=(
 export CC="clang"
 export CXX="clang++"
 
-export CFLAGS="${CFLAGS} -g -O1 ${sanitize_flags[@]}"
-export CXXFLAGS="${CXXFLAGS} -g -O1 -std=c++14 ${sanitize_flags[@]}"
-export LDFLAGS="${LDFLAGS} ${sanitize_flags[@]}"
+export CFLAGS="  ${CFLAGS}   -g -O1            ${sanitize_flags[@]}"
+export CXXFLAGS="${CXXFLAGS} -g -O1 -std=c++11 ${sanitize_flags[@]}"
+export LDFLAGS=" ${LDFLAGS}                    ${sanitize_flags[@]}"
 
 bash build-libarchive.sh
-
 bash build-freetype.sh
-
 bash build-targets.sh
 
 cd ../build

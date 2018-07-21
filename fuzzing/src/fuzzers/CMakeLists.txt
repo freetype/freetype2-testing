@@ -56,8 +56,7 @@ foreach(exe ${libfuzzer_exes})
   # defines a main function when testing the compiler.  Clang (obviously)
   # fails when being confronted with two main functions.
 
-  set_target_properties("libfuzzer-${exe}"
-    PROPERTIES
+  set_target_properties("libfuzzer-${exe}" PROPERTIES
     OUTPUT_NAME "${exe}"
     LINK_FLAGS  "${FUZZING_ENGINE}")
 
