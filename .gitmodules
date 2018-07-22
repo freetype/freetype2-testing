@@ -1,4 +1,8 @@
 [submodule "freetype2"]
-	path = external/freetype2
-	url = http://git.sv.nongnu.org/r/freetype/freetype2.git
-	branch = master
+  path = external/freetype2
+  url = http://git.sv.nongnu.org/r/freetype/freetype2.git
+  branch = master
+[submodule "libarchive"]
+  path = external/libarchive
+  url = https://github.com/libarchive/libarchive.git
+  branch = master

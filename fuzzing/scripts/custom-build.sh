@@ -242,8 +242,9 @@ fi
 export LDFLAGS="${ldflags}"
 
 # ----------------------------------------------------------------------------
-# build FreeType:
+# build libarchive + FreeType:
 
+bash build-libarchive.sh
 bash build-freetype.sh
 
 # ----------------------------------------------------------------------------

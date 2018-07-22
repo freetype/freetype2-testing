@@ -21,6 +21,8 @@ cd "${0%/*}" # go to `fuzzing/scripts'
 # which would cause CMake's setup process to fail.  See
 # `fuzzing/src/fuzzing/CMakeLists.txt' for details.
 
+bash build-libarchive.sh
+
 bash build-freetype.sh
 
 bash build-targets.sh

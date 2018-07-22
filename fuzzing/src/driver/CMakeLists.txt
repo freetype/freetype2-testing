@@ -15,7 +15,7 @@ add_executable(driver
 
 target_link_libraries(driver
   PRIVATE
-  archive
+  "${LIBARCHIVE_STATIC_LIBRARY}"
   fuzztargets
   "${FREETYPE_STATIC_LIBRARY}")
 

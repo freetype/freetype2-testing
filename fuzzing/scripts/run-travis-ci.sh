@@ -25,6 +25,8 @@ export CFLAGS="${CFLAGS} -g -O1 ${sanitize_flags[@]}"
 export CXXFLAGS="${CXXFLAGS} -g -O1 -std=c++14 ${sanitize_flags[@]}"
 export LDFLAGS="${LDFLAGS} ${sanitize_flags[@]}"
 
+bash build-libarchive.sh
+
 bash build-freetype.sh
 
 bash build-targets.sh
