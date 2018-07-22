@@ -57,7 +57,7 @@
                         "Type:\n"                                       \
                         "  --legacy\n"                                  \
                         "  --cff\n"                                     \
-                        "  --cidtyp1\n"                                 \
+                        "  --cidtype1\n"                                \
                         "  --truetype\n"                                \
                         "  --type1\n\n"                                 \
                         "  --glyphs-outlines\n\n"                       \
