@@ -17,7 +17,7 @@ target_link_libraries(driver
   PRIVATE
   archive
   fuzztargets
-  freetype)
+  "${FREETYPE_STATIC_LIBRARY}")
 
 if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")
   target_compile_definitions(driver PRIVATE "LOGGER_GLOG")

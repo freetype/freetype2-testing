@@ -25,7 +25,18 @@ git reset --hard
 git rev-parse HEAD
 
 sh autogen.sh
-sh configure
+
+# Having additional libraries is pain since they have to be linked statically
+# for OSS-Fuzz.  Should additional libraries be required, they have to be
+# linked properly in `fuzzing/src/fuzzers/CMakeLists.txt'.
+
+sh configure \
+   --enable-static=yes \
+   --enable-shared=no \
+   --with-bzip2=no \
+   --with-harfbuzz=no \
+   --with-png=no  \
+   --with-zlib=no
 
 make -j$(nproc)
 
