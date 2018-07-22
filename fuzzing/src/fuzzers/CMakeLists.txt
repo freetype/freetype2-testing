@@ -29,14 +29,6 @@ set(libfuzzer_exes
 # libraries of that environment and fall back to dynamic linking if all else
 # fails.
 
-set("link_libarchive" "archive")
-
-set("oss_path_libarchive" "/usr/lib/x86_64-linux-gnu/libarchive.a")
-
-if (EXISTS "${oss_path_libarchive}")
-  set("link_libarchive" "${oss_path_libarchive}")
-endif()
-
 add_executable(libfuzzer-legacy
   "${FUZZING_SRC_DIR}/legacy/ftfuzzer.cc")
 
@@ -54,7 +46,7 @@ foreach(exe ${libfuzzer_exes})
 
   target_link_libraries("libfuzzer-${exe}"
     PRIVATE
-    "${link_libarchive}"
+    "${LIBARCHIVE_STATIC_LIBRARY}"
     "${FREETYPE_STATIC_LIBRARY}")
 
   # `-fsanitize=fuzzer' or `-lFuzzingEngine' cannot be set earlier since CMake
