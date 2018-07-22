@@ -44,7 +44,6 @@ foreach(exe ${libfuzzer_exes})
 
     target_link_libraries("libfuzzer-${exe}"
       PRIVATE
-      # `fuzztargets' are statically linked at all times:
       fuzztargets)
 
   endif()
@@ -52,9 +51,7 @@ foreach(exe ${libfuzzer_exes})
   target_link_libraries("libfuzzer-${exe}"
     PRIVATE
     "${link_libarchive}"
-    # FreeType is always built as a static library;  using that directly
-    # causes no headache:
-    "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
+    "${FREETYPE_STATIC_LIBRARY}")
 
   # `-fsanitize=fuzzer' or `-lFuzzingEngine' cannot be set earlier since CMake
   # defines a main function when testing the compiler.  Clang (obviously)
