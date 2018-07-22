@@ -1,6 +1,6 @@
-// cidtype1.cpp
+// cidtype1-render.cpp
 //
-//   Implementation of CidType1FuzzTarget.
+//   Implementation of CidType1RenderFuzzTarget.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,29 +12,35 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/cidtype1.h"
+#include "targets/font-drivers/cidtype1-render.h"
 
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
 #include "iterators/faceprepiterator-outlines.h"
-#include "visitors/facevisitor-cid.h"
-#include "visitors/facevisitor-charcodes.h"
-#include "visitors/facevisitor-type1tables.h"
-#include "visitors/facevisitor-variants.h"
+#include "visitors/facevisitor-loadglyphs-bitmaps.h"
+#include "visitors/facevisitor-loadglyphs-outlines.h"
 #include "utils/logging.h"
 
 
   using namespace std;
 
 
-  CidType1FuzzTarget::
-  CidType1FuzzTarget( void )
+  CidType1RenderFuzzTarget::
+  CidType1RenderFuzzTarget( void )
   {
     auto  fli = fuzzing::make_unique<FaceLoadIterator>();
 
     auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
     auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
 
+
+    // -----------------------------------------------------------------------
+    // Face preparation iterators:
+
+    (void) fpi_bitmaps
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
 
     // -----------------------------------------------------------------------
     // Face load iterators:
@@ -44,15 +50,6 @@
 
     (void) fli->add_iterator( move( fpi_bitmaps  ) );
     (void) fli->add_iterator( move( fpi_outlines ) );
-
-    (void) fli->add_once_visitor( fuzzing::make_unique<FaceVisitorCid>() );
-    (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
-    (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
-
-    (void) fli
-      ->add_always_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:

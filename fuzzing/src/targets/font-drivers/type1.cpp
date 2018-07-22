@@ -21,13 +21,10 @@
 #include "iterators/glyphloaditerator-naive.h"
 #include "visitors/facevisitor-charcodes.h"
 #include "visitors/facevisitor-kerning.h"
-#include "visitors/facevisitor-loadglyphs-bitmaps.h"
-#include "visitors/facevisitor-loadglyphs-outlines.h"
 #include "visitors/facevisitor-multiplemasters.h"
 #include "visitors/facevisitor-trackkerning.h"
 #include "visitors/facevisitor-type1tables.h"
 #include "visitors/facevisitor-variants.h"
-#include "utils/logging.h"
 
 
   using namespace std;
@@ -52,13 +49,6 @@
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
     
-    (void) fpi_bitmaps
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
-    (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
-    (void) fpi_mm
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
-
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>(
                        FaceLoader::FontFormat::TYPE_1) );
@@ -70,7 +60,9 @@
     // Face load iterators:
 
     (void) fli->set_supported_font_format( FaceLoader::FontFormat::TYPE_1 );
-    (void) fli->set_accept_tar_archives( true );
+
+    // TODO: activate as soon as the `libarchive' mem leak is figured out.
+    // (void) fli->set_accept_tar_archives( true );
 
     (void) fli->add_iterator( move( fpi_bitmaps  ) );
     (void) fli->add_iterator( move( fpi_outlines ) );
