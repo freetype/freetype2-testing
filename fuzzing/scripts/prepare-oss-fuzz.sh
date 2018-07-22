@@ -19,9 +19,16 @@ settings_base_dir=$(readlink -f "../settings")
 
 fuzzers=(
     "legacy"
+
     "cff"
+    "cff-render"
     "cidtype1"
+    "cidtype1-render"
     "truetype"
+    "truetype-render"
+    "type1"
+    "type1-render"
+
     "glyphs-outlines"
 )
 
