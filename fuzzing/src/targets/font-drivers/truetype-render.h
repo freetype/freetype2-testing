@@ -16,6 +16,9 @@
 #define TARGETS_FONT_DRIVERS_TRUETYPE_RENDER_H_
 
 
+#include <ft2build.h>
+#include FT_DRIVER_H
+
 #include "targets/base.h"
 
 
@@ -26,6 +29,21 @@
 
 
     TrueTypeRenderFuzzTarget( void );
+
+
+    virtual void
+    run( const uint8_t*  data,
+         size_t          size );
+
+
+  private:
+
+
+    vector<FT_UInt>  interpreter_versions{
+      TT_INTERPRETER_VERSION_35,
+      TT_INTERPRETER_VERSION_38,
+      TT_INTERPRETER_VERSION_40
+    };
   };
 
 

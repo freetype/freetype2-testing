@@ -21,9 +21,7 @@
 #include <string>
 
 #include <ft2build.h>
-#include FT_AUTOHINTER_H
 #include FT_FREETYPE_H
-#include FT_MODULE_H
 
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator.h"
@@ -52,6 +50,9 @@
     ~FuzzTarget( void );
 
 
+    // @Description:
+    //   Run some input on the fuzz target.
+    //
     // @Input:
     //   data ::
     //     Fuzzed input data.
@@ -59,9 +60,12 @@
     //   size ::
     //     The size of fuzzed input data.
 
-    void
+    virtual void
     run( const uint8_t*  data,
          size_t          size );
+
+
+  protected:
 
 
     // @See: FaceLoader::set_data_is_tar_archive()
@@ -70,7 +74,26 @@
     set_data_is_tar_archive( bool  is_tar_archive );
 
 
-  protected:
+    // @Description:
+    //   Set a FreeType property via `FT_Property_Set'.
+    //
+    // @Input:
+    //   module_name ::
+    //     See `FT_Property_Set'.
+    //
+    //   property_name ::
+    //     See `FT_Property_Set'.
+    //
+    //   value ::
+    //     See `FT_Property_Set'.
+    //
+    // @Return:
+    //   `false' if `FT_Property_Set' returns an error, 'true' otherwise.
+
+    bool
+    set_property( string  module_name,
+                  string  property_name,
+                  void*   value );
 
 
     // @Description:

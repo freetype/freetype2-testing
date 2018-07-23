@@ -14,12 +14,14 @@ This subproject has two main purposes:
 - **[OSS-Fuzz](https://github.com/google/oss-fuzz)**: Provide the source code and build scripts for the fuzz targets.
 - **[Travis CI](https://travis-ci.org/freetype/freetype2-testing)**: Provide settings, source code, and build scripts for the regression test suite.
 
-## Fuzzed API Functions
+## Fuzzed API
 
-The following tables provide an overview over currently fuzzed and unfuzzed API functions.
+The following tables provide an overview over currently fuzzed and unfuzzed parts of FreeType's API.
 Columns have the following meaning:
 
-- **Function**:    The API function name.
+- **Function**:    The name of an API function.
+- **Module**:      The name of a module when set via [`FT_Property_Set`](https://www.freetype.org/freetype2/docs/reference/ft2-module_management.html#FT_Property_Set).
+- **Property**:    The name of a property when set via [`FT_Property_Set`](https://www.freetype.org/freetype2/docs/reference/ft2-module_management.html#FT_Property_Set).
 - **Used**:        A function is used at least once, by one fuzz target.
 - **Extensively**: A function is used in (almost) every way possible and it is up the fuzzer to find inputs that fully test it.
 - **Resources**:   Some important resources that a function uses.  This list is by no means complete.  It merely highlights important shared resources that carry over from one function to another.
@@ -252,24 +254,51 @@ https://www.freetype.org/freetype2/docs/reference/ft2-gasp_table.html
 | ------ | ------------- | :----------------: | :----------------: | --------- |
 | 16.1.1 | `FT_Get_Gasp` | :heavy_check_mark: | :heavy_check_mark: | Face      |
 
+### Driver Properties
+
+https://www.freetype.org/freetype2/docs/reference/ft2-properties.html
+
+|         | Module       | Property               | Used               | Extensively        |
+| ------- | ------------ | ---------------------- | :----------------: | :----------------: |
+| 17.1.1  | `autofitter` | `darkening-parameters` |                    |                    |
+| 17.1.2  | `autofitter` | `default-script`       |                    |                    |
+| 17.1.3  | `autofitter` | `fallback-script`      |                    |                    |
+| 17.1.4  | `autofitter` | `increase-x-height`    |                    |                    |
+| 17.1.5  | `autofitter` | `no-stem-darkening`    |                    |                    |
+| 17.1.6  | `autofitter` | `warping `             |                    |                    |
+| 17.1.7  | `cff`        | `darkening-parameters` |                    |                    |
+| 17.1.8  | `cff`        | `hinting-engine`       |                    |                    |
+| 17.1.9  | `cff`        | `no-stem-darkening`    |                    |                    |
+| 17.1.10 | `cff`        | `random-seed`          |                    |                    |
+| 17.1.11 | `pcf`        | `no-long-family-names` |                    |                    |
+| 17.1.12 | `t1cid`      | `darkening-parameters` |                    |                    |
+| 17.1.13 | `t1cid`      | `hinting-engine`       |                    |                    |
+| 17.1.14 | `t1cid`      | `no-stem-darkening`    |                    |                    |
+| 17.1.15 | `t1cid`      | `random-seed`          |                    |                    |
+| 17.1.16 | `truetype`   | `interpreter-version ` | :heavy_check_mark: | :heavy_check_mark: |
+| 17.1.17 | `type1`      | `darkening-parameters` |                    |                    |
+| 17.1.18 | `type1`      | `hinting-engine`       |                    |                    |
+| 17.1.19 | `type1`      | `no-stem-darkening`    |                    |                    |
+| 17.1.20 | `type1`      | `random-seed`          |                    |                    |
+
 ### Cache Sub-System
 
 https://www.freetype.org/freetype2/docs/reference/ft2-cache_subsystem.html
 
 |         | Function                      | Used | Extensively |
 | ------- | ----------------------------- | :--: | :---------: |
-| 17.1.1  | `FTC_Manager_New`             |      |             |
-| 17.1.2  | `FTC_Manager_Reset`           |      |             |
-| 17.1.3  | `FTC_Manager_Done`            |      |             |
-| 17.1.4  | `FTC_Manager_LookupFace`      |      |             |
-| 17.1.5  | `FTC_Manager_LookupSize`      |      |             |
-| 17.1.6  | `FTC_Manager_RemoveFaceID`    |      |             |
-| 17.1.7  | `FTC_Node_Unref`              |      |             |
-| 17.1.8  | `FTC_ImageCache_New`          |      |             |
-| 17.1.9  | `FTC_ImageCache_Lookup`       |      |             |
-| 17.1.10 | `FTC_SBitCache_New`           |      |             |
-| 17.1.11 | `FTC_SBitCache_Lookup`        |      |             |
-| 17.1.12 | `FTC_CMapCache_New`           |      |             |
-| 17.1.13 | `FTC_CMapCache_Lookup`        |      |             |
-| 17.1.14 | `FTC_ImageCache_LookupScaler` |      |             |
-| 17.1.15 | `FTC_SBitCache_LookupScaler`  |      |             |
+| 18.1.1  | `FTC_Manager_New`             |      |             |
+| 18.1.2  | `FTC_Manager_Reset`           |      |             |
+| 18.1.3  | `FTC_Manager_Done`            |      |             |
+| 18.1.4  | `FTC_Manager_LookupFace`      |      |             |
+| 18.1.5  | `FTC_Manager_LookupSize`      |      |             |
+| 18.1.6  | `FTC_Manager_RemoveFaceID`    |      |             |
+| 18.1.7  | `FTC_Node_Unref`              |      |             |
+| 18.1.8  | `FTC_ImageCache_New`          |      |             |
+| 18.1.9  | `FTC_ImageCache_Lookup`       |      |             |
+| 18.1.10 | `FTC_SBitCache_New`           |      |             |
+| 18.1.11 | `FTC_SBitCache_Lookup`        |      |             |
+| 18.1.12 | `FTC_CMapCache_New`           |      |             |
+| 18.1.13 | `FTC_CMapCache_Lookup`        |      |             |
+| 18.1.14 | `FTC_ImageCache_LookupScaler` |      |             |
+| 18.1.15 | `FTC_SBitCache_LookupScaler`  |      |             |

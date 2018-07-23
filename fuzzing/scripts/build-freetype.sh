@@ -11,18 +11,25 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-pathToFreeType=$(readlink -f "../../external/freetype2")
+path_to_freetype=$( readlink -f "../../external/freetype2" )
 
-git submodule init "${pathToFreeType}"
+git submodule init "${path_to_freetype}"
 
 # We always want to run the latest version of FreeType:
-git submodule update --remote "${pathToFreeType}"
+git submodule update --remote "${path_to_freetype}"
 
-cd "${pathToFreeType}"
+cd "${path_to_freetype}"
 
 git clean -dfqx
 git reset --hard
 git rev-parse HEAD
+
+# Manipulating `ftoption.h' to enable non-standard features of FreeType.
+# There are prettier ways to achieve that, however, this is the simplest:
+
+git apply "../../fuzzing/settings/freetype2/ftoption.patch"
+
+# CFLAGS="${CFLAGS} -DFT_CONFIG_OPTIONS_H=<devel/ftoption.h>"
 
 sh autogen.sh
 
@@ -30,14 +37,14 @@ sh autogen.sh
 # for OSS-Fuzz.  Should additional libraries be required, they have to be
 # linked properly in `fuzzing/src/fuzzers/CMakeLists.txt'.
 
-sh configure \
-   --enable-static=yes \
-   --enable-shared=no \
-   --with-bzip2=no \
-   --with-harfbuzz=no \
-   --with-png=no  \
-   --with-zlib=no
+sh configure          \
+   --enable-static    \
+   --disable-shared   \
+   --without-bzip2    \
+   --without-harfbuzz \
+   --without-png      \
+   --without-zlib
 
-make -j$(nproc)
+make -j$( nproc )
 
 cd "${dir}"

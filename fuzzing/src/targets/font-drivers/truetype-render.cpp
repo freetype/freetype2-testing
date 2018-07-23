@@ -61,3 +61,20 @@
 
     (void) set_iterator( move( fli ) );
   }
+
+
+  void
+  TrueTypeRenderFuzzTarget::
+  run( const uint8_t*  data,
+       size_t          size )
+  {
+    for ( auto  version : interpreter_versions )
+    {
+      LOG( INFO ) << "using interpreter-version: " << version;
+
+      if ( set_property( "truetype",
+                         "interpreter-version",
+                         &version) == true )
+        (void) FuzzTarget::run( data, size );
+    }
+  }

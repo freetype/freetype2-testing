@@ -13,9 +13,9 @@ set -euxo pipefail
 dir="${PWD}"
 cd "${0%/*}" # go to `fuzzing/scripts'
 
-bin_base_dir=$(      readlink -f "../build/bin" )
-corpora_base_dir=$(  readlink -f "../corpora"   )
-settings_base_dir=$( readlink -f "../settings"  )
+bin_base_dir=$(      readlink -f "../build/bin"          )
+corpora_base_dir=$(  readlink -f "../corpora"            )
+settings_base_dir=$( readlink -f "../settings/oss-fuzz"  )
 
 fuzzers=(
     "legacy"

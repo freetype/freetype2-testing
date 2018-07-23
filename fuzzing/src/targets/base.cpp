@@ -17,6 +17,10 @@
 #include <cassert>
 #include <iostream>
 
+#include <ft2build.h>
+#include FT_AUTOHINTER_H
+#include FT_MODULE_H
+
 #include "utils/logging.h"
 
 
@@ -81,6 +85,26 @@
   {
     assert( face_load_iterator != nullptr );
     face_load_iterator->set_data_is_tar_archive( is_tar_archive );
+  }
+
+
+  bool
+  FuzzTarget::
+  set_property( string  module_name,
+                string  property_name,
+                void*   value )
+  {
+    FT_Error  error;
+
+
+    error = FT_Property_Set( library,
+                             module_name.c_str(),
+                             property_name.c_str(),
+                             value );
+
+    LOG_IF( ERROR, error != 0 ) << "FT_Property_Set failed: " << error;
+
+    return error == 0 ? true : false;
   }
 
 
