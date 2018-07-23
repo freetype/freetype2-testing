@@ -13,21 +13,26 @@ set -euxo pipefail
 dir="${PWD}"
 cd "${0%/*}" # go to `fuzzing/scripts'
 
-bin_base_dir=$(readlink -f "../build/bin")
-corpora_base_dir=$(readlink -f "../corpora")
-settings_base_dir=$(readlink -f "../settings")
+bin_base_dir=$(      readlink -f "../build/bin" )
+corpora_base_dir=$(  readlink -f "../corpora"   )
+settings_base_dir=$( readlink -f "../settings"  )
 
 fuzzers=(
     "legacy"
 
     "cff"
     "cff-render"
+
     "cidtype1"
     "cidtype1-render"
+
     "truetype"
     "truetype-render"
+
     "type1"
     "type1-render"
+    "type1-render-tar"
+    "type1-tar"
 
     "glyphs-outlines"
 )

@@ -1,6 +1,6 @@
-// type1-render.cpp
+// type1-render-tar.cpp
 //
-//   Implementation of Type1RenderFuzzTarget.
+//   Implementation of Type1RenderTarFuzzTarget.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,11 +12,11 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/type1-render.h"
+#include "targets/font-drivers/type1-render-tar.h"
 
 
-  Type1RenderFuzzTarget::
-  Type1RenderFuzzTarget( void )
+  Type1RenderTarFuzzTarget::
+  Type1RenderTarFuzzTarget( void )
   {
-    (void) set_data_is_tar_archive( false );
+    (void) set_data_is_tar_archive( true );
   }

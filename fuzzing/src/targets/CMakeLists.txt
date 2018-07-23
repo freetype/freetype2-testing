@@ -11,6 +11,7 @@
 
 add_library(fuzztargets
   STATIC
+
   "${FUZZING_SRC_DIR}/iterators/faceloaditerator.cpp"
   "${FUZZING_SRC_DIR}/iterators/faceprepiterator.cpp"
   "${FUZZING_SRC_DIR}/iterators/faceprepiterator-bitmaps.cpp"
@@ -19,6 +20,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/iterators/glyphloaditerator.cpp"
   "${FUZZING_SRC_DIR}/iterators/glyphloaditerator-naive.cpp"
   "${FUZZING_SRC_DIR}/iterators/glyphrenderiterator-allmodes.cpp"
+
   "${FUZZING_SRC_DIR}/targets/base.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cff.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cff-render.cpp"
@@ -27,11 +29,17 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/targets/font-drivers/truetype.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/truetype-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/type1-base.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render-base.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render-tar.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/type1-tar.cpp"
   "${FUZZING_SRC_DIR}/targets/glyphs/outlines.cpp"
+
   "${FUZZING_SRC_DIR}/utils/faceloader.cpp"
   "${FUZZING_SRC_DIR}/utils/tarreader.cpp"
   "${FUZZING_SRC_DIR}/utils/utils.cpp"
+
   "${FUZZING_SRC_DIR}/visitors/facevisitor-cid.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-charcodes.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-gasp.cpp"
@@ -46,6 +54,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/visitors/facevisitor-truetypetables.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-type1tables.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-variants.cpp"
+
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-cbox.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-transform.cpp")
 
