@@ -158,7 +158,7 @@ else
     print_info "1" "compile with '-g -O1'"
     print_info "2" "compile with '-g -O2'"
     print_info "3" "compile with '-g -O3'"
-    print_info "n" "compile with debugging flags"
+    print_info "n" "compile without debugging flags"
     printf "\n"
     build_debugging=$(ask_user "0|1|2|3|n" "1")
     print_sel "${build_debugging}" "0" "-g O0"
