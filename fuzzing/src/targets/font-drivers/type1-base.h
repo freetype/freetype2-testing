@@ -1,6 +1,6 @@
-// type1.h
+// type1-base.h
 //
-//   Fuzz target for Type 1 fonts.
+//   Base class of fuzz target for Type 1 faces.
 //
 // Copyright 2018 by
 // Armin Hasitzka.
@@ -12,21 +12,21 @@
 // understand and accept it fully.
 
 
-#ifndef TARGETS_FONT_DRIVERS_TYPE_1_H_
-#define TARGETS_FONT_DRIVERS_TYPE_1_H_
+#ifndef TARGETS_FONT_DRIVERS_TYPE_1_BASE_H_
+#define TARGETS_FONT_DRIVERS_TYPE_1_BASE_H_
 
 
-#include "targets/font-drivers/type1-base.h"
+#include "targets/base.h"
 
 
-  class Type1FuzzTarget
-  : public Type1FuzzTargetBase
+  class Type1FuzzTargetBase
+  : public FuzzTarget
   {
   public:
 
 
-    Type1FuzzTarget( void );
+    Type1FuzzTargetBase( void );
   };
 
 
-#endif // TARGETS_FONT_DRIVERS_TYPE_1_H_
+#endif // TARGETS_FONT_DRIVERS_TYPE_1_BASE_H_

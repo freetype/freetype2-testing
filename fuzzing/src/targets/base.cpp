@@ -75,6 +75,15 @@
   }
 
 
+  void
+  FuzzTarget::
+  set_data_is_tar_archive( bool  is_tar_archive )
+  {
+    assert( face_load_iterator != nullptr );
+    face_load_iterator->set_data_is_tar_archive( is_tar_archive );
+  }
+
+
   unique_ptr<FaceLoadIterator>&
   FuzzTarget::
   set_iterator( unique_ptr<FaceLoadIterator>  iterator )

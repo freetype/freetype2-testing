@@ -1,6 +1,6 @@
-// type1.h
+// type1-tar.h
 //
-//   Fuzz target for Type 1 fonts.
+//   Fuzz target for Type 1 fonts with tar sampling data.
 //
 // Copyright 2018 by
 // Armin Hasitzka.
@@ -12,21 +12,21 @@
 // understand and accept it fully.
 
 
-#ifndef TARGETS_FONT_DRIVERS_TYPE_1_H_
-#define TARGETS_FONT_DRIVERS_TYPE_1_H_
+#ifndef TARGETS_FONT_DRIVERS_TYPE_1_TAR_H_
+#define TARGETS_FONT_DRIVERS_TYPE_1_TAR_H_
 
 
 #include "targets/font-drivers/type1-base.h"
 
 
-  class Type1FuzzTarget
+  class Type1TarFuzzTarget
   : public Type1FuzzTargetBase
   {
   public:
 
 
-    Type1FuzzTarget( void );
+    Type1TarFuzzTarget( void );
   };
 
 
-#endif // TARGETS_FONT_DRIVERS_TYPE_1_H_
+#endif // TARGETS_FONT_DRIVERS_TYPE_1_TAR_H_

@@ -64,6 +64,12 @@
          size_t          size );
 
 
+    // @See: FaceLoader::set_data_is_tar_archive()
+
+    void
+    set_data_is_tar_archive( bool  is_tar_archive );
+
+
   protected:
 
 

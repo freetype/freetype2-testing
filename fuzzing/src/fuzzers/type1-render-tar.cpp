@@ -1,6 +1,6 @@
-// type1-render.cpp
+// type1.cpp
 //
-//   Implementation of Type1RenderFuzzTarget.
+//   Fuzz target to render Type 1 fonts with tar sampling data.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,11 +12,20 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/type1-render.h"
+#include "targets/font-drivers/type1-render-tar.h"
 
 
-  Type1RenderFuzzTarget::
-  Type1RenderFuzzTarget( void )
+namespace {
+
+
+  Type1RenderTarFuzzTarget  target;
+
+
+  extern "C" int
+  LLVMFuzzerTestOneInput( const uint8_t*  data,
+                          size_t          size )
   {
-    (void) set_data_is_tar_archive( false );
+    (void) target.run( data, size );
+    return 0;
   }
+}

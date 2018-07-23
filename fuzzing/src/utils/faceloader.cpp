@@ -61,10 +61,9 @@
 
     (void) files.clear();
 
-    if ( accept_tar_archives )
+    if ( data_is_tar_archive == true )
       (void) tarreader.extract_data( data, size );
-
-    if ( files.size() == 0 )
+    else
       (void) files.emplace_back( data, data + size );
 
     num_faces     = -1;
@@ -74,9 +73,9 @@
 
   void
   FaceLoader::
-  set_accept_tar_archives( bool  accept )
+  set_data_is_tar_archive( bool  is_tar_archive )
   {
-    accept_tar_archives = accept;
+    data_is_tar_archive = is_tar_archive;
   }
 
 
@@ -169,6 +168,12 @@
     FT_Error  error;
     FT_Face   face;
 
+
+    if ( files.size() < 1 )
+    {
+      LOG( ERROR ) << "missing data; no data to load a face from";
+      return make_unique_face();
+    }
 
     if ( face_index >= 0 )
       face_index += ( instance_index << 16 );

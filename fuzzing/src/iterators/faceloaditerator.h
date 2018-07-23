@@ -58,10 +58,10 @@
                    size_t          size );
 
 
-    // @See: FaceLoader::set_accept_tar_archives
+    // @See: FaceLoader::set_data_is_tar_archive()
 
     void
-    set_accept_tar_archives( bool  accept );
+    set_data_is_tar_archive( bool  is_tar_archive );
     
 
     // @Description:

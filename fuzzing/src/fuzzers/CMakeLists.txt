@@ -14,20 +14,23 @@ set(libfuzzer_exes
   
   cff
   cff-render
+
   cidtype1
   cidtype1-render
+
   truetype
   truetype-render
+
   type1
   type1-render
+  type1-render-tar
+  type1-tar
 
   glyphs-outlines)
 
 # OSS-Fuzz does not allow shared objects.  Thus we have to link the fuzz
-# targets as statically as possible.  Since this only affects builds on
-# OSS-Fuzz's machines at the moment, we test for specific paths of static
-# libraries of that environment and fall back to dynamic linking if all else
-# fails.
+# targets as statically as possible.  Bear that in mind when linking
+# additional libraries.
 
 add_executable(libfuzzer-legacy
   "${FUZZING_SRC_DIR}/legacy/ftfuzzer.cc")

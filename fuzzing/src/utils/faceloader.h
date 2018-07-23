@@ -98,19 +98,16 @@
 
 
     // @Description:
-    //   Tries to interpret fuzzing data as tar archives if `true'.  If the
-    //   input data can somehow be opened by libarchve, it will be used that
-    //   way, otherwise the input gets interpreted as a single input file.
-    //   Note: only enable this if needed since it adds a considerable (and
-    //   unnecessary) overhead when not needed.
+    //   Choose whether this target should treat incoming data as a tar
+    //   archive or as a plain font file.  Mind that this only makes sense
+    //   with certain font drivers.
     //
     // @Input:
-    //   accept ::
-    //     Try to interpret fuzzing input as tar archives if `true'. Skip that
-    //     step if `false'.  Default: `false'.
+    //   is_tar_archive ::
+    //     Treat input as a tar archive (true) or plain font file (false).
 
     void
-    set_accept_tar_archives( bool  accept );
+    set_data_is_tar_archive( bool  is_tar_archive );
 
 
     void
@@ -167,7 +164,7 @@
     FontFormat  supported_font_format        = FontFormat::NONE;
     string      supported_font_format_string = "";
 
-    bool  accept_tar_archives = false;
+    bool  data_is_tar_archive = false;
 
     FT_Long  num_faces  = -1;
     FT_Long  face_index =  0;
