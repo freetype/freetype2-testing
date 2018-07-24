@@ -15,9 +15,15 @@
 #include "visitors/facevisitor-loadglyphs.h"
 
 #include <set>
-#include <vector>
 
 #include "utils/logging.h"
+
+
+  FaceVisitorLoadGlyphs::
+  FaceVisitorLoadGlyphs( void )
+  {
+    (void) add_transformation( nullptr, nullptr );
+  }
 
 
   void
@@ -29,28 +35,57 @@
     FT_Long  num_glyphs = face->num_glyphs;
 
 
-    for ( auto  index = 0;
-          index < num_glyphs &&
-            index < GLYPH_INDEX_MAX;
-          index++ )
+    for ( auto  transformation : transformations )
     {
-      LOG( INFO ) << "testing glyph " << ( index + 1 ) << "/" << num_glyphs;
+      FT_Matrix*  matrix = transformation.first;
+      FT_Vector*  vector = transformation.second;
 
-      for ( auto  load_flags : this->load_flags )
+
+      LOG_IF( INFO, matrix == nullptr ) << "setting transformation matrix: none";
+      LOG_IF( INFO, matrix != nullptr )
+        << "setting transformation matrix: "
+        << matrix->xx << ", " << matrix->xy << "; "
+        << matrix->yx << ", " << matrix->yy;
+
+      LOG_IF( INFO, vector == nullptr ) << "setting transform vector: none";
+      LOG_IF( INFO, vector != nullptr )
+        << "setting transform vector: "
+        << vector->x << ", " << vector->y;
+
+      (void) FT_Set_Transform( face.get(), matrix, vector );
+
+      for ( auto  index = 0;
+            index < num_glyphs &&
+              index < GLYPH_INDEX_MAX;
+            index++ )
       {
-        LOG( INFO ) << "load flags: " << hex << load_flags;
+        LOG( INFO ) << "testing glyph " << ( index + 1 ) << "/" << num_glyphs;
 
-        error = FT_Load_Glyph( face.get(), index, load_flags );
-
-        if ( error != 0 )
+        for ( auto  load_flags : this->load_flags )
         {
-          LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
-          continue; // try the next flag; it might work better.
+          LOG( INFO ) << "load flags: " << hex << "0x" << load_flags;
+
+          error = FT_Load_Glyph( face.get(), index, load_flags );
+
+          if ( error != 0 )
+          {
+            LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
+            continue; // try the next flag; it might work better.
+          }
         }
       }
-    }
 
-    WARN_ABOUT_IGNORED_VALUES( num_glyphs, GLYPH_INDEX_MAX, "glyphs" );
+      WARN_ABOUT_IGNORED_VALUES( num_glyphs, GLYPH_INDEX_MAX, "glyphs" );
+    }
+  }
+
+
+  void
+  FaceVisitorLoadGlyphs::
+  add_transformation( FT_Matrix*  matrix,
+                      FT_Vector*  delta )
+  {
+    (void) transformations.push_back( { matrix, delta } );
   }
 
 

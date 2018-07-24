@@ -65,7 +65,7 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 | 2.3.2 | `FT_Set_Pixel_Sizes` | :heavy_check_mark: | :heavy_check_mark: | Face      |       |           |
 | 2.3.3 | `FT_Request_Size`    | :heavy_check_mark: | :heavy_check_mark: | Face      |       | 2.3.1     |
 | 2.3.4 | `FT_Select_Size`     | :heavy_check_mark: | :heavy_check_mark: | Face      |       |           |
-| 2.3.5 | `FT_Set_Transform`   |                    |                    | Face      |       |           |
+| 2.3.5 | `FT_Set_Transform`   | :heavy_check_mark: | :heavy_check_mark: | Face      |       |           |
 
 |       | Function            | Used               | Extensively        | Resources                             | Calls            | Called by |
 | ----- | ------------------- | :----------------: | :----------------: | ------------------------------------- | ---------------- | --------- |

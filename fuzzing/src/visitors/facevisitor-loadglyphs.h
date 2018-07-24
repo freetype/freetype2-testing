@@ -33,7 +33,7 @@
   public:
 
 
-    FaceVisitorLoadGlyphs( void ) {}
+    FaceVisitorLoadGlyphs( void );
 
 
     FaceVisitorLoadGlyphs( const FaceVisitorLoadGlyphs& ) = delete;
@@ -53,10 +53,27 @@
   protected:
 
 
-    // Description:
+    // @Description:
+    //   Add a transformation that will be used with all load flags.
+    //   Note:  the "empty" transformation (no transformation at all) will
+    //   always be added automatically.
+    //
+    // @Input:
+    //   matrix ::
+    //     See `FT_Set_Transform'.
+    //
+    //   vector ::
+    //     See `FT_Set_Transform'.
+
+    void
+    add_transformation( FT_Matrix*  matrix,
+                        FT_Vector*  delta );
+
+
+    // @Description:
     //   Set load flags that will all be used in `run()'.
     //
-    // Input:
+    // @Input:
     //   flags ::
     //     A set of flags.
 
@@ -69,7 +86,8 @@
 
     static const FT_Long  GLYPH_INDEX_MAX = 30;
 
-    vector<FT_Int32>  load_flags;
+    vector<pair<FT_Matrix*, FT_Vector*>>  transformations;
+    vector<FT_Int32>                      load_flags;
   };
 
 
