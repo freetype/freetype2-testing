@@ -44,6 +44,13 @@
 
     virtual
     ~FaceVisitorLoadGlyphsOutlines( void ) {}
+
+
+  private:
+
+
+    FT_Matrix  matrix;
+    FT_Vector  delta;
   };
 
 
