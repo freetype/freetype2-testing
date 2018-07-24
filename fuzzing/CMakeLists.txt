@@ -30,12 +30,26 @@ set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
 set(FUZZING_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(FUZZING_SRC_DIR  "${FUZZING_BASE_DIR}/src")
 
+# ${FUZZING_CORPORA_SUITES} is used to automatically detect and register
+# regression tests.
+
 set(FUZZING_CORPORA_DIR    "${FUZZING_BASE_DIR}/corpora")
 set(FUZZING_CORPORA_SUITES
-  "cff"
-  "cidtype1"
   "legacy"
-  "truetype")
+
+  "cff"
+  "cff-render"
+
+  "cidtype1"
+  "cidtype1-render"
+
+  "truetype"
+  "truetype-render"
+
+  "type1"
+  "type1-render"
+  "type1-render-tar"
+  "type1-tar")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
