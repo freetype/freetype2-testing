@@ -1,5 +1,20 @@
 # CMakeLists.txt
 #
+# This script listens to a few environmental variables:
+#
+#   CMAKE_DRIVER_EXE_NAME
+#     (optional) Override the default name "driver".
+#
+#   CMAKE_FUZZING_ENGINE
+#     If set:  set up everything to build the fuzzers.  The value is expected
+#              to be a linkable library that contains the desired
+#              implementation of the fuzzer.
+#              For example: `-fsanitize=fuzzer'.
+#     If not set:  set up everything to build the driver.
+#
+#   CMAKE_USE_LOGGER_GLOG
+#     (optional) If set and `1', glog will be linked.
+#
 # Copyright 2018 by
 # Armin Hasitzka.
 #
@@ -14,6 +29,11 @@ cmake_minimum_required(VERSION 3.0)
 project(fuzzing)
 
 set(FUZZING_ENGINE "$ENV{CMAKE_FUZZING_ENGINE}")
+
+set(DRIVER_EXE_NAME "driver")
+if(NOT "$ENV{CMAKE_DRIVER_EXE_NAME}" STREQUAL "")
+  set(DRIVER_EXE_NAME "$ENV{CMAKE_DRIVER_EXE_NAME}")
+endif()
 
 if("$ENV{CMAKE_USE_LOGGER_GLOG}")
   set(LOGGER_NAME "LOGGER_GLOG")

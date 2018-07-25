@@ -10,11 +10,10 @@ set -euxo pipefail
 # indicate that you have read the license and understand and accept it
 # fully.
 
-dir=$PWD
+dir="${PWD}"
 cd ..
 
-rm -rf build
-mkdir build && cd build
+mkdir -p build && cd build
 
 cmake -DCMAKE_BUILD_TYPE=Debug ..
 make -j$(nproc)
