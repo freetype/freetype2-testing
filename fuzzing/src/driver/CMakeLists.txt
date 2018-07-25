@@ -13,6 +13,8 @@ add_executable(driver
   "${FUZZING_SRC_DIR}/driver/driver.cpp"
   "${FUZZING_SRC_DIR}/legacy/ftfuzzer.cc")
 
+set_target_properties(driver PROPERTIES OUTPUT_NAME "${DRIVER_EXE_NAME}")
+
 target_link_libraries(driver
   PRIVATE
   "${LIBARCHIVE_STATIC_LIBRARY}"
