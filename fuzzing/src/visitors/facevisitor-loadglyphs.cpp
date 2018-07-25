@@ -67,11 +67,7 @@
 
           error = FT_Load_Glyph( face.get(), index, load_flags );
 
-          if ( error != 0 )
-          {
-            LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
-            continue; // try the next flag; it might work better.
-          }
+          LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
         }
       }
 

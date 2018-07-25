@@ -46,9 +46,12 @@
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
-
+    FT_Int    num_charmaps;
+    
 
     assert( face != nullptr );
+
+    num_charmaps = face->num_charmaps;
 
     for ( auto  encoding : encodings )
     {
@@ -67,7 +70,7 @@
     }
 
     for ( FT_Int  charmap_index = 0;
-          charmap_index < face->num_charmaps &&
+          charmap_index < num_charmaps &&
             charmap_index < CHARMAP_INDEX_MAX;
           charmap_index++ )
     {
@@ -82,7 +85,7 @@
         continue;
 
       LOG( INFO ) << "load charmap "
-                  << ( charmap_index + 1 ) << "/" << face->num_charmaps;
+                  << ( charmap_index + 1 ) << "/" << num_charmaps;
 
       if ( FT_Get_Charmap_Index( charmap ) != charmap_index )
       {
@@ -92,7 +95,7 @@
       (void) slide_along( face );
     }
 
-    WARN_ABOUT_IGNORED_VALUES( face->charmaps,
+    WARN_ABOUT_IGNORED_VALUES( num_charmaps,
                                CHARMAP_INDEX_MAX,
                                "character maps" );
   }
@@ -107,8 +110,8 @@
     FT_ULong  char_code;
     FT_UInt   glyph_index;
 
-    FT_String   glyph_name[100];
-    FT_UInt     glyph_name_length = 100;
+    FT_String  glyph_name[100];
+    FT_UInt    glyph_name_length = 100;
 
     FT_UInt  slide_index = 0;
 
@@ -136,10 +139,8 @@
       LOG_IF( ERROR, error != 0) << "FT_Load_Char failed: " << error;
 
       if ( FT_HAS_GLYPH_NAMES( face.get() ) != 1 )
-      {
         LOG( INFO ) << "char code: " << char_code << ", "
                     << "glyph index: " << glyph_index;
-      }
       else
       {
         error = FT_Get_Glyph_Name( face.get(),
