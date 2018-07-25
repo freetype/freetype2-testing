@@ -48,9 +48,14 @@
     }
 
     // Select arbitrary coordinates:
-    for ( auto  i = 0; i < master->num_axis; i++ )
+    for ( auto  i = 0;
+          i < master->num_axis &&
+            i < AXIS_INDEX_MAX;
+          i++ )
       coords.push_back( ( master->axis[i].minimum +
                           master->axis[i].def ) / 2 );
+
+    WARN_ABOUT_IGNORED_VALUES( master->num_axis, AXIS_INDEX_MAX, "axis" );
 
     error = FT_Set_Var_Design_Coordinates( face.get(),
                                            coords.size(),

@@ -35,6 +35,6 @@
     for ( auto  ppem : ppems )
     {
       flags = FT_Get_Gasp( face.get(), ppem );
-      LOG( INFO ) << "gasp: " << hex << flags;
+      LOG( INFO ) << "gasp: " << hex << "0x" << flags;
     }
   }

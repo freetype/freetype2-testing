@@ -58,6 +58,9 @@
   private:
 
 
+    static const FT_UInt  AXIS_INDEX_MAX = 10;
+
+
     Unique_FT_Face
     free_and_return( FT_Library      library,
                      FT_MM_Var*      master,

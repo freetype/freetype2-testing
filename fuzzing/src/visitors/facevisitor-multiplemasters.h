@@ -71,7 +71,9 @@
   private:
 
 
-    bool  is_adobe_mm;
+    static const FT_UInt  AXIS_INDEX_MAX = 10;
+
+    bool  has_adobe_mm;
 
 
     // @Description:

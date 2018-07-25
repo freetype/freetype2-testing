@@ -21,7 +21,7 @@
   FaceVisitorMultipleMasters::
   FaceVisitorMultipleMasters( FaceLoader::FontFormat  format )
   {
-    is_adobe_mm = format == FaceLoader::FontFormat::TYPE_1 ? true : false;
+    has_adobe_mm = format == FaceLoader::FontFormat::TYPE_1 ? true : false;
   }
 
 
@@ -49,7 +49,7 @@
 
     library = face->glyph->library;
 
-    if ( is_adobe_mm == true )
+    if ( has_adobe_mm == true )
     {
       error = FT_Get_Multi_Master( face.get(), &master );
       LOG_IF( ERROR, error != 0 ) << "FT_Get_Multi_Master failed: " << error;
@@ -81,7 +81,10 @@
     }
 
     // Select arbitrary coordinates:
-    for ( auto  i = 0; i < var->num_axis; i++ )
+    for ( auto  i = 0;
+          i < var->num_axis &&
+            i < AXIS_INDEX_MAX;
+          i++ )
     {
       coords_var_design.push_back( ( var->axis[i].minimum +
                                      var->axis[i].def ) / 2 );
@@ -91,6 +94,8 @@
       coords_mm_blend.push_back( 0x10000L * 0.5 );
       coords_var_blend.push_back( 0x10000L * 0.5 );
     }
+
+    WARN_ABOUT_IGNORED_VALUES( var->num_axis, AXIS_INDEX_MAX, "axis" );
 
     (void) test_coords( face,
                         coords_var_design,
@@ -131,7 +136,7 @@
       LOG_IF( ERROR, error != 0 )
         << "FT_Get_Var_Axis_Flags failed: " << error;
       LOG_IF( INFO, error == 0 )
-        << "flags of axis " << ( i + 1 ) << ": " << hex << flags;
+        << "flags of axis " << ( i + 1 ) << ": " << hex << "0x" << flags;
     }
 
     for ( auto  i = 0; i < var->num_namedstyles; i++ )

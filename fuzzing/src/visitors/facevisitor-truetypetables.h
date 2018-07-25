@@ -49,6 +49,12 @@
     void
     run( Unique_FT_Face  face )
     override;
+
+
+  private:
+
+
+    static const FT_ULong  TABLE_INDEX_MAX = 20;
   };
 
 

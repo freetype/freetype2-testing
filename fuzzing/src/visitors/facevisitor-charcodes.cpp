@@ -67,7 +67,8 @@
     }
 
     for ( FT_Int  charmap_index = 0;
-          charmap_index < face->num_charmaps;
+          charmap_index < face->num_charmaps &&
+            charmap_index < CHARMAP_INDEX_MAX;
           charmap_index++ )
     {
       FT_CharMap charmap = face->charmaps[charmap_index];
@@ -90,6 +91,10 @@
 
       (void) slide_along( face );
     }
+
+    WARN_ABOUT_IGNORED_VALUES( face->charmaps,
+                               CHARMAP_INDEX_MAX,
+                               "character maps" );
   }
 
 
