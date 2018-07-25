@@ -265,7 +265,7 @@ https://www.freetype.org/freetype2/docs/reference/ft2-properties.html
 | 17.1.3  | `autofitter` | `fallback-script`      |                    |                    |
 | 17.1.4  | `autofitter` | `increase-x-height`    |                    |                    |
 | 17.1.5  | `autofitter` | `no-stem-darkening`    |                    |                    |
-| 17.1.6  | `autofitter` | `warping `             |                    |                    |
+| 17.1.6  | `autofitter` | `warping `             | :heavy_check_mark: | :heavy_check_mark: |
 | 17.1.7  | `cff`        | `darkening-parameters` |                    |                    |
 | 17.1.8  | `cff`        | `hinting-engine`       |                    |                    |
 | 17.1.9  | `cff`        | `no-stem-darkening`    |                    |                    |

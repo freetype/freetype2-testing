@@ -40,8 +40,9 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/utils/tarreader.cpp"
   "${FUZZING_SRC_DIR}/utils/utils.cpp"
 
-  "${FUZZING_SRC_DIR}/visitors/facevisitor-cid.cpp"
+  "${FUZZING_SRC_DIR}/visitors/facevisitor-autohinter.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-charcodes.cpp"
+  "${FUZZING_SRC_DIR}/visitors/facevisitor-cid.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-gasp.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-kerning.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-loadglyphs.cpp"

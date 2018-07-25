@@ -18,6 +18,7 @@
 #include "iterators/faceprepiterator-bitmaps.h"
 #include "iterators/faceprepiterator-multiplemasters.h"
 #include "iterators/faceprepiterator-outlines.h"
+#include "visitors/facevisitor-autohinter.h"
 #include "visitors/facevisitor-loadglyphs-bitmaps.h"
 #include "visitors/facevisitor-loadglyphs-outlines.h"
 #include "utils/logging.h"
@@ -42,8 +43,14 @@
     
     (void) fpi_bitmaps
       ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+
+    (void) fpi_mm
+      ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_mm
       ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
 
