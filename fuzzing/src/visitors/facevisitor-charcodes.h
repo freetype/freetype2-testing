@@ -53,8 +53,9 @@
   private:
 
     
-    // The operations are cheap but no need to exaggerate:
-    static const FT_UInt  SLIDE_ALONG_MAX = 50;
+    // These operations are cheap but no need to exaggerate:
+    static const FT_UInt  SLIDE_ALONG_MAX   = 50;
+    static const FT_Int   CHARMAP_INDEX_MAX = 10;
 
     vector<pair<FT_Encoding, string>>  encodings;
 

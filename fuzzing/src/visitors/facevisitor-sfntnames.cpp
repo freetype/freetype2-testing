@@ -38,7 +38,8 @@
     num_sfnt_names = FT_Get_Sfnt_Name_Count( face.get() );
 
     for ( FT_UInt  index = 0;
-          index < num_sfnt_names && index < SFNT_NAME_MAX;
+          index < num_sfnt_names &&
+            index < SFNT_NAME_MAX;
           index++ )
     {
       error = FT_Get_Sfnt_Name( face.get(), index, &sfnt_name );

@@ -63,7 +63,8 @@
     if ( error == 0 )
     {
       for ( FT_UInt table_index = 0;
-            table_index < num_tables;
+            table_index < num_tables &&
+              table_index < TABLE_INDEX_MAX;
             table_index++ )
       {
         error = FT_Sfnt_Table_Info( face.get(),
@@ -87,6 +88,8 @@
                                     buffer,
                                     &buffer_len );
       }
+
+      WARN_ABOUT_IGNORED_VALUES( num_tables, TABLE_INDEX_MAX, "tables" );
     }
 
     for ( FT_Int  charmap_index = 0;

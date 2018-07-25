@@ -45,6 +45,13 @@
     void
     run( Unique_FT_Face  face )
     override;
+
+
+  private:
+
+
+    static const size_t  VARIANT_SELECTORS_MAX =  10;
+    static const size_t  LOCAL_CHARCODES_MAX   =  50;
   };
 
 

@@ -46,8 +46,11 @@
     }
 
     while ( *raw_selectors != 0 )
+    {
       selectors.push_back( *raw_selectors++ );
-
+      if ( selectors.size() >= VARIANT_SELECTORS_MAX )
+        break;
+    }
 
     for ( FT_UInt32  selector : selectors )
     {
@@ -61,8 +64,10 @@
       local_charcodes.clear();
       while ( *raw_chars != 0 )
       {
-        local_charcodes.insert( *raw_chars );
+        local_charcodes.insert(  *raw_chars );
         global_charcodes.insert( *raw_chars++ );
+        if ( local_charcodes.size() >= LOCAL_CHARCODES_MAX )
+          break;
       }
 
       for ( FT_UInt32  charcode : local_charcodes )
