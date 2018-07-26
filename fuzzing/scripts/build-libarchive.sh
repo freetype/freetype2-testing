@@ -13,8 +13,8 @@ set -euxo pipefail
 dir="${PWD}"
 pathToLibarchive=$(readlink -f "../../external/libarchive")
 
-git submodule init   "${pathToLibarchive}"
-git submodule update "${pathToLibarchive}"
+git submodule init             "${pathToLibarchive}"
+git submodule update --depth 1 "${pathToLibarchive}"
 
 cd "${pathToLibarchive}"
 
