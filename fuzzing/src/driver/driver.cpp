@@ -68,9 +68,9 @@
                         "  --cidtype1-render\n"                         \
                         "  --truetype\n"                                \
                         "  --truetype-render\n"                         \
-                        "  --type1\n\n"                                 \
-                        "  --type1-render\n\n"                          \
-                        "  --type1-render-tar\n\n"                      \
+                        "  --type1\n"                                   \
+                        "  --type1-render\n"                            \
+                        "  --type1-render-tar\n"                        \
                         "  --type1-tar\n\n"                             \
                         "  --glyphs-outlines\n\n"                       \
                         "File:\n"                                       \
