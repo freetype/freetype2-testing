@@ -48,10 +48,6 @@
   {
     cerr << message << "\n";
 
-#ifdef LOGGER_GLOG
-    gflags::ShutDownCommandLineFlags();
-#endif // LOGGER_GLOG
-
     return EXIT_FAILURE;
   }
 
@@ -84,7 +80,7 @@
   {
 
 #ifdef LOGGER_GLOG
-    (void) google::InitGoogleLogging( argv[0] );
+  (void) google::InitGoogleLogging( argv[0] );
 #endif // LOGGER_GLOG
 
     if ( argc != 3 )
@@ -132,10 +128,6 @@
       (void) ( GlyphsOutlinesFuzzTarget() ).run( data, size );
     else
       return print_usage();
-
-#ifdef LOGGER_GLOG
-    gflags::ShutDownCommandLineFlags();
-#endif // LOGGER_GLOG
 
     return EXIT_SUCCESS;
   }

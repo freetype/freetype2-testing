@@ -313,6 +313,10 @@ export LDFLAGS="${ldflags}"
 
 export CMAKE_DRIVER_EXE_NAME="${driver_name}"
 
+if [[ "${build_glog}" == "y" ]]; then
+    bash build-glog.sh
+fi
+
 bash build-libarchive.sh
 bash build-freetype.sh
 bash build-targets.sh

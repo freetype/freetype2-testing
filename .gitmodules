@@ -2,6 +2,10 @@
   path = external/freetype2
   url = http://git.sv.nongnu.org/r/freetype/freetype2.git
   branch = master
+[submodule "glog"]
+  path = external/glog
+  url = https://github.com/google/glog.git
+  branch = master
 [submodule "libarchive"]
   path = external/libarchive
   url = https://github.com/libarchive/libarchive.git

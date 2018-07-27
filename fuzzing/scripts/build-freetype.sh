@@ -29,8 +29,6 @@ git rev-parse HEAD
 
 git apply "../../fuzzing/settings/freetype2/ftoption.patch"
 
-# CFLAGS="${CFLAGS} -DFT_CONFIG_OPTIONS_H=<devel/ftoption.h>"
-
 sh autogen.sh
 
 # Having additional libraries is pain since they have to be linked statically

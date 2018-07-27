@@ -23,7 +23,7 @@ target_link_libraries(driver
 
 if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")
   target_compile_definitions(driver PRIVATE "LOGGER_GLOG")
-  target_link_libraries(     driver PRIVATE gflags glog)
+  target_link_libraries(driver PRIVATE "${GLOG_STATIC_LIBRARY}")
 endif()
 
 foreach(suite ${FUZZING_CORPORA_SUITES})
