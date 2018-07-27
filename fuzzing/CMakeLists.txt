@@ -65,6 +65,11 @@ set(FREETYPE_BASE_DIR       "${SUBMODULES_DIR}/freetype2")
 set(FREETYPE_SRC_DIR        "${FREETYPE_BASE_DIR}/src")
 set(FREETYPE_STATIC_LIBRARY "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
 
+set(GLOG_BASE_DIR       "${SUBMODULES_DIR}/glog")
+set(GLOG_SRC_DIR        "${GLOG_BASE_DIR}/src")
+set(GLOG_BUILD_DIR      "${GLOG_BASE_DIR}/build")
+set(GLOG_STATIC_LIBRARY "${GLOG_BUILD_DIR}/libglog.a")
+
 set(LIBARCHIVE_BASE_DIR       "${SUBMODULES_DIR}/libarchive")
 set(LIBARCHIVE_SRC_DIR        "${LIBARCHIVE_BASE_DIR}/src")
 set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
@@ -91,7 +96,11 @@ include_directories(
   "${FUZZING_SRC_DIR}"
   "${LIBARCHIVE_BASE_DIR}/libarchive")
 
-link_directories("${FREETYPE_BASE_DIR}/objs/.libs")
+if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")
+  include_directories(
+    "${GLOG_BUILD_DIR}"
+    "${GLOG_SRC_DIR}")
+endif()
 
 enable_testing()
 
