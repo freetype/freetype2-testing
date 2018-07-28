@@ -11,46 +11,55 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-pathToLibarchive=$(readlink -f "../../external/libarchive")
 
-git submodule init             "${pathToLibarchive}"
-git submodule update --depth 1 "${pathToLibarchive}"
+path_to_src=$( readlink -f "../../external/libarchive" )
 
-cd "${pathToLibarchive}"
+if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
 
-git clean -dfqx
-git reset --hard
-git rev-parse HEAD
+    git submodule init             "${path_to_src}"
+    git submodule update --depth 1 "${path_to_src}"
 
-sh build/autogen.sh
+    cd "${path_to_src}"
 
-# Build `libarchive' as slim as possible:
+    git clean -dfqx
+    git reset --hard
+    git rev-parse HEAD
 
-sh configure                     \
-   --disable-dependency-tracking \
-   --disable-shared              \
-   --enable-static               \
-   --disable-bsdtar              \
-   --disable-bsdcat              \
-   --disable-bsdcpio             \
-   --enable-posix-regex-lib=libc \
-   --disable-xattr               \
-   --disable-acl                 \
-   --disable-largefile           \
-   --without-zlib                \
-   --without-bz2lib              \
-   --without-iconv               \
-   --without-libiconv-prefix     \
-   --without-lz4                 \
-   --without-zstd                \
-   --without-lzma                \
-   --with-lzo2                   \
-   --without-cng                 \
-   --without-nettle              \
-   --without-openssl             \
-   --without-xml2                \
-   --without-expat
+    sh build/autogen.sh
 
-make -j$(nproc)
+    # Build `libarchive' as slim as possible:
+
+    sh configure                     \
+       --disable-dependency-tracking \
+       --disable-shared              \
+       --enable-static               \
+       --disable-bsdtar              \
+       --disable-bsdcat              \
+       --disable-bsdcpio             \
+       --enable-posix-regex-lib=libc \
+       --disable-xattr               \
+       --disable-acl                 \
+       --disable-largefile           \
+       --without-zlib                \
+       --without-bz2lib              \
+       --without-iconv               \
+       --without-libiconv-prefix     \
+       --without-lz4                 \
+       --without-zstd                \
+       --without-lzma                \
+       --with-lzo2                   \
+       --without-cng                 \
+       --without-nettle              \
+       --without-openssl             \
+       --without-xml2                \
+       --without-expat
+fi
+
+cd "${path_to_src}"
+
+if [[ -f "Makefile" ]]; then
+    make -j$( nproc )
+fi
+
 
 cd "${dir}"

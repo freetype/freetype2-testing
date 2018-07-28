@@ -13,7 +13,33 @@ set -eo pipefail
 dir="${PWD}"
 cd "${0%/*}" # go to `fuzzing/scripts'
 
-if [[ "$#" == "1" && "${1}" == "--help" ]]; then
+# ----------------------------------------------------------------------------
+# collect parameters:
+
+opt_help="0"   # 0|1
+opt_repeat="0" # 0|1
+
+while [[ "${#}" -gt "0" ]]; do
+    case "${1}" in
+        --help)
+            opt_help="1"
+            shift
+            ;;
+        --repeat)
+            opt_repeat="1"
+            shift
+            ;;
+        *) # show usage when invalid parameters are used:
+            opt_help="1"
+            shift
+            ;;
+    esac
+done
+
+# ----------------------------------------------------------------------------
+# usage:
+
+if [[ "${opt_help}" == "1" ]]; then
     cat <<EOF
 
 usage: ${0} [OPTIONS]
@@ -27,10 +53,25 @@ set any of these variables but if they are set, they will be used.
 
 OPTIONS:
 
+  --repeat  Repeat the last build.  Nothing will be reset, nothing will be
+            changed.  Using this option calls 'make' in every module without
+            flushing or resetting anything.  Useful for debugging.
+
   --help  Print usage information.
 
 EOF
 
+    exit 66
+fi
+
+# ----------------------------------------------------------------------------
+# repeat shortcut:
+
+if [[ "${opt_repeat}" == "1" ]]; then
+    bash build-glog.sh       --no-init
+    bash build-libarchive.sh --no-init
+    bash build-freetype.sh   --no-init
+    bash build-targets.sh    --no-init
     exit
 fi
 
@@ -61,14 +102,16 @@ driver_name="driver"
 # helpers:
 
 # Print the new line character (\n).
-function print_nl {
+function print_nl()
+{
     printf "\n"
 }
 
 # Print a question.
 #
 # $1: Question string.
-function print_q {
+function print_q()
+{
     printf "\n${ansi_bold}%s${ansi_reset}\n" "${1}"
 }
 
@@ -80,7 +123,8 @@ function print_q {
 # .. or ...
 #
 # $1: General information.
-function print_info {
+function print_info()
+{
     if [[ "$#" == "1" ]]; then
         printf "  %s\n" "${1}"
     elif [[ "$#" == "2" ]]; then
@@ -93,7 +137,8 @@ function print_info {
 # Print a url.
 #
 # $1: URL.
-function print_url {
+function print_url()
+{
     printf "  ${ansi_underline}%s${ansi_reset}\n" "${1}"
 }
 
@@ -104,7 +149,8 @@ function print_url {
 # ${2n + 3, n >= 0}: The nth description of an option.
 #
 # Example: $ print_sel ${selection} "y" "yes" "n" "no" ...
-function print_sel {
+function print_sel()
+{
     i=2
     while [[ i -le "$#" ]]; do
         if [[ "${1}" == "${!i}" ]]; then
@@ -122,7 +168,8 @@ function print_sel {
 # "n" (no).
 #
 # $1: The chosen option.
-function print_sel_yes_no {
+function print_sel_yes_no()
+{
     print_sel "${1}" "y" "yes" "n" "no"
 }
 
@@ -130,7 +177,8 @@ function print_sel_yes_no {
 #
 # $1: a list of options like "a|b|c"
 # $2 (optional): a default option like "a"
-function ask_user {
+function ask_user()
+{
     options="${1}"
     if [[ "$#" == "2" ]]; then
         options="${options}, default: ${2}"

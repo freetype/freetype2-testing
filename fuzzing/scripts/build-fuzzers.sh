@@ -22,9 +22,7 @@ cd "${0%/*}" # go to `fuzzing/scripts'
 # `fuzzing/src/fuzzing/CMakeLists.txt' for details.
 
 bash build-libarchive.sh
-
 bash build-freetype.sh
-
 bash build-targets.sh
 
 cd "${dir}"

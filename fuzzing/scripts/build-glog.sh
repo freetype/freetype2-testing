@@ -11,25 +11,31 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-path_to_glog=$( readlink -f "../../external/glog" )
 
-git submodule init             "${path_to_glog}"
-git submodule update --depth 1 "${path_to_glog}"
+path_to_src=$( readlink -f "../../external/glog" )
+path_to_build="${path_to_src}/build"
 
-cd "${path_to_glog}"
+if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
-git clean -dfqx
-git reset --hard
-git rev-parse HEAD
+    git submodule init             "${path_to_src}"
+    git submodule update --depth 1 "${path_to_src}"
 
-cmake -H.                 \
-      -Bbuild             \
-      -G "Unix Makefiles" \
-      -DWITH_GFLAGS=OFF   \
-      -DBUILD_TESTING=OFF
+    cd "${path_to_src}"
 
-cd "build"
+    git clean -dfqx
+    git reset --hard
+    git rev-parse HEAD
 
-make -j$( nproc )
+    cmake -H.                 \
+          -Bbuild             \
+          -G "Unix Makefiles" \
+          -DWITH_GFLAGS=OFF   \
+          -DBUILD_TESTING=OFF
+fi
+
+if [[ -d "${path_to_build}" ]]; then
+    cd "${path_to_build}"
+    make -j$( nproc )
+fi
 
 cd "${dir}"
