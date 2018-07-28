@@ -11,24 +11,33 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd ..
 
-mkdir -p build && cd build
+path_to_build=$( readlink -f "../build" )
 
-# Remove all files and folders in `fuzzing/build' except for the folder `bin':
+if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
-find .              \
-     -maxdepth 1    \
-     -type f        \
-     -exec rm {} \;
+    mkdir -p "${path_to_build}" && cd "${path_to_build}"
 
-find .                 \
-     -maxdepth 1       \
-     -type d           \
-     ! -name bin       \
-     -exec rm -r {} \;
+    # Remove all files and folders in `fuzzing/build' except for the folder
+    # `bin':
 
-cmake -DCMAKE_BUILD_TYPE=Debug ..
-make -j$(nproc)
+    find .              \
+         -maxdepth 1    \
+         -type f        \
+         -exec rm {} \;
+
+    find .                 \
+         -maxdepth 1       \
+         -type d           \
+         ! -name bin       \
+         -exec rm -r {} \;
+
+    cmake -DCMAKE_BUILD_TYPE=Debug ..
+fi
+
+if [[ -d "${path_to_build}" ]]; then
+   cd "${path_to_build}"
+   make -j$( nproc )
+fi
 
 cd "${dir}"
