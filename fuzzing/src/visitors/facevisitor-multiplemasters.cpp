@@ -54,7 +54,7 @@
       error = FT_Get_Multi_Master( face.get(), &master );
       LOG_IF( ERROR, error != 0 ) << "FT_Get_Multi_Master failed: " << error;
 
-      if ( error != 0 )
+      if ( error == 0 )
       {
         for ( auto i = 0; i < master.num_axis; i++ )
         {
