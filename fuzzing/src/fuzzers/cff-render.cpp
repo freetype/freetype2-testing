@@ -1,6 +1,6 @@
-// cff.cpp
+// cff-render.cpp
 //
-//   Fuzz target for TrueType fonts.
+//   Fuzz target to render CFF fonts.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,10 +12,10 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/cff.h"
+#include "targets/font-drivers/cff-render.h"
 
 
-  static CffFuzzTarget  target;
+  static CffRenderFuzzTarget  target;
 
 
   extern "C" int

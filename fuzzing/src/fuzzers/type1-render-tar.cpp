@@ -1,4 +1,4 @@
-// type1.cpp
+// type1-render-tar.cpp
 //
 //   Fuzz target to render Type 1 fonts with tar sampling data.
 //

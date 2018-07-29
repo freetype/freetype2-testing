@@ -1,6 +1,6 @@
-// type1.cpp
+// type1-render.cpp
 //
-//   Fuzz target for Type 1 fonts.
+//   Fuzz target to render Type 1 fonts.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,10 +12,10 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/type1.h"
+#include "targets/font-drivers/type1-render.h"
 
 
-  static Type1FuzzTarget  target;
+  static Type1RenderFuzzTarget  target;
 
 
   extern "C" int
