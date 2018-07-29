@@ -1,6 +1,6 @@
-// truetype.cpp
+// truetype-render.cpp
 //
-//   Fuzz target for TrueType fonts.
+//   Fuzz target to render TrueType fonts.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,10 +12,10 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/truetype.h"
+#include "targets/font-drivers/truetype-render.h"
 
 
-  static TrueTypeFuzzTarget  target;
+  static TrueTypeRenderFuzzTarget  target;
 
 
   extern "C" int

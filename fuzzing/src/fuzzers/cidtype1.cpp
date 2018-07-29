@@ -1,6 +1,6 @@
 // cidtype1.cpp
 //
-//   Fuzz target for TrueType fonts.
+//   Fuzz target for CID Type 1 fonts.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.

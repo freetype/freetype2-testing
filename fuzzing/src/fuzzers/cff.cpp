@@ -1,6 +1,6 @@
 // cff.cpp
 //
-//   Fuzz target for TrueType fonts.
+//   Fuzz target for CFF fonts.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.

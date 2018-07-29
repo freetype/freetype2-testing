@@ -1,6 +1,6 @@
-// cidtype1.cpp
+// cidtype1-render.cpp
 //
-//   Fuzz target for TrueType fonts.
+//   Fuzz target to render CID Type 1 fonts.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,10 +12,10 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/cidtype1.h"
+#include "targets/font-drivers/cidtype1-render.h"
 
 
-  static CidType1FuzzTarget  target;
+  static CidType1RenderFuzzTarget  target;
 
 
   extern "C" int
