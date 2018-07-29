@@ -1,6 +1,6 @@
-// cidtype1-render.cpp
+// windowsfnt-render.cpp
 //
-//   Implementation of CidType1RenderFuzzTarget.
+//   Implementation of WindowsFntRenderFuzzTarget.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,26 +12,22 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/cidtype1-render.h"
+#include "targets/font-drivers/windowsfnt-render.h"
 
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
-#include "iterators/faceprepiterator-outlines.h"
-#include "visitors/facevisitor-autohinter.h"
 #include "visitors/facevisitor-loadglyphs-bitmaps.h"
-#include "visitors/facevisitor-loadglyphs-outlines.h"
 
 
   using namespace std;
 
 
-  CidType1RenderFuzzTarget::
-  CidType1RenderFuzzTarget( void )
+  WindowsFntRenderFuzzTarget::
+  WindowsFntRenderFuzzTarget( void )
   {
     auto  fli = fuzzing::make_unique<FaceLoadIterator>();
 
     auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
-    auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
 
 
     // -----------------------------------------------------------------------
@@ -40,19 +36,13 @@
     (void) fpi_bitmaps
       ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
 
-    (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
-    (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
-
     // -----------------------------------------------------------------------
     // Face load iterators:
 
     (void) fli
-      ->set_supported_font_format( FaceLoader::FontFormat::CID_TYPE_1 );
-
+      ->set_supported_font_format( FaceLoader::FontFormat::WINDOWS_FNT );
+    
     (void) fli->add_iterator( move( fpi_bitmaps  ) );
-    (void) fli->add_iterator( move( fpi_outlines ) );
 
     // -----------------------------------------------------------------------
     // Fuzz target:

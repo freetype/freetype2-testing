@@ -27,7 +27,6 @@
 #include "visitors/facevisitor-truetypetables.h"
 #include "visitors/facevisitor-type1tables.h"
 #include "visitors/facevisitor-variants.h"
-#include "utils/logging.h"
 
 
   using namespace std;

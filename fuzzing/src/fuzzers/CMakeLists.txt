@@ -26,6 +26,9 @@ set(libfuzzer_exes
   type1-render-tar
   type1-tar
 
+  windowsfnt
+  windowsfnt-render
+
   glyphs-outlines)
 
 # OSS-Fuzz does not allow shared objects.  Thus we have to link the fuzz

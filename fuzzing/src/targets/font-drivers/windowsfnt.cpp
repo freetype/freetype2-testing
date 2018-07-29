@@ -1,6 +1,6 @@
-// cidtype1.cpp
+// windowsfnt.cpp
 //
-//   Implementation of CidType1FuzzTarget.
+//   Implementation of WindowsFntFuzzTarget.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,46 +12,37 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/cidtype1.h"
+#include "targets/font-drivers/windowsfnt.h"
 
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
-#include "iterators/faceprepiterator-outlines.h"
-#include "visitors/facevisitor-cid.h"
 #include "visitors/facevisitor-charcodes.h"
-#include "visitors/facevisitor-type1tables.h"
-#include "visitors/facevisitor-variants.h"
+#include "visitors/facevisitor-windowsfnt.h"
 
 
   using namespace std;
 
 
-  CidType1FuzzTarget::
-  CidType1FuzzTarget( void )
+  WindowsFntFuzzTarget::
+  WindowsFntFuzzTarget( void )
   {
     auto  fli = fuzzing::make_unique<FaceLoadIterator>();
 
     auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
-    auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
 
 
     // -----------------------------------------------------------------------
     // Face load iterators:
 
     (void) fli
-      ->set_supported_font_format( FaceLoader::FontFormat::CID_TYPE_1 );
-
+      ->set_supported_font_format( FaceLoader::FontFormat::WINDOWS_FNT );
+    
     (void) fli->add_iterator( move( fpi_bitmaps  ) );
-    (void) fli->add_iterator( move( fpi_outlines ) );
-
-    (void) fli->add_once_visitor( fuzzing::make_unique<FaceVisitorCid>() );
+    
     (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
-
-    (void) fli
-      ->add_always_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
+      ->add_once_visitor( fuzzing::make_unique<FaceVisitorWindowsFnt>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
