@@ -53,7 +53,10 @@ set(FUZZING_CORPORA_SUITES
   "type1"
   "type1-render"
   "type1-render-tar"
-  "type1-tar")
+  "type1-tar"
+
+  "windowsfnt"
+  "windowsfnt-render")
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)

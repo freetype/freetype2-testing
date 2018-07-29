@@ -26,7 +26,6 @@
 #include "visitors/facevisitor-truetypepatents.h"
 #include "visitors/facevisitor-truetypetables.h"
 #include "visitors/facevisitor-variants.h"
-#include "utils/logging.h"
 
 
   using namespace std;

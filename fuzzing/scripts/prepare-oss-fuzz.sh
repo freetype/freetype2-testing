@@ -34,6 +34,9 @@ fuzzers=(
     "type1-render-tar"
     "type1-tar"
 
+    "windowsfnt"
+    "windowsfnt-render"
+
     "glyphs-outlines"
 )
 

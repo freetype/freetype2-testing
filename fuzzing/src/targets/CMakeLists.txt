@@ -34,6 +34,8 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render-base.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render-tar.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-tar.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt-render.cpp"
   "${FUZZING_SRC_DIR}/targets/glyphs/outlines.cpp"
 
   "${FUZZING_SRC_DIR}/utils/faceloader.cpp"
@@ -55,6 +57,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/visitors/facevisitor-truetypetables.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-type1tables.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-variants.cpp"
+  "${FUZZING_SRC_DIR}/visitors/facevisitor-windowsfnt.cpp"
 
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-cbox.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-transform.cpp")
