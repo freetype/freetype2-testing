@@ -3,7 +3,7 @@
 
 # FreeType
 
-https://www.freetype.org/
+https://www.freetype.org
 
 FreeType is a freely available software library to render fonts.
 
@@ -11,23 +11,47 @@ FreeType is a freely available software library to render fonts.
 
 This subproject has two main purposes:
 
-- **[OSS-Fuzz](https://github.com/google/oss-fuzz)**: Provide the source code and build scripts for the fuzz targets.
-- **[Travis CI](https://travis-ci.org/freetype/freetype2-testing)**: Provide settings, source code, and build scripts for the regression test suite.
+- **[OSS-Fuzz](https://github.com/google/oss-fuzz)**:
+  Provide the source code and build scripts for the fuzz targets.
+- **[Travis CI](https://travis-ci.org/freetype/freetype2-testing)**:
+  Provide settings, source code, and build scripts for the regression test suite.
+
+## Structure
+
+The general structure of this subproject is as follows:
+
+- [**corpora**](corpora):    The initial corpora for OSS-Fuzz and the
+                             regression tests.
+- [**scripts**](scripts):    Scripts that build the fuzz targets and prepare
+                             files (corpora and settings) for OSS-Fuzz.
+- [**settings**](settings):  Various settings for the OSS-Fuzz targets as well
+                             as for submodules.
+- [**src**](src):            Source code of the fuzz targets.
 
 ## Fuzzed API
 
-The following tables provide an overview over currently fuzzed and unfuzzed parts of FreeType's API.
+The following tables provide an overview over currently fuzzed and unfuzzed
+parts of
+[FreeType's API](https://www.freetype.org/freetype2/docs/reference/ft2-toc.html).
 Columns have the following meaning:
 
 - **Function**:    The name of an API function.
-- **Module**:      The name of a module when set via [`FT_Property_Set`](https://www.freetype.org/freetype2/docs/reference/ft2-module_management.html#FT_Property_Set).
-- **Property**:    The name of a property when set via [`FT_Property_Set`](https://www.freetype.org/freetype2/docs/reference/ft2-module_management.html#FT_Property_Set).
+- **Module**:      The name of a module when set via
+                   [`FT_Property_Set`](https://www.freetype.org/freetype2/docs/reference/ft2-module_management.html#FT_Property_Set).
+- **Property**:    The name of a property when set via
+                   [`FT_Property_Set`](https://www.freetype.org/freetype2/docs/reference/ft2-module_management.html#FT_Property_Set).
 - **Used**:        A function is used at least once, by one fuzz target.
-- **Extensively**: A function is used in (almost) every way possible and it is up the fuzzer to find inputs that fully test it.
-- **Resources**:   Some important resources that a function uses.  This list is by no means complete.  It merely highlights important shared resources that carry over from one function to another.
+- **Extensively**: A function is used in (almost) every way possible and it is
+                   up the fuzzer to find inputs that fully test it.
+- **Resources**:   Some important resources that a function uses.  This list
+                   is by no means complete.  It merely highlights important
+                   shared resources that carry over from one function to
+                   another.
 - **Alias**:       Other functions that do exactly the same.
-- **Calls**:       Other API functions that a function calls.  Used to track down implicitely used API functions.
-- **Called by**:   Other API functions that call a function.  Used to track down implicitely used API functions.
+- **Calls**:       Other API functions that a function calls.  Used to track
+                   down implicitely used API functions.
+- **Called by**:   Other API functions that call a function.  Used to track
+                   down implicitely used API functions.
 
 ### FreeType Version
 
@@ -234,9 +258,9 @@ https://www.freetype.org/freetype2/docs/reference/ft2-pfr_fonts.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-winfnt_fonts.html
 
-|        | Function               | Used | Extensively |
-| ------ | ---------------------- | :--: | :---------: |
-| 14.1.1 | `FT_Get_WinFNT_Header` |      |             |
+|        | Function               | Used               | Extensively        | Resources |
+| ------ | ---------------------- | :----------------: | :----------------: | --------- |
+| 14.1.1 | `FT_Get_WinFNT_Header` | :heavy_check_mark: | :heavy_check_mark: | Face      |
 
 ### Font Formats
 
