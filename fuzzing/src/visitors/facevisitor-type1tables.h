@@ -102,10 +102,13 @@
                                    &value,
                                    sizeof( value ) );
 
-      LOG_IF( INFO, size > 0 ) << key << "[" << index << "]: "
-                               << value;
-      LOG_IF( INFO, size <= 0 ) << key << "[" << index << "]: "
-                                << "does not exist";
+      if ( size > 0 )
+        LOG( INFO ) << key << "[" << index << "]: " << value;
+      else
+      {
+        LOG( INFO ) << key << "[" << index << "]: does not exist";
+        value = static_cast<T>( 0 );
+      }
     }
 
 
