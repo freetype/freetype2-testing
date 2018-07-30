@@ -36,8 +36,17 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 fi
 
 if [[ -d "${path_to_build}" ]]; then
+
    cd "${path_to_build}"
    make -j$( nproc )
+   cd "bin"
+
+   # link ./driver -> ./target (if the target has a different name):
+   if [[ -n ${CMAKE_DRIVER_EXE_NAME+x} &&
+         "${CMAKE_DRIVER_EXE_NAME}" != "driver" ]]; then
+       rm -f "driver"
+       ln -s "${CMAKE_DRIVER_EXE_NAME}" "driver"
+   fi
 fi
 
 cd "${dir}"
