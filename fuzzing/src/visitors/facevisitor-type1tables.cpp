@@ -104,8 +104,7 @@
 
     (void) get_simple( face, PS_DICT_ENCODING_TYPE,  encoding_type_buffer );
     (void) get_string( face, PS_DICT_ENCODING_ENTRY, string_buffer );
-
-    (void) get_simple( face, PS_DICT_NUM_SUBRS, int_buffer );
+    (void) get_simple( face, PS_DICT_NUM_SUBRS,      int_buffer    );
 
     (void) loop_string( face,
                         num_subrs,
