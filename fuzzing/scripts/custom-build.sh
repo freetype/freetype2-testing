@@ -17,7 +17,7 @@ cd "${0%/*}" # go to `fuzzing/scripts'
 # collect parameters:
 
 opt_help="0"   # 0|1
-opt_repeat="0" # 0|1
+opt_rebuild="0" # 0|1
 
 while [[ "${#}" -gt "0" ]]; do
     case "${1}" in
@@ -25,8 +25,8 @@ while [[ "${#}" -gt "0" ]]; do
             opt_help="1"
             shift
             ;;
-        --repeat)
-            opt_repeat="1"
+        --rebuild)
+            opt_rebuild="1"
             shift
             ;;
         *) # show usage when invalid parameters are used:
@@ -53,9 +53,9 @@ set any of these variables but if they are set, they will be used.
 
 OPTIONS:
 
-  --repeat  Repeat the last build.  Nothing will be reset, nothing will be
-            changed.  Using this option calls 'make' in every module without
-            flushing or resetting anything.  Useful for debugging.
+  --rebuild  Rebuild the last build.  Nothing will be reset, nothing will be
+             changed.  Using this option calls 'make' in every module without
+             flushing or resetting anything.  Useful for debugging.
 
   --help  Print usage information.
 
@@ -65,9 +65,9 @@ EOF
 fi
 
 # ----------------------------------------------------------------------------
-# repeat shortcut:
+# rebuild shortcut:
 
-if [[ "${opt_repeat}" == "1" ]]; then
+if [[ "${opt_rebuild}" == "1" ]]; then
     bash build-glog.sh       --no-init
     bash build-libarchive.sh --no-init
     bash build-freetype.sh   --no-init

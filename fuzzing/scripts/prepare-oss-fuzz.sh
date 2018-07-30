@@ -56,8 +56,8 @@ for fuzzer in "${fuzzers[@]}"; do
     mkdir -p "${seed_dir}"
 
     find "${corpora_base_dir}/${fuzzer}" \
-         -type f \
-         ! -name "README.md" \
+         -type f                         \
+         ! -name "README.md"             \
          -exec cp {} "${seed_dir}" \;
 
     zip -j "${seed_zip}" "${seed_dir}/"*
