@@ -84,7 +84,12 @@
   private:
 
 
-    static const FT_Long  GLYPH_INDEX_MAX = 30;
+    static const FT_Long  GLYPH_INDEX_MAX = 10;
+
+    // August 2018:
+    //   32767 x 32767 pixels seem like a good upper bound for rendered
+    //   glyphs.  It's way beyond what is needed in real life scenarios.
+    static const FT_Pos   RENDER_PIXELS_MAX = 32767 * 32767;
 
     vector<pair<FT_Matrix*, FT_Vector*>>  transformations;
     vector<FT_Int32>                      load_flags;
