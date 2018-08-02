@@ -14,7 +14,13 @@
 
 #include "visitors/facevisitor-loadglyphs.h"
 
+#include <cassert>
+#include <cmath>
+#include <limits>
 #include <set>
+
+#include <ft2build.h>
+#include FT_OUTLINE_H
 
 #include "utils/logging.h"
 
@@ -32,8 +38,17 @@
   {
     FT_Error  error;
 
-    FT_Long  num_glyphs = face->num_glyphs;
+    FT_Long  num_glyphs;
 
+    FT_GlyphSlot  glyph_slot;
+    FT_BBox       control_box;
+    FT_Pos        width;
+    FT_Pos        width_max = numeric_limits<decltype( width )>::max();
+    FT_Pos        height;
+
+    assert( face != nullptr );
+
+    num_glyphs = face->num_glyphs;
 
     for ( auto  transformation : transformations )
     {
@@ -64,6 +79,31 @@
         for ( auto  load_flags : this->load_flags )
         {
           LOG( INFO ) << "load flags: " << hex << "0x" << load_flags;
+
+          glyph_slot = face->glyph;
+
+          if ( glyph_slot->format == FT_GLYPH_FORMAT_OUTLINE )
+          {
+            (void) FT_Outline_Get_CBox( &glyph_slot->outline,
+                                        &control_box );
+
+            width  = abs( control_box.xMin - control_box.xMax );
+            height = abs( control_box.yMin - control_box.yMax );
+
+            LOG( INFO ) << "glyph size: "
+                        << width << " x " << height << "\n";
+
+            // Don't forget to check for overflows first!
+
+            if ( width  > 0 &&
+                 height > 0 &&
+                 ( width_max / width < height ||
+                   width * height > RENDER_PIXELS_MAX ) )
+            {
+              LOG( WARNING ) << "glyph too large to be rendered";
+              continue;
+            }
+          }
 
           error = FT_Load_Glyph( face.get(), index, load_flags );
 
