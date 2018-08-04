@@ -14,7 +14,7 @@ targets in (and for) various scenarios.  At the moment, there are three main
 stakeholders:
 
 - **OSS-Fuzz**   has two entry points.  First, it calls
-                 [`build-fuzzers.sh`](build-fuzzers.sh).  All environmental
+                 [`build-fuzzers.sh`](build-fuzzers.sh).  All environment
                  variables are set by OSS-Fuzz and in
                  [OSS-Fuzz's `build.sh`](https://github.com/google/oss-fuzz/blob/master/projects/freetype2/build.sh).
                  After that, OSS-Fuzz calls
