@@ -1,6 +1,6 @@
 # CMakeLists.txt
 #
-# This script listens to a few environmental variables:
+# This script listens to a few environment variables:
 #
 #   CMAKE_DRIVER_EXE_NAME
 #     (optional) Override the default name "driver".
