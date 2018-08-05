@@ -2,7 +2,13 @@
 //
 //   Load glyphs with the autohinter.
 //
-//   Drivers: all
+//   Drivers:
+//     - CFF
+//     - CID Type 1
+//     - PFR
+//     - TrueType
+//     - Type 1
+//     - Type 42
 //
 // Copyright 2018 by
 // Armin Hasitzka.

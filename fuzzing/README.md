@@ -123,7 +123,7 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 |       | Function               | Used               | Extensively        | Resources                      |
 | ----- | ---------------------- | :----------------: | :----------------: | ------------------------------ |
 | 2.9.1 | `FT_Get_FSType_Flags`  | :heavy_check_mark: | :heavy_check_mark: | Face                           |
-| 2.9.2 | `FT_Get_SubGlyph_Info` |                    |                    | Glyph Slot <br> Subglyph Index |
+| 2.9.2 | `FT_Get_SubGlyph_Info` | :heavy_check_mark: | :heavy_check_mark: | Glyph Slot <br> Subglyph Index |
 
 ### Unicode Variation Sequences
 
