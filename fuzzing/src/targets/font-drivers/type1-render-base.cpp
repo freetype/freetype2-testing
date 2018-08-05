@@ -27,6 +27,10 @@
   using namespace std;
 
 
+  const FT_Long  Type1RenderFuzzTargetBase::NUM_USED_BITMAPS  = 15;
+  const FT_Long  Type1RenderFuzzTargetBase::NUM_USED_OUTLINES =  2;
+
+
   Type1RenderFuzzTargetBase::
   Type1RenderFuzzTargetBase( void )
   {
@@ -42,25 +46,28 @@
     // Face preparation iterators:
 
     (void) fpi_bitmaps
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>(
+          NUM_USED_BITMAPS ) );
 
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>(
+          NUM_USED_OUTLINES ) );
 
     (void) fpi_mm
       ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_mm
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>(
+          NUM_USED_OUTLINES ) );
 
     // -----------------------------------------------------------------------
     // Face load iterators:
 
     (void) fli->set_supported_font_format( FaceLoader::FontFormat::TYPE_1 );
-
-    // TODO: activate as soon as the `libarchive' mem leak is figured out.
-    // (void) fli->set_accept_tar_archives( true );
 
     (void) fli->add_iterator( move( fpi_bitmaps  ) );
     (void) fli->add_iterator( move( fpi_outlines ) );

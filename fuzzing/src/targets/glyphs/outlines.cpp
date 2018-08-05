@@ -26,12 +26,16 @@
   using namespace std;
 
 
+  const FT_Long  GlyphsOutlinesFuzzTarget::NUM_LOAD_GLYPHS = 5;
+
+
   GlyphsOutlinesFuzzTarget::
   GlyphsOutlinesFuzzTarget( void )
   {
     auto  fli = fuzzing::make_unique<FaceLoadIterator>();
     auto  fpi = fuzzing::make_unique<FacePrepIteratorOutlines>();
-    auto  gli = fuzzing::make_unique<GlyphLoadIteratorNaive>();
+    auto  gli =
+      fuzzing::make_unique<GlyphLoadIteratorNaive>( NUM_LOAD_GLYPHS );
     auto  gri = fuzzing::make_unique<GlyphRenderIteratorAllModes>();
 
 

@@ -16,11 +16,12 @@
 
 
   FaceVisitorLoadGlyphsBitmaps::
-  FaceVisitorLoadGlyphsBitmaps()
+  FaceVisitorLoadGlyphsBitmaps( FT_Long  num_used_glyphs )
+    : FaceVisitorLoadGlyphs( num_used_glyphs )
   {
-    (void) add_load_flags( FT_LOAD_DEFAULT );
-    (void) add_load_flags( FT_LOAD_VERTICAL_LAYOUT );
-    (void) add_load_flags( FT_LOAD_LINEAR_DESIGN );
-    (void) add_load_flags( FT_LOAD_COLOR );
-    (void) add_load_flags( FT_LOAD_BITMAP_METRICS_ONLY );
+    (void) add_mode( FT_LOAD_DEFAULT             );
+    (void) add_mode( FT_LOAD_VERTICAL_LAYOUT     );
+    (void) add_mode( FT_LOAD_LINEAR_DESIGN       );
+    (void) add_mode( FT_LOAD_COLOR               );
+    (void) add_mode( FT_LOAD_BITMAP_METRICS_ONLY );
   }

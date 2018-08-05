@@ -17,6 +17,22 @@
 #include "utils/logging.h"
 
 
+  GlyphLoadIterator::
+  GlyphLoadIterator( FT_Long  num_load_glyphs )
+  {
+    (void) set_num_load_glyphs( num_load_glyphs );
+  }
+
+
+  void
+  GlyphLoadIterator::
+  set_num_load_glyphs( FT_Long  glyphs )
+  {
+    num_load_glyphs = glyphs;
+    LOG( INFO ) << "num glyphs: " << num_load_glyphs;
+  }
+
+
   void
   GlyphLoadIterator::
   add_load_flags( FT_Int32  flags )

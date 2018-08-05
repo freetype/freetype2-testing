@@ -14,6 +14,8 @@
 
 #include "iterators/glyphrenderiterator-allmodes.h"
 
+#include <cassert>
+
 #include <ft2build.h>
 #include FT_GLYPH_H
 
@@ -29,7 +31,12 @@
     FT_Glyph         raw_rendered_glyph;
     Unique_FT_Glyph  rendered_glyph = make_unique_glyph();
     Unique_FT_Glyph  buffer_glyph   = make_unique_glyph();
-    
+
+
+    assert( glyph != nullptr );
+
+    if ( glyph_has_reasonable_render_size( glyph ) == false )
+      return;
 
     for ( auto  mode = 0; mode < FT_RENDER_MODE_MAX; mode++ )
     {
