@@ -47,12 +47,20 @@
     
     (void) fpi_bitmaps
       ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
-    (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
 
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>(
-                       FaceLoader::FontFormat::TRUETYPE) );
+      ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
+    (void) fpi_outlines
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorMultipleMasters>(
+          FaceLoader::FontFormat::TRUETYPE ) );
+
+    (void) fpi_mm
+      ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
+    (void) fpi_mm
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorMultipleMasters>(
+          FaceLoader::FontFormat::TRUETYPE ) );
 
     // -----------------------------------------------------------------------
     // Face load iterators:

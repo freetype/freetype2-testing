@@ -52,6 +52,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/visitors/facevisitor-loadglyphs-outlines.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-multiplemasters.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-sfntnames.cpp"
+  "${FUZZING_SRC_DIR}/visitors/facevisitor-subglyphs.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-trackkerning.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-truetypepatents.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-truetypetables.cpp"

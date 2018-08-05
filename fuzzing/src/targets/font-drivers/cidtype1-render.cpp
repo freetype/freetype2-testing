@@ -20,6 +20,7 @@
 #include "visitors/facevisitor-autohinter.h"
 #include "visitors/facevisitor-loadglyphs-bitmaps.h"
 #include "visitors/facevisitor-loadglyphs-outlines.h"
+#include "visitors/facevisitor-subglyphs.h"
 
 
   using namespace std;
@@ -52,6 +53,8 @@
       ->add_visitor(
         fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>(
           NUM_USED_OUTLINES ) );
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorSubGlyphs>() );
 
     // -----------------------------------------------------------------------
     // Face load iterators:
