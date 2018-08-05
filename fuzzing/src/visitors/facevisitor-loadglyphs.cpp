@@ -15,20 +15,16 @@
 #include "visitors/facevisitor-loadglyphs.h"
 
 #include <cassert>
-#include <cmath>
-#include <limits>
 #include <set>
-
-#include <ft2build.h>
-#include FT_OUTLINE_H
 
 #include "utils/logging.h"
 
 
   FaceVisitorLoadGlyphs::
-  FaceVisitorLoadGlyphs( void )
+  FaceVisitorLoadGlyphs( FT_Long  num_used_glyphs )
   {
     (void) add_transformation( nullptr, nullptr );
+    (void) set_num_used_glyphs( num_used_glyphs );
   }
 
 
@@ -37,16 +33,11 @@
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
+    FT_Long   num_glyphs;
 
-    FT_Long  num_glyphs;
 
-    FT_GlyphSlot  glyph_slot;
-    FT_BBox       control_box;
-    FT_Pos        width;
-    FT_Pos        width_max = numeric_limits<decltype( width )>::max();
-    FT_Pos        height;
-
-    assert( face != nullptr );
+    assert( face            != nullptr &&
+            num_used_glyphs >  0 );
 
     num_glyphs = face->num_glyphs;
 
@@ -56,7 +47,8 @@
       FT_Vector*  vector = transformation.second;
 
 
-      LOG_IF( INFO, matrix == nullptr ) << "setting transformation matrix: none";
+      LOG_IF( INFO, matrix == nullptr )
+        << "setting transformation matrix: none";
       LOG_IF( INFO, matrix != nullptr )
         << "setting transformation matrix: "
         << matrix->xx << ", " << matrix->xy << "; "
@@ -71,48 +63,48 @@
 
       for ( auto  index = 0;
             index < num_glyphs &&
-              index < GLYPH_INDEX_MAX;
+              index < num_used_glyphs;
             index++ )
       {
         LOG( INFO ) << "testing glyph " << ( index + 1 ) << "/" << num_glyphs;
 
-        for ( auto  load_flags : this->load_flags )
+        for ( auto mode : modes )
         {
-          LOG( INFO ) << "load flags: " << hex << "0x" << load_flags;
+          LOG( INFO ) << "load flags: 0x" << hex << get<0>( mode );
 
-          glyph_slot = face->glyph;
+          error = FT_Load_Glyph( face.get(), index, get<0>( mode ) );
 
-          if ( glyph_slot->format == FT_GLYPH_FORMAT_OUTLINE )
+          if ( error != 0 )
           {
-            (void) FT_Outline_Get_CBox( &glyph_slot->outline,
-                                        &control_box );
-
-            width  = abs( control_box.xMin - control_box.xMax );
-            height = abs( control_box.yMin - control_box.yMax );
-
-            LOG( INFO ) << "glyph size: "
-                        << width << " x " << height << "\n";
-
-            // Don't forget to check for overflows first!
-
-            if ( width  > 0 &&
-                 height > 0 &&
-                 ( width_max / width < height ||
-                   width * height > RENDER_PIXELS_MAX ) )
-            {
-              LOG( WARNING ) << "glyph too large to be rendered";
-              continue;
-            }
+            LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
+            continue;
           }
 
-          error = FT_Load_Glyph( face.get(), index, load_flags );
+          if ( get<1>( mode ) == false )
+            continue;
 
-          LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
+          if ( glyph_has_reasonable_render_size(
+                 get_glyph_from_face( face ) ) == false )
+            continue;
+
+          LOG( INFO ) << "render mode: 0x" << hex << get<2>( mode );
+
+          error = FT_Render_Glyph( face->glyph, get<2>( mode ) );
+
+          LOG_IF( ERROR, error != 0 ) << "FT_Render_Glyph failed: " << error;
         }
       }
 
-      WARN_ABOUT_IGNORED_VALUES( num_glyphs, GLYPH_INDEX_MAX, "glyphs" );
+      WARN_ABOUT_IGNORED_VALUES( num_glyphs, num_used_glyphs, "glyphs" );
     }
+  }
+
+
+  void
+  FaceVisitorLoadGlyphs::
+  set_num_used_glyphs( FT_Long  max )
+  {
+    num_used_glyphs = max;
   }
 
 
@@ -127,7 +119,18 @@
 
   void
   FaceVisitorLoadGlyphs::
-  add_load_flags( FT_Int32  flags )
+  add_mode( FT_Int32        load_flags )
   {
-    (void) load_flags.push_back( flags );
+    (void) modes.push_back( ModeTuple( load_flags,
+                                       false,
+                                       FT_RENDER_MODE_NORMAL ) );
+  }
+
+
+  void
+  FaceVisitorLoadGlyphs::
+  add_mode( FT_Int32        load_flags,
+            FT_Render_Mode  render_mode )
+  {
+    (void) modes.push_back( ModeTuple( load_flags, true, render_mode ) );
   }

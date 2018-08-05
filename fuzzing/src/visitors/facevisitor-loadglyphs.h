@@ -1,6 +1,7 @@
 // facevisitor-loadglyphs.h
 //
-//   Load a bunch of glyphs with a variety of different load flags.
+//   Load and render a bunch of glyphs with a variety of different flags and
+//   modes.
 //
 //   Drivers: all
 //
@@ -33,7 +34,9 @@
   public:
 
 
-    FaceVisitorLoadGlyphs( void );
+    // @See: `FaceVisitorLoadGlyphs::set_num_used_glyphs()'.
+
+    FaceVisitorLoadGlyphs( FT_Long  num_used_glyphs );
 
 
     FaceVisitorLoadGlyphs( const FaceVisitorLoadGlyphs& ) = delete;
@@ -48,6 +51,21 @@
     void
     run( Unique_FT_Face  face )
     override;
+
+
+    // @Description:
+    //   Set the amount of glyphs that will be loaded/rendered per setting.
+    //   Note that this function HAS to be called BEFORE
+    //   `FaceVisitorLoadGlyphs::run()' or this visitor will fail.  This
+    //   function also gets called implicitely in a dedicated constructor.
+    //
+    // @Input:
+    //   max ::
+    //     Has to ba a value in the range of [1, LONG_MAX) or calling
+    //     `FaceVisitorLoadGlyphs::run()' will fail.
+
+    void
+    set_num_used_glyphs( FT_Long  glyphs );
 
 
   protected:
@@ -70,29 +88,41 @@
                         FT_Vector*  delta );
 
 
-    // @Description:
-    //   Set load flags that will all be used in `run()'.
-    //
-    // @Input:
-    //   flags ::
-    //     A set of flags.
+    // @See: `FaceVisitorLoadGlyphs::add_mode()'.
 
     void
-    add_load_flags( FT_Int32  flags );
+    add_mode( FT_Int32  load_flags );
+
+
+    // @Description:
+    //   Set a combination of load flags and render modes that will be used in
+    //   `run()'.
+    //
+    // @Input:
+    //   load_flags ::
+    //     A set of load flags.
+    //
+    //   render_mode ::
+    //     A render mode.
+
+    void
+    add_mode( FT_Int32        load_flags,
+              FT_Render_Mode  render_mode );
 
 
   private:
 
 
-    static const FT_Long  GLYPH_INDEX_MAX = 10;
+    // 0: load flags
+    // 1: use renderer
+    // 2: render mode
+    typedef tuple<FT_Int32, bool, FT_Render_Mode>  ModeTuple;
 
-    // August 2018:
-    //   32767 x 32767 pixels seem like a good upper bound for rendered
-    //   glyphs.  It's way beyond what is needed in real life scenarios.
-    static const FT_Pos   RENDER_PIXELS_MAX = 32767 * 32767;
+
+    FT_Long  num_used_glyphs = -1;
 
     vector<pair<FT_Matrix*, FT_Vector*>>  transformations;
-    vector<FT_Int32>                      load_flags;
+    vector<ModeTuple>                     modes;
   };
 
 

@@ -53,9 +53,9 @@
   private:
 
 
-    static const FT_Long  GLYPH_INDEX_MAX = 30;
-
-    FT_Int32  load_flags = FT_LOAD_FORCE_AUTOHINT | FT_LOAD_RENDER;
+    static const FT_Long   GLYPH_INDEX_MAX = 30;
+    static const FT_Int32  LOAD_FLAGS      = FT_LOAD_FORCE_AUTOHINT |
+                                             FT_LOAD_NO_BITMAP;
 
     FT_Bool          default_warping = 0;
     vector<FT_Bool>  warpings{ 0, 1 };

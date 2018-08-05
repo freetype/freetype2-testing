@@ -25,6 +25,10 @@
   using namespace std;
 
 
+  const FT_Long  CidType1RenderFuzzTarget::NUM_USED_BITMAPS  = 15;
+  const FT_Long  CidType1RenderFuzzTarget::NUM_USED_OUTLINES =  5;
+
+
   CidType1RenderFuzzTarget::
   CidType1RenderFuzzTarget( void )
   {
@@ -38,12 +42,16 @@
     // Face preparation iterators:
 
     (void) fpi_bitmaps
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>(
+          NUM_USED_BITMAPS ) );
 
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>(
+          NUM_USED_OUTLINES ) );
 
     // -----------------------------------------------------------------------
     // Face load iterators:

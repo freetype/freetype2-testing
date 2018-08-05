@@ -33,7 +33,7 @@
 
     for ( auto  warping : warpings )
     {
-      LOG( INFO ) << "using warping: " << ( warping == 1 ? "yes" : "no" );
+      LOG( INFO ) << ( warping == 1 ? "" : "not " ) << "using warping";
 
       (void) set_property( face, "warping", &warping );
       (void) load_glyphs( face );
@@ -71,7 +71,7 @@
     {
       LOG( INFO ) << "testing glyph " << ( index + 1 ) << "/" << num_glyphs;
 
-      error = FT_Load_Glyph( face.get(), index, load_flags );
+      error = FT_Load_Glyph( face.get(), index, LOAD_FLAGS );
 
       LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
     }

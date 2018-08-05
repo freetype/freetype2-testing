@@ -28,8 +28,9 @@
   public:
 
 
-    GlyphLoadIteratorNaive( void ) {}
-    
+    GlyphLoadIteratorNaive( FT_Long  num_load_glyphs )
+      : GlyphLoadIterator( num_load_glyphs ) {}
+
 
     GlyphLoadIteratorNaive(
       const GlyphLoadIteratorNaive& ) = delete;
@@ -48,11 +49,6 @@
 
   private:
     
-
-    static const FT_Long  GLYPH_INDEX_MAX = 50;
-
-    FT_Long  num_glyphs  = 0;
-    FT_Long  glyph_index = 0;
 
     bool  last_load_successful = false;
   };

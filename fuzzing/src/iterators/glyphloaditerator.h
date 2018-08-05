@@ -33,6 +33,11 @@
     GlyphLoadIterator( void ) {}
 
 
+    // @See: `GlyphLoadIterator::set_num_load_glyphs()'.
+
+    GlyphLoadIterator( FT_Long  num_load_glyphs );
+
+
     GlyphLoadIterator( const GlyphLoadIterator& ) = delete;
     GlyphLoadIterator& operator= ( const GlyphLoadIterator& ) = delete;
 
@@ -43,6 +48,19 @@
 
     virtual void
     run( Unique_FT_Face  face ) = 0;
+
+
+    // @Description:
+    //   Define an upper bound of how many glyphs should be loaded.  Note
+    //   that some iterators require this function to be called BEFORE
+    //   `GlyphLoadIterator::run()'.  This function can be invoked by using
+    //   the dedicated constructor.
+    // @Input
+    //   num_load_glyphs ::
+    //     The amount of glyphs that should be loaded (if available).
+
+    void
+    set_num_load_glyphs( FT_Long  num_load_glyphs );
 
 
     void
@@ -79,6 +97,8 @@
     
   protected:
 
+
+    FT_Long  num_load_glyphs = -1;
 
     FT_Int32  load_flags = FT_LOAD_DEFAULT;
 

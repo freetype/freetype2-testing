@@ -33,7 +33,7 @@
   public:
 
 
-    FaceVisitorLoadGlyphsOutlines( void );
+    FaceVisitorLoadGlyphsOutlines( FT_Long  num_used_glyphs );
 
 
     FaceVisitorLoadGlyphsOutlines(

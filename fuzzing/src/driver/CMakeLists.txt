@@ -44,7 +44,7 @@ foreach(suite ${FUZZING_CORPORA_SUITES})
       NAME "${full_test_name}"
       COMMAND driver "--${suite}" "${test_input_path}")
 
-    set_tests_properties("${full_test_name}" PROPERTIES TIMEOUT 20)
+    set_tests_properties("${full_test_name}" PROPERTIES TIMEOUT 10)
 
   endforeach()
 

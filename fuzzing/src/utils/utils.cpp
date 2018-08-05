@@ -14,6 +14,13 @@
 
 #include "utils/utils.h"
 
+#include <cassert>
+#include <cmath>
+#include <limits>
+
+#include <ft2build.h>
+#include FT_GLYPH_H
+
 #include "utils/logging.h"
 
 
@@ -54,4 +61,100 @@
     }
 
     return make_unique_glyph( raw_glyph );
+  }
+
+
+  Unique_FT_Glyph
+  fuzzing::
+  get_glyph_from_face( const Unique_FT_Face&  face )
+  {
+    FT_Error  error;
+    FT_Glyph  glyph;
+
+    error = FT_Get_Glyph( face->glyph, &glyph );
+
+    if ( error != 0 )
+    {
+      LOG( INFO ) << "FT_Get_Glyph failed: " << error;
+      return make_unique_glyph();
+    }
+
+    return make_unique_glyph( glyph );
+  }
+
+
+  FT_Pos
+  fuzzing::
+  get_glyph_pixels( const Unique_FT_Glyph&  glyph )
+  {
+    static const auto  POS_MAX = numeric_limits<FT_Pos>::max();
+
+    FT_BBox  box;
+    FT_Pos   width;
+    FT_Pos   height;
+
+
+    assert( glyph != nullptr );
+
+    (void) FT_Glyph_Get_CBox( glyph.get(), FT_GLYPH_BBOX_PIXELS, &box );
+
+    width  = abs( box.xMin - box.xMax );
+    height = abs( box.yMin - box.yMax );
+
+    LOG( INFO ) << "glyph size: " << width << " x " << height << " px\n";
+
+    // Beware possible overflows:
+
+    return width > 0 && POS_MAX / width < height ? POS_MAX : width * height;
+  }
+
+
+  bool
+  fuzzing::
+  glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
+                             FT_Pos                  reasonable_size )
+
+  {
+    if ( glyph == nullptr )
+    {
+      LOG( WARNING ) << "glyph is null";
+      return false;
+    }
+
+    if ( get_glyph_pixels( glyph ) > reasonable_size )
+    {
+      LOG( WARNING ) << "glyph is beyond reasonbale size";
+      return false;
+    }
+
+    return true;
+  }
+
+
+  bool
+  fuzzing::
+  glyph_has_reasonable_work_size( const Unique_FT_Glyph&  glyph )
+  {
+    // August 2018:
+    //   32767 x 32767 pixels is a good size to work on glyphs (when NOT
+    //   rendering them).  It's definitely more than what is needed in
+    //   regular, real-life scenarios.
+
+    return glyph_has_reasonable_size( glyph, 32767 * 32767 );
+  }
+
+
+  bool
+  fuzzing::
+  glyph_has_reasonable_render_size( const Unique_FT_Glyph&  glyph )
+  {
+    // August 2018:
+    //   2500 x 2500 pixels a bit restrictive upper bound to render glyphs.
+    //   However, rendering larger glyphs than that starts to take up
+    //   considerable amount of time which is precious when rendering a few
+    //   hundred (up to a few thousand) glyphs within a few seconds.
+    //   Special stress targets could be developed that specialise on glyphs
+    //   up to 32767 x 32767 pixels.
+
+    return glyph_has_reasonable_size( glyph, 2500 * 2500 );
   }

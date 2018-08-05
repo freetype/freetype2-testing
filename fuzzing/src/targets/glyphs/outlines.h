@@ -26,6 +26,12 @@
 
 
     GlyphsOutlinesFuzzTarget( void );
+
+
+  private:
+
+
+    static const FT_Long  NUM_LOAD_GLYPHS;
   };
 
 

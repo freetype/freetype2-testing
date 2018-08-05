@@ -22,6 +22,9 @@
   using namespace std;
 
 
+  const FT_Long  WindowsFntRenderFuzzTarget::NUM_USED_BITMAPS = 30;
+
+
   WindowsFntRenderFuzzTarget::
   WindowsFntRenderFuzzTarget( void )
   {
@@ -31,18 +34,20 @@
 
 
     // -----------------------------------------------------------------------
-    // Face preparation iterators:
+    // Face preparation iterator:
 
     (void) fpi_bitmaps
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>(
+          NUM_USED_BITMAPS ) );
 
     // -----------------------------------------------------------------------
-    // Face load iterators:
+    // Face load iterator:
 
     (void) fli
       ->set_supported_font_format( FaceLoader::FontFormat::WINDOWS_FNT );
     
-    (void) fli->add_iterator( move( fpi_bitmaps  ) );
+    (void) fli->add_iterator( move( fpi_bitmaps ) );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
