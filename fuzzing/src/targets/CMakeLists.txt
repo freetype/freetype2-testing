@@ -34,6 +34,8 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render-base.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render-tar.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-tar.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/type42.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/type42-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt-render.cpp"
   "${FUZZING_SRC_DIR}/targets/glyphs/outlines.cpp"
