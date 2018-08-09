@@ -26,6 +26,9 @@ set(libfuzzer_exes
   type1-render-tar
   type1-tar
 
+  type42
+  type42-render
+
   windowsfnt
   windowsfnt-render
 

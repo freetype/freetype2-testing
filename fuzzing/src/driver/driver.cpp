@@ -27,6 +27,8 @@
 #include "targets/font-drivers/type1-render.h"
 #include "targets/font-drivers/type1-render-tar.h"
 #include "targets/font-drivers/type1-tar.h"
+#include "targets/font-drivers/type42.h"
+#include "targets/font-drivers/type42-render.h"
 #include "targets/font-drivers/windowsfnt.h"
 #include "targets/font-drivers/windowsfnt-render.h"
 #include "targets/glyphs/outlines.h"
@@ -70,6 +72,8 @@
                         "  --type1-render\n"                            \
                         "  --type1-render-tar\n"                        \
                         "  --type1-tar\n"                               \
+                        "  --type42\n"                                  \
+                        "  --type42-render\n"                           \
                         "  --windowsfnt\n"                              \
                         "  --windowsfnt-render\n\n"                     \
                         "  --glyphs-outlines\n\n"                       \
@@ -128,6 +132,10 @@
       (void) ( Type1RenderTarFuzzTarget()   ).run( data, size );
     else if ( type_arg == "--type1-tar" )
       (void) ( Type1TarFuzzTarget()         ).run( data, size );
+    else if ( type_arg == "--type42" )
+      (void) ( Type42FuzzTarget()           ).run( data, size );
+    else if ( type_arg == "--type42-render" )
+      (void) ( Type42RenderFuzzTarget()     ).run( data, size );
     else if ( type_arg == "--windowsfnt" )
       (void) ( WindowsFntFuzzTarget()       ).run( data, size );
     else if ( type_arg == "--windowsfnt-render" )

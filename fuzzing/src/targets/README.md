@@ -12,12 +12,16 @@ FreeType is a freely available software library to render fonts.
 
 Targets can be virtually of any shape or size.  They do not have to inherit
 from a specific interface as long as they are capable of working with an input
-blob of `const uint8_t*` whose length is measured in `size_t` (see
-e.g. [`base.h`](/fuzzing/src/targets/base.h#L64)).  All targets get shipped in
-a single static libray which is then linked by the
-[driver](fuzzing/src/driver) and the [fuzzers](/fuzzing/src/fuzzers).  This
-method results in a significant size overhead in the fuzz targets, however,
-two main reasons lead to this decision:
+blob of `const uint8_t*` whose length is measured in `size_t` (e.g. see
+[`base.h`](/fuzzing/src/targets/base.h#L64)).
+
+## Design Choice
+
+All targets get shipped in a single static libray which is linked against by
+the [driver](fuzzing/src/driver) and the [fuzzers](/fuzzing/src/fuzzers).
+This method results in a significant size overhead in the fuzz targets,
+compared to only linking dedicated objects.  However, two main reasons lead to
+this decision:
 
 1. Assembling the targets [in a single
    place](/fuzzing/src/targets/CMakeLists.txt) keeps the build process
@@ -27,3 +31,37 @@ two main reasons lead to this decision:
 
 2. As of August 2018, [OSS-Fuzz](https://github.com/google/oss-fuzz) does not
    support any kind of dynamic linking.
+
+## Adding a New Target
+
+Several steps have to be completed to make a new target available throughout
+all parts of the fuzzing subproject:
+
+- Basics:
+    - [Build](/fuzzing/src/targets) the new target and export it as part of
+      the [target library](/fuzzing/src/targets/CMakeLists.txt).
+    - Prepare a suitable (new and unique) [fuzz corpus](/fuzzing/corpora).
+
+- Add the new target to the regression suite:
+    - Register the target in the [test
+      driver](/fuzzing/src/driver/driver.cpp).
+    - Register the corpus to be used in [regression
+      tests](/fuzzing/CMakeLists.txt).
+
+- Prepare the new target for OSS-Fuzz:
+    - Create [fuzzer executables](/fuzzing/src/fuzzers) and add them to the
+      [build process](/fuzzing/src/fuzzers/CMakeLists.txt).
+    - Provide [settings](/fuzzing/settings/oss-fuzz) if necessary.
+    - Tell OSS-Fuzz's build process to
+      [prepare and use](/fuzzing/scripts/prepare-oss-fuzz.sh) the new target.
+
+- Test the new target:
+    - Build the new target with
+      [custom-script.sh](/fuzzing/scripts/custom-build.sh), enable the logger,
+      and confirm that all API functions are called as expected.
+    - Make sure [run-travis-ci.sh](/fuzzing/scripts/run-travis-ci.sh) runs
+      successfully and executes the new corpus.
+    - Ensure that the changes do not break FreeType's [OSS-Fuzz
+      build](https://github.com/google/oss-fuzz/blob/master/docs/new_project_guide.md#testing-locally)
+      and, in addition, that the new fuzzer fuzzes (let it reach at least
+      10,000 runs locally).
