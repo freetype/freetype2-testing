@@ -41,16 +41,13 @@ all parts of the fuzzing subproject:
     - [Build](/fuzzing/src/targets) the new target and export it as part of
       the [target library](/fuzzing/src/targets/CMakeLists.txt).
     - Prepare a suitable (new and unique) [fuzz corpus](/fuzzing/corpora).
+    - Register the new target in the root
+      [CMakeLists.txt](/fuzzing/CMakeLists.txt) (`add_fuzz_target()`) to
+      automatically generate a fuzzer and regression tests from it.
 
-- Add the new target to the regression suite:
-    - Register the target in the [test
-      driver](/fuzzing/src/driver/driver.cpp).
-    - Register the corpus to be used in [regression
-      tests](/fuzzing/CMakeLists.txt).
+- Add the new target to the [test driver](/fuzzing/src/driver/driver.cpp).
 
 - Prepare the new target for OSS-Fuzz:
-    - Create [fuzzer executables](/fuzzing/src/fuzzers) and add them to the
-      [build process](/fuzzing/src/fuzzers/CMakeLists.txt).
     - Provide [settings](/fuzzing/settings/oss-fuzz) if necessary.
     - Tell OSS-Fuzz's build process to
       [prepare and use](/fuzzing/scripts/prepare-oss-fuzz.sh) the new target.

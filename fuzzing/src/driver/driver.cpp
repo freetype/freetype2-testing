@@ -18,20 +18,33 @@
 #include <vector>
 
 #include "targets/font-drivers/cff.h"
+#include "targets/font-drivers/cff-ftengine.h"
 #include "targets/font-drivers/cff-render.h"
+#include "targets/font-drivers/cff-render-ftengine.h"
+
 #include "targets/font-drivers/cidtype1.h"
+#include "targets/font-drivers/cidtype1-ftengine.h"
 #include "targets/font-drivers/cidtype1-render.h"
+#include "targets/font-drivers/cidtype1-render-ftengine.h"
+
 #include "targets/font-drivers/truetype.h"
 #include "targets/font-drivers/truetype-render.h"
+
 #include "targets/font-drivers/type1.h"
+#include "targets/font-drivers/type1-ftengine.h"
 #include "targets/font-drivers/type1-render.h"
+#include "targets/font-drivers/type1-render-ftengine.h"
 #include "targets/font-drivers/type1-render-tar.h"
 #include "targets/font-drivers/type1-tar.h"
+
 #include "targets/font-drivers/type42.h"
 #include "targets/font-drivers/type42-render.h"
+
 #include "targets/font-drivers/windowsfnt.h"
 #include "targets/font-drivers/windowsfnt-render.h"
+
 #include "targets/glyphs/outlines.h"
+
 #include "utils/logging.h"
 
 
@@ -63,17 +76,23 @@
                         "Type:\n"                                       \
                         "  --legacy\n\n"                                \
                         "  --cff\n"                                     \
+                        "  --cff-ftengine\n"                            \
                         "  --cff-render\n"                              \
+                        "  --cff-render-ftengine\n\n"                   \
                         "  --cidtype1\n"                                \
+                        "  --cidtype1-ftengine\n"                       \
                         "  --cidtype1-render\n"                         \
+                        "  --cidtype1-render-ftengine\n\n"              \
                         "  --truetype\n"                                \
-                        "  --truetype-render\n"                         \
+                        "  --truetype-render\n\n"                       \
                         "  --type1\n"                                   \
+                        "  --type1-ftengine\n"                          \
                         "  --type1-render\n"                            \
+                        "  --type1-render-ftengine\n"                   \
                         "  --type1-render-tar\n"                        \
-                        "  --type1-tar\n"                               \
+                        "  --type1-tar\n\n"                             \
                         "  --type42\n"                                  \
-                        "  --type42-render\n"                           \
+                        "  --type42-render\n\n"                         \
                         "  --windowsfnt\n"                              \
                         "  --windowsfnt-render\n\n"                     \
                         "  --glyphs-outlines\n\n"                       \
@@ -111,37 +130,57 @@
     string  type_arg( argv[1] );
 
     if ( type_arg == "--legacy" )
-      (void) LLVMFuzzerTestOneInput(               data, size );
+      (void) LLVMFuzzerTestOneInput(                     data, size );
+
     else if ( type_arg == "--cff" )
-      (void) ( CffFuzzTarget()              ).run( data, size );
+      (void) ( CffFuzzTarget()                    ).run( data, size );
+    else if ( type_arg == "--cff-ftengine" )
+      (void) ( CffFtEngineFuzzTarget()            ).run( data, size );
     else if ( type_arg == "--cff-render" )
-      (void) ( CffRenderFuzzTarget()        ).run( data, size );
+      (void) ( CffRenderFuzzTarget()              ).run( data, size );
+    else if ( type_arg == "--cff-render-ftengine" )
+      (void) ( CffRenderFtEngineFuzzTarget()      ).run( data, size );
+
     else if ( type_arg == "--cidtype1" )
-      (void) ( CidType1FuzzTarget()         ).run( data, size );
+      (void) ( CidType1FuzzTarget()               ).run( data, size );
+    else if ( type_arg == "--cidtype1-ftengine" )
+      (void) ( CidType1FtEngineFuzzTarget()       ).run( data, size );
     else if ( type_arg == "--cidtype1-render" )
-      (void) ( CidType1RenderFuzzTarget() ).run( data, size );
+      (void) ( CidType1RenderFuzzTarget()         ).run( data, size );
+    else if ( type_arg == "--cidtype1-render-ftengine" )
+      (void) ( CidType1RenderFtEngineFuzzTarget() ).run( data, size );
+
     else if ( type_arg == "--truetype" )
-      (void) ( TrueTypeFuzzTarget()         ).run( data, size );
+      (void) ( TrueTypeFuzzTarget()               ).run( data, size );
     else if ( type_arg == "--truetype-render" )
-      (void) ( TrueTypeRenderFuzzTarget()   ).run( data, size );
+      (void) ( TrueTypeRenderFuzzTarget()         ).run( data, size );
+
     else if ( type_arg == "--type1" )
-      (void) ( Type1FuzzTarget()            ).run( data, size );
+      (void) ( Type1FuzzTarget()                  ).run( data, size );
+    else if ( type_arg == "--type1-ftengine" )
+      (void) ( Type1FtEngineFuzzTarget()          ).run( data, size );
     else if ( type_arg == "--type1-render" )
-      (void) ( Type1RenderFuzzTarget()      ).run( data, size );
+      (void) ( Type1RenderFuzzTarget()            ).run( data, size );
+    else if ( type_arg == "--type1-render-ftengine" )
+      (void) ( Type1RenderFtEngineFuzzTarget()    ).run( data, size );
     else if ( type_arg == "--type1-render-tar" )
-      (void) ( Type1RenderTarFuzzTarget()   ).run( data, size );
+      (void) ( Type1RenderTarFuzzTarget()         ).run( data, size );
     else if ( type_arg == "--type1-tar" )
-      (void) ( Type1TarFuzzTarget()         ).run( data, size );
+      (void) ( Type1TarFuzzTarget()               ).run( data, size );
+
     else if ( type_arg == "--type42" )
-      (void) ( Type42FuzzTarget()           ).run( data, size );
+      (void) ( Type42FuzzTarget()                 ).run( data, size );
     else if ( type_arg == "--type42-render" )
-      (void) ( Type42RenderFuzzTarget()     ).run( data, size );
+      (void) ( Type42RenderFuzzTarget()           ).run( data, size );
+
     else if ( type_arg == "--windowsfnt" )
-      (void) ( WindowsFntFuzzTarget()       ).run( data, size );
+      (void) ( WindowsFntFuzzTarget()             ).run( data, size );
     else if ( type_arg == "--windowsfnt-render" )
-      (void) ( WindowsFntRenderFuzzTarget() ).run( data, size );
+      (void) ( WindowsFntRenderFuzzTarget()       ).run( data, size );
+
     else if ( type_arg == "--glyphs-outlines" )
-      (void) ( GlyphsOutlinesFuzzTarget()   ).run( data, size );
+      (void) ( GlyphsOutlinesFuzzTarget()         ).run( data, size );
+
     else
       return print_usage();
 

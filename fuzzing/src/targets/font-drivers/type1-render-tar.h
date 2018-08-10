@@ -1,6 +1,6 @@
 // type1-render-tar.h
 //
-//   Fuzz target that renders Type 1 faces from tar archives.
+//   Render Type 1 faces using tar sampling data.
 //
 // Copyright 2018 by
 // Armin Hasitzka.
@@ -16,11 +16,11 @@
 #define TARGETS_FONT_DRIVERS_TYPE_1_RENDER_TAR_H_
 
 
-#include "targets/font-drivers/type1-render-base.h"
+#include "targets/font-drivers/type1-render.h"
 
 
   class Type1RenderTarFuzzTarget
-  : public Type1RenderFuzzTargetBase
+  : public Type1RenderFuzzTarget
   {
   public:
 

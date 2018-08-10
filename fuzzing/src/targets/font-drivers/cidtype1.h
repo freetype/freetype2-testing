@@ -1,6 +1,6 @@
 // cidtype1.h
 //
-//   Fuzz target for CID Type 1 faces.
+//   Fuzz target for CID Type 1 fonts using Adobe's hinting engine.
 //
 // Copyright 2018 by
 // Armin Hasitzka.

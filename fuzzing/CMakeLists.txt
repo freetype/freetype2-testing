@@ -35,35 +35,16 @@ set(FUZZING_BASE_DIR    "${CMAKE_CURRENT_SOURCE_DIR}")
 set(FUZZING_SRC_DIR     "${FUZZING_BASE_DIR}/src")
 set(FUZZING_CORPORA_DIR "${FUZZING_BASE_DIR}/corpora")
 
-# ${FUZZING_CORPORA_SUITES} is used to automatically detect and register
-# regression tests.
+# `FUZZ_TARGET_NAMES', `FUZZ_TARGET_CLASS_NAMES', and
+# `FUZZ_TARGET_HEADER_PATHS' are filled by `add_fuzz_target()'.
 
-set(FUZZING_CORPORA_SUITES
-  "legacy"
+set(FUZZ_TARGET_NAMES        "legacy")
+set(FUZZ_TARGET_CLASS_NAMES  "x")
+set(FUZZ_TARGET_HEADER_PATHS "x")
 
-  "cff"
-  "cff-render"
-
-  "cidtype1"
-  "cidtype1-render"
-
-  "truetype"
-  "truetype-render"
-
-  "type1"
-  "type1-render"
-  "type1-render-tar"
-  "type1-tar"
-
-  "type42"
-  "type42-render"
-
-  "windowsfnt"
-  "windowsfnt-render")
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 set(SUBMODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external")
 
@@ -81,7 +62,110 @@ set(LIBARCHIVE_SRC_DIR        "${LIBARCHIVE_BASE_DIR}/src")
 set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
 
 # ----------------------------------------------------------------------------
-# options:
+# functions:
+
+function(add_fuzz_target
+    class_name
+    header_path)
+
+  string(REGEX MATCH "(^|/)([^/]+)\\.h$" out "${header_path}")
+
+  if (NOT "${CMAKE_MATCH_COUNT}" EQUAL "2")
+    message(FATAL_ERROR "invalid header path: '${header_path}'")
+  endif()
+  
+  set(FUZZ_TARGET_NAMES
+    ${FUZZ_TARGET_NAMES}
+    "${CMAKE_MATCH_2}"
+    PARENT_SCOPE)
+
+  set(FUZZ_TARGET_CLASS_NAMES
+    ${FUZZ_TARGET_CLASS_NAMES}
+    "${class_name}"
+    PARENT_SCOPE)
+
+  set(FUZZ_TARGET_HEADER_PATHS
+    ${FUZZ_TARGET_HEADER_PATHS}
+    "${header_path}"
+    PARENT_SCOPE)
+
+endfunction()
+
+# ----------------------------------------------------------------------------
+# fuzz targets:
+
+add_fuzz_target(
+  "CffFuzzTarget"
+  "targets/font-drivers/cff.h")
+add_fuzz_target(
+  "CffFtEngineFuzzTarget"
+  "targets/font-drivers/cff-ftengine.h")
+add_fuzz_target(
+  "CffRenderFuzzTarget"
+  "targets/font-drivers/cff-render.h")
+add_fuzz_target(
+  "CffRenderFtEngineFuzzTarget"
+  "targets/font-drivers/cff-render-ftengine.h")
+
+add_fuzz_target(
+  "CidType1FuzzTarget"
+  "targets/font-drivers/cidtype1.h")
+add_fuzz_target(
+  "CidType1FtEngineFuzzTarget"
+  "targets/font-drivers/cidtype1-ftengine.h")
+add_fuzz_target(
+  "CidType1RenderFuzzTarget"
+  "targets/font-drivers/cidtype1-render.h")
+add_fuzz_target(
+  "CidType1RenderFtEngineFuzzTarget"
+  "targets/font-drivers/cidtype1-render-ftengine.h")
+
+add_fuzz_target(
+  "TrueTypeFuzzTarget"
+  "targets/font-drivers/truetype.h")
+add_fuzz_target(
+  "TrueTypeRenderFuzzTarget"
+  "targets/font-drivers/truetype-render.h")
+
+add_fuzz_target(
+  "Type1FuzzTarget"
+  "targets/font-drivers/type1.h")
+add_fuzz_target(
+  "Type1FtEngineFuzzTarget"
+  "targets/font-drivers/type1-ftengine.h")
+add_fuzz_target(
+  "Type1RenderFuzzTarget"
+  "targets/font-drivers/type1-render.h")
+add_fuzz_target(
+  "Type1RenderFtEngineFuzzTarget"
+  "targets/font-drivers/type1-render-ftengine.h")
+add_fuzz_target(
+  "Type1RenderTarFuzzTarget"
+  "targets/font-drivers/type1-render-tar.h")
+add_fuzz_target(
+  "Type1TarFuzzTarget"
+  "targets/font-drivers/type1-tar.h")
+
+add_fuzz_target(
+  "Type42FuzzTarget"
+  "targets/font-drivers/type42.h")
+add_fuzz_target(
+  "Type42RenderFuzzTarget"
+  "targets/font-drivers/type42-render.h")
+
+add_fuzz_target(
+  "WindowsFntFuzzTarget"
+  "targets/font-drivers/windowsfnt.h")
+add_fuzz_target(
+  "WindowsFntRenderFuzzTarget"
+  "targets/font-drivers/windowsfnt-render.h")
+
+add_fuzz_target(
+  "GlyphsOutlinesFuzzTarget"
+  "targets/glyphs/outlines.h")
+
+# ----------------------------------------------------------------------------
+# environment options:
 
 set(FUZZING_ENGINE "$ENV{CMAKE_FUZZING_ENGINE}")
 

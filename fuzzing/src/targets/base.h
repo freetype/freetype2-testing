@@ -91,9 +91,9 @@
     //   `false' if `FT_Property_Set' returns an error, 'true' otherwise.
 
     bool
-    set_property( string  module_name,
-                  string  property_name,
-                  void*   value );
+    set_property( const string  module_name,
+                  const string  property_name,
+                  const void*   value );
 
 
     // @Description:
@@ -109,6 +109,13 @@
     
     unique_ptr<FaceLoadIterator>&
     set_iterator( unique_ptr<FaceLoadIterator>  iterator );
+
+
+  protected:
+
+
+    static const FT_UInt  HINTING_ADOBE;
+    static const FT_UInt  HINTING_FREETYPE;
 
 
   private:

@@ -80,5 +80,7 @@
     // -----------------------------------------------------------------------
     // Fuzz target:
 
+    (void) set_property( "cff", "hinting-engine", &HINTING_ADOBE );
+
     (void) set_iterator( move( fli ) );
   }

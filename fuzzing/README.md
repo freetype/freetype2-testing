@@ -291,17 +291,17 @@ https://www.freetype.org/freetype2/docs/reference/ft2-properties.html
 | 17.1.5  | `autofitter` | `no-stem-darkening`    |                    |                    |
 | 17.1.6  | `autofitter` | `warping `             | :heavy_check_mark: | :heavy_check_mark: |
 | 17.1.7  | `cff`        | `darkening-parameters` |                    |                    |
-| 17.1.8  | `cff`        | `hinting-engine`       |                    |                    |
+| 17.1.8  | `cff`        | `hinting-engine`       | :heavy_check_mark: | :heavy_check_mark: |
 | 17.1.9  | `cff`        | `no-stem-darkening`    |                    |                    |
 | 17.1.10 | `cff`        | `random-seed`          |                    |                    |
 | 17.1.11 | `pcf`        | `no-long-family-names` |                    |                    |
 | 17.1.12 | `t1cid`      | `darkening-parameters` |                    |                    |
-| 17.1.13 | `t1cid`      | `hinting-engine`       |                    |                    |
+| 17.1.13 | `t1cid`      | `hinting-engine`       | :heavy_check_mark: | :heavy_check_mark: |
 | 17.1.14 | `t1cid`      | `no-stem-darkening`    |                    |                    |
 | 17.1.15 | `t1cid`      | `random-seed`          |                    |                    |
 | 17.1.16 | `truetype`   | `interpreter-version ` | :heavy_check_mark: | :heavy_check_mark: |
 | 17.1.17 | `type1`      | `darkening-parameters` |                    |                    |
-| 17.1.18 | `type1`      | `hinting-engine`       |                    |                    |
+| 17.1.18 | `type1`      | `hinting-engine`       | :heavy_check_mark: | :heavy_check_mark: |
 | 17.1.19 | `type1`      | `no-stem-darkening`    |                    |                    |
 | 17.1.20 | `type1`      | `random-seed`          |                    |                    |
 

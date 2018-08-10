@@ -24,6 +24,10 @@
 #include "utils/logging.h"
 
 
+  const FT_UInt  FuzzTarget::HINTING_ADOBE    = FT_HINTING_ADOBE;
+  const FT_UInt  FuzzTarget::HINTING_FREETYPE = FT_HINTING_FREETYPE;
+
+
   FuzzTarget::
   FuzzTarget( void )
   {
@@ -32,8 +36,6 @@
     FT_Int  major;
     FT_Int  minor;
     FT_Int  patch;
-    
-    unsigned int  hinting_engine;
 
     
     error = FT_Init_FreeType( &library );
@@ -45,13 +47,6 @@
 
     (void) FT_Library_Version( library, &major, &minor, &patch );
     LOG( INFO ) << "using FreeType " << major << "." << minor << "." << patch;
-
-    // TODO: move this away from here ...
-    hinting_engine = FT_HINTING_ADOBE;
-    (void) FT_Property_Set( library,
-                            "cff",
-                            "hinting-engine",
-                            &hinting_engine );
   }
 
 
@@ -90,12 +85,15 @@
 
   bool
   FuzzTarget::
-  set_property( string  module_name,
-                string  property_name,
-                void*   value )
+  set_property( const string  module_name,
+                const string  property_name,
+                const void*   value )
   {
     FT_Error  error;
 
+
+    LOG( INFO ) << "setting '" << property_name
+                << "' in '"   << module_name << "'";
 
     error = FT_Property_Set( library,
                              module_name.c_str(),
