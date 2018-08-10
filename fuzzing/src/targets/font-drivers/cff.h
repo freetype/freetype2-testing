@@ -1,6 +1,6 @@
 // cff.h
 //
-//   Fuzz target for CFF faces.
+//   Fuzz CFF faces.
 //
 // Copyright 2018 by
 // Armin Hasitzka.

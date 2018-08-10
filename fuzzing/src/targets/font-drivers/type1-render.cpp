@@ -14,9 +14,76 @@
 
 #include "targets/font-drivers/type1-render.h"
 
+#include "iterators/faceloaditerator.h"
+#include "iterators/faceprepiterator-bitmaps.h"
+#include "iterators/faceprepiterator-multiplemasters.h"
+#include "iterators/faceprepiterator-outlines.h"
+#include "iterators/glyphloaditerator-naive.h"
+#include "visitors/facevisitor-autohinter.h"
+#include "visitors/facevisitor-loadglyphs-bitmaps.h"
+#include "visitors/facevisitor-loadglyphs-outlines.h"
+#include "visitors/facevisitor-subglyphs.h"
+
+
+  using namespace std;
+
+
+  const FT_Long  Type1RenderFuzzTarget::NUM_USED_BITMAPS  = 15;
+  const FT_Long  Type1RenderFuzzTarget::NUM_USED_OUTLINES =  2;
+
 
   Type1RenderFuzzTarget::
   Type1RenderFuzzTarget( void )
   {
+    auto  fli = fuzzing::make_unique<FaceLoadIterator>();
+
+    auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
+    auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
+    auto  fpi_mm =
+      fuzzing::make_unique<FacePrepIteratorMultipleMasters>();
+
+
+    // -----------------------------------------------------------------------
+    // Face preparation iterators:
+
+    (void) fpi_bitmaps
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>(
+          NUM_USED_BITMAPS ) );
+
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
+    (void) fpi_outlines
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>(
+          NUM_USED_OUTLINES ) );
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorSubGlyphs>() );
+
+    (void) fpi_mm
+      ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
+    (void) fpi_mm
+      ->add_visitor(
+        fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>(
+          NUM_USED_OUTLINES ) );
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorSubGlyphs>() );
+
+    // -----------------------------------------------------------------------
+    // Face load iterators:
+
+    (void) fli->set_supported_font_format( FaceLoader::FontFormat::TYPE_1 );
+
+    (void) fli->add_iterator( move( fpi_bitmaps  ) );
+    (void) fli->add_iterator( move( fpi_outlines ) );
+    (void) fli->add_iterator( move( fpi_mm       ) );
+    
+    // -----------------------------------------------------------------------
+    // Fuzz target:
+
+    (void) set_property( "type1", "hinting-engine", &HINTING_ADOBE );
+
+    (void) set_iterator( move( fli ) );
+
     (void) set_data_is_tar_archive( false );
   }

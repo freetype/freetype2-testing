@@ -9,51 +9,39 @@
 # indicate that you have read the license and understand and accept it
 # fully.
 
-set(libfuzzer_exes
-  legacy
-  
-  cff
-  cff-render
-
-  cidtype1
-  cidtype1-render
-
-  truetype
-  truetype-render
-
-  type1
-  type1-render
-  type1-render-tar
-  type1-tar
-
-  type42
-  type42-render
-
-  windowsfnt
-  windowsfnt-render
-
-  glyphs-outlines)
-
-# OSS-Fuzz does not allow shared objects.  Thus we have to link the fuzz
+# Note: OSS-Fuzz does not allow shared objects.  Thus we have to link the fuzz
 # targets as statically as possible.  Bear that in mind when linking
 # additional libraries.
 
-add_executable(libfuzzer-legacy
+add_executable("fuzzer-legacy"
   "${FUZZING_SRC_DIR}/legacy/ftfuzzer.cc")
 
-foreach(exe ${libfuzzer_exes})
-  
-  if(NOT "${exe}" STREQUAL "legacy")
-    
-    add_executable("libfuzzer-${exe}" "${exe}.cpp")
+list(LENGTH FUZZ_TARGET_NAMES num_fuzz_targets)
+math(EXPR num_fuzz_targets "${num_fuzz_targets} - 1")
 
-    target_link_libraries("libfuzzer-${exe}"
+foreach(fuzz_target_index RANGE "${num_fuzz_targets}")
+
+  list(GET FUZZ_TARGET_NAMES        "${fuzz_target_index}" name)
+  list(GET FUZZ_TARGET_CLASS_NAMES  "${fuzz_target_index}" class_name)
+  list(GET FUZZ_TARGET_HEADER_PATHS "${fuzz_target_index}" header_path)
+
+  set(exe "fuzzer-${name}")
+
+  if(NOT "${name}" STREQUAL "legacy")
+    
+    add_executable("${exe}" "template.cpp")
+
+    target_compile_definitions("${exe}" PUBLIC
+      "FUZZ_TARGET_HEADER_PATH=\"${header_path}\""
+      "FUZZ_TARGET_CLASS_NAME=${class_name}")
+
+    target_link_libraries("${exe}"
       PRIVATE
-      fuzztargets)
+      "fuzztargets")
 
   endif()
 
-  target_link_libraries("libfuzzer-${exe}"
+  target_link_libraries("${exe}"
     PRIVATE
     "${LIBARCHIVE_STATIC_LIBRARY}"
     "${FREETYPE_STATIC_LIBRARY}")
@@ -62,8 +50,8 @@ foreach(exe ${libfuzzer_exes})
   # defines a main function when testing the compiler.  Clang (obviously)
   # fails when being confronted with two main functions.
 
-  set_target_properties("libfuzzer-${exe}" PROPERTIES
-    OUTPUT_NAME "${exe}"
+  set_target_properties("${exe}" PROPERTIES
+    OUTPUT_NAME "${name}"
     LINK_FLAGS  "${FUZZING_ENGINE}")
 
 endforeach()

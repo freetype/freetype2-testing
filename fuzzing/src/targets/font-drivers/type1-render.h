@@ -1,6 +1,6 @@
 // type1-render.h
 //
-//   Fuzz target that renders Type 1 faces.
+//   Render Type 1 faces.
 //
 // Copyright 2018 by
 // Armin Hasitzka.
@@ -16,16 +16,23 @@
 #define TARGETS_FONT_DRIVERS_TYPE_1_RENDER_H_
 
 
-#include "targets/font-drivers/type1-render-base.h"
+#include "targets/base.h"
 
 
   class Type1RenderFuzzTarget
-  : public Type1RenderFuzzTargetBase
+  : public FuzzTarget
   {
   public:
 
 
     Type1RenderFuzzTarget( void );
+
+
+  private:
+
+
+    static const FT_Long  NUM_USED_BITMAPS;
+    static const FT_Long  NUM_USED_OUTLINES;
   };
 
 

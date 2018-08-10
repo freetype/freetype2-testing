@@ -1,6 +1,6 @@
 // cff-render.h
 //
-//   Fuzz target for rendering CFF faces.
+//   Render CFF faces.
 //
 // Copyright 2018 by
 // Armin Hasitzka.

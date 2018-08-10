@@ -21,16 +21,22 @@ fuzzers=(
     "legacy"
 
     "cff"
+    "cff-ftengine"
     "cff-render"
+    "cff-render-ftengine"
 
     "cidtype1"
+    "cidtype1-ftengine"
     "cidtype1-render"
+    "cidtype1-render-ftengine"
 
     "truetype"
     "truetype-render"
 
     "type1"
+    "type1-ftengine"
     "type1-render"
+    "type1-render-ftengine"
     "type1-render-tar"
     "type1-tar"
 

@@ -26,7 +26,7 @@ if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")
   target_link_libraries(driver PRIVATE "${GLOG_STATIC_LIBRARY}")
 endif()
 
-foreach(suite ${FUZZING_CORPORA_SUITES})
+foreach(suite ${FUZZ_TARGET_NAMES})
 
   set(suite_dir "${FUZZING_CORPORA_DIR}/${suite}")
   file(GLOB_RECURSE test_input_paths "${suite_dir}/*")

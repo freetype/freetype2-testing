@@ -1,6 +1,6 @@
 // type1-tar.cpp
 //
-//   Implementation of Type1FuzzTargetBase.
+//   Implementation of Type1TarFuzzTarget.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.

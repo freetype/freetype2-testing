@@ -1,8 +1,8 @@
 diff --git a/include/freetype/config/ftoption.h b/include/freetype/config/ftoption.h
-index a5d883f5f..a63928d6f 100644
+index 18c7d13e..6bded39c 100644
 --- a/include/freetype/config/ftoption.h
 +++ b/include/freetype/config/ftoption.h
-@@ -639,9 +639,9 @@ FT_BEGIN_HEADER
+@@ -649,9 +649,9 @@ FT_BEGIN_HEADER
     *
     * [1] https://www.microsoft.com/typography/cleartype/truetypecleartype.aspx
     */
@@ -15,3 +15,21 @@ index a5d883f5f..a63928d6f 100644
  
  
    /**************************************************************************
+@@ -771,7 +771,7 @@ FT_BEGIN_HEADER
+    * switch between the two engines using the `hinting-engine' property of
+    * the type1 driver module.
+    */
+-/* #define T1_CONFIG_OPTION_OLD_ENGINE */
++#define T1_CONFIG_OPTION_OLD_ENGINE
+ 
+ 
+   /*************************************************************************/
+@@ -814,7 +814,7 @@ FT_BEGIN_HEADER
+    * switch between the two engines using the `hinting-engine' property of
+    * the cff driver module.
+    */
+-/* #define CFF_CONFIG_OPTION_OLD_ENGINE */
++#define CFF_CONFIG_OPTION_OLD_ENGINE
+ 
+ 
+   /*************************************************************************/

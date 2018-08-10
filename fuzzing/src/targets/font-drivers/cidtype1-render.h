@@ -1,6 +1,6 @@
 // cidtype1-render.h
 //
-//   Fuzz target for rendering CID Type 1 faces.
+//   Render CID Type 1 faces.
 //
 // Copyright 2018 by
 // Armin Hasitzka.
