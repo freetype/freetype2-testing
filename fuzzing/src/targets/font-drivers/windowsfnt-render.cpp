@@ -28,8 +28,7 @@
   WindowsFntRenderFuzzTarget::
   WindowsFntRenderFuzzTarget( void )
   {
-    auto  fli = fuzzing::make_unique<FaceLoadIterator>();
-
+    auto  fli          = fuzzing::make_unique<FaceLoadIterator>();
     auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
 
 

@@ -90,6 +90,15 @@ endfunction()
 # fuzz targets:
 
 add_fuzz_target(
+  "bdf"
+  "BdfFuzzTarget"
+  "targets/font-drivers/bdf.h")
+add_fuzz_target(
+  "bdf-render"
+  "BdfRenderFuzzTarget"
+  "targets/font-drivers/bdf-render.h")
+
+add_fuzz_target(
   "cff"
   "CffFuzzTarget"
   "targets/font-drivers/cff.h")
@@ -122,6 +131,15 @@ add_fuzz_target(
   "cidtype1-render-ftengine"
   "CidType1RenderFtEngineFuzzTarget"
   "targets/font-drivers/cidtype1-render-ftengine.h")
+
+add_fuzz_target(
+  "pcf"
+  "PcfFuzzTarget"
+  "targets/font-drivers/pcf.h")
+add_fuzz_target(
+  "pcf-render"
+  "PcfRenderFuzzTarget"
+  "targets/font-drivers/pcf-render.h")
 
 add_fuzz_target(
   "truetype"

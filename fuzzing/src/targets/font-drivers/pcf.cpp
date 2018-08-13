@@ -1,6 +1,6 @@
-// windowsfnt.cpp
+// pcf.cpp
 //
-//   Implementation of WindowsFntFuzzTarget.
+//   Implementation of PcfFuzzTarget.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,19 +12,20 @@
 // understand and accept it fully.
 
 
-#include "targets/font-drivers/windowsfnt.h"
+#include "targets/font-drivers/pcf.h"
 
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
+#include "visitors/facevisitor-bdf.h"
 #include "visitors/facevisitor-charcodes.h"
-#include "visitors/facevisitor-windowsfnt.h"
+#include "visitors/facevisitor-variants.h"
 
 
   using namespace std;
 
 
-  WindowsFntFuzzTarget::
-  WindowsFntFuzzTarget( void )
+  PcfFuzzTarget::
+  PcfFuzzTarget( void )
   {
     auto  fli          = fuzzing::make_unique<FaceLoadIterator>();
     auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
@@ -33,15 +34,18 @@
     // -----------------------------------------------------------------------
     // Face load iterators:
 
-    (void) fli
-      ->set_supported_font_format( FaceLoader::FontFormat::WINDOWS_FNT );
+    (void) fli->set_supported_font_format( FaceLoader::FontFormat::PCF );
     
     (void) fli->add_iterator( move( fpi_bitmaps ) );
     
     (void) fli
+      ->add_once_visitor(
+        fuzzing::make_unique<FaceVisitorBdf>(
+          FaceLoader::FontFormat::PCF ) );
+    (void) fli
       ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorWindowsFnt>() );
+      ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
