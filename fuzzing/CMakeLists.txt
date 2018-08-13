@@ -149,6 +149,14 @@ add_fuzz_target(
   "truetype-render"
   "TrueTypeRenderFuzzTarget"
   "targets/font-drivers/truetype-render.h")
+add_fuzz_target(
+  "truetype-render-i35"
+  "TrueTypeRenderI35FuzzTarget"
+  "targets/font-drivers/truetype-render-i35.h")
+add_fuzz_target(
+  "truetype-render-i38"
+  "TrueTypeRenderI38FuzzTarget"
+  "targets/font-drivers/truetype-render-i38.h")
 
 add_fuzz_target(
   "type1"

@@ -38,6 +38,8 @@ fuzzers=(
 
     "truetype"
     "truetype-render"
+    "truetype-render-i35"
+    "truetype-render-i38"
 
     "type1"
     "type1-ftengine"
