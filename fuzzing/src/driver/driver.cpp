@@ -35,6 +35,8 @@
 
 #include "targets/font-drivers/truetype.h"
 #include "targets/font-drivers/truetype-render.h"
+#include "targets/font-drivers/truetype-render-i35.h"
+#include "targets/font-drivers/truetype-render-i38.h"
 
 #include "targets/font-drivers/type1.h"
 #include "targets/font-drivers/type1-ftengine.h"
@@ -94,7 +96,9 @@
                         "  --pcf\n"                                     \
                         "  --pcf-render\n\n"                            \
                         "  --truetype\n"                                \
-                        "  --truetype-render\n\n"                       \
+                        "  --truetype-render\n"                         \
+                        "  --truetype-render-i35\n"                     \
+                        "  --truetype-render-i38\n\n"                   \
                         "  --type1\n"                                   \
                         "  --type1-ftengine\n"                          \
                         "  --type1-render\n"                            \
@@ -174,6 +178,10 @@
       (void) ( TrueTypeFuzzTarget()               ).run( data, size );
     else if ( type_arg == "--truetype-render" )
       (void) ( TrueTypeRenderFuzzTarget()         ).run( data, size );
+    else if ( type_arg == "--truetype-render-i35" )
+      (void) ( TrueTypeRenderI35FuzzTarget()      ).run( data, size );
+    else if ( type_arg == "--truetype-render-i38" )
+      (void) ( TrueTypeRenderI38FuzzTarget()      ).run( data, size );
 
     else if ( type_arg == "--type1" )
       (void) ( Type1FuzzTarget()                  ).run( data, size );

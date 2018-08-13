@@ -36,6 +36,8 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/targets/font-drivers/pcf-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/truetype.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/truetype-render.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/truetype-render-i35.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/truetype-render-i38.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-ftengine.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1-render.cpp"

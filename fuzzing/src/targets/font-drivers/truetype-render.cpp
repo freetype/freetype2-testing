@@ -28,6 +28,13 @@
   using namespace std;
 
 
+  const FT_UInt  TrueTypeRenderFuzzTarget::INTERPRETER_VERSION_35 =
+    TT_INTERPRETER_VERSION_35;
+  const FT_UInt  TrueTypeRenderFuzzTarget::INTERPRETER_VERSION_38 =
+    TT_INTERPRETER_VERSION_38;
+  const FT_UInt  TrueTypeRenderFuzzTarget::INTERPRETER_VERSION_40 =
+    TT_INTERPRETER_VERSION_40;
+
   const FT_Long  TrueTypeRenderFuzzTarget::NUM_USED_BITMAPS  = 15;
   const FT_Long  TrueTypeRenderFuzzTarget::NUM_USED_OUTLINES =  2;
 
@@ -81,22 +88,9 @@
     // -----------------------------------------------------------------------
     // Fuzz target:
 
-    (void) set_iterator( move( fli ) );
-  }
-
-
-  void
-  TrueTypeRenderFuzzTarget::
-  run( const uint8_t*  data,
-       size_t          size )
-  {
-    for ( auto  version : interpreter_versions )
-    {
-      LOG( INFO ) << "using interpreter-version: " << version;
-
-      if ( set_property( "truetype",
+    (void) set_property( "truetype",
                          "interpreter-version",
-                         &version) == true )
-        (void) FuzzTarget::run( data, size );
-    }
+                         &INTERPRETER_VERSION_40 );
+
+    (void) set_iterator( move( fli ) );
   }
