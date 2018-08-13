@@ -22,6 +22,8 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/iterators/glyphrenderiterator-allmodes.cpp"
 
   "${FUZZING_SRC_DIR}/targets/base.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/bdf.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/bdf-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cff.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cff-ftengine.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cff-render.cpp"
@@ -30,6 +32,8 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/targets/font-drivers/cidtype1-ftengine.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cidtype1-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cidtype1-render-ftengine.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/pcf.cpp"
+  "${FUZZING_SRC_DIR}/targets/font-drivers/pcf-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/truetype.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/truetype-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/type1.cpp"
@@ -49,6 +53,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/utils/utils.cpp"
 
   "${FUZZING_SRC_DIR}/visitors/facevisitor-autohinter.cpp"
+  "${FUZZING_SRC_DIR}/visitors/facevisitor-bdf.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-charcodes.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-cid.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-gasp.cpp"

@@ -17,6 +17,9 @@
 #include <iostream>
 #include <vector>
 
+#include "targets/font-drivers/bdf.h"
+#include "targets/font-drivers/bdf-render.h"
+
 #include "targets/font-drivers/cff.h"
 #include "targets/font-drivers/cff-ftengine.h"
 #include "targets/font-drivers/cff-render.h"
@@ -26,6 +29,9 @@
 #include "targets/font-drivers/cidtype1-ftengine.h"
 #include "targets/font-drivers/cidtype1-render.h"
 #include "targets/font-drivers/cidtype1-render-ftengine.h"
+
+#include "targets/font-drivers/pcf.h"
+#include "targets/font-drivers/pcf-render.h"
 
 #include "targets/font-drivers/truetype.h"
 #include "targets/font-drivers/truetype-render.h"
@@ -73,8 +79,10 @@
   print_usage( void )
   {
     return print_error( "\nUsage: driver TYPE FILE\n\n"                 \
-                        "Type:\n"                                       \
+                        "Type:\n\n"                                     \
                         "  --legacy\n\n"                                \
+                        "  --bdf\n"                                     \
+                        "  --bdf-render\n\n"                            \
                         "  --cff\n"                                     \
                         "  --cff-ftengine\n"                            \
                         "  --cff-render\n"                              \
@@ -83,6 +91,8 @@
                         "  --cidtype1-ftengine\n"                       \
                         "  --cidtype1-render\n"                         \
                         "  --cidtype1-render-ftengine\n\n"              \
+                        "  --pcf\n"                                     \
+                        "  --pcf-render\n\n"                            \
                         "  --truetype\n"                                \
                         "  --truetype-render\n\n"                       \
                         "  --type1\n"                                   \
@@ -96,7 +106,7 @@
                         "  --windowsfnt\n"                              \
                         "  --windowsfnt-render\n\n"                     \
                         "  --glyphs-outlines\n\n"                       \
-                        "File:\n"                                       \
+                        "File:\n\n"                                     \
                         "  The location (path) of an input file.\n" );
   }
 
@@ -132,6 +142,11 @@
     if ( type_arg == "--legacy" )
       (void) LLVMFuzzerTestOneInput(                     data, size );
 
+    else if ( type_arg == "--bdf" )
+      (void) ( BdfFuzzTarget()                    ).run( data, size );
+    else if ( type_arg == "--bdf-render" )
+      (void) ( BdfRenderFuzzTarget()              ).run( data, size );
+
     else if ( type_arg == "--cff" )
       (void) ( CffFuzzTarget()                    ).run( data, size );
     else if ( type_arg == "--cff-ftengine" )
@@ -149,6 +164,11 @@
       (void) ( CidType1RenderFuzzTarget()         ).run( data, size );
     else if ( type_arg == "--cidtype1-render-ftengine" )
       (void) ( CidType1RenderFtEngineFuzzTarget() ).run( data, size );
+
+    else if ( type_arg == "--pcf" )
+      (void) ( PcfFuzzTarget()                    ).run( data, size );
+    else if ( type_arg == "--pcf-render" )
+      (void) ( PcfRenderFuzzTarget()              ).run( data, size );
 
     else if ( type_arg == "--truetype" )
       (void) ( TrueTypeFuzzTarget()               ).run( data, size );

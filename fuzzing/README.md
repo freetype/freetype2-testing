@@ -229,10 +229,10 @@ https://www.freetype.org/freetype2/docs/reference/ft2-sfnt_names.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-bdf_fonts.html
 
-|        | Function                | Used | Extensively |
-| ------ | ----------------------- | :--: | :---------: |
-| 11.1.1 | `FT_Get_BDF_Charset_ID` |      |             |
-| 11.1.2 | `FT_Get_BDF_Property`   |      |             |
+|        | Function                | Used               | Extensively        |
+| ------ | ----------------------- | :----------------: | :----------------: |
+| 11.1.1 | `FT_Get_BDF_Charset_ID` | :heavy_check_mark: | :heavy_check_mark: |
+| 11.1.2 | `FT_Get_BDF_Property`   |                    |                    |
 
 ### CID Fonts
 

@@ -20,6 +20,9 @@ settings_base_dir=$( readlink -f "../settings/oss-fuzz"  )
 fuzzers=(
     "legacy"
 
+    "bdf"
+    "bdf-render"
+
     "cff"
     "cff-ftengine"
     "cff-render"
@@ -29,6 +32,9 @@ fuzzers=(
     "cidtype1-ftengine"
     "cidtype1-render"
     "cidtype1-render-ftengine"
+
+    "pcf"
+    "pcf-render"
 
     "truetype"
     "truetype-render"
