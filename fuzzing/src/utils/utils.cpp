@@ -71,6 +71,7 @@
     FT_Error  error;
     FT_Glyph  glyph;
 
+
     error = FT_Get_Glyph( face->glyph, &glyph );
 
     if ( error != 0 )
@@ -83,18 +84,35 @@
   }
 
 
-  FT_Pos
+  bool
   fuzzing::
-  get_glyph_pixels( const Unique_FT_Glyph&  glyph )
+  glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
+                             FT_Pos                  reasonable_pixels )
+  {
+    return glyph_has_reasonable_size( glyph, reasonable_pixels, 0, 0 );
+  }
+
+
+  bool
+  fuzzing::
+  glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
+                             FT_Pos                  reasonable_pixels,
+                             FT_Pos                  reasonable_width,
+                             FT_Pos                  reasonable_height )
   {
     static const auto  POS_MAX = numeric_limits<FT_Pos>::max();
 
     FT_BBox  box;
+    FT_Pos   pixels;
     FT_Pos   width;
     FT_Pos   height;
 
 
-    assert( glyph != nullptr );
+    if ( glyph == nullptr )
+    {
+      LOG( WARNING ) << "glyph is null";
+      return false;
+    }
 
     (void) FT_Glyph_Get_CBox( glyph.get(), FT_GLYPH_BBOX_PIXELS, &box );
 
@@ -103,25 +121,17 @@
 
     LOG( INFO ) << "glyph size: " << width << " x " << height << " px\n";
 
-    // Beware possible overflows:
-
-    return width > 0 && POS_MAX / width < height ? POS_MAX : width * height;
-  }
-
-
-  bool
-  fuzzing::
-  glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
-                             FT_Pos                  reasonable_size )
-
-  {
-    if ( glyph == nullptr )
+    if ( ( reasonable_width  > 0 && width  > reasonable_width  ) ||
+         ( reasonable_height > 0 && height > reasonable_height ) )
     {
-      LOG( WARNING ) << "glyph is null";
+      LOG( WARNING ) << "glyph is beyond reasonbale size";
       return false;
     }
 
-    if ( get_glyph_pixels( glyph ) > reasonable_size )
+    // Beware possible overflows:
+    pixels = width > 0 && POS_MAX / width < height ? POS_MAX : width * height;
+
+    if ( reasonable_pixels > 0 && pixels > reasonable_pixels )
     {
       LOG( WARNING ) << "glyph is beyond reasonbale size";
       return false;
@@ -155,6 +165,8 @@
     //   hundred (up to a few thousand) glyphs within a few seconds.
     //   Special stress targets could be developed that specialise on glyphs
     //   up to 32767 x 32767 pixels.
+    //   In addition, limit the width and height since at least the width
+    //   has a big influence on the performance.
 
-    return glyph_has_reasonable_size( glyph, 2500 * 2500 );
+    return glyph_has_reasonable_size( glyph, 2500 * 2500, 10000, 10000 );
   }

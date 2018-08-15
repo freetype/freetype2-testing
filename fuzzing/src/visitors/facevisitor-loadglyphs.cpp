@@ -23,8 +23,8 @@
   FaceVisitorLoadGlyphs::
   FaceVisitorLoadGlyphs( FT_Long  num_used_glyphs )
   {
-    (void) add_transformation( nullptr, nullptr );
     (void) set_num_used_glyphs( num_used_glyphs );
+    (void) add_transformation( nullptr, nullptr );
   }
 
 
@@ -68,30 +68,13 @@
       {
         LOG( INFO ) << "testing glyph " << ( index + 1 ) << "/" << num_glyphs;
 
-        for ( auto mode : modes )
+        for ( auto  flags : load_flags )
         {
-          LOG( INFO ) << "load flags: 0x" << hex << get<0>( mode );
+          LOG( INFO ) << "load flags: 0x" << hex << flags;
 
-          error = FT_Load_Glyph( face.get(), index, get<0>( mode ) );
+          error = FT_Load_Glyph( face.get(), index, flags );
 
-          if ( error != 0 )
-          {
-            LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
-            continue;
-          }
-
-          if ( get<1>( mode ) == false )
-            continue;
-
-          if ( glyph_has_reasonable_render_size(
-                 get_glyph_from_face( face ) ) == false )
-            continue;
-
-          LOG( INFO ) << "render mode: 0x" << hex << get<2>( mode );
-
-          error = FT_Render_Glyph( face->glyph, get<2>( mode ) );
-
-          LOG_IF( ERROR, error != 0 ) << "FT_Render_Glyph failed: " << error;
+          LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
         }
       }
 
@@ -102,9 +85,10 @@
 
   void
   FaceVisitorLoadGlyphs::
-  set_num_used_glyphs( FT_Long  max )
+  set_num_used_glyphs( FT_Long  glyphs )
   {
-    num_used_glyphs = max;
+    assert( glyphs > 0 );
+    num_used_glyphs = glyphs;
   }
 
 
@@ -119,18 +103,7 @@
 
   void
   FaceVisitorLoadGlyphs::
-  add_mode( FT_Int32        load_flags )
+  add_load_flags( FT_Int32  load_flags )
   {
-    (void) modes.push_back( ModeTuple( load_flags,
-                                       false,
-                                       FT_RENDER_MODE_NORMAL ) );
-  }
-
-
-  void
-  FaceVisitorLoadGlyphs::
-  add_mode( FT_Int32        load_flags,
-            FT_Render_Mode  render_mode )
-  {
-    (void) modes.push_back( ModeTuple( load_flags, true, render_mode ) );
+    (void) this->load_flags.push_back( load_flags );
   }

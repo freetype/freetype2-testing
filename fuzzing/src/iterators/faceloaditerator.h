@@ -109,8 +109,8 @@
   private:
 
 
-    static const FT_Long  FACE_INDEX_MAX     = 20;
-    static const FT_Long  INSTANCE_INDEX_MAX =  5;
+    static const FT_Long  FACE_INDEX_MAX     = 5;
+    static const FT_Long  INSTANCE_INDEX_MAX = 5;
 
     unique_ptr<FaceLoader>  face_loader;
 

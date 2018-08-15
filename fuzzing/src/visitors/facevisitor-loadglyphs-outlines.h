@@ -33,7 +33,7 @@
   public:
 
 
-    FaceVisitorLoadGlyphsOutlines( FT_Long  num_used_glyphs );
+    FaceVisitorLoadGlyphsOutlines( void );
 
 
     FaceVisitorLoadGlyphsOutlines(
@@ -48,6 +48,8 @@
 
   private:
 
+
+    static const FT_Long  NUM_USED_GLYPHS;
 
     FT_Matrix  matrix;
     FT_Vector  delta;

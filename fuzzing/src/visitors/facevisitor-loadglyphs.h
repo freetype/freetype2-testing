@@ -1,7 +1,6 @@
 // facevisitor-loadglyphs.h
 //
-//   Load and render a bunch of glyphs with a variety of different flags and
-//   modes.
+//   Load a bunch of glyphs with a variety of different flags.
 //
 //   Drivers: all
 //
@@ -53,22 +52,21 @@
     override;
 
 
+  protected:
+
+
     // @Description:
-    //   Set the amount of glyphs that will be loaded/rendered per setting.
-    //   Note that this function HAS to be called BEFORE
-    //   `FaceVisitorLoadGlyphs::run()' or this visitor will fail.  This
-    //   function also gets called implicitely in a dedicated constructor.
+    //   Define the amount of glyphs that this visitor uses;
+    //   [0 .. `num_used_glyphs'].  This function HAS to be called at least
+    //   once per visitor as `run()' would fail otherwise.
     //
     // @Input:
-    //   max ::
-    //     Has to ba a value in the range of [1, LONG_MAX) or calling
-    //     `FaceVisitorLoadGlyphs::run()' will fail.
+    //   glyphs ::
+    //     Even though this is `FT_Long', this function really only accepts
+    //     values that are `> 0'.
 
     void
     set_num_used_glyphs( FT_Long  glyphs );
-
-
-  protected:
 
 
     // @Description:
@@ -88,41 +86,24 @@
                         FT_Vector*  delta );
 
 
-    // @See: `FaceVisitorLoadGlyphs::add_mode()'.
-
-    void
-    add_mode( FT_Int32  load_flags );
-
-
     // @Description:
-    //   Set a combination of load flags and render modes that will be used in
-    //   `run()'.
+    //   Set load flags that will be used in `run()'.
     //
     // @Input:
     //   load_flags ::
     //     A set of load flags.
-    //
-    //   render_mode ::
-    //     A render mode.
 
     void
-    add_mode( FT_Int32        load_flags,
-              FT_Render_Mode  render_mode );
+    add_load_flags( FT_Int32  load_flags );
 
 
   private:
 
 
-    // 0: load flags
-    // 1: use renderer
-    // 2: render mode
-    typedef tuple<FT_Int32, bool, FT_Render_Mode>  ModeTuple;
-
-
     FT_Long  num_used_glyphs = -1;
 
     vector<pair<FT_Matrix*, FT_Vector*>>  transformations;
-    vector<ModeTuple>                     modes;
+    vector<FT_Int32>                      load_flags;
   };
 
 

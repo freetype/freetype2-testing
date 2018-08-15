@@ -22,9 +22,6 @@
   using namespace std;
 
 
-  const FT_Long  PcfRenderFuzzTarget::NUM_USED_BITMAPS = 30;
-
-
   PcfRenderFuzzTarget::
   PcfRenderFuzzTarget( void )
   {
@@ -36,9 +33,7 @@
     // Face preparation iterator:
 
     (void) fpi_bitmaps
-      ->add_visitor(
-        fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>(
-          NUM_USED_BITMAPS ) );
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
 
     // -----------------------------------------------------------------------
     // Face load iterator:

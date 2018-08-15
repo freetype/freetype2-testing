@@ -34,16 +34,12 @@
   protected:
 
     
+    // We need variables holding the enum values to feed them to
+    // `FT_Property_Set':
+
     static const FT_UInt  INTERPRETER_VERSION_35;
     static const FT_UInt  INTERPRETER_VERSION_38;
     static const FT_UInt  INTERPRETER_VERSION_40;
-
-
-  private:
-
-
-    static const FT_Long  NUM_USED_BITMAPS;
-    static const FT_Long  NUM_USED_OUTLINES;
   };
 
 

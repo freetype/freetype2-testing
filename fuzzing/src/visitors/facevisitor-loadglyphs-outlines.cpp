@@ -15,11 +15,16 @@
 #include "visitors/facevisitor-loadglyphs-outlines.h"
 
 
+  const FT_Long  FaceVisitorLoadGlyphsOutlines::NUM_USED_GLYPHS = 5;
+
+
   FaceVisitorLoadGlyphsOutlines::
-  FaceVisitorLoadGlyphsOutlines( FT_Long  num_used_glyphs )
-    : FaceVisitorLoadGlyphs( num_used_glyphs )
+  FaceVisitorLoadGlyphsOutlines( void )
+    : FaceVisitorLoadGlyphs( NUM_USED_GLYPHS )
   {
-    // Note: the auto-hinter has its own visitor.
+    // Notes:
+    //   - The auto-hinter has its own visitor.
+    //   - Rendering has its own visitor for performance reasons.
 
     FT_Int32  flags = FT_LOAD_NO_BITMAP | FT_LOAD_NO_AUTOHINT;
 
@@ -39,17 +44,11 @@
     (void) add_transformation( &matrix, nullptr );
     (void) add_transformation( &matrix, &delta  );
 
-    (void) add_mode( flags,                        FT_RENDER_MODE_NORMAL );
-
-    (void) add_mode( flags | FT_LOAD_NO_SCALE                            );
-    (void) add_mode( flags | FT_LOAD_NO_HINTING,   FT_RENDER_MODE_NORMAL );
-    (void) add_mode( flags | FT_LOAD_VERTICAL_LAYOUT                     );
-    (void) add_mode( flags | FT_LOAD_PEDANTIC                            );
-    (void) add_mode( flags | FT_LOAD_LINEAR_DESIGN                       );
-    (void) add_mode( flags | FT_LOAD_COMPUTE_METRICS                     );
-    
-    (void) add_mode( flags | FT_LOAD_TARGET_LIGHT, FT_RENDER_MODE_LIGHT  );
-    (void) add_mode( flags | FT_LOAD_TARGET_MONO,  FT_RENDER_MODE_MONO   );
-    (void) add_mode( flags | FT_LOAD_TARGET_LCD,   FT_RENDER_MODE_LCD    );
-    (void) add_mode( flags | FT_LOAD_TARGET_LCD_V, FT_RENDER_MODE_LCD_V  );
+    (void) add_load_flags( flags                           );
+    (void) add_load_flags( flags | FT_LOAD_NO_SCALE        );
+    (void) add_load_flags( flags | FT_LOAD_NO_HINTING      );
+    (void) add_load_flags( flags | FT_LOAD_VERTICAL_LAYOUT );
+    (void) add_load_flags( flags | FT_LOAD_PEDANTIC        );
+    (void) add_load_flags( flags | FT_LOAD_LINEAR_DESIGN   );
+    (void) add_load_flags( flags | FT_LOAD_COMPUTE_METRICS );
   }

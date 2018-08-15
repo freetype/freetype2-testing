@@ -20,14 +20,11 @@
 #include "visitors/facevisitor-autohinter.h"
 #include "visitors/facevisitor-loadglyphs-bitmaps.h"
 #include "visitors/facevisitor-loadglyphs-outlines.h"
+#include "visitors/facevisitor-renderglyphs.h"
 #include "visitors/facevisitor-subglyphs.h"
 
 
   using namespace std;
-
-
-  const FT_Long  Type42RenderFuzzTarget::NUM_USED_BITMAPS  = 15;
-  const FT_Long  Type42RenderFuzzTarget::NUM_USED_OUTLINES =  5;
 
 
   Type42RenderFuzzTarget::
@@ -43,16 +40,14 @@
     // Face preparation iterators:
 
     (void) fpi_bitmaps
-      ->add_visitor(
-        fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>(
-          NUM_USED_BITMAPS ) );
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
 
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_outlines
-      ->add_visitor(
-        fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>(
-          NUM_USED_OUTLINES ) );
+      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+    (void) fpi_outlines
+      ->add_visitor( fuzzing::make_unique<FaceVisitorRenderGlyphs>() );
     (void) fpi_outlines
       ->add_visitor( fuzzing::make_unique<FaceVisitorSubGlyphs>() );
 
