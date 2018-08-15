@@ -75,6 +75,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/visitors/facevisitor-windowsfnt.cpp"
 
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-cbox.cpp"
+  "${FUZZING_SRC_DIR}/visitors/glyphvisitor-outlines.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-transform.cpp")
 
 target_compile_definitions(fuzztargets
