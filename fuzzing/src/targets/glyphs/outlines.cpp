@@ -19,6 +19,7 @@
 #include "iterators/glyphloaditerator-naive.h"
 #include "iterators/glyphrenderiterator-allmodes.h"
 #include "visitors/glyphvisitor-cbox.h"
+#include "visitors/glyphvisitor-outlines.h"
 #include "visitors/glyphvisitor-transform.h"
 #include "utils/logging.h"
 
@@ -47,6 +48,7 @@
     (void) gli->add_iterator( move( gri ) );
 
     (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorCBox>() );
+    (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorOutlines>() );
     (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorTransform>() );
 
     // -----------------------------------------------------------------------
