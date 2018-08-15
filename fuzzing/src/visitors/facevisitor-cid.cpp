@@ -14,10 +14,12 @@
 
 #include "visitors/facevisitor-cid.h"
 
-#include "utils/logging.h"
+#include <cassert>
 
 #include <ft2build.h>
 #include FT_CID_H
+
+#include "utils/logging.h"
 
 
   void
@@ -26,7 +28,7 @@
   {
     FT_Error  error;
 
-    FT_Long  num_glyphs = face->num_glyphs;
+    FT_Long  num_glyphs;
 
     const char*  registry;
     const char*  ordering;
@@ -36,6 +38,10 @@
 
     FT_UInt  cid;
 
+
+    assert( face != nullptr );
+
+    num_glyphs = face->num_glyphs;
 
     error = FT_Get_CID_Registry_Ordering_Supplement( face.get(),
                                                      &registry,

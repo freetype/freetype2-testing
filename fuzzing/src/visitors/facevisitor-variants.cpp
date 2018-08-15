@@ -14,6 +14,7 @@
 
 #include "visitors/facevisitor-variants.h"
 
+#include <cassert>
 #include <set>
 #include <vector>
 
@@ -36,6 +37,8 @@
     FT_Int   is_default;
     FT_UInt  glyph_index;
 
+
+    assert( face != nullptr );
 
     raw_selectors = FT_Face_GetVariantSelectors( face.get() );
 
