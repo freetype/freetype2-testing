@@ -49,7 +49,7 @@
     FT_Byte  num_stem_snap_v;
     
 
-    assert( face.get() != nullptr );
+    assert( face != nullptr );
 
     has_glyph_names = FT_Has_PS_Glyph_Names( face.get() );
 
