@@ -26,12 +26,6 @@
 
 
     WindowsFntRenderFuzzTarget( void );
-
-
-  private:
-
-
-    static const FT_Long  NUM_USED_BITMAPS;
   };
 
 

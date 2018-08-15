@@ -27,7 +27,7 @@
   public:
 
 
-    FaceVisitorLoadGlyphsBitmaps( FT_Long  num_used_glyphs );
+    FaceVisitorLoadGlyphsBitmaps( void );
 
 
     FaceVisitorLoadGlyphsBitmaps(
@@ -38,6 +38,12 @@
 
     virtual
     ~FaceVisitorLoadGlyphsBitmaps( void ) {}
+
+
+  private:
+
+
+    static const FT_Long  NUM_USED_GLYPHS;
   };
 
 

@@ -26,13 +26,6 @@
 
 
     Type1RenderFuzzTarget( void );
-
-
-  private:
-
-
-    static const FT_Long  NUM_USED_BITMAPS;
-    static const FT_Long  NUM_USED_OUTLINES;
   };
 
 

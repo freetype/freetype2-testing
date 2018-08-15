@@ -100,38 +100,38 @@
     get_glyph_from_face( const Unique_FT_Face&  face );
 
 
-    // @Description:
-    //   Get the amount of pixels that glyph's bitmap uses.  This can also
-    //   be applied to outline glyphs which have not been rendered yet.
-    //
-    // @Input:
-    //   glyph ::
-    //     A glyph.
-    //
-    // @Return:
-    //   The amount of pixels of the glyphs's bitmap.
+    // @See: `glyph_has_reasonable_size'.
 
-    FT_Pos
-    get_glyph_pixels( const Unique_FT_Glyph&  glyph );
+    bool
+    glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
+                               FT_Pos                  reasonable_pixels );
 
 
     // @Description:
-    //   Check if the given glyph's bitmap exceeds a certain amount of pixels.
+    //   Check if the given glyph's bitmap exceeds certain sizes.
     //
     // @Input:
     //   glyph ::
     //     A glpyh that is to be evaluated.
     //
-    //   reasonable_size ::
-    //     Amount of pixels.
+    //   reasonable_pixels ::
+    //     Amount of total pixels.  `0' means:  accept anything.
+    //
+    //   reasonable_width ::
+    //     Amount of vertical pixels.  `0' means:  accept anything.
+    //
+    //   reasonable_height ::
+    //     Amount of horizontal pixels.  `0' means:  accept anything.
     //
     // @Return:
     //    `true', if the given glyph's bitmap has less than or equally many
-    //    pixels as the reasonable size.
+    //    pixels as the respective reasonabale sizes.
 
     bool
     glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
-                               FT_Pos                  reasonable_size );
+                               FT_Pos                  reasonable_pixels,
+                               FT_Pos                  reasonable_width,
+                               FT_Pos                  reasonable_height );
 
 
     // @Description:
