@@ -326,3 +326,25 @@ https://www.freetype.org/freetype2/docs/reference/ft2-cache_subsystem.html
 | 18.1.13 | `FTC_CMapCache_Lookup`        |      |             |
 | 18.1.14 | `FTC_ImageCache_LookupScaler` |      |             |
 | 18.1.15 | `FTC_SBitCache_LookupScaler`  |      |             |
+
+### Outline Processing
+
+https://www.freetype.org/freetype2/docs/reference/ft2-outline_processing.html
+
+|         | Function                     | Used               | Extensively        | Resources            |
+| ------- | ---------------------------- | :----------------: | :----------------: | -------------------- |
+| 21.1.1  | `FT_Outline_New`             | :heavy_check_mark: | :heavy_check_mark: | Library              |
+| 21.1.2  | `FT_Outline_Done`            | :heavy_check_mark: | :heavy_check_mark: | Library <br> Outline |
+| 21.1.3  | `FT_Outline_Copy`            | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.4  | `FT_Outline_Translate`       | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.5  | `FT_Outline_Transform`       | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.6  | `FT_Outline_Embolden`        | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.7  | `FT_Outline_EmboldenXY`      | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.8  | `FT_Outline_Reverse`         | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.9  | `FT_Outline_Check`           | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.10 | `FT_Outline_Get_CBox`        | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.11 | `FT_Outline_Get_BBox`        | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.12 | `FT_Outline_Get_Bitmap`      |                    |                    | Library <br> Outline |
+| 21.1.13 | `FT_Outline_Render`          |                    |                    | Library <br> Outline |
+| 21.1.14 | `FT_Outline_Decompose`       | :heavy_check_mark: | :heavy_check_mark: | Outline              |
+| 21.1.15 | `FT_Outline_Get_Orientation` | :heavy_check_mark: | :heavy_check_mark: | Outline              |
