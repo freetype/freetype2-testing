@@ -11,7 +11,7 @@ set -eo pipefail
 # fully.
 
 dir="${PWD}"
-cd "${0%/*}" # go to `fuzzing/scripts'
+cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts'
 
 # ----------------------------------------------------------------------------
 # collect parameters:
@@ -68,10 +68,10 @@ fi
 # rebuild shortcut:
 
 if [[ "${opt_rebuild}" == "1" ]]; then
-    bash build-glog.sh       --no-init
-    bash build-libarchive.sh --no-init
-    bash build-freetype.sh   --no-init
-    bash build-targets.sh    --no-init
+    bash build/glog.sh       --no-init
+    bash build/libarchive.sh --no-init
+    bash build/freetype.sh   --no-init
+    bash build/targets.sh    --no-init
     exit
 fi
 
@@ -365,8 +365,8 @@ if [[ "${build_glog}" == "y" ]]; then
     bash build-glog.sh
 fi
 
-bash build-libarchive.sh
-bash build-freetype.sh
-bash build-targets.sh
+bash build/libarchive.sh
+bash build/freetype.sh
+bash build/targets.sh
 
 cd "${dir}"

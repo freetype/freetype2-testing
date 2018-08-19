@@ -11,7 +11,7 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd "${0%/*}" # go to `fuzzing/scripts'
+cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts'
 
 bin_base_dir=$(      readlink -f "../build/bin"          )
 corpora_base_dir=$(  readlink -f "../corpora"            )

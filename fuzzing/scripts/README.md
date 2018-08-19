@@ -13,24 +13,27 @@ The scripts in this folder are designed to build (and prepare) the fuzz
 targets in (and for) various scenarios.  At the moment, there are three main
 stakeholders:
 
-- **OSS-Fuzz**   has two entry points.  First, it calls
-                 [`build-fuzzers.sh`](build-fuzzers.sh).  All environment
-                 variables are set by OSS-Fuzz and in
-                 [OSS-Fuzz's `build.sh`](https://github.com/google/oss-fuzz/blob/master/projects/freetype2/build.sh).
-                 After that, OSS-Fuzz calls
-                 [`prepare-oss-fuzz.sh`](prepare-oss-fuzz.sh), which copies
-                 all files to their designated places and zips up the corpora.
-                 This process is currently split into two parts to allow for
-                 some hacking in
-                 [OSS-Fuzz's `build.sh`](https://github.com/google/oss-fuzz/blob/master/projects/freetype2/build.sh).
+- **OSS-Fuzz** has two entry points.  The process is currently split into two
+  parts to allow for some hacking in [OSS-Fuzz's
+  `build.sh`](https://github.com/google/oss-fuzz/blob/master/projects/freetype2/build.sh).
+    1. First, it calls [`build-fuzzers.sh`](build-fuzzers.sh).  All
+       environment variables are set by OSS-Fuzz and in [OSS-Fuzz's
+       `build.sh`](https://github.com/google/oss-fuzz/blob/master/projects/freetype2/build.sh).
+    2. After that, OSS-Fuzz calls
+       [`prepare-oss-fuzz.sh`](prepare-oss-fuzz.sh), which copies all files to
+       their designated places and zips up the corpora.
+              
+- **Travis CI**  calls [`run-travis-ci.sh`](run-travis-ci.sh), which supports
+  two different rows/lanes:
+    1. [**Regression Suite**](travis-ci/regression-suite.sh):  build a
+       standard version of the [test driver](/fuzzing/src/driver) and run all
+       available regression tests.
+    2. [**OSS-Fuzz Build**](travis-ci/oss-fuzz-build.sh):  build OSS-Fuzz's
+       fuzzers through OSS-Fuzz's infrastructure tools to confirm that the
+       build process works as expected.
 
-- **Travis CI**  calls [`run-travis-ci.sh`](run-travis-ci.sh), which builds a
-                 standard version of the [test driver](/fuzzing/src/driver)
-                 and runs all available tests.
-
-- **Developers** usually want to use [`custom-build.sh`](custom-build.sh). See
-                 [Debugging the Fuzz Targets](#debugging-the-fuzz-targets)
-                 and for details.
+- **Developers** usually want to use [`custom-build.sh`](custom-build.sh).
+  See [Debugging the Fuzz Targets](#debugging-the-fuzz-targets) for details.
 
 # Debugging the Fuzz Targets
 
@@ -91,7 +94,7 @@ FreeType.  Hence, calling `./custom-build.sh` ensures that the test driver is
 built with FreeType's upstream.
 
 When debugging FreeType, it is advisable to make changes to
-`external/freetype2` as these changes will be detected and used by
+`/external/freetype2` as these changes will be detected and used by
 `./custom-build.sh --rebuild`.  **BEWARE**: calling `./custom-build.sh`
 (without `--rebuild`) resets all changes made to that submodule.  Thus, it is
 good practice to save changes in the form of a patch before rebuilding the

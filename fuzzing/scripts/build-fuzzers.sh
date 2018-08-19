@@ -11,7 +11,7 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd "${0%/*}" # go to `fuzzing/scripts'
+cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts'
 
 # We expect a bunch of flags coming in from the fuzzing framework;  in fact
 # everything that is connected to compilers, sanitizers, coverage, ...  The
@@ -21,8 +21,8 @@ cd "${0%/*}" # go to `fuzzing/scripts'
 # which would cause CMake's setup process to fail.  See
 # `fuzzing/src/fuzzing/CMakeLists.txt' for details.
 
-bash build-libarchive.sh
-bash build-freetype.sh
-bash build-targets.sh
+bash build/libarchive.sh
+bash build/freetype.sh
+bash build/targets.sh
 
 cd "${dir}"

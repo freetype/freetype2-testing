@@ -17,17 +17,21 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources:
-            - llvm-toolchain-trusty-5.0
-          packages:
-            - clang-5.0
+          sources: llvm-toolchain-trusty-5.0
+          packages: clang-5.0
       env:
+        - TRAVIS_CI_ROW="regression-suite"
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-        - TRAVIS_CI_ROW="fuzzing"
+    - os: linux
+      sudo: required
+      services: docker
+      env:
+        - TRAVIS_CI_ROW="oss-fuzz-build"
+        - MATRIX_EVAL=
 
 before_install:
   - sudo apt-get -qq update && sudo apt-get install -y autoconf cmake libtool
   - eval "${MATRIX_EVAL}"
 
 script:
-  - if [[ "${TRAVIS_CI_ROW}" == "fuzzing" ]]; then bash fuzzing/scripts/run-travis-ci.sh; fi
+  - bash fuzzing/scripts/run-travis-ci.sh

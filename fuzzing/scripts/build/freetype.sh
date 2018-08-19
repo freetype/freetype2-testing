@@ -11,8 +11,9 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
+cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts/build'
 
-path_to_freetype=$( readlink -f "../../external/freetype2" )
+path_to_freetype=$( readlink -f "../../../external/freetype2" )
 
 if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
