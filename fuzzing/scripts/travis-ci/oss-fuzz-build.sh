@@ -11,19 +11,18 @@ set -exo pipefail
 # fully.
 
 dir="${PWD}"
-cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts'
+cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts/travis-ci'
 
-case "${TRAVIS_CI_ROW}" in
-    "regression-suite")
-        bash travis-ci/regression-suite.sh
-        ;;
-    "oss-fuzz-build")
-        bash travis-ci/oss-fuzz-build.sh
-        ;;
-    *)
-        printf "\$TRAVIS_CI_ROW has invalid value: '%s'\n" "${TRAVIS_CI_ROW}"
-        exit 66
-        ;;
-esac
+if [[ ! -v "TRAVIS_BUILD_DIR" ]]; then
+    exit 66
+fi
+
+cd "${TRAVIS_BUILD_DIR}"
+
+git clone "https://github.com/google/oss-fuzz.git"
+cd "oss-fuzz"
+
+python infra/helper.py build_image   --pull freetype2
+python infra/helper.py build_fuzzers        freetype2
 
 cd "${dir}"
