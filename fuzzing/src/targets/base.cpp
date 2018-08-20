@@ -76,10 +76,19 @@
 
   void
   FuzzTarget::
+  set_supported_font_format( FaceLoader::FontFormat  format )
+  {
+    assert( face_load_iterator != nullptr );
+    (void) face_load_iterator->set_supported_font_format( format );
+  }
+
+
+  void
+  FuzzTarget::
   set_data_is_tar_archive( bool  is_tar_archive )
   {
     assert( face_load_iterator != nullptr );
-    face_load_iterator->set_data_is_tar_archive( is_tar_archive );
+    (void) face_load_iterator->set_data_is_tar_archive( is_tar_archive );
   }
 
 

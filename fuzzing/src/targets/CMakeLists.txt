@@ -49,6 +49,8 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt-render.cpp"
   "${FUZZING_SRC_DIR}/targets/glyphs/outlines.cpp"
+  "${FUZZING_SRC_DIR}/targets/glyphs/bitmaps.cpp"
+  "${FUZZING_SRC_DIR}/targets/glyphs/bitmaps-pcf.cpp"
 
   "${FUZZING_SRC_DIR}/utils/faceloader.cpp"
   "${FUZZING_SRC_DIR}/utils/tarreader.cpp"
@@ -74,6 +76,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/visitors/facevisitor-variants.cpp"
   "${FUZZING_SRC_DIR}/visitors/facevisitor-windowsfnt.cpp"
 
+  "${FUZZING_SRC_DIR}/visitors/glyphvisitor-bitmap-handling.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-cbox.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-outlines.cpp"
   "${FUZZING_SRC_DIR}/visitors/glyphvisitor-transform.cpp")

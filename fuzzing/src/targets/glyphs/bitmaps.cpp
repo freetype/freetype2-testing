@@ -1,6 +1,6 @@
-// outlines.cpp
+// bitmaps.cpp
 //
-//   Implementation of GlyphsOutlinesFuzzTarget.
+//   Implementation of GlyphsBitmapsFuzzTarget.
 //
 // Copyright 2018 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
@@ -12,51 +12,38 @@
 // understand and accept it fully.
 
 
-#include "targets/glyphs/outlines.h"
+#include "targets/glyphs/bitmaps.h"
 
 #include "iterators/faceloaditerator.h"
-#include "iterators/faceprepiterator-outlines.h"
+#include "iterators/faceprepiterator-bitmaps.h"
 #include "iterators/glyphloaditerator-naive.h"
-#include "iterators/glyphrenderiterator-allmodes.h"
-#include "visitors/glyphvisitor-cbox.h"
-#include "visitors/glyphvisitor-outlines.h"
-#include "visitors/glyphvisitor-transform.h"
+#include "visitors/glyphvisitor-bitmap-handling.h"
 #include "utils/logging.h"
 
 
-  using namespace std;
+  const FT_Long  GlyphsBitmapsFuzzTarget::NUM_LOAD_GLYPHS = 20;
 
 
-  const FT_Long  GlyphsOutlinesFuzzTarget::NUM_LOAD_GLYPHS = 5;
-
-
-  GlyphsOutlinesFuzzTarget::
-  GlyphsOutlinesFuzzTarget( void )
+  GlyphsBitmapsFuzzTarget::
+  GlyphsBitmapsFuzzTarget( void )
   {
     auto  fli = fuzzing::make_unique<FaceLoadIterator>();
-    auto  fpi = fuzzing::make_unique<FacePrepIteratorOutlines>();
+    auto  fpi = fuzzing::make_unique<FacePrepIteratorBitmaps>();
     auto  gli =
       fuzzing::make_unique<GlyphLoadIteratorNaive>( NUM_LOAD_GLYPHS );
-    auto  gri = fuzzing::make_unique<GlyphRenderIteratorAllModes>();
 
 
     // -----------------------------------------------------------------------
     // Glyph load iterators:
 
-    (void) gli->add_load_flags( FT_LOAD_NO_BITMAP );
-
-    (void) gli->add_iterator( move( gri ) );
-
-    (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorCBox>()      );
-    (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorOutlines>()  );
-    (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorTransform>() );
+    (void) gli
+      ->add_visitor( fuzzing::make_unique<GlyphVisitorBitmapHandling>() );
 
     // -----------------------------------------------------------------------
     // Assemble the rest:
 
     (void) fpi->add_iterator( move( gli ) );
 
-    (void) fli->set_supported_font_format( FaceLoader::FontFormat::TRUETYPE );
     (void) fli->add_iterator( move( fpi ) );
 
     // -----------------------------------------------------------------------

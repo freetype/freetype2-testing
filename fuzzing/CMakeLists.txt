@@ -202,6 +202,10 @@ add_fuzz_target(
   "targets/font-drivers/windowsfnt-render.h")
 
 add_fuzz_target(
+  "glyphs-bitmaps-pcf"
+  "GlyphsBitmapsPcfFuzzTarget"
+  "targets/glyphs/bitmaps-pcf.h")
+add_fuzz_target(
   "glyphs-outlines"
   "GlyphsOutlinesFuzzTarget"
   "targets/glyphs/outlines.h")

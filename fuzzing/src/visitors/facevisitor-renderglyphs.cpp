@@ -63,7 +63,7 @@
         }
 
         if ( glyph_has_reasonable_render_size(
-               get_glyph_from_face( face ) ) == false )
+               get_unique_glyph_from_face( face ) ) == false )
           continue;
 
         LOG( INFO ) << "render mode: " << mode.second;
