@@ -27,12 +27,14 @@
     
     FT_Long  num_glyphs;
 
-    FT_Glyph         raw_glyph;
+    // `glyph' is the product of `FT_Get_Glyph' which is tied to its face's
+    // glyph slot in many ways.  Beware `get_unique_glyph_from_face'.
+
     Unique_FT_Glyph  glyph = make_unique_glyph();
 
 
     assert( face            != nullptr &&
-            num_load_glyphs >  0 );
+            num_load_glyphs >  0       );
 
     num_glyphs = face->num_glyphs;
 
@@ -44,28 +46,18 @@
       LOG( INFO ) << "using glyph " << ( index + 1 ) << "/" << num_glyphs;
 
       error = FT_Load_Glyph( face.get(), index, load_flags );
+      LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
 
       if ( error != 0 )
-      {
-        LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
         continue; // try the next glyph; it might work better.
-      }
 
-      if ( glyph_has_reasonable_work_size(
-             get_glyph_from_face( face ) ) == false )
+      glyph = get_unique_glyph_from_face( face );
+
+      if ( glyph                                   == nullptr ||
+           glyph_has_reasonable_work_size( glyph ) == false   )
         continue;
 
-      error = FT_Get_Glyph( face->glyph, &raw_glyph );
-
-      if ( error != 0 )
-      {
-        LOG( ERROR ) << "FT_Get_Glyph failed: " << error;
-        continue; // try the next glyph; it might work better.
-      }
-
-      glyph = make_unique_glyph( raw_glyph );
-
-      (void) invoke_visitors_and_iterators( glyph );
+      (void) invoke_visitors_and_iterators( copy_unique_glyph( glyph ) );
     }
 
     WARN_ABOUT_IGNORED_VALUES( num_glyphs, num_load_glyphs, "glyphs" );

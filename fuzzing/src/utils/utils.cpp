@@ -48,39 +48,28 @@
   copy_unique_glyph( const Unique_FT_Glyph&  glyph )
   {
     FT_Error  error;
-
     FT_Glyph  raw_glyph;
 
 
     error = FT_Glyph_Copy( glyph.get(), &raw_glyph );
+    LOG_IF( ERROR, error != 0 ) << "FT_Glyph_Copy failed: " << error;
 
-    if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_Glyph_Copy failed: " << error;
-      return make_unique_glyph();
-    }
-
-    return make_unique_glyph( raw_glyph );
+    return make_unique_glyph( error == 0 ? raw_glyph : nullptr );
   }
 
 
   Unique_FT_Glyph
   fuzzing::
-  get_glyph_from_face( const Unique_FT_Face&  face )
+  get_unique_glyph_from_face( const Unique_FT_Face&  face )
   {
     FT_Error  error;
     FT_Glyph  glyph;
 
 
     error = FT_Get_Glyph( face->glyph, &glyph );
+    LOG_IF( ERROR, error != 0 ) << "FT_Get_Glyph failed: " << error;
 
-    if ( error != 0 )
-    {
-      LOG( INFO ) << "FT_Get_Glyph failed: " << error;
-      return make_unique_glyph();
-    }
-
-    return make_unique_glyph( glyph );
+    return make_unique_glyph( error == 0 ? glyph : nullptr );
   }
 
 

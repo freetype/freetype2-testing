@@ -50,28 +50,6 @@
       decltype( FT_Done_Glyph )*>  Unique_FT_Glyph;
 
 
-    Unique_FT_Face
-    make_unique_face( FT_Face  face=nullptr );
-
-
-    Unique_FT_Glyph
-    make_unique_glyph( FT_Glyph  glyph=nullptr );
-
-
-    // Description:
-    //   Creates a copy of a glyph.
-    //
-    // Input:
-    //   glyph ::
-    //     A glyph that will be copied.
-    //
-    // Return:
-    //   A freshly created copy of the glyph.
-
-    Unique_FT_Glyph
-    copy_unique_glyph( const Unique_FT_Glyph&  glyph );
-
-
     // @Description:
     //   As of today (Summer 2018), `std::make_unique' is still not reliably
     //   available.  This version of `make_unique' helps to bridge the gap
@@ -86,18 +64,45 @@
     }
 
 
+    Unique_FT_Face
+    make_unique_face( FT_Face  face=nullptr );
+
+
+    Unique_FT_Glyph
+    make_unique_glyph( FT_Glyph  glyph=nullptr );
+
+
     // @Description:
-    //    Extract a loaded glyph from the face.
+    //   Creates a copy of a glyph.
+    //
+    // @Input:
+    //   glyph ::
+    //     A glyph that will be copied.
+    //
+    // @Return:
+    //   A freshly created copy of the glyph.
+
+    Unique_FT_Glyph
+    copy_unique_glyph( const Unique_FT_Glyph&  glyph );
+
+
+    // @Description:
+    //   Extract a loaded glyph from the face via `FT_Get_Glyph'.  Mind: This
+    //   can only be done ONCE per loaded face as the new glyph only
+    //   references bitmaps and outlines of the face's glyph slot.  Copy the
+    //   returned glyph immediately and avoid using it directly (unless in
+    //   very special cases).
     //
     // @Input:
     //   face ::
-    //     A face that has a loaded glyph.
+    //     A face that has a loaded glyph in its glyph slot.
     //
     // @Return:
-    //   The last loaded glyph of the input face.
+    //   The last loaded glyph of the input face or `nullptr' if any error
+    //   occurred.
 
     Unique_FT_Glyph
-    get_glyph_from_face( const Unique_FT_Face&  face );
+    get_unique_glyph_from_face( const Unique_FT_Face&  face );
 
 
     // @See: `glyph_has_reasonable_size'.

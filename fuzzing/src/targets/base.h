@@ -68,7 +68,13 @@
   protected:
 
 
-    // @See: FaceLoader::set_data_is_tar_archive()
+    // @See: `FaceLoader::set_supported_font_format()'
+
+    void
+    set_supported_font_format( FaceLoader::FontFormat  format );
+
+
+    // @See: `FaceLoader::set_data_is_tar_archive()'
 
     void
     set_data_is_tar_archive( bool  is_tar_archive );

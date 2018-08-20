@@ -55,6 +55,8 @@ fuzzers=(
     "windowsfnt-render"
 
     "glyphs-outlines"
+
+    "glyphs-bitmaps-pcf"
 )
 
 # This script relies on:

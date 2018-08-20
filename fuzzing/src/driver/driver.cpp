@@ -52,6 +52,7 @@
 #include "targets/font-drivers/windowsfnt-render.h"
 
 #include "targets/glyphs/outlines.h"
+#include "targets/glyphs/bitmaps-pcf.h"
 
 #include "utils/logging.h"
 
@@ -110,6 +111,7 @@
                         "  --windowsfnt\n"                              \
                         "  --windowsfnt-render\n\n"                     \
                         "  --glyphs-outlines\n\n"                       \
+                        "  --glyphs-bitmaps-pcf\n\n"                    \
                         "File:\n\n"                                     \
                         "  The location (path) of an input file.\n" );
   }
@@ -208,6 +210,9 @@
 
     else if ( type_arg == "--glyphs-outlines" )
       (void) ( GlyphsOutlinesFuzzTarget()         ).run( data, size );
+
+    else if ( type_arg == "--glyphs-bitmaps-pcf" )
+      (void) ( GlyphsBitmapsPcfFuzzTarget()       ).run( data, size );
 
     else
       return print_usage();
