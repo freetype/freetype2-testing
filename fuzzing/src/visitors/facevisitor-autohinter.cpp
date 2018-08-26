@@ -72,8 +72,7 @@
       LOG( INFO ) << "testing glyph " << ( index + 1 ) << "/" << num_glyphs;
 
       error = FT_Load_Glyph( face.get(), index, LOAD_FLAGS );
-
-      LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
+      LOG_FT_ERROR( "FT_Load_Glyph", error );
     }
 
     WARN_ABOUT_IGNORED_VALUES( num_glyphs, GLYPH_INDEX_MAX, "glyphs" );

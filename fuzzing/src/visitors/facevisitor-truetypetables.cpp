@@ -53,12 +53,10 @@
     LOG( INFO ) << "load whole font file";
 
     error = FT_Load_Sfnt_Table( face.get(), 0, 0, buffer, &buffer_len );
-
-    LOG_IF( ERROR, error != 0 ) << "FT_Load_Sfnt_Table failed: " << error;
+    LOG_FT_ERROR( "FT_Load_Sfnt_Table", error );
 
     error = FT_Sfnt_Table_Info ( face.get(), 0, nullptr, &num_tables );
-
-    LOG_IF( ERROR, error != 0 ) << "FT_Sfnt_Table_Info failed: " << error;
+    LOG_FT_ERROR( "FT_Sfnt_Table_Info", error );
 
     if ( error == 0 )
     {
@@ -71,9 +69,7 @@
                                     table_index,
                                     &table_tag,
                                     &table_length );
-
-        LOG_IF( ERROR, error != 0 )
-          << "FT_Sfnt_Table_Info failed: " << error;
+        LOG_FT_ERROR( "FT_Sfnt_Table_Info", error );
 
         if ( error != 0 )
           continue;
@@ -96,7 +92,8 @@
           charmap_index < face->num_charmaps;
           charmap_index++ )
     {
-      FT_CharMap map = face->charmaps[charmap_index];
+      FT_CharMap  map = face->charmaps[charmap_index];
+
       
       cmap_language_id = FT_Get_CMap_Language_ID( map );
       cmap_format      = FT_Get_CMap_Format( map );

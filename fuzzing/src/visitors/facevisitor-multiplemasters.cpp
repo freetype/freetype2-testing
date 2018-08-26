@@ -52,30 +52,28 @@
     if ( has_adobe_mm == true )
     {
       error = FT_Get_Multi_Master( face.get(), &master );
-      LOG_IF( ERROR, error != 0 ) << "FT_Get_Multi_Master failed: " << error;
+      LOG_FT_ERROR( "FT_Get_Multi_Master", error );
 
       if ( error == 0 )
       {
         for ( auto i = 0; i < master.num_axis; i++ )
-        {
           coords_mm_design.push_back( ( master.axis[i].minimum +
                                         master.axis[i].maximum ) / 2 );
-        }
 
         LOG( INFO ) << "testing FT_Set_MM_Design_Coordinates";
 
         error = FT_Set_MM_Design_Coordinates( face.get(),
                                               coords_mm_design.size(),
                                               coords_mm_design.data() );
-        LOG_IF( ERROR, error != 0 )
-          << "FT_Set_MM_Design_Coordinates failed: " << error;
+        LOG_FT_ERROR( "FT_Set_MM_Design_Coordinates", error );
       }
     }
 
     error = FT_Get_MM_Var( face.get(), &var );
+    LOG_FT_ERROR( "FT_Get_MM_Var", error );
+
     if ( error != 0 )
     {
-      LOG( ERROR ) << "FT_Get_MM_Var failed: " << error;
       (void) FT_Done_MM_Var( library, var );
       return;
     }
@@ -133,8 +131,8 @@
 
 
       error = FT_Get_Var_Axis_Flags( var, i, &flags );
-      LOG_IF( ERROR, error != 0 )
-        << "FT_Get_Var_Axis_Flags failed: " << error;
+      LOG_FT_ERROR( "FT_Get_Var_Axis_Flags", error );
+
       LOG_IF( INFO, error == 0 )
         << "flags of axis " << ( i + 1 ) << ": " << hex << "0x" << flags;
     }
@@ -143,9 +141,9 @@
     {
       // TODO: extract the name (strid + psid).
       LOG( INFO ) << "setting named instance " << ( i + 1 );
+
       error = FT_Set_Named_Instance( face.get(), i );
-      LOG_IF( ERROR, error != 0 )
-        << "FT_Set_Named_Instance failed: " << error;
+      LOG_FT_ERROR( "FT_Set_Named_Instance", error );
     }
     
     (void) FT_Done_MM_Var( library, var );
@@ -165,6 +163,5 @@
     LOG( INFO ) << "testing " << fn_name;
 
     error = fn( face.get(), coords.size(), coords.data() );
-
-    LOG_IF( ERROR, error != 0 ) << fn_name << " failed: " << error;
+    LOG_FT_ERROR( fn_name, error );
   }

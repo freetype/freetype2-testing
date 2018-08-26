@@ -47,9 +47,7 @@
                                                      &registry,
                                                      &ordering,
                                                      &supplement );
-
-    LOG_IF( ERROR, error != 0 ) <<
-      "FT_Get_CID_Registry_Ordering_Supplement failed: " << error;
+    LOG_FT_ERROR( "FT_Get_CID_Registry_Ordering_Supplement", error );
 
     LOG_IF( INFO, error == 0 ) << "cid r/o/s: "
                                << registry << "/"
@@ -57,9 +55,7 @@
                                << supplement;
 
     error = FT_Get_CID_Is_Internally_CID_Keyed( face.get(), &is_cid );
-    
-    LOG_IF( ERROR, error != 0 ) <<
-      "FT_Get_CID_Is_Internally_CID_Keyed failed: " << error;
+    LOG_FT_ERROR( "FT_Get_CID_Is_Internally_CID_Keyed", error );
 
     LOG_IF( INFO, error == 0 ) << "cid is "
                                << ( is_cid == 0 ? "not " : "" )
@@ -71,12 +67,10 @@
           index++ )
     {
       error = FT_Get_CID_From_Glyph_Index( face.get(), index, &cid );
+      LOG_FT_ERROR( "FT_Get_CID_From_Glyph_Index", error );
 
       if ( error != 0)
-      {
-        LOG( ERROR ) << "FT_Get_CID_From_Glyph_Index failed: " << error;
         break; // we can expect this call to fail again.
-      }
 
       LOG_IF( INFO, error == 0 ) << index << "/" << num_glyphs
                                  << " (glyph index) <-> "

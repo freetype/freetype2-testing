@@ -41,11 +41,10 @@
     library = face->glyph->library;
 
     error = FT_Get_MM_Var( face.get(), &master );
+    LOG_FT_ERROR( "FT_Get_MM_Var", error );
+
     if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_Get_MM_Var failed: " << error;
       return free_and_return( library, master, make_unique_face() );
-    }
 
     // Select arbitrary coordinates:
     for ( auto  i = 0;
@@ -60,11 +59,10 @@
     error = FT_Set_Var_Design_Coordinates( face.get(),
                                            coords.size(),
                                            coords.data() );
+    LOG_FT_ERROR( "FT_Set_Var_Design_Coordinates", error );
+
     if ( error != 0 )
-    {
-      LOG( ERROR) << "FT_Set_Var_Design_Coordinates failed: " << error;
       return free_and_return( library, master, make_unique_face() );
-    }
 
     return free_and_return( library, master, move( face ) );
   }

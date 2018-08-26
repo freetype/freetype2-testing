@@ -55,12 +55,10 @@
         LOG( INFO ) << "load flags: 0x" << hex << mode.first;
 
         error = FT_Load_Glyph( face.get(), index, mode.first );
+        LOG_FT_ERROR( "FT_Load_Glyph", error );
 
         if ( error != 0 )
-        {
-          LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
           continue;
-        }
 
         if ( glyph_has_reasonable_render_size(
                get_unique_glyph_from_face( face ) ) == false )
@@ -69,8 +67,7 @@
         LOG( INFO ) << "render mode: " << mode.second;
 
         error = FT_Render_Glyph( face->glyph, mode.second );
-
-        LOG_IF( ERROR, error != 0 ) << "FT_Render_Glyph failed: " << error;
+        LOG_FT_ERROR( "FT_Render_Glyph", error );
       }
     }
 

@@ -16,6 +16,11 @@
 #define UTILS_LOGGING_H_
 
 
+#include <iomanip>
+
+#include <ft2build.h>
+#include FT_ERRORS_H
+
 #ifdef LOGGER_GLOG
 
 #include <glog/logging.h>
@@ -31,6 +36,12 @@
 #define LOG_IF( a, b ) ; if ( 0 ) std::cout
 
 #endif // LOGGER_GLOG
+
+#define LOG_FT_ERROR( fn_name, error )                    \
+  LOG_IF( ERROR, error != 0 )                             \
+  << fn_name << " failed: "                               \
+  << "0x" << setfill( '0' ) << setw( 2 ) << hex << error  \
+  << " (" << FT_Error_String( error ) << ")"
 
 
 #endif // UTILS_LOGGING_H_

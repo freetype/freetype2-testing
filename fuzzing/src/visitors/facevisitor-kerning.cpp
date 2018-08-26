@@ -59,16 +59,14 @@
                                   right_glyph,
                                   kern_mode,
                                   &kerning );
-
-          LOG_IF( ERROR, error != 0) << "FT_Get_Kerning failed: " << error;
+          LOG_FT_ERROR( "FT_Get_Kerning", error );
 
           error = FT_Get_Kerning( face.get(),
                                   right_glyph,
                                   left_glyph,
                                   kern_mode,
                                   &kerning );
-
-          LOG_IF( ERROR, error != 0) << "FT_Get_Kerning failed: " << error;
+          LOG_FT_ERROR( "FT_Get_Kerning", error );
         }
       }
     }

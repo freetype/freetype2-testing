@@ -73,8 +73,7 @@
           LOG( INFO ) << "load flags: 0x" << hex << flags;
 
           error = FT_Load_Glyph( face.get(), index, flags );
-
-          LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
+          LOG_FT_ERROR( "FT_Load_Glyph", error );
         }
       }
 

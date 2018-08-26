@@ -92,20 +92,20 @@
 
     const char*  face_name;
 
-    FT_Long  num_faces = face_loader->get_num_faces();
-    FT_Long  face_index = 0;
-
-    FT_Long  num_instances = 0;
-    FT_Long  instance_index = 0;
+    FT_Long  num_faces;
+    FT_Long  num_instances;
 
     
-    for ( face_index = 0;
+    assert( face_loader != nullptr );
+
+    num_faces = face_loader->get_num_faces();
+
+    for ( auto  face_index = 0;
           face_index < num_faces &&
             face_index < FACE_INDEX_MAX;
           face_index++ )
     {
       (void) face_loader->set_face_index( face_index );
-      num_instances = face_loader->get_num_instances();
 
       if ( face_loader->load() == nullptr )
       {
@@ -122,7 +122,9 @@
           visitor->run( face_loader->load() );
       }
 
-      for ( instance_index = 0;
+      num_instances = face_loader->get_num_instances();
+
+      for ( auto  instance_index = 0;
             instance_index < num_instances &&
               instance_index < INSTANCE_INDEX_MAX;
             instance_index++ )

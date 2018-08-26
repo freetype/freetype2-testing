@@ -39,11 +39,10 @@
 
     
     error = FT_Init_FreeType( &library );
+    LOG_FT_ERROR( "FT_Init_FreeType", error );
+
     if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_Init_FreeType failed: " << error;
       return;
-    }
 
     (void) FT_Library_Version( library, &major, &minor, &patch );
     LOG( INFO ) << "using FreeType " << major << "." << minor << "." << patch;
@@ -109,7 +108,7 @@
                              property_name.c_str(),
                              value );
 
-    LOG_IF( ERROR, error != 0 ) << "FT_Property_Set failed: " << error;
+    LOG_FT_ERROR( "FT_Property_Set", error );
 
     return error == 0 ? true : false;
   }

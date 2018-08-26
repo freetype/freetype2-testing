@@ -57,8 +57,9 @@
              FT_Matrix*              matrix,
              FT_Vector*              delta )
   {
-    FT_Error  error = FT_Glyph_Transform( glyph.get(), matrix, delta );
-    
+    FT_Error  error;
 
-    LOG_IF( ERROR, error != 0 ) << "FT_Glyph_Transform failed: " << error;
+
+    error = FT_Glyph_Transform( glyph.get(), matrix, delta );
+    LOG_FT_ERROR( "FT_Glyph_Transform", error );
   }

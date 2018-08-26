@@ -76,26 +76,19 @@
     error = FT_Set_Pixel_Sizes( face.get(),
                                 get<0>( char_sizes[index] ),
                                 get<1>( char_sizes[index] ) );
+    LOG_FT_ERROR( "FT_Set_Pixel_Sizes", error );
 
     if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_Set_Pixel_Sizes failed: " << error;
       return make_unique_face();
-    }
 
     error = FT_Set_Char_Size( face.get(),
                               get<2>( char_sizes[index] ),
                               get<3>( char_sizes[index] ),
                               get<4>( char_sizes[index] ),
                               get<5>( char_sizes[index] ) );
+    LOG_FT_ERROR( "FT_Set_Char_Size", error );
 
-    if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_Set_Char_Size failed: " << error;
-      return make_unique_face();
-    }
-
-    return move( face );
+    return error == 0 ? move( face ) : make_unique_face();
   }
 
 

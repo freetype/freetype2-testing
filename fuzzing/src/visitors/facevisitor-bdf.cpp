@@ -45,12 +45,12 @@
       error = FT_Get_BDF_Charset_ID( face.get(),
                                      &charset_encoding,
                                      &charset_registry );
+      LOG_FT_ERROR( "FT_Get_BDF_Charset_ID", error );
 
-      LOG_IF( ERROR, error != 0 )
-        << "FT_Get_BDF_Charset_ID failed: " << error;
-      LOG_IF( INFO, error == 0 )
-        << "BDF charset encoding: " << string( charset_encoding );
-      LOG_IF( INFO, error == 0 )
-        << "BDF charset registry: " << string( charset_registry );
+      if ( error == 0 )
+      {
+        LOG( INFO ) << "BDF charset encoding: " << string( charset_encoding );
+        LOG( INFO ) << "BDF charset registry: " << string( charset_registry );
+      }
     }
   }
