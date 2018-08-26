@@ -52,7 +52,7 @@
 
 
     error = FT_Glyph_Copy( glyph.get(), &raw_glyph );
-    LOG_IF( ERROR, error != 0 ) << "FT_Glyph_Copy failed: " << error;
+    LOG_FT_ERROR( "FT_Glyph_Copy", error );
 
     return make_unique_glyph( error == 0 ? raw_glyph : nullptr );
   }
@@ -67,7 +67,7 @@
 
 
     error = FT_Get_Glyph( face->glyph, &glyph );
-    LOG_IF( ERROR, error != 0 ) << "FT_Get_Glyph failed: " << error;
+    LOG_FT_ERROR( "FT_Get_Glyph", error );
 
     return make_unique_glyph( error == 0 ? glyph : nullptr );
   }

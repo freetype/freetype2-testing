@@ -184,11 +184,10 @@
                                 face_index,
                                 &face );
 
+    LOG_FT_ERROR( "FT_New_Memory_Face", error );
+
     if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_New_Memory_face failed: " << error;
       return make_unique_face();
-    }
 
     // If we have more than a single input file coming from an archive,
     // attach them (starting with the second file) using the order given
@@ -207,9 +206,10 @@
 
 
       error = FT_Attach_Stream( face, &open_args );
+      LOG_FT_ERROR( "FT_Attach_Stream", error );
+
       if ( error != 0 )
       {
-        LOG( ERROR ) << "FT_Attach_Stream failed: " << error;
         (void) FT_Done_Face( face );
         return make_unique_face();
       }

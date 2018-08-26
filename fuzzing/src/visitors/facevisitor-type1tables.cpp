@@ -68,7 +68,7 @@
     else if ( error == FT_Err_Invalid_Argument )
       LOG( INFO ) << "face is not postscript based";
     else
-      LOG( ERROR ) << "FT_Get_PS_Font_Info failed: " << error;
+      LOG_FT_ERROR( "FT_Get_PS_Font_Info", error );
 
     error = FT_Get_PS_Font_Private( face.get(), &private_dict );
     
@@ -77,7 +77,7 @@
     else if ( error == FT_Err_Invalid_Argument )
       LOG( INFO ) << "face is not postscript based";
     else
-      LOG( ERROR ) << "FT_Get_PS_Font_Private failed: " << error;
+      LOG_FT_ERROR( "FT_Get_PS_Font_Private", error );
 
     (void) get_simple( face, PS_DICT_FONT_TYPE,   byte_buffer   );
     (void) get_simple( face, PS_DICT_FONT_MATRIX, fixed_buffer  );

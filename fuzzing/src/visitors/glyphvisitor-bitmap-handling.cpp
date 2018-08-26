@@ -109,7 +109,7 @@
 
 
     error = FT_Bitmap_Copy( library, &source, &target );
-    LOG_IF( ERROR, error != 0 ) << "FT_Bitmap_Copy failed: " << error;
+    LOG_FT_ERROR( "FT_Bitmap_Copy", error );
 
     return error == 0 ? true : false;
   }
@@ -128,7 +128,7 @@
     LOG( INFO ) << "embolden bitmap: " << xStrength << " x " << yStrength;
 
     error = FT_Bitmap_Embolden( library, &bitmap, xStrength, yStrength );
-    LOG_IF( ERROR, error != 0 ) << "FT_Bitmap_Embolden failed: " << error;
+    LOG_FT_ERROR( "FT_Bitmap_Embolden", error );
   }
 
 
@@ -156,8 +156,7 @@
                              &target,
                              &target_offset,
                              COLOUR_PINK );
-
-    LOG_IF( ERROR, error != 0 ) << "FT_Bitmap_Blend failed: " << error;
+    LOG_FT_ERROR( "FT_Bitmap_Blend", error );
   }
 
     
@@ -176,6 +175,5 @@
                                &( (FT_BitmapGlyph)glyph.get() )->bitmap,
                                &bitmap,
                                alignment );
-
-    LOG_IF( ERROR, error != 0 ) << "FT_Bitmap_Convert failed: " << error;
+    LOG_FT_ERROR( "FT_Bitmap_Convert", error );
   }

@@ -14,6 +14,8 @@
 
 #include "iterators/faceprepiterator-bitmaps.h"
 
+#include <cassert>
+
 #include "utils/logging.h"
 
 
@@ -21,10 +23,13 @@
   FacePrepIteratorBitmaps::
   run( const unique_ptr<FaceLoader>&  face_loader )
   {
-    Unique_FT_Face  face = face_loader->load();
+    Unique_FT_Face  face = make_unique_face();
+    FT_Int          num_strikes;
 
-    FT_Int  num_strikes = face->num_fixed_sizes;
 
+    assert( face_loader != nullptr );
+
+    face = face_loader->load();
 
     if ( face == nullptr )
     {
@@ -35,7 +40,9 @@
     if ( face->style_flags >> 16 != 0 )
       return;
     
-    for ( auto index = 0;
+    num_strikes = face->num_fixed_sizes;
+
+    for ( auto  index = 0;
           index < num_strikes &&
             index < STRIKE_INDEX_MAX;
           index++ )
@@ -74,12 +81,7 @@
     }
 
     error = FT_Select_Size( face.get(), index );
+    LOG_FT_ERROR( "FT_Select_Size", error );
     
-    if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_Select_Size failed: " << error;
-      return make_unique_face();
-    }
-
-    return move( face );
+    return error == 0 ? move( face ) : make_unique_face();
   }

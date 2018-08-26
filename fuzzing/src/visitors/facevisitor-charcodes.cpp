@@ -78,8 +78,7 @@
 
 
       error = FT_Set_Charmap ( face.get(), charmap );
-
-      LOG_IF( ERROR, error != 0 ) << "FT_Set_Charmap failed: " << error;
+      LOG_FT_ERROR( "FT_Set_Charmap", error );
 
       if ( error != 0 )
         continue;
@@ -88,9 +87,7 @@
                   << ( charmap_index + 1 ) << "/" << num_charmaps;
 
       if ( FT_Get_Charmap_Index( charmap ) != charmap_index )
-      {
         LOG( ERROR ) << "FT_Get_Charmap_Index failed";
-      }
 
       (void) slide_along( face );
     }
@@ -136,7 +133,7 @@
       // `FT_Load_Char' a few times.
 
       error = FT_Load_Char( face.get(), char_code, FT_LOAD_DEFAULT );
-      LOG_IF( ERROR, error != 0) << "FT_Load_Char failed: " << error;
+      LOG_FT_ERROR( "FT_Load_Char", error );
 
       if ( FT_HAS_GLYPH_NAMES( face.get() ) != 1 )
         LOG( INFO ) << "char code: " << char_code << ", "
@@ -147,8 +144,7 @@
                                    glyph_index,
                                    (void*) glyph_name,
                                    glyph_name_length );
-
-        LOG_IF( ERROR, error != 0 ) << "FT_Get_Glyph_Name failed: " << error;
+        LOG_FT_ERROR( "FT_Get_Glyph_Name", error );
 
         if ( error != 0 )
           continue;

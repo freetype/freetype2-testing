@@ -33,7 +33,7 @@
     assert( face != nullptr );
 
     error = FT_Get_WinFNT_Header( face.get(), &header );
-    
-    LOG_IF( ERROR, error != 0 ) << "FT_Get_WinFNT_Header failed: " << error;
+    LOG_FT_ERROR( "FT_Get_WinFNT_Header", error );
+
     LOG_IF( INFO, error == 0) << "retrieved Windows FNT font info header";
   }

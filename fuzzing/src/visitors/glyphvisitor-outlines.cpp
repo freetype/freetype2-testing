@@ -51,29 +51,24 @@
                             glyph_outline->n_points,
                             glyph_outline->n_contours,
                             &outline );
+    LOG_FT_ERROR( "FT_Outline_New", error );
 
     if ( error != 0 )
-    {
-      LOG( ERROR ) << "FT_Outline_New failed: " << error;
       return;
-    }
 
     for ( auto  fn : callbacks )
     {
       error = FT_Outline_Copy( glyph_outline, &outline );
+      LOG_FT_ERROR( "FT_Outline_Copy", error );
 
       if ( error != 0 )
-      {
-        LOG( ERROR ) << "FT_Outline_Copy failed: " << error;
         continue;
-      }
 
       (void) fn( outline );
     }
 
     error = FT_Outline_Done( glyph->library, &outline );
-
-    LOG_IF( ERROR, error != 0 ) << "FT_Outline_Done failed: " << error;
+    LOG_FT_ERROR( "FT_Outline_Done", error );
   }
 
 
@@ -98,8 +93,7 @@
     LOG( INFO ) << "embolden outline by " << strength;
 
     error = FT_Outline_Embolden( &outline, strength );
-
-    LOG_IF( ERROR, error != 0 ) << "FT_Outline_Embolden failed: " << error;
+    LOG_FT_ERROR( "FT_Outline_Embolden", error );
   }
 
 
@@ -116,8 +110,7 @@
                 << xstrength << " x " << ystrength;
 
     error = FT_Outline_EmboldenXY( &outline, xstrength, ystrength );
-
-    LOG_IF( ERROR, error != 0 ) << "FT_Outline_EmboldenXY failed: " << error;
+    LOG_FT_ERROR( "FT_Outline_EmboldenXY", error );
   }
 
 

@@ -43,10 +43,10 @@
           index++ )
     {
       error = FT_Get_Sfnt_Name( face.get(), index, &sfnt_name );
+      LOG_FT_ERROR( "FT_Get_Sfnt_Name", error );
 
       if ( error != 0 )
       {
-        LOG( ERROR ) << "FT_Get_Sfnt_Name failed: " << error;
         continue;
       }
 
@@ -70,8 +70,8 @@
       error = FT_Get_Sfnt_LangTag( face.get(),
                                    sfnt_name.language_id,
                                    &sfnt_lang );
+      LOG_FT_ERROR( "FT_Get_Sfnt_LangTag", error );
 
-      LOG_IF( ERROR, error != 0 ) << "FT_Get_Sfnt_LangTag failed: " << error;
       LOG_IF( INFO, error == 0 )
         << "sfnt lang tag "
         << ( index + 1 ) << "/" << num_sfnt_names << ": "

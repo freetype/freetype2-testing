@@ -46,7 +46,7 @@
       LOG( INFO ) << "using glyph " << ( index + 1 ) << "/" << num_glyphs;
 
       error = FT_Load_Glyph( face.get(), index, load_flags );
-      LOG_IF( ERROR, error != 0 ) << "FT_Load_Glyph failed: " << error;
+      LOG_FT_ERROR( "FT_Load_Glyph", error );
 
       if ( error != 0 )
         continue; // try the next glyph; it might work better.

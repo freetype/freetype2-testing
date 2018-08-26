@@ -44,7 +44,6 @@
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
-
     FT_Fixed  kerning;
 
 
@@ -61,9 +60,8 @@
                                       point_size,
                                       degree,
                                       &kerning );
+        LOG_FT_ERROR( "FT_Get_Track_Kerning", error );
 
-        LOG_IF( ERROR, error != 0 )
-          << "FT_Get_Track_Kerning failed: " << error;
         LOG_IF( INFO, error == 0)
           << "track kerning of "
           << point_size << "/" << degree << ": " << kerning;

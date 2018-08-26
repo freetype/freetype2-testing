@@ -47,12 +47,10 @@
       LOG( INFO ) << "testing glyph " << ( index + 1 ) << "/" << num_glyphs;
 
       error = FT_Load_Glyph( face.get(), index, LOAD_FLAGS );
+      LOG_FT_ERROR( "FT_Load_Glyph", error );
 
       if ( error != 0 )
-      {
-        LOG( ERROR ) << "FT_Load_Glyph failed: " << error;
         continue;
-      }
 
       if ( face->glyph->format != FT_GLYPH_FORMAT_COMPOSITE )
       {
@@ -74,9 +72,8 @@
                                       &sg_arg1,
                                       &sg_arg2,
                                       &sg_transform );
+        LOG_FT_ERROR( "FT_Get_SubGlyph_Info", error );
 
-        LOG_IF( ERROR, error != 0 )
-                        << "FT_Get_SubGlyph_Info failed: " << error;
         LOG_IF( INFO, error == 0 )
           << "subglyph " << ( sub_index + 1 ) << "/" << num_subglyphs << ": "
           << "glyph #" << sg_index << ", "
