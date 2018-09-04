@@ -4,14 +4,14 @@ index 18dc4669..3491225a 100644
 +++ b/include/freetype/config/ftoption.h
 @@ -503,7 +503,7 @@ FT_BEGIN_HEADER
     *
-    *   More details can be found in the file fterrors.h.
+    *   More details can be found in the file `fterrors.h`.
     */
 -/* #define FT_CONFIG_OPTION_ERROR_STRINGS */
 +#define FT_CONFIG_OPTION_ERROR_STRINGS
  
  
    /*************************************************************************/
-@@ -656,8 +656,8 @@ FT_BEGIN_HEADER
+@@ -658,8 +658,8 @@ FT_BEGIN_HEADER
     * https://www.microsoft.com/typography/cleartype/truetypecleartype.aspx
     */
  /* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  1         */
@@ -22,17 +22,17 @@ index 18dc4669..3491225a 100644
  
  
    /**************************************************************************
-@@ -774,7 +774,7 @@ FT_BEGIN_HEADER
-    * between the two engines using the 'hinting-engine' property of the type1
-    * driver module.
+@@ -778,7 +778,7 @@ FT_BEGIN_HEADER
+    * switch between the two engines using the `hinting-engine` property of
+    * the 'type1' driver module.
     */
 -/* #define T1_CONFIG_OPTION_OLD_ENGINE */
 +#define T1_CONFIG_OPTION_OLD_ENGINE
  
  
    /*************************************************************************/
-@@ -816,7 +816,7 @@ FT_BEGIN_HEADER
-    * between the two engines using the 'hinting-engine' property of the cff
+@@ -820,7 +820,7 @@ FT_BEGIN_HEADER
+    * between the two engines using the `hinting-engine` property of the 'cff'
     * driver module.
     */
 -/* #define CFF_CONFIG_OPTION_OLD_ENGINE */
