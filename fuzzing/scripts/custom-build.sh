@@ -90,6 +90,7 @@ build_ubsan=     # y|n
 build_coverage=  # y|n
 build_debugging= # 0|1|2|3|n
 build_ft_trace=  # y|n
+build_ccache=    # y|n
 
 cflags="${CFLAGS}"
 cxxflags="${CXXFLAGS} -std=c++11"
@@ -336,7 +337,7 @@ else
     print_info "yes" "activate 'FT_DEBUG_LEVEL_{TRACE,ERROR}' and 'FT_DEBUG_MEMORY'"
     print_nl
 
-    build_ft_trace=$(ask_user "y|n" "n")
+    build_ft_trace=$( ask_user "y|n" "n" )
     print_sel_yes_no "${build_ft_trace}"
 fi
 
@@ -347,13 +348,32 @@ if [[ "${build_ft_trace}" == "y" ]]; then
     driver_name="${driver_name}-fttrace"
 fi
 
+if ! command -v "ccache" >"/dev/null"; then
+    build_ccache="n"
+else
+    print_q    "Use ccache?"
+    print_info "ccache seems to be available on this system"
+    print_nl
+
+    build_ccache=$( ask_user "y|n" "y" )
+    print_sel_yes_no "${build_ccache}"
+fi
+
 print_nl
 
 # ----------------------------------------------------------------------------
 # export flags and build everything:
 
-export CC="clang"
-export CXX="clang++"
+cc="clang"
+cxx="clang++"
+
+if [[ "${build_ccache}" == "y" ]]; then
+    cc="ccache ${cc}"
+    cxx="ccache ${cxx}"
+fi
+
+export CC="${cc}"
+export CXX="${cxx}"
 
 export CFLAGS="${cflags}"
 export CXXFLAGS="${cxxflags}"
@@ -362,11 +382,11 @@ export LDFLAGS="${ldflags}"
 export CMAKE_DRIVER_EXE_NAME="${driver_name}"
 
 if [[ "${build_glog}" == "y" ]]; then
-    bash build/glog.sh
+    bash "build/glog.sh"
 fi
 
-bash build/libarchive.sh
-bash build/freetype.sh
-bash build/targets.sh
+bash "build/libarchive.sh"
+bash "build/freetype.sh"
+bash "build/targets.sh"
 
 cd "${dir}"
