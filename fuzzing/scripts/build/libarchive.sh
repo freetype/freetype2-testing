@@ -68,5 +68,4 @@ if [[ -f "Makefile" ]]; then
     make -j$( nproc )
 fi
 
-
 cd "${dir}"
