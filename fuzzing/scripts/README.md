@@ -32,8 +32,9 @@ stakeholders:
        fuzzers through OSS-Fuzz's infrastructure tools to confirm that the
        build process works as expected.
 
-- **Developers** usually want to use [`custom-build.sh`](custom-build.sh).
-  See [Debugging the Fuzz Targets](#debugging-the-fuzz-targets) for details.
+- **Developers** usually want to use [`custom-build.sh`](custom-build.sh) or
+  [`cleanup.sh`](cleanup.sh).  See [Debugging the Fuzz
+  Targets](#debugging-the-fuzz-targets) for details.
 
 # Debugging the Fuzz Targets
 
@@ -102,7 +103,7 @@ test target:
 
 ```
 $ cd /external/freetype2
-$ git diff > ~/my.patch
+$ git diff >~/my.patch
 ```
 
 Once a bug is fixed, this patch can be applied to a writable copy of

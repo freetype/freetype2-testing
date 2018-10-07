@@ -92,6 +92,9 @@ build_debugging= # 0|1|2|3|n
 build_ft_trace=  # y|n
 build_ccache=    # y|n
 
+cc="clang"
+cxx="clang++"
+
 cflags="${CFLAGS}"
 cxxflags="${CXXFLAGS} -std=c++11"
 ldflags="${LDFLAGS}"
@@ -359,18 +362,17 @@ else
     print_sel_yes_no "${build_ccache}"
 fi
 
+if [[ "${build_ccache}" == "y" ]]; then
+    cc="ccache ${cc}"
+    cxx="ccache ${cxx}"
+
+    driver_name="${driver_name}-ccache"
+fi
+
 print_nl
 
 # ----------------------------------------------------------------------------
 # export flags and build everything:
-
-cc="clang"
-cxx="clang++"
-
-if [[ "${build_ccache}" == "y" ]]; then
-    cc="ccache ${cc}"
-    cxx="ccache ${cxx}"
-fi
 
 export CC="${cc}"
 export CXX="${cxx}"
