@@ -157,5 +157,9 @@
     //   In addition, limit the width and height since at least the width
     //   has a big influence on the performance.
 
-    return glyph_has_reasonable_size( glyph, 2500 * 2500, 10000, 10000 );
+    // November 2018:
+    //   The heights have to be restricted even further; see
+    //   https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=9930.
+
+    return glyph_has_reasonable_size( glyph, 2500 * 2500, 10000, 5000 );
   }
