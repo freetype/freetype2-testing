@@ -1,5 +1,5 @@
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
-[![Build Status](https://travis-ci.org/freetype/freetype2-testing.svg?branch=master)](https://travis-ci.org/freetype/freetype2-testing)
+[![Build Status](https://travis-ci.com/freetype/freetype2-testing.svg?branch=master)](https://travis-ci.com/freetype/freetype2-testing)
 
 # FreeType
 
@@ -13,7 +13,7 @@ The **Fuzzing subproject** has two main purposes:
 
 - **[OSS-Fuzz](https://github.com/google/oss-fuzz)**:
   Provide the source code and build scripts for OSS Fuzz's fuzzers.
-- **[Travis CI](https://travis-ci.org/freetype/freetype2-testing)**:
+- **[Travis CI](https://travis-ci.com/freetype/freetype2-testing)**:
   Provide settings, source code, and build scripts for the regression test suite.
 
 ## Structure
