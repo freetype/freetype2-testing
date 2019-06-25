@@ -2,7 +2,7 @@
 //
 //   Fuzz target for glyph bitmaps.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,11 +16,11 @@
 #define TARGETS_GLYPHS_BITMAPS_H_
 
 
-#include "targets/base.h"
+#include "targets/FaceFuzzTarget.h"
 
 
   class GlyphsBitmapsFuzzTarget
-  : public FuzzTarget
+    : public FaceFuzzTarget
   {
   public:
 

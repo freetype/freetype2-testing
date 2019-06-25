@@ -373,3 +373,28 @@ https://www.freetype.org/freetype2/docs/reference/ft2-bitmap_handling.html
 | 23.1.5 | `FT_Bitmap_Blend`         | :wavy_dash:        | Library <br> Bitmap |
 | 23.1.6 | `FT_GlyphSlot_Own_Bitmap` |                    | Glyph Slot          |
 | 23.1.7 | `FT_Bitmap_Done`          | :heavy_check_mark: | Library <br> Bitmap |
+
+### GZIP Streams
+
+https://www.freetype.org/freetype2/docs/reference/ft2-gzip.html
+
+|        | Function             | Fuzzed             |
+| ------ | -------------------- | :----------------: |
+| 28.1.1 | `FT_Stream_OpenGzip` | :heavy_check_mark: |
+| 28.1.2 | `FT_Gzip_Uncompress` |                    |
+
+### LZW Streams
+
+https://www.freetype.org/freetype2/docs/reference/ft2-lzw.html
+
+|        | Function            | Fuzzed             |
+| ------ | ------------------- | :----------------: |
+| 29.1.1 | `FT_Stream_OpenLZW` | :heavy_check_mark: |
+
+### BZIP2 Streams
+
+https://www.freetype.org/freetype2/docs/reference/ft2-bzip2.html
+
+|        | Function              | Fuzzed             |
+| ------ | --------------------- | :----------------: |
+| 30.1.1 | `FT_Stream_OpenBzip2` | :heavy_check_mark: |

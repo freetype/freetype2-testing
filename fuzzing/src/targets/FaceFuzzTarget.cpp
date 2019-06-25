@@ -1,8 +1,8 @@
-// base.cpp
+// FaceFuzzTarget.cpp
 //
-//   Implementation of FontDriverFuzzTarget.
+//   Implementation of FaceFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -12,53 +12,25 @@
 // understand and accept it fully.
 
 
-#include "targets/base.h"
+#include "targets/FaceFuzzTarget.h"
 
 #include <cassert>
-#include <iostream>
 
-#include <ft2build.h>
 #include FT_AUTOHINTER_H
 #include FT_MODULE_H
 
 #include "utils/logging.h"
 
 
-  const FT_UInt  FuzzTarget::HINTING_ADOBE    = FT_HINTING_ADOBE;
-  const FT_UInt  FuzzTarget::HINTING_FREETYPE = FT_HINTING_FREETYPE;
+  const FT_UInt
+  FaceFuzzTarget::HINTING_ADOBE    = FT_HINTING_ADOBE;
 
-
-  FuzzTarget::
-  FuzzTarget( void )
-  {
-    FT_Error  error;
-
-    FT_Int  major;
-    FT_Int  minor;
-    FT_Int  patch;
-
-    
-    error = FT_Init_FreeType( &library );
-    LOG_FT_ERROR( "FT_Init_FreeType", error );
-
-    if ( error != 0 )
-      return;
-
-    (void) FT_Library_Version( library, &major, &minor, &patch );
-    LOG( INFO ) << "using FreeType " << major << "." << minor << "." << patch;
-  }
-
-
-  FuzzTarget::
-  ~FuzzTarget( void )
-  {
-    (void) FT_Done_FreeType( library );
-    library = nullptr;
-  }
+  const FT_UInt
+  FaceFuzzTarget::HINTING_FREETYPE = FT_HINTING_FREETYPE;
 
 
   void
-  FuzzTarget::
+  FaceFuzzTarget::
   run( const uint8_t*  data,
        size_t          size )
   {
@@ -67,14 +39,14 @@
 
     assert( face_load_iterator != nullptr );
 
-    (void) face_load_iterator->set_library( library );
+    (void) face_load_iterator->set_library( get_ft_library() );
     (void) face_load_iterator->set_raw_bytes( data, size );
     (void) face_load_iterator->run();
   }
 
 
   void
-  FuzzTarget::
+  FaceFuzzTarget::
   set_supported_font_format( FaceLoader::FontFormat  format )
   {
     assert( face_load_iterator != nullptr );
@@ -83,7 +55,7 @@
 
 
   void
-  FuzzTarget::
+  FaceFuzzTarget::
   set_data_is_tar_archive( bool  is_tar_archive )
   {
     assert( face_load_iterator != nullptr );
@@ -92,7 +64,7 @@
 
 
   bool
-  FuzzTarget::
+  FaceFuzzTarget::
   set_property( const string  module_name,
                 const string  property_name,
                 const void*   value )
@@ -103,7 +75,7 @@
     LOG( INFO ) << "setting '" << property_name
                 << "' in '"   << module_name << "'";
 
-    error = FT_Property_Set( library,
+    error = FT_Property_Set( get_ft_library(),
                              module_name.c_str(),
                              property_name.c_str(),
                              value );
@@ -115,7 +87,7 @@
 
 
   unique_ptr<FaceLoadIterator>&
-  FuzzTarget::
+  FaceFuzzTarget::
   set_iterator( unique_ptr<FaceLoadIterator>  iterator )
   {
     face_load_iterator = move( iterator );

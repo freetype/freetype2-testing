@@ -1,8 +1,8 @@
-// base.h
+// FaceFuzzTarget.h
 //
-//   Base class of fuzz targets.
+//   Base class of face fuzz targets.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -12,11 +12,10 @@
 // understand and accept it fully.
 
 
-#ifndef TARGETS_BASE_H_
-#define TARGETS_BASE_H_
+#ifndef TARGETS_FACEFUZZTARGET_H_
+#define TARGETS_FACEFUZZTARGET_H_
 
 
-#include <cstdint>
 #include <functional>
 #include <string>
 
@@ -26,6 +25,7 @@
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator.h"
 #include "iterators/glyphloaditerator.h"
+#include "targets/FuzzTarget.h"
 #include "utils/faceloader.h"
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
@@ -34,20 +34,10 @@
   using namespace std;
 
 
-  class FuzzTarget
+  class FaceFuzzTarget
+    : public freetype::FuzzTarget
   {
   public:
-
-
-    FuzzTarget( void );
-
-
-    FuzzTarget( const FuzzTarget& ) = delete;
-    FuzzTarget& operator= ( const FuzzTarget& ) = delete;
-
-
-    virtual
-    ~FuzzTarget( void );
 
 
     // @Description:
@@ -60,12 +50,15 @@
     //   size ::
     //     The size of fuzzed input data.
 
-    virtual void
+    void
     run( const uint8_t*  data,
-         size_t          size );
+         size_t          size ) override;
 
 
   protected:
+
+
+    FaceFuzzTarget() = default;
 
 
     // @See: `FaceLoader::set_supported_font_format()'
@@ -127,10 +120,8 @@
   private:
 
 
-    FT_Library  library;
-
     unique_ptr<FaceLoadIterator>  face_load_iterator;
   };
 
 
-#endif // TARGETS_BASE_H_
+#endif // TARGETS_FACEFUZZTARGET_H_

@@ -1,6 +1,6 @@
 # CMakeLists.txt
 #
-# Copyright 2018 by
+# Copyright 2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -44,7 +44,8 @@ foreach(fuzz_target_index RANGE "${num_fuzz_targets}")
   target_link_libraries("${exe}"
     PRIVATE
     "${LIBARCHIVE_STATIC_LIBRARY}"
-    "${FREETYPE_STATIC_LIBRARY}")
+    "${FREETYPE_STATIC_LIBRARY}"
+    "${BZIP2_STATIC_LIBRARY}")
 
   # `-fsanitize=fuzzer' or `-lFuzzingEngine' cannot be set earlier since CMake
   # defines a main function when testing the compiler.  Clang (obviously)

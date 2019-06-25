@@ -2,7 +2,7 @@
 //
 //   Fuzz target for rendering TrueType faces.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,11 +19,11 @@
 #include <ft2build.h>
 #include FT_DRIVER_H
 
-#include "targets/base.h"
+#include "targets/FaceFuzzTarget.h"
 
 
   class TrueTypeRenderFuzzTarget
-  : public FuzzTarget
+    : public FaceFuzzTarget
   {
   public:
 
@@ -33,7 +33,7 @@
 
   protected:
 
-    
+
     // We need variables holding the enum values to feed them to
     // `FT_Property_Set':
 

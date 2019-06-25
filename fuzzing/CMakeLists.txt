@@ -15,7 +15,7 @@
 #   CMAKE_USE_LOGGER_GLOG
 #     (optional) If set and `1', glog will be linked.
 #
-# Copyright 2018 by
+# Copyright 2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -60,6 +60,9 @@ set(GLOG_STATIC_LIBRARY "${GLOG_BUILD_DIR}/libglog.a")
 set(LIBARCHIVE_BASE_DIR       "${SUBMODULES_DIR}/libarchive")
 set(LIBARCHIVE_SRC_DIR        "${LIBARCHIVE_BASE_DIR}/src")
 set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
+
+set(BZIP2_BASE_DIR       "${SUBMODULES_DIR}/bzip2")
+set(BZIP2_STATIC_LIBRARY "${BZIP2_BASE_DIR}/libbz2.a")
 
 # ----------------------------------------------------------------------------
 # functions:
@@ -209,6 +212,19 @@ add_fuzz_target(
   "glyphs-outlines"
   "GlyphsOutlinesFuzzTarget"
   "targets/glyphs/outlines.h")
+
+add_fuzz_target(
+  "gzip"
+  "freetype::GzipFuzzTarget"
+  "targets/support/GzipFuzzTarget.h")
+add_fuzz_target(
+  "lzw"
+  "freetype::LzwFuzzTarget"
+  "targets/support/LzwFuzzTarget.h")
+add_fuzz_target(
+  "bzip2"
+  "freetype::Bzip2FuzzTarget"
+  "targets/support/Bzip2FuzzTarget.h")
 
 # ----------------------------------------------------------------------------
 # environment options:

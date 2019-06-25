@@ -1,7 +1,7 @@
 #!/bin/bash
-set -euxo pipefail
+set -exo pipefail
 
-# Copyright 2018 by
+# Copyright 2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -35,6 +35,9 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
     sh autogen.sh
 
+    export BZIP2_CFLAGS="-I../bzip2"
+    export BZIP2_LIBS="-l../bzip2/libbz2.a"
+
     # Having additional libraries is pain since they have to be linked
     # statically for OSS-Fuzz.  Should additional libraries be required, they
     # have to be linked properly in `fuzzing/src/fuzzers/CMakeLists.txt'.
@@ -42,7 +45,7 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     sh configure          \
        --enable-static    \
        --disable-shared   \
-       --without-bzip2    \
+       --with-bzip2       \
        --without-harfbuzz \
        --without-png      \
        --without-zlib

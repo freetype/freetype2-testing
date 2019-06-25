@@ -2,7 +2,7 @@
 //
 //   Switch between different loggers and/or compile them out completely.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -37,10 +37,10 @@
 
 #endif // LOGGER_GLOG
 
-#define LOG_FT_ERROR( fn_name, error )                    \
-  LOG_IF( ERROR, error != 0 )                             \
-  << fn_name << " failed: "                               \
-  << "0x" << setfill( '0' ) << setw( 2 ) << hex << error  \
+#define LOG_FT_ERROR( fn_name, error )                                  \
+  LOG_IF( ERROR, error != 0 )                                           \
+  << fn_name << " failed: "                                             \
+  << "0x" << std::setfill( '0' ) << std::setw( 2 ) << std::hex << error \
   << " (" << FT_Error_String( error ) << ")"
 
 

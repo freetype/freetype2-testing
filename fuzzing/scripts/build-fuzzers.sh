@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-# Copyright 2018 by
+# Copyright 2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -22,6 +22,7 @@ cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts'
 # `fuzzing/src/fuzzing/CMakeLists.txt' for details.
 
 bash build/libarchive.sh
+bash build/bzip2.sh
 bash build/freetype.sh
 bash build/targets.sh
 

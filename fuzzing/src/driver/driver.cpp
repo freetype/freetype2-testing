@@ -2,7 +2,7 @@
 //
 //   Entry point of the test driver.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -53,6 +53,10 @@
 
 #include "targets/glyphs/outlines.h"
 #include "targets/glyphs/bitmaps-pcf.h"
+
+#include "targets/support/Bzip2FuzzTarget.h"
+#include "targets/support/GzipFuzzTarget.h"
+#include "targets/support/LzwFuzzTarget.h"
 
 #include "utils/logging.h"
 
@@ -112,6 +116,9 @@
                         "  --windowsfnt-render\n\n"                     \
                         "  --glyphs-outlines\n\n"                       \
                         "  --glyphs-bitmaps-pcf\n\n"                    \
+                        "  --gzip\n"                                    \
+                        "  --lzw\n"                                     \
+                        "  --bzip2\n\n"                                 \
                         "File:\n\n"                                     \
                         "  The location (path) of an input file.\n" );
   }
@@ -213,6 +220,13 @@
 
     else if ( type_arg == "--glyphs-bitmaps-pcf" )
       (void) ( GlyphsBitmapsPcfFuzzTarget()       ).run( data, size );
+
+    else if ( type_arg == "--gzip" )
+      (void) ( freetype::GzipFuzzTarget()         ).run( data, size );
+    else if ( type_arg == "--lzw" )
+      (void) ( freetype::LzwFuzzTarget()          ).run( data, size );
+    else if ( type_arg == "--bzip2" )
+      (void) ( freetype::Bzip2FuzzTarget()        ).run( data, size );
 
     else
       return print_usage();
