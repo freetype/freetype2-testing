@@ -10,3 +10,6 @@
   path = external/libarchive
   url = https://github.com/libarchive/libarchive.git
   branch = master
+[submodule "external/bzip2"]
+	path = external/bzip2
+	url = git://sourceware.org/git/bzip2.git

@@ -57,6 +57,10 @@ fuzzers=(
     "glyphs-outlines"
 
     "glyphs-bitmaps-pcf"
+
+    "gzip"
+    "lzw"
+    "bzip2"
 )
 
 # This script relies on:

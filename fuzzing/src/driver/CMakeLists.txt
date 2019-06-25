@@ -1,6 +1,6 @@
 # CMakeLists.txt
 #
-# Copyright 2018 by
+# Copyright 2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -19,7 +19,8 @@ target_link_libraries(driver
   PRIVATE
   "${LIBARCHIVE_STATIC_LIBRARY}"
   fuzztargets
-  "${FREETYPE_STATIC_LIBRARY}")
+  "${FREETYPE_STATIC_LIBRARY}"
+  "${BZIP2_STATIC_LIBRARY}")
 
 if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")
   target_compile_definitions(driver PRIVATE "LOGGER_GLOG")

@@ -1,6 +1,6 @@
 # CMakeLists.txt
 #
-# Copyright 2018 by
+# Copyright 2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -21,7 +21,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/iterators/glyphloaditerator-naive.cpp"
   "${FUZZING_SRC_DIR}/iterators/glyphrenderiterator-allmodes.cpp"
 
-  "${FUZZING_SRC_DIR}/targets/base.cpp"
+  "${FUZZING_SRC_DIR}/targets/FaceFuzzTarget.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/bdf.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/bdf-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/cff.cpp"
@@ -48,11 +48,16 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/targets/font-drivers/type42-render.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/windowsfnt-render.cpp"
+  "${FUZZING_SRC_DIR}/targets/FuzzTarget.cpp"
   "${FUZZING_SRC_DIR}/targets/glyphs/outlines.cpp"
   "${FUZZING_SRC_DIR}/targets/glyphs/bitmaps.cpp"
   "${FUZZING_SRC_DIR}/targets/glyphs/bitmaps-pcf.cpp"
+  "${FUZZING_SRC_DIR}/targets/support/Bzip2FuzzTarget.cpp"
+  "${FUZZING_SRC_DIR}/targets/support/GzipFuzzTarget.cpp"
+  "${FUZZING_SRC_DIR}/targets/support/LzwFuzzTarget.cpp"
 
   "${FUZZING_SRC_DIR}/utils/faceloader.cpp"
+  "${FUZZING_SRC_DIR}/utils/FreeTypeStream.cpp"
   "${FUZZING_SRC_DIR}/utils/tarreader.cpp"
   "${FUZZING_SRC_DIR}/utils/utils.cpp"
 

@@ -2,7 +2,7 @@
 //
 //   Render TrueType faces using interpreter version 35.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,7 +20,7 @@
 
 
   class TrueTypeRenderI35FuzzTarget
-  : public TrueTypeRenderFuzzTarget
+    : public TrueTypeRenderFuzzTarget
   {
   public:
 

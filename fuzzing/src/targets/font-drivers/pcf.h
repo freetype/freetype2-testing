@@ -2,7 +2,7 @@
 //
 //   Fuzz PCF faces.
 //
-// Copyright 2018 by
+// Copyright 2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,11 +16,11 @@
 #define TARGETS_FONT_DRIVERS_PCF_H_
 
 
-#include "targets/base.h"
+#include "targets/FaceFuzzTarget.h"
 
 
   class PcfFuzzTarget
-  : public FuzzTarget
+    : public FaceFuzzTarget
   {
   public:
 
