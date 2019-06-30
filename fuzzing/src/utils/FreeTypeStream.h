@@ -71,7 +71,7 @@ namespace freetype {
   private:
 
 
-    FT_StreamRec  stream;
+    FT_StreamRec  stream = {};
   };
 }
 
