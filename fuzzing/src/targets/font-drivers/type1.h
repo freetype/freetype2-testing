@@ -2,7 +2,7 @@
 //
 //   Fuzz Type 1 faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class Type1FuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    Type1FuzzTarget( void );
+    Type1FuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TYPE_1_H_

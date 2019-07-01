@@ -8,7 +8,7 @@
 //     - TrueType
 //     - Type 1
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,6 +22,7 @@
 #define VISITORS_FACE_VISITOR_MULTIPLE_MASTERS_H_
 
 
+#include <string>
 #include <vector>
 
 #include <ft2build.h>
@@ -32,11 +33,11 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorMultipleMasters
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
 
@@ -51,16 +52,6 @@
     //     Set the format.
 
     FaceVisitorMultipleMasters( FaceLoader::FontFormat  format );
-
-
-    FaceVisitorMultipleMasters(
-      const FaceVisitorMultipleMasters& ) = delete;
-    FaceVisitorMultipleMasters& operator= (
-      const FaceVisitorMultipleMasters& ) = delete;
-
-
-    virtual
-    ~FaceVisitorMultipleMasters( void ) {}
 
 
     void
@@ -91,10 +82,11 @@
 
     void
     test_coords( Unique_FT_Face&                             face,
-                 vector<FT_Fixed>&                           coords,
-                 const string&                               fn_name,
+                 std::vector<FT_Fixed>&                      coords,
+                 const std::string&                          fn_name,
                  decltype( FT_Set_Var_Design_Coordinates )*  fn );
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_MULTIPLE_MASTERS_H_

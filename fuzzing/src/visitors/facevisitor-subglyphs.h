@@ -10,7 +10,7 @@
 //     - Type 1
 //     - Type 42
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -28,24 +28,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorSubGlyphs
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorSubGlyphs( void ) {}
-
-
-    FaceVisitorSubGlyphs( const FaceVisitorSubGlyphs& ) = delete;
-    FaceVisitorSubGlyphs& operator= ( const FaceVisitorSubGlyphs& ) = delete;
-
-
-    virtual
-    ~FaceVisitorSubGlyphs( void ) {}
 
 
     void
@@ -61,6 +50,7 @@
     static const FT_Int32  LOAD_FLAGS         = FT_LOAD_NO_BITMAP |
                                                 FT_LOAD_NO_RECURSE;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_SUBGLYPHS_H_

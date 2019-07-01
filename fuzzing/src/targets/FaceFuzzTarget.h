@@ -2,7 +2,7 @@
 //
 //   Base class of face fuzz targets.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -31,11 +31,11 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceFuzzTarget
-    : public freetype::FuzzTarget
+    : public FuzzTarget
   {
   public:
 
@@ -90,9 +90,9 @@
     //   `false' if `FT_Property_Set' returns an error, 'true' otherwise.
 
     bool
-    set_property( const string  module_name,
-                  const string  property_name,
-                  const void*   value );
+    set_property( const std::string  module_name,
+                  const std::string  property_name,
+                  const void*        value );
 
 
     // @Description:
@@ -105,9 +105,9 @@
     //
     // @Return:
     //   A reference to the added iterator.
-    
-    unique_ptr<FaceLoadIterator>&
-    set_iterator( unique_ptr<FaceLoadIterator>  iterator );
+
+    std::unique_ptr<FaceLoadIterator>&
+    set_iterator( std::unique_ptr<FaceLoadIterator>  iterator );
 
 
   protected:
@@ -120,8 +120,9 @@
   private:
 
 
-    unique_ptr<FaceLoadIterator>  face_load_iterator;
+    std::unique_ptr<FaceLoadIterator>  face_load_iterator;
   };
+}
 
 
 #endif // TARGETS_FACEFUZZTARGET_H_

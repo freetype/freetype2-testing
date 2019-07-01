@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphVisitorCBox.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,7 +20,7 @@
 
 
   void
-  GlyphVisitorCBox::
+  freetype::GlyphVisitorCBox::
   run( Unique_FT_Glyph  glyph )
   {
     assert( glyph != nullptr );
@@ -34,10 +34,10 @@
 
 
   void
-  GlyphVisitorCBox::
+  freetype::GlyphVisitorCBox::
   query_cbox( const Unique_FT_Glyph&  glyph,
               FT_Glyph_BBox_Mode      bbox_mode,
-              const string&           name )
+              const std::string&      name )
   {
     FT_BBox   acbox;
 

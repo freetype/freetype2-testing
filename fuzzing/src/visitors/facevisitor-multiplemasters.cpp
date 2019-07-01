@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorMultipleMasters.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -18,7 +18,7 @@
 #include "utils/logging.h"
 
 
-  FaceVisitorMultipleMasters::
+  freetype::FaceVisitorMultipleMasters::
   FaceVisitorMultipleMasters( FaceLoader::FontFormat  format )
   {
     has_adobe_mm = format == FaceLoader::FontFormat::TYPE_1 ? true : false;
@@ -26,7 +26,7 @@
 
 
   void
-  FaceVisitorMultipleMasters::
+  freetype::FaceVisitorMultipleMasters::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
@@ -35,10 +35,10 @@
     FT_Multi_Master  master;
     FT_MM_Var*       var;
 
-    vector<FT_Long>   coords_mm_design;
-    vector<FT_Fixed>  coords_var_design;
-    vector<FT_Fixed>  coords_mm_blend;
-    vector<FT_Fixed>  coords_var_blend;
+    std::vector<FT_Long>   coords_mm_design;
+    std::vector<FT_Fixed>  coords_var_design;
+    std::vector<FT_Fixed>  coords_mm_blend;
+    std::vector<FT_Fixed>  coords_var_blend;
 
 
     if ( face == nullptr )
@@ -134,7 +134,7 @@
       LOG_FT_ERROR( "FT_Get_Var_Axis_Flags", error );
 
       LOG_IF( INFO, error == 0 )
-        << "flags of axis " << ( i + 1 ) << ": " << hex << "0x" << flags;
+        << "flags of axis " << ( i + 1 ) << ": " << std::hex << "0x" << flags;
     }
 
     for ( auto  i = 0; i < var->num_namedstyles; i++ )
@@ -151,10 +151,10 @@
 
 
   void
-  FaceVisitorMultipleMasters::
+  freetype::FaceVisitorMultipleMasters::
   test_coords( Unique_FT_Face&                             face,
-               vector<FT_Fixed>&                           coords,
-               const string&                               fn_name,
+               std::vector<FT_Fixed>&                      coords,
+               const std::string&                          fn_name,
                decltype( FT_Set_Var_Design_Coordinates )*  fn )
   {
     FT_Error  error;

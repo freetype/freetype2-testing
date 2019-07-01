@@ -2,7 +2,7 @@
 //
 //   Fuzz target for CID Type 1 fonts using FreeType's hinting engine.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/font-drivers/cidtype1.h"
 
 
+namespace freetype {
+
+
   class CidType1FtEngineFuzzTarget
     : public CidType1FuzzTarget
   {
   public:
 
 
-    CidType1FtEngineFuzzTarget( void );
+    CidType1FtEngineFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_CID_TYPE_1_FT_ENGINE_H_

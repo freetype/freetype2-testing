@@ -11,7 +11,7 @@
 //     - Type 1
 //     - Type 42
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -31,24 +31,16 @@
 #include "visitors/glyphvisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class GlyphVisitorOutlines
-  : public GlyphVisitor
+    : public GlyphVisitor
   {
   public:
 
 
-    GlyphVisitorOutlines( void );
-
-
-    GlyphVisitorOutlines( const GlyphVisitorOutlines& ) = delete;
-    GlyphVisitorOutlines& operator= ( const GlyphVisitorOutlines& ) = delete;
-
-
-    virtual
-    ~GlyphVisitorOutlines( void ) {}
+    GlyphVisitorOutlines();
 
 
     void
@@ -61,7 +53,7 @@
 
     typedef void  (*OutlineFunc)( FT_Outline& );
 
-    vector<OutlineFunc>  callbacks;
+    std::vector<OutlineFunc>  callbacks;
 
 
     // @Description:
@@ -115,6 +107,7 @@
     static void
     embolden_4( FT_Outline&  outline );
   };
+}
 
 
 #endif // VISITORS_GLYPH_VISITOR_OUTLINES_H_

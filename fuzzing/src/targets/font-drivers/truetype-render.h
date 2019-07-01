@@ -2,7 +2,7 @@
 //
 //   Fuzz target for rendering TrueType faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,13 +22,16 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class TrueTypeRenderFuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    TrueTypeRenderFuzzTarget( void );
+    TrueTypeRenderFuzzTarget();
 
 
   protected:
@@ -41,6 +44,7 @@
     static const FT_UInt  INTERPRETER_VERSION_38;
     static const FT_UInt  INTERPRETER_VERSION_40;
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TRUETYPE_RENDER_H_

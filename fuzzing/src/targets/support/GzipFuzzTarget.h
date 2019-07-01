@@ -21,6 +21,7 @@
 
 namespace freetype {
 
+
   class GzipFuzzTarget
     : public FuzzTarget
   {

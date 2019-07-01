@@ -9,7 +9,7 @@
 //     - Type 1
 //     - Type 42
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -23,6 +23,7 @@
 #define VISITORS_FACE_VISITOR_TYPE_1_TABLES_H_
 
 
+#include <string>
 #include <vector>
 
 #include <ft2build.h>
@@ -33,25 +34,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorType1Tables
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorType1Tables( void ) {}
-
-
-    FaceVisitorType1Tables( const FaceVisitorType1Tables& ) = delete;
-    FaceVisitorType1Tables& operator= (
-      const FaceVisitorType1Tables& ) = delete;
-
-
-    virtual
-    ~FaceVisitorType1Tables( void ) {}
 
 
     void
@@ -115,18 +104,18 @@
     // @See: `FT_Get_PS_Font_Value()'.
 
     static void
-    get_string( Unique_FT_Face&     face,
-                PS_Dict_Keys        key,
-                vector<FT_String>&  str );
+    get_string( Unique_FT_Face&          face,
+                PS_Dict_Keys             key,
+                std::vector<FT_String>&  str );
 
 
     // @See: `FT_Get_PS_Font_Value()'.
 
     static void
-    get_string( Unique_FT_Face&     face,
-                PS_Dict_Keys        key,
-                FT_UInt             index,
-                vector<FT_String>&  str );
+    get_string( Unique_FT_Face&          face,
+                PS_Dict_Keys             key,
+                FT_UInt                  index,
+                std::vector<FT_String>&  str );
 
 
     // @Description:
@@ -159,7 +148,7 @@
     loop_simple( Unique_FT_Face&         face,
                  size_t                  max_value_computed,
                  size_t                  max_value_static,
-                 string                  values_name,
+                 std::string             values_name,
                  PS_Dict_Keys            key,
                  T&                      value )
     {
@@ -180,13 +169,13 @@
     // @See: `FaceVisitorType1Tables::loop()'.
 
     static void
-    loop_string( Unique_FT_Face&     face,
-                 size_t              max_value_computed,
-                 size_t              max_value_static,
-                 string              values_name,
-                 PS_Dict_Keys        key,
-                 vector<FT_String>&  value );
+    loop_string( Unique_FT_Face&          face,
+                 size_t                   max_value_computed,
+                 size_t                   max_value_static,
+                 std::string              values_name,
+                 PS_Dict_Keys             key,
+                 std::vector<FT_String>&  value );
   };
-
+}
 
 #endif // VISITORS_FACE_VISITOR_TYPE_1_TABLES_H_

@@ -2,7 +2,7 @@
 //
 //   Fuzz target for rendering Windows FNT faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class WindowsFntRenderFuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    WindowsFntRenderFuzzTarget( void );
+    WindowsFntRenderFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_WINDOWS_FNT_RENDER_H_

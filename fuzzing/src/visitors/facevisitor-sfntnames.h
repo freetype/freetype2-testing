@@ -6,7 +6,7 @@
 //     - CFF
 //     - TrueType
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -24,24 +24,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorSfntNames
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorSfntNames( void ) {}
-
-
-    FaceVisitorSfntNames( const FaceVisitorSfntNames& ) = delete;
-    FaceVisitorSfntNames& operator= ( const FaceVisitorSfntNames& ) = delete;
-
-
-    virtual
-    ~FaceVisitorSfntNames( void ) {}
 
 
     void
@@ -54,6 +43,7 @@
 
     static const FT_UInt  SFNT_NAME_MAX = 20;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_SFNT_NAMES_H_

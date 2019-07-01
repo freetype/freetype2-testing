@@ -2,7 +2,7 @@
 //
 //   Implementation of Type1RenderFtEngineFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,8 +15,8 @@
 #include "targets/font-drivers/type1-render-ftengine.h"
 
 
-  Type1RenderFtEngineFuzzTarget::
-  Type1RenderFtEngineFuzzTarget( void )
+  freetype::Type1RenderFtEngineFuzzTarget::
+  Type1RenderFtEngineFuzzTarget()
   {
     (void) set_property( "type1", "hinting-engine", &HINTING_FREETYPE );
   }

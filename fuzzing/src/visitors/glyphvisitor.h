@@ -2,7 +2,7 @@
 //
 //   Base class of visitors of glyphs.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -18,25 +18,20 @@
 
 #include "utils/utils.h"
 
+#include <boost/core/noncopyable.hpp>
 
-  using namespace fuzzing;
-  using namespace std;
+
+namespace freetype {
 
 
   class GlyphVisitor
+    : private boost::noncopyable
   {
   public:
 
 
-    GlyphVisitor( void ) {}
-
-
-    GlyphVisitor( const GlyphVisitor& ) = delete;
-    GlyphVisitor& operator= ( const GlyphVisitor& ) = delete;
-
-
     virtual
-    ~GlyphVisitor( void ) {}
+    ~GlyphVisitor() = default;
 
 
     // @Description:
@@ -49,6 +44,7 @@
     virtual void
     run( Unique_FT_Glyph  glyph ) = 0;
   };
+}
 
 
 #endif // VISITORS_GLYPH_VISITOR_H_

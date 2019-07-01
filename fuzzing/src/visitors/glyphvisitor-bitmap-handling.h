@@ -2,7 +2,7 @@
 //
 //   Invoke API functions that deal with bitmap handling.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,22 +22,13 @@
 #include "visitors/glyphvisitor.h"
 
 
+namespace freetype {
+
+
   class GlyphVisitorBitmapHandling
-  : public GlyphVisitor
+    : public GlyphVisitor
   {
   public:
-
-
-    GlyphVisitorBitmapHandling( void ) {}
-
-
-    GlyphVisitorBitmapHandling( const GlyphVisitorBitmapHandling& ) = delete;
-    GlyphVisitorBitmapHandling& operator= (
-      const GlyphVisitorBitmapHandling& ) = delete;
-
-
-    virtual
-    ~GlyphVisitorBitmapHandling( void ) {}
 
 
     void
@@ -81,6 +72,7 @@
              FT_Bitmap&        bitmap,
              FT_Int            alignment );
   };
+}
 
 
 #endif // VISITORS_GLYPH_VISITOR_BITMAP_HANDLING_H_

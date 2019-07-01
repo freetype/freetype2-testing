@@ -2,7 +2,7 @@
 //
 //   Base class of fuzz targets.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -18,6 +18,8 @@
 
 #include <cstdint>
 
+#include <boost/core/noncopyable.hpp>
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <freetype/internal/internal.h>
@@ -26,15 +28,14 @@
 
 namespace freetype {
 
+
   class FuzzTarget
+    : private boost::noncopyable
   {
   public:
 
 
-    FuzzTarget( const FuzzTarget& ) = delete;
-    FuzzTarget& operator= ( const FuzzTarget& ) = delete;
-
-
+    virtual
     ~FuzzTarget();
 
 

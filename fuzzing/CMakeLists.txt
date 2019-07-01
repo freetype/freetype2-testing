@@ -15,7 +15,7 @@
 #   CMAKE_USE_LOGGER_GLOG
 #     (optional) If set and `1', glog will be linked.
 #
-# Copyright 2019 by
+# Copyright 2018-2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -51,6 +51,8 @@ set(SUBMODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external")
 set(FREETYPE_BASE_DIR       "${SUBMODULES_DIR}/freetype2")
 set(FREETYPE_SRC_DIR        "${FREETYPE_BASE_DIR}/src")
 set(FREETYPE_STATIC_LIBRARY "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
+
+set(BOOST_BASE_DIR "${SUBMODULES_DIR}/boost")
 
 set(GLOG_BASE_DIR       "${SUBMODULES_DIR}/glog")
 set(GLOG_SRC_DIR        "${GLOG_BASE_DIR}/src")
@@ -94,123 +96,123 @@ endfunction()
 
 add_fuzz_target(
   "bdf"
-  "BdfFuzzTarget"
+  "freetype::BdfFuzzTarget"
   "targets/font-drivers/bdf.h")
 add_fuzz_target(
   "bdf-render"
-  "BdfRenderFuzzTarget"
+  "freetype::BdfRenderFuzzTarget"
   "targets/font-drivers/bdf-render.h")
 
 add_fuzz_target(
   "cff"
-  "CffFuzzTarget"
+  "freetype::CffFuzzTarget"
   "targets/font-drivers/cff.h")
 add_fuzz_target(
   "cff-ftengine"
-  "CffFtEngineFuzzTarget"
+  "freetype::CffFtEngineFuzzTarget"
   "targets/font-drivers/cff-ftengine.h")
 add_fuzz_target(
   "cff-render"
-  "CffRenderFuzzTarget"
+  "freetype::CffRenderFuzzTarget"
   "targets/font-drivers/cff-render.h")
 add_fuzz_target(
   "cff-render-ftengine"
-  "CffRenderFtEngineFuzzTarget"
+  "freetype::CffRenderFtEngineFuzzTarget"
   "targets/font-drivers/cff-render-ftengine.h")
 
 add_fuzz_target(
   "cidtype1"
-  "CidType1FuzzTarget"
+  "freetype::CidType1FuzzTarget"
   "targets/font-drivers/cidtype1.h")
 add_fuzz_target(
   "cidtype1-ftengine"
-  "CidType1FtEngineFuzzTarget"
+  "freetype::CidType1FtEngineFuzzTarget"
   "targets/font-drivers/cidtype1-ftengine.h")
 add_fuzz_target(
   "cidtype1-render"
-  "CidType1RenderFuzzTarget"
+  "freetype::CidType1RenderFuzzTarget"
   "targets/font-drivers/cidtype1-render.h")
 add_fuzz_target(
   "cidtype1-render-ftengine"
-  "CidType1RenderFtEngineFuzzTarget"
+  "freetype::CidType1RenderFtEngineFuzzTarget"
   "targets/font-drivers/cidtype1-render-ftengine.h")
 
 add_fuzz_target(
   "pcf"
-  "PcfFuzzTarget"
+  "freetype::PcfFuzzTarget"
   "targets/font-drivers/pcf.h")
 add_fuzz_target(
   "pcf-render"
-  "PcfRenderFuzzTarget"
+  "freetype::PcfRenderFuzzTarget"
   "targets/font-drivers/pcf-render.h")
 
 add_fuzz_target(
   "truetype"
-  "TrueTypeFuzzTarget"
+  "freetype::TrueTypeFuzzTarget"
   "targets/font-drivers/truetype.h")
 add_fuzz_target(
   "truetype-render"
-  "TrueTypeRenderFuzzTarget"
+  "freetype::TrueTypeRenderFuzzTarget"
   "targets/font-drivers/truetype-render.h")
 add_fuzz_target(
   "truetype-render-i35"
-  "TrueTypeRenderI35FuzzTarget"
+  "freetype::TrueTypeRenderI35FuzzTarget"
   "targets/font-drivers/truetype-render-i35.h")
 add_fuzz_target(
   "truetype-render-i38"
-  "TrueTypeRenderI38FuzzTarget"
+  "freetype::TrueTypeRenderI38FuzzTarget"
   "targets/font-drivers/truetype-render-i38.h")
 
 add_fuzz_target(
   "type1"
-  "Type1FuzzTarget"
+  "freetype::Type1FuzzTarget"
   "targets/font-drivers/type1.h")
 add_fuzz_target(
   "type1-ftengine"
-  "Type1FtEngineFuzzTarget"
+  "freetype::Type1FtEngineFuzzTarget"
   "targets/font-drivers/type1-ftengine.h")
 add_fuzz_target(
   "type1-render"
-  "Type1RenderFuzzTarget"
+  "freetype::Type1RenderFuzzTarget"
   "targets/font-drivers/type1-render.h")
 add_fuzz_target(
   "type1-render-ftengine"
-  "Type1RenderFtEngineFuzzTarget"
+  "freetype::Type1RenderFtEngineFuzzTarget"
   "targets/font-drivers/type1-render-ftengine.h")
 add_fuzz_target(
   "type1-render-tar"
-  "Type1RenderTarFuzzTarget"
+  "freetype::Type1RenderTarFuzzTarget"
   "targets/font-drivers/type1-render-tar.h")
 add_fuzz_target(
   "type1-tar"
-  "Type1TarFuzzTarget"
+  "freetype::Type1TarFuzzTarget"
   "targets/font-drivers/type1-tar.h")
 
 add_fuzz_target(
   "type42"
-  "Type42FuzzTarget"
+  "freetype::Type42FuzzTarget"
   "targets/font-drivers/type42.h")
 add_fuzz_target(
   "type42-render"
-  "Type42RenderFuzzTarget"
+  "freetype::Type42RenderFuzzTarget"
   "targets/font-drivers/type42-render.h")
 
 add_fuzz_target(
   "windowsfnt"
-  "WindowsFntFuzzTarget"
+  "freetype::WindowsFntFuzzTarget"
   "targets/font-drivers/windowsfnt.h")
 add_fuzz_target(
   "windowsfnt-render"
-  "WindowsFntRenderFuzzTarget"
+  "freetype::WindowsFntRenderFuzzTarget"
   "targets/font-drivers/windowsfnt-render.h")
 
 add_fuzz_target(
   "glyphs-bitmaps-pcf"
-  "GlyphsBitmapsPcfFuzzTarget"
+  "freetype::GlyphsBitmapsPcfFuzzTarget"
   "targets/glyphs/bitmaps-pcf.h")
 add_fuzz_target(
   "glyphs-outlines"
-  "GlyphsOutlinesFuzzTarget"
+  "freetype::GlyphsOutlinesFuzzTarget"
   "targets/glyphs/outlines.h")
 
 add_fuzz_target(
@@ -245,6 +247,7 @@ endif()
 
 include_directories(
   "${FREETYPE_BASE_DIR}/include"
+  "${BOOST_BASE_DIR}"
   "${FUZZING_SRC_DIR}"
   "${LIBARCHIVE_BASE_DIR}/libarchive")
 

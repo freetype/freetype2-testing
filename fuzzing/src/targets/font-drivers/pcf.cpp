@@ -2,7 +2,7 @@
 //
 //   Implementation of PcfFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -14,6 +14,8 @@
 
 #include "targets/font-drivers/pcf.h"
 
+#include <utility> // std::move
+
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
 #include "visitors/facevisitor-bdf.h"
@@ -21,14 +23,11 @@
 #include "visitors/facevisitor-variants.h"
 
 
-  using namespace std;
-
-
-  PcfFuzzTarget::
-  PcfFuzzTarget( void )
+  freetype::PcfFuzzTarget::
+  PcfFuzzTarget()
   {
-    auto  fli          = fuzzing::make_unique<FaceLoadIterator>();
-    auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
+    auto  fli          = freetype::make_unique<FaceLoadIterator>();
+    auto  fpi_bitmaps  = freetype::make_unique<FacePrepIteratorBitmaps>();
 
 
     // -----------------------------------------------------------------------
@@ -36,19 +35,19 @@
 
     (void) fli->set_supported_font_format( FaceLoader::FontFormat::PCF );
     
-    (void) fli->add_iterator( move( fpi_bitmaps ) );
+    (void) fli->add_iterator( std::move( fpi_bitmaps ) );
     
     (void) fli
       ->add_once_visitor(
-        fuzzing::make_unique<FaceVisitorBdf>(
+        freetype::make_unique<FaceVisitorBdf>(
           FaceLoader::FontFormat::PCF ) );
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
+      ->add_once_visitor( freetype::make_unique<FaceVisitorCharCodes>() );
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
+      ->add_once_visitor( freetype::make_unique<FaceVisitorVariants>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
 
-    (void) set_iterator( move( fli ) );
+    (void) set_iterator( std::move( fli ) );
   }

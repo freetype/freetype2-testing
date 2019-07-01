@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorCid.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -23,7 +23,7 @@
 
 
   void
-  FaceVisitorCid::
+  freetype::FaceVisitorCid::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;

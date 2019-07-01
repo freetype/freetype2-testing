@@ -2,7 +2,7 @@
 //
 //   Implementation of TrueTypeRenderI38FuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,8 +15,8 @@
 #include "targets/font-drivers/truetype-render-i38.h"
 
 
-  TrueTypeRenderI38FuzzTarget::
-  TrueTypeRenderI38FuzzTarget( void )
+  freetype::TrueTypeRenderI38FuzzTarget::
+  TrueTypeRenderI38FuzzTarget()
   {
     (void) set_property( "truetype",
                          "interpreter-version",

@@ -2,7 +2,7 @@
 //
 //   Implementation of FacePrepIteratorBitmaps.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,8 +20,8 @@
 
 
   void
-  FacePrepIteratorBitmaps::
-  run( const unique_ptr<FaceLoader>&  face_loader )
+  freetype::FacePrepIteratorBitmaps::
+  run( const std::unique_ptr<FaceLoader>&  face_loader )
   {
     Unique_FT_Face  face = make_unique_face();
     FT_Int          num_strikes;
@@ -64,10 +64,10 @@
   }
 
 
-  Unique_FT_Face
-  FacePrepIteratorBitmaps::
-  get_prepared_face( const unique_ptr<FaceLoader>&  face_loader,
-                     FT_Int                         index )
+  freetype::Unique_FT_Face
+  freetype::FacePrepIteratorBitmaps::
+  get_prepared_face( const std::unique_ptr<FaceLoader>&  face_loader,
+                     FT_Int                              index )
   {
     FT_Error  error;
 

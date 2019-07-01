@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorRenderGlyphs.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,13 +15,13 @@
 #include "visitors/facevisitor-renderglyphs.h"
 
 #include <cassert>
-#include <set>
 
 #include "utils/logging.h"
 
 
-  const vector<pair<FT_Int32, FT_Render_Mode>>
-  FaceVisitorRenderGlyphs::RENDER_MODES =
+  const freetype::FaceVisitorRenderGlyphs::RenderModes
+  freetype::FaceVisitorRenderGlyphs::
+  RENDER_MODES =
   {
     { FT_LOAD_NO_BITMAP | FT_LOAD_TARGET_NORMAL, FT_RENDER_MODE_NORMAL },
     { FT_LOAD_NO_BITMAP | FT_LOAD_TARGET_LIGHT,  FT_RENDER_MODE_LIGHT  },
@@ -32,7 +32,7 @@
 
 
   void
-  FaceVisitorRenderGlyphs::
+  freetype::FaceVisitorRenderGlyphs::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
@@ -52,7 +52,7 @@
 
       for ( auto  mode : RENDER_MODES )
       {
-        LOG( INFO ) << "load flags: 0x" << hex << mode.first;
+        LOG( INFO ) << "load flags: 0x" << std::hex << mode.first;
 
         error = FT_Load_Glyph( face.get(), index, mode.first );
         LOG_FT_ERROR( "FT_Load_Glyph", error );

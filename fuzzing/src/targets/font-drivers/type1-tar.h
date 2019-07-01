@@ -2,7 +2,7 @@
 //
 //   Fuzz Type 1 faces using tar sampling data.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/font-drivers/type1.h"
 
 
+namespace freetype {
+
+
   class Type1TarFuzzTarget
     : public Type1FuzzTarget
   {
   public:
 
 
-    Type1TarFuzzTarget( void );
+    Type1TarFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TYPE_1_TAR_H_

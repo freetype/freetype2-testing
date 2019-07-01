@@ -4,7 +4,7 @@
 //
 //   Drivers: all
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -21,23 +21,16 @@
 #include "visitors/facevisitor-loadglyphs.h"
 
 
+namespace freetype {
+
+
   class FaceVisitorLoadGlyphsBitmaps
-  : public FaceVisitorLoadGlyphs
+    : public FaceVisitorLoadGlyphs
   {
   public:
 
 
-    FaceVisitorLoadGlyphsBitmaps( void );
-
-
-    FaceVisitorLoadGlyphsBitmaps(
-      const FaceVisitorLoadGlyphsBitmaps& ) = delete;
-    FaceVisitorLoadGlyphsBitmaps& operator= (
-      const FaceVisitorLoadGlyphsBitmaps& ) = delete;
-
-
-    virtual
-    ~FaceVisitorLoadGlyphsBitmaps( void ) {}
+    FaceVisitorLoadGlyphsBitmaps();
 
 
   private:
@@ -45,6 +38,7 @@
 
     static const FT_Long  NUM_USED_GLYPHS;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_LOAD_GLYPHS_BITMAPS_H_

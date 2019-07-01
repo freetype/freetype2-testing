@@ -2,7 +2,7 @@
 //
 //   Wrapper class to create faces from fuzzed input.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,15 +19,20 @@
 #include <string>
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "utils/tarreader.h"
 #include "utils/utils.h"
 
 
-  using namespace fuzzing;
-  using namespace std;
+namespace freetype {
 
 
   class FaceLoader
+    : private boost::noncopyable
   {
   public:
 
@@ -48,12 +53,8 @@
     };
 
 
-    FaceLoader( void )
+    FaceLoader()
       : tarreader( files ) {}
-
-
-    FaceLoader( const FaceLoader& ) = delete;
-    FaceLoader& operator= ( const FaceLoader& ) = delete;
 
 
     // @Description:
@@ -126,11 +127,11 @@
     //   The number of faces.
 
     FT_Long
-    get_num_faces( void );
+    get_num_faces();
 
 
     FT_Long
-    get_num_instances( void );
+    get_num_instances();
       
 
     // @Description:
@@ -149,7 +150,7 @@
     //   A pointer to a face object or nullptr if any error occurred.
 
     Unique_FT_Face
-    load( void );
+    load();
 
 
   private:
@@ -159,10 +160,10 @@
     
     TarReader  tarreader;
 
-    vector<vector<FT_Byte>>  files;
+    std::vector<std::vector<FT_Byte>>  files;
 
-    FontFormat  supported_font_format        = FontFormat::NONE;
-    string      supported_font_format_string = "";
+    FontFormat   supported_font_format        = FontFormat::NONE;
+    std::string  supported_font_format_string = "";
 
     bool  data_is_tar_archive = false;
 
@@ -177,6 +178,7 @@
     load_face( FT_Long  face_index     = -1,
                FT_Long  instance_inces =  0 );
   };
+}
 
 
 #endif // UTILS_FACE_LOADER_H_

@@ -5,7 +5,7 @@
 //   Drivers:
 //     - Type 1
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -25,25 +25,16 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorTrackKerning
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
 
 
-    FaceVisitorTrackKerning( void );
-
-
-    FaceVisitorTrackKerning( const FaceVisitorTrackKerning& ) = delete;
-    FaceVisitorTrackKerning& operator= (
-      const FaceVisitorTrackKerning& ) = delete;
-
-    
-    virtual
-    ~FaceVisitorTrackKerning( void ) {}
+    FaceVisitorTrackKerning();
 
 
     void
@@ -54,9 +45,10 @@
   private:
 
 
-    vector<FT_Fixed>  point_sizes;
-    vector<FT_Int>    degrees;
+    std::vector<FT_Fixed>  point_sizes;
+    std::vector<FT_Int>    degrees;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_TRACK_KERNING_H_

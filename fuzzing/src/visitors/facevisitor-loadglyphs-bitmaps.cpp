@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorLoadGlyphsBitmaps.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,11 +15,13 @@
 #include "visitors/facevisitor-loadglyphs-bitmaps.h"
 
 
-  const FT_Long  FaceVisitorLoadGlyphsBitmaps::NUM_USED_GLYPHS = 30;
+  const FT_Long
+  freetype::FaceVisitorLoadGlyphsBitmaps::
+  NUM_USED_GLYPHS = 30;
 
 
-  FaceVisitorLoadGlyphsBitmaps::
-  FaceVisitorLoadGlyphsBitmaps( void )
+  freetype::FaceVisitorLoadGlyphsBitmaps::
+  FaceVisitorLoadGlyphsBitmaps()
     : FaceVisitorLoadGlyphs( NUM_USED_GLYPHS )
   {
     (void) add_load_flags( FT_LOAD_DEFAULT             );

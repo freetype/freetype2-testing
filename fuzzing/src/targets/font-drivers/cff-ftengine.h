@@ -2,7 +2,7 @@
 //
 //   Fuzz CFF faces using FreeType's hinting engine.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/font-drivers/cff.h"
 
 
+namespace freetype {
+
+
   class CffFtEngineFuzzTarget
     : public CffFuzzTarget
   {
   public:
 
 
-    CffFtEngineFuzzTarget( void );
+    CffFtEngineFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_CFF_FT_ENGINE_H_

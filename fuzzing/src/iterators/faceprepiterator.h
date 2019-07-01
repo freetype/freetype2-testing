@@ -2,7 +2,7 @@
 //
 //   Base class of iterators that prepare faces.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,26 +16,27 @@
 #define ITERATORS_FACE_PREP_ITERATOR_H_
 
 
+#include <memory> // std::unique_ptr
+
+#include <boost/core/noncopyable.hpp>
+
 #include "iterators/glyphloaditerator.h"
 #include "utils/faceloader.h"
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
 
+namespace freetype {
+
+
   class FacePrepIterator
+    : private boost::noncopyable
   {
   public:
 
 
-    FacePrepIterator( void ) {}
-
-
-    FacePrepIterator( const FacePrepIterator& ) = delete;
-    FacePrepIterator& operator= ( const FacePrepIterator& ) = delete;
-
-
     virtual
-    ~FacePrepIterator( void ) {}
+    ~FacePrepIterator() = default;
 
 
     // @Description:
@@ -49,7 +50,7 @@
     //   A reference to the added visitor.
 
     void
-    add_visitor( unique_ptr<FaceVisitor>  visitor );
+    add_visitor( std::unique_ptr<FaceVisitor>  visitor );
 
 
     // @Description:
@@ -63,19 +64,20 @@
     //   A reference to the added iterator.
 
     void
-    add_iterator( unique_ptr<GlyphLoadIterator>  iterator );
+    add_iterator( std::unique_ptr<GlyphLoadIterator>  iterator );
 
 
     virtual void
-    run( const unique_ptr<FaceLoader>&  face_loader ) = 0;
+    run( const std::unique_ptr<FaceLoader>&  face_loader ) = 0;
 
 
   protected:
 
 
-    vector<unique_ptr<FaceVisitor>>        face_visitors;
-    vector<unique_ptr<GlyphLoadIterator>>  glyph_load_iterators;
+    std::vector<std::unique_ptr<FaceVisitor>>        face_visitors;
+    std::vector<std::unique_ptr<GlyphLoadIterator>>  glyph_load_iterators;
   };
+}
 
 
 #endif // ITERATORS_FACE_PREP_ITERATOR_H_

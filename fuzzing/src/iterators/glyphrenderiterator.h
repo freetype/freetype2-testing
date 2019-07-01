@@ -2,7 +2,7 @@
 //
 //   Base class of iterators that render glyphs.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,29 +16,26 @@
 #define ITERATORS_GLYPH_RENDER_ITERATOR_H_
 
 
+#include <memory> // std::unique_ptr
 #include <vector>
+
+#include <boost/core/noncopyable.hpp>
 
 #include "utils/utils.h"
 #include "visitors/glyphvisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class GlyphRenderIterator
+    : private boost::noncopyable
   {
   public:
 
 
-    GlyphRenderIterator( void ) {}
-
-
-    GlyphRenderIterator( const GlyphRenderIterator& ) = delete;
-    GlyphRenderIterator& operator= ( const GlyphRenderIterator& ) = delete;
-
-
     virtual
-    ~GlyphRenderIterator( void ) {}
+    ~GlyphRenderIterator() = default;
 
 
     virtual void
@@ -53,14 +50,18 @@
     //     A glyph visitor.
 
     void
-    add_visitor( unique_ptr<GlyphVisitor>  visitor );
+    add_visitor( std::unique_ptr<GlyphVisitor>  visitor );
 
     
   protected:
 
 
-    vector<unique_ptr<GlyphVisitor>>  glyph_visitors;
+    typedef std::vector<std::unique_ptr<GlyphVisitor>>  GlyphVisitors;
+
+
+    GlyphVisitors  glyph_visitors;
   };
+}
 
 
 #endif // ITERATORS_GLYPH_RENDER_ITERATOR_H_

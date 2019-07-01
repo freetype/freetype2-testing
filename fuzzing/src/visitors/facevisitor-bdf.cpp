@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorBdf.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,7 +22,7 @@
 #include "utils/logging.h"
 
 
-  FaceVisitorBdf::
+  freetype::FaceVisitorBdf::
   FaceVisitorBdf( FaceLoader::FontFormat  format )
   {
     font_format = format;
@@ -30,7 +30,7 @@
 
 
   void
-  FaceVisitorBdf::
+  freetype::FaceVisitorBdf::
   run( Unique_FT_Face  face )
   {
     FT_Error     error;
@@ -49,8 +49,10 @@
 
       if ( error == 0 )
       {
-        LOG( INFO ) << "BDF charset encoding: " << string( charset_encoding );
-        LOG( INFO ) << "BDF charset registry: " << string( charset_registry );
+        LOG( INFO ) << "BDF charset encoding: "
+                    << std::string( charset_encoding );
+        LOG( INFO ) << "BDF charset registry: "
+                    << std::string( charset_registry );
       }
     }
   }

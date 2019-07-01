@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphVisitorTransform.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,7 +20,7 @@
 
 
   void
-  GlyphVisitorTransform::
+  freetype::GlyphVisitorTransform::
   run( Unique_FT_Glyph  glyph )
   {
     FT_Error  error;
@@ -52,7 +52,7 @@
 
 
   void
-  GlyphVisitorTransform::
+  freetype::GlyphVisitorTransform::
   transform( const Unique_FT_Glyph&  glyph,
              FT_Matrix*              matrix,
              FT_Vector*              delta )

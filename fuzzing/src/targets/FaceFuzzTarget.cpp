@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceFuzzTarget.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -23,14 +23,17 @@
 
 
   const FT_UInt
-  FaceFuzzTarget::HINTING_ADOBE    = FT_HINTING_ADOBE;
+  freetype::FaceFuzzTarget::
+  HINTING_ADOBE = FT_HINTING_ADOBE;
+
 
   const FT_UInt
-  FaceFuzzTarget::HINTING_FREETYPE = FT_HINTING_FREETYPE;
+  freetype::FaceFuzzTarget::
+  HINTING_FREETYPE = FT_HINTING_FREETYPE;
 
 
   void
-  FaceFuzzTarget::
+  freetype::FaceFuzzTarget::
   run( const uint8_t*  data,
        size_t          size )
   {
@@ -46,7 +49,7 @@
 
 
   void
-  FaceFuzzTarget::
+  freetype::FaceFuzzTarget::
   set_supported_font_format( FaceLoader::FontFormat  format )
   {
     assert( face_load_iterator != nullptr );
@@ -55,7 +58,7 @@
 
 
   void
-  FaceFuzzTarget::
+  freetype::FaceFuzzTarget::
   set_data_is_tar_archive( bool  is_tar_archive )
   {
     assert( face_load_iterator != nullptr );
@@ -64,10 +67,10 @@
 
 
   bool
-  FaceFuzzTarget::
-  set_property( const string  module_name,
-                const string  property_name,
-                const void*   value )
+  freetype::FaceFuzzTarget::
+  set_property( const std::string  module_name,
+                const std::string  property_name,
+                const void*        value )
   {
     FT_Error  error;
 
@@ -86,9 +89,9 @@
   }
 
 
-  unique_ptr<FaceLoadIterator>&
-  FaceFuzzTarget::
-  set_iterator( unique_ptr<FaceLoadIterator>  iterator )
+  std::unique_ptr<freetype::FaceLoadIterator>&
+  freetype::FaceFuzzTarget::
+  set_iterator( std::unique_ptr<FaceLoadIterator>  iterator )
   {
     face_load_iterator = move( iterator );
     return face_load_iterator;

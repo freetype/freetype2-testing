@@ -10,7 +10,7 @@
 //     - Type 1
 //     - Type 42
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -27,23 +27,16 @@
 #include "visitors/facevisitor-loadglyphs.h"
 
 
+namespace freetype {
+
+
   class FaceVisitorLoadGlyphsOutlines
-  : public FaceVisitorLoadGlyphs
+    : public FaceVisitorLoadGlyphs
   {
   public:
 
 
-    FaceVisitorLoadGlyphsOutlines( void );
-
-
-    FaceVisitorLoadGlyphsOutlines(
-      const FaceVisitorLoadGlyphsOutlines& ) = delete;
-    FaceVisitorLoadGlyphsOutlines& operator= (
-      const FaceVisitorLoadGlyphsOutlines& ) = delete;
-
-
-    virtual
-    ~FaceVisitorLoadGlyphsOutlines( void ) {}
+    FaceVisitorLoadGlyphsOutlines();
 
 
   private:
@@ -54,6 +47,7 @@
     FT_Matrix  matrix;
     FT_Vector  delta;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_LOAD_GLYPHS_OUTLINES_H_

@@ -1,6 +1,6 @@
 # CMakeLists.txt
 #
-# Copyright 2019 by
+# Copyright 2018-2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -11,6 +11,7 @@
 
 add_executable(driver
   "${FUZZING_SRC_DIR}/driver/driver.cpp"
+  "${FUZZING_SRC_DIR}/driver/DriverInternals.cpp"
   "${FUZZING_SRC_DIR}/legacy/ftfuzzer.cc")
 
 set_target_properties(driver PROPERTIES OUTPUT_NAME "${DRIVER_EXE_NAME}")

@@ -2,7 +2,7 @@
 //
 //   Render Type 1 faces using FreeType's hinting engine.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/font-drivers/type1-render.h"
 
 
+namespace freetype {
+
+
   class Type1RenderFtEngineFuzzTarget
     : public Type1RenderFuzzTarget
   {
   public:
 
 
-    Type1RenderFtEngineFuzzTarget( void );
+    Type1RenderFtEngineFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TYPE_1_RENDER_FT_ENGINE_H_

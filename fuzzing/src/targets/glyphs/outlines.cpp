@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphsOutlinesFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -14,6 +14,8 @@
 
 #include "targets/glyphs/outlines.h"
 
+#include <utility> // std::move
+
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-outlines.h"
 #include "iterators/glyphloaditerator-naive.h"
@@ -24,20 +26,19 @@
 #include "utils/logging.h"
 
 
-  using namespace std;
+  const FT_Long
+  freetype::GlyphsOutlinesFuzzTarget::
+  NUM_LOAD_GLYPHS = 5;
 
 
-  const FT_Long  GlyphsOutlinesFuzzTarget::NUM_LOAD_GLYPHS = 5;
-
-
-  GlyphsOutlinesFuzzTarget::
-  GlyphsOutlinesFuzzTarget( void )
+  freetype::GlyphsOutlinesFuzzTarget::
+  GlyphsOutlinesFuzzTarget()
   {
-    auto  fli = fuzzing::make_unique<FaceLoadIterator>();
-    auto  fpi = fuzzing::make_unique<FacePrepIteratorOutlines>();
+    auto  fli = freetype::make_unique<FaceLoadIterator>();
+    auto  fpi = freetype::make_unique<FacePrepIteratorOutlines>();
     auto  gli =
-      fuzzing::make_unique<GlyphLoadIteratorNaive>( NUM_LOAD_GLYPHS );
-    auto  gri = fuzzing::make_unique<GlyphRenderIteratorAllModes>();
+      freetype::make_unique<GlyphLoadIteratorNaive>( NUM_LOAD_GLYPHS );
+    auto  gri = freetype::make_unique<GlyphRenderIteratorAllModes>();
 
 
     // -----------------------------------------------------------------------
@@ -45,22 +46,22 @@
 
     (void) gli->add_load_flags( FT_LOAD_NO_BITMAP );
 
-    (void) gli->add_iterator( move( gri ) );
+    (void) gli->add_iterator( std::move( gri ) );
 
-    (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorCBox>()      );
-    (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorOutlines>()  );
-    (void) gli->add_visitor( fuzzing::make_unique<GlyphVisitorTransform>() );
+    (void) gli->add_visitor( freetype::make_unique<GlyphVisitorCBox>()      );
+    (void) gli->add_visitor( freetype::make_unique<GlyphVisitorOutlines>()  );
+    (void) gli->add_visitor( freetype::make_unique<GlyphVisitorTransform>() );
 
     // -----------------------------------------------------------------------
     // Assemble the rest:
 
-    (void) fpi->add_iterator( move( gli ) );
+    (void) fpi->add_iterator( std::move( gli ) );
 
     (void) fli->set_supported_font_format( FaceLoader::FontFormat::TRUETYPE );
-    (void) fli->add_iterator( move( fpi ) );
+    (void) fli->add_iterator( std::move( fpi ) );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
 
-    (void) set_iterator( move( fli ) );
+    (void) set_iterator( std::move( fli ) );
   }
