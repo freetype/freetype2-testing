@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorType1Tables.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,10 +15,11 @@
 #include "visitors/facevisitor-type1tables.h"
 
 #include <cassert>
+#include <vector>
 
 
   void
-  FaceVisitorType1Tables::
+  freetype::FaceVisitorType1Tables::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
@@ -37,7 +38,7 @@
     FT_Short         short_buffer;
     FT_UShort        ushort_buffer;
 
-    vector<FT_String>  string_buffer;
+    std::vector<FT_String>  string_buffer;
 
     FT_Int   num_char_strings;
     FT_Int   num_subrs;
@@ -203,21 +204,21 @@
 
 
   void
-  FaceVisitorType1Tables::
-  get_string( Unique_FT_Face&     face,
-              PS_Dict_Keys        key,
-              vector<FT_String>&  str )
+  freetype::FaceVisitorType1Tables::
+  get_string( Unique_FT_Face&          face,
+              PS_Dict_Keys             key,
+              std::vector<FT_String>&  str )
   {
     (void) get_string( face, key, 0, str );
   }
 
 
   void
-  FaceVisitorType1Tables::
-  get_string( Unique_FT_Face&     face,
-              PS_Dict_Keys        key,
-              FT_UInt             index,
-              vector<FT_String>&  str )
+  freetype::FaceVisitorType1Tables::
+  get_string( Unique_FT_Face&          face,
+              PS_Dict_Keys             key,
+              FT_UInt                  index,
+              std::vector<FT_String>&  str )
   {
     FT_Long  size;
 
@@ -244,18 +245,18 @@
                                  size );
 
     LOG( INFO ) << key << "[" << index << "]: '"
-                << string( str.begin(), str.end() ) << "'";
+                << std::string( str.begin(), str.end() ) << "'";
   }
 
 
   void
-  FaceVisitorType1Tables::
-  loop_string( Unique_FT_Face&     face,
-               size_t              max_value_computed,
-               size_t              max_value_static,
-               string              values_name,
-               PS_Dict_Keys        key,
-               vector<FT_String>&  value )
+  freetype::FaceVisitorType1Tables::
+  loop_string( Unique_FT_Face&          face,
+               size_t                   max_value_computed,
+               size_t                   max_value_static,
+               std::string              values_name,
+               PS_Dict_Keys             key,
+               std::vector<FT_String>&  value )
   {
     for ( auto  index = 0;
           index < max_value_computed &&

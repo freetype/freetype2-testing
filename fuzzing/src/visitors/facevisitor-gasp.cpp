@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorGasp.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -23,11 +23,10 @@
 
 
   void
-  FaceVisitorGasp::
+  freetype::FaceVisitorGasp::
   run( Unique_FT_Face  face )
   {
-    FT_Error  error;
-    FT_Int    flags;
+    FT_Int  flags;
 
 
     assert( face != nullptr );
@@ -35,6 +34,6 @@
     for ( auto  ppem : ppems )
     {
       flags = FT_Get_Gasp( face.get(), ppem );
-      LOG( INFO ) << "gasp: " << hex << "0x" << flags;
+      LOG( INFO ) << "gasp: " << std::hex << "0x" << flags;
     }
   }

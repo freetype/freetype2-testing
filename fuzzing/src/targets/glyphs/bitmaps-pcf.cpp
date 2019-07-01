@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphsBitmapsPcfFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,8 +15,8 @@
 #include "targets/glyphs/bitmaps-pcf.h"
 
 
-  GlyphsBitmapsPcfFuzzTarget::
-  GlyphsBitmapsPcfFuzzTarget( void )
+  freetype::GlyphsBitmapsPcfFuzzTarget::
+  GlyphsBitmapsPcfFuzzTarget()
   {
     (void) set_supported_font_format( FaceLoader::FontFormat::PCF );
   }

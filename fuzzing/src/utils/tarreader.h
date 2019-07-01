@@ -2,7 +2,7 @@
 //
 //   Used to extract files from tar archives.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -17,29 +17,30 @@
 
 #include <vector>
 
+#include <boost/core/noncopyable.hpp>
+
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
 #include "utils/utils.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class TarReader
+    : private boost::noncopyable
   {
   public:
 
 
+    typedef std::vector<std::vector<FT_Byte>>  Files;
+
     // @Input:
     //   files ::
     //     Extracted files will be added to this vector.
-    TarReader( vector<vector<FT_Byte>>&  files )
+    TarReader( Files&  files )
       : files(files) {}
-
-
-    TarReader( const TarReader& ) = delete;
-    TarReader& operator= ( const TarReader& ) = delete;
 
 
     bool
@@ -50,8 +51,9 @@
   private:
 
 
-    vector<vector<FT_Byte>>&  files;
+    Files&  files;
   };
+}
 
 
 #endif // UTILS_TAR_READER_H_

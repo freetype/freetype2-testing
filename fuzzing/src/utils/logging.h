@@ -2,7 +2,7 @@
 //
 //   Switch between different loggers and/or compile them out completely.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,6 +19,7 @@
 #include <iomanip>
 
 #include <ft2build.h>
+#include FT_FREETYPE_H
 #include FT_ERRORS_H
 
 #ifdef LOGGER_GLOG

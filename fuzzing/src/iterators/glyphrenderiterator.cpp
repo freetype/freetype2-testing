@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphRenderIterator.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -14,10 +14,12 @@
 
 #include "iterators/glyphrenderiterator.h"
 
+#include <utility> // std::move
+
 
   void
-  GlyphRenderIterator::
-  add_visitor( unique_ptr<GlyphVisitor>  visitor )
+  freetype::GlyphRenderIterator::
+  add_visitor( std::unique_ptr<GlyphVisitor>  visitor )
   {
-    (void) glyph_visitors.emplace_back( move( visitor ) );
+    (void) glyph_visitors.emplace_back( std::move( visitor ) );
   }

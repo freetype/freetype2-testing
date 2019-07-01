@@ -6,7 +6,7 @@
 //     - CFF
 //     - TrueType
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -24,26 +24,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorTrueTypeTables
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorTrueTypeTables( void ) {}
-
-
-    FaceVisitorTrueTypeTables(
-      const FaceVisitorTrueTypeTables& ) = delete;
-    FaceVisitorTrueTypeTables& operator= (
-      const FaceVisitorTrueTypeTables& ) = delete;
-
-
-    virtual
-    ~FaceVisitorTrueTypeTables( void ) {}
 
 
     void
@@ -56,6 +43,7 @@
 
     static const FT_ULong  TABLE_INDEX_MAX = 20;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_TRUETYPE_TABLES_H_

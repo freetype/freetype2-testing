@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorLoadGlyphsOutlines.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,11 +15,13 @@
 #include "visitors/facevisitor-loadglyphs-outlines.h"
 
 
-  const FT_Long  FaceVisitorLoadGlyphsOutlines::NUM_USED_GLYPHS = 5;
+  const FT_Long
+  freetype::FaceVisitorLoadGlyphsOutlines::
+  NUM_USED_GLYPHS = 5;
 
 
-  FaceVisitorLoadGlyphsOutlines::
-  FaceVisitorLoadGlyphsOutlines( void )
+  freetype::FaceVisitorLoadGlyphsOutlines::
+  FaceVisitorLoadGlyphsOutlines()
     : FaceVisitorLoadGlyphs( NUM_USED_GLYPHS )
   {
     // Notes:

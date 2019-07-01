@@ -6,7 +6,7 @@
 //     - CFF
 //     - TrueType
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -26,24 +26,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorGasp
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorGasp( void ) {}
-
-
-    FaceVisitorGasp( const FaceVisitorGasp& ) = delete;
-    FaceVisitorGasp& operator= ( const FaceVisitorGasp& ) = delete;
-
-    
-    virtual
-    ~FaceVisitorGasp( void ) {}
 
 
     void
@@ -55,8 +44,9 @@
 
 
     // some arbitrary seeds:
-    vector<FT_UInt>  ppems{ 8, 16, 32, 64 };
+    std::vector<FT_UInt>  ppems{ 8, 16, 32, 64 };
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_GASP_H_

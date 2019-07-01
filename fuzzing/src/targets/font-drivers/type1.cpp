@@ -2,7 +2,7 @@
 //
 //   Implementation of Type1FuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -13,6 +13,8 @@
 
 
 #include "targets/font-drivers/type1.h"
+
+#include <utility> // std::move
 
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
@@ -27,60 +29,58 @@
 #include "visitors/facevisitor-variants.h"
 
 
-  using namespace std;
-
-
-  Type1FuzzTarget::
-  Type1FuzzTarget( void )
+  freetype::Type1FuzzTarget::
+  Type1FuzzTarget()
   {
-    auto  fli = fuzzing::make_unique<FaceLoadIterator>();
+    auto  fli = freetype::make_unique<FaceLoadIterator>();
 
-    auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
-    auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
+    auto  fpi_bitmaps  = freetype::make_unique<FacePrepIteratorBitmaps>();
+    auto  fpi_outlines = freetype::make_unique<FacePrepIteratorOutlines>();
     auto  fpi_mm =
-      fuzzing::make_unique<FacePrepIteratorMultipleMasters>();
+      freetype::make_unique<FacePrepIteratorMultipleMasters>();
 
 
     // -----------------------------------------------------------------------
     // Face preparation iterators:
 
     (void) fpi_bitmaps
-      ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorKerning>() );
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorKerning>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorKerning>() );
     
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorMultipleMasters>(
+      ->add_visitor( freetype::make_unique<FaceVisitorMultipleMasters>(
                        FaceLoader::FontFormat::TYPE_1) );
 
     (void) fpi_mm
-      ->add_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorType1Tables>() );
 
     // -----------------------------------------------------------------------
     // Face load iterators:
 
     (void) fli->set_supported_font_format( FaceLoader::FontFormat::TYPE_1 );
 
-    (void) fli->add_iterator( move( fpi_bitmaps  ) );
-    (void) fli->add_iterator( move( fpi_outlines ) );
-    (void) fli->add_iterator( move( fpi_mm       ) );
+    (void) fli->add_iterator( std::move( fpi_bitmaps  ) );
+    (void) fli->add_iterator( std::move( fpi_outlines ) );
+    (void) fli->add_iterator( std::move( fpi_mm       ) );
 
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
+      ->add_once_visitor( freetype::make_unique<FaceVisitorCharCodes>() );
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
+      ->add_once_visitor( freetype::make_unique<FaceVisitorVariants>() );
 
     (void) fli
-      ->add_always_visitor( fuzzing::make_unique<FaceVisitorTrackKerning>() );
+      ->add_always_visitor(
+        freetype::make_unique<FaceVisitorTrackKerning>() );
     (void) fli
-      ->add_always_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
+      ->add_always_visitor( freetype::make_unique<FaceVisitorType1Tables>() );
     
     // -----------------------------------------------------------------------
     // Fuzz target:
 
     (void) set_property( "type1", "hinting-engine", &HINTING_ADOBE );
 
-    (void) set_iterator( move( fli ) );
+    (void) set_iterator( std::move( fli ) );
 
     (void) set_data_is_tar_archive( false );
   }

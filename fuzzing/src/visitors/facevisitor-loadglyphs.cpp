@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorLoadGlyphs.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,12 +15,11 @@
 #include "visitors/facevisitor-loadglyphs.h"
 
 #include <cassert>
-#include <set>
 
 #include "utils/logging.h"
 
 
-  FaceVisitorLoadGlyphs::
+  freetype::FaceVisitorLoadGlyphs::
   FaceVisitorLoadGlyphs( FT_Long  num_used_glyphs )
   {
     (void) set_num_used_glyphs( num_used_glyphs );
@@ -29,7 +28,7 @@
 
 
   void
-  FaceVisitorLoadGlyphs::
+  freetype::FaceVisitorLoadGlyphs::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
@@ -70,7 +69,7 @@
 
         for ( auto  flags : load_flags )
         {
-          LOG( INFO ) << "load flags: 0x" << hex << flags;
+          LOG( INFO ) << "load flags: 0x" << std::hex << flags;
 
           error = FT_Load_Glyph( face.get(), index, flags );
           LOG_FT_ERROR( "FT_Load_Glyph", error );
@@ -83,7 +82,7 @@
 
 
   void
-  FaceVisitorLoadGlyphs::
+  freetype::FaceVisitorLoadGlyphs::
   set_num_used_glyphs( FT_Long  glyphs )
   {
     assert( glyphs > 0 );
@@ -92,7 +91,7 @@
 
 
   void
-  FaceVisitorLoadGlyphs::
+  freetype::FaceVisitorLoadGlyphs::
   add_transformation( FT_Matrix*  matrix,
                       FT_Vector*  delta )
   {
@@ -101,7 +100,7 @@
 
 
   void
-  FaceVisitorLoadGlyphs::
+  freetype::FaceVisitorLoadGlyphs::
   add_load_flags( FT_Int32  load_flags )
   {
     (void) this->load_flags.push_back( load_flags );

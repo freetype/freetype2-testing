@@ -2,7 +2,7 @@
 //
 //   Base class of iterators over faces.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,27 +16,30 @@
 #define ITERATORS_FACE_LOAD_ITERATOR_H_
 
 
+#include <memory> // std::unique_ptr
+
+#include <boost/core/noncopyable.hpp>
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "iterators/faceprepiterator.h"
 #include "utils/faceloader.h"
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
 
-  using namespace fuzzing;
-  using namespace std;
+namespace freetype {
 
 
   class FaceLoadIterator
+    : private boost::noncopyable
   {
   public:
 
     
-    FaceLoadIterator( void )
+    FaceLoadIterator()
       : face_loader( new FaceLoader ) {}
-
-
-    FaceLoadIterator( const FaceLoadIterator& ) = delete;
-    FaceLoadIterator& operator= ( const FaceLoadIterator& ) = delete;
 
 
     // @See: FaceLoader::set_supported_font_format
@@ -72,7 +75,7 @@
     //     A face visitor.
 
     void
-    add_once_visitor( unique_ptr<FaceVisitor>  visitor );
+    add_once_visitor( std::unique_ptr<FaceVisitor>  visitor );
 
 
     // @Description:
@@ -83,7 +86,7 @@
     //     A face visitor.
 
     void
-    add_always_visitor( unique_ptr<FaceVisitor>  visitor );
+    add_always_visitor( std::unique_ptr<FaceVisitor>  visitor );
 
 
     // @Description:
@@ -95,7 +98,7 @@
     //     A face preparation iterator.
 
     void
-    add_iterator( unique_ptr<FacePrepIterator>  iterator );
+    add_iterator( std::unique_ptr<FacePrepIterator>  iterator );
 
 
     // @Description:
@@ -103,7 +106,7 @@
     //   visitors.
 
     void
-    run( void );
+    run();
 
 
   private:
@@ -112,13 +115,14 @@
     static const FT_Long  FACE_INDEX_MAX     = 5;
     static const FT_Long  INSTANCE_INDEX_MAX = 5;
 
-    unique_ptr<FaceLoader>  face_loader;
+    std::unique_ptr<FaceLoader>  face_loader;
 
-    vector<unique_ptr<FaceVisitor>>  once_face_visitors;
-    vector<unique_ptr<FaceVisitor>>  always_face_visitors;
+    std::vector<std::unique_ptr<FaceVisitor>>  once_face_visitors;
+    std::vector<std::unique_ptr<FaceVisitor>>  always_face_visitors;
 
-    vector<unique_ptr<FacePrepIterator>>  face_prep_iterators;
+    std::vector<std::unique_ptr<FacePrepIterator>>  face_prep_iterators;
   };
+}
 
 
 #endif // ITERATORS_FACE_LOAD_ITERATOR_H_

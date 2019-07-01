@@ -2,7 +2,7 @@
 //
 //   Query glyphs' control boxes.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,27 +16,18 @@
 #define VISITORS_GLYPH_VISITOR_CBOX_H_
 
 
+#include <string>
+
 #include "visitors/glyphvisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class GlyphVisitorCBox
-  : public GlyphVisitor
+    : public GlyphVisitor
   {
   public:
-
-
-    GlyphVisitorCBox( void ) {}
-
-
-    GlyphVisitorCBox( const GlyphVisitorCBox& ) = delete;
-    GlyphVisitorCBox& operator= ( const GlyphVisitorCBox& ) = delete;
-
-
-    virtual
-    ~GlyphVisitorCBox( void ) {}
 
 
     void
@@ -50,8 +41,9 @@
     void
     query_cbox( const Unique_FT_Glyph&  glyph,
                 FT_Glyph_BBox_Mode      bbox_mode,
-                const string&           name );
+                const std::string&      name );
   };
+}
 
 
 #endif // VISITORS_GLYPH_VISITOR_CBOX_H_

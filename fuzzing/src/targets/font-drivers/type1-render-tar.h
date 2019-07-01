@@ -2,7 +2,7 @@
 //
 //   Render Type 1 faces using tar sampling data.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/font-drivers/type1-render.h"
 
 
+namespace freetype {
+
+
   class Type1RenderTarFuzzTarget
     : public Type1RenderFuzzTarget
   {
   public:
 
 
-    Type1RenderTarFuzzTarget( void );
+    Type1RenderTarFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TYPE_1_RENDER_TAR_H_

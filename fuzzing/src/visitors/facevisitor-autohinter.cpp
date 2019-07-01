@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorAutohinter.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -23,12 +23,9 @@
 
 
   void
-  FaceVisitorAutohinter::
+  freetype::FaceVisitorAutohinter::
   run( Unique_FT_Face  face )
   {
-    FT_Error  error;
-
-
     assert( face != nullptr );
 
     for ( auto  warping : warpings )
@@ -44,10 +41,10 @@
 
 
   void
-  FaceVisitorAutohinter::
-  set_property( Unique_FT_Face&  face,
-                const string     property_name,
-                const void*      value)
+  freetype::FaceVisitorAutohinter::
+  set_property( Unique_FT_Face&    face,
+                const std::string  property_name,
+                const void*        value)
   {
     (void) FT_Property_Set( face->glyph->library,
                             "autofitter",
@@ -57,7 +54,7 @@
 
 
   void
-  FaceVisitorAutohinter::
+  freetype::FaceVisitorAutohinter::
   load_glyphs( Unique_FT_Face&  face )
   {
     FT_Error  error;

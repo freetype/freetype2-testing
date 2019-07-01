@@ -2,7 +2,7 @@
 //
 //   Fuzz target for Type 42 faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class Type42FuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    Type42FuzzTarget( void );
+    Type42FuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TYPE_42_H_

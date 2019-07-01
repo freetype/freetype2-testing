@@ -2,7 +2,7 @@
 //
 //   Implementation of FuzzTarget.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,

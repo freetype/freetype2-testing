@@ -2,7 +2,7 @@
 //
 //   Render CID Type 1 faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class CidType1RenderFuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    CidType1RenderFuzzTarget( void );
+    CidType1RenderFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_CID_TYPE_1_RENDER_H_

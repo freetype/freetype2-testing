@@ -4,7 +4,7 @@
 //
 //   Drivers: all
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -18,17 +18,18 @@
 #define VISITORS_FACE_VISITOR_LOAD_GLYPHS_H_
 
 
+#include <utility> // std::pair
 #include <vector>
 
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorLoadGlyphs
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
 
@@ -36,15 +37,6 @@
     // @See: `FaceVisitorLoadGlyphs::set_num_used_glyphs()'.
 
     FaceVisitorLoadGlyphs( FT_Long  num_used_glyphs );
-
-
-    FaceVisitorLoadGlyphs( const FaceVisitorLoadGlyphs& ) = delete;
-    FaceVisitorLoadGlyphs& operator= (
-      const FaceVisitorLoadGlyphs& ) = delete;
-
-
-    virtual
-    ~FaceVisitorLoadGlyphs( void ) {}
 
 
     void
@@ -100,11 +92,15 @@
   private:
 
 
+    typedef std::vector<std::pair<FT_Matrix*, FT_Vector*>>  Transformations;
+
+
     FT_Long  num_used_glyphs = -1;
 
-    vector<pair<FT_Matrix*, FT_Vector*>>  transformations;
-    vector<FT_Int32>                      load_flags;
+    Transformations        transformations;
+    std::vector<FT_Int32>  load_flags;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_LOAD_GLYPHS_H_

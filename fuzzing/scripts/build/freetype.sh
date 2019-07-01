@@ -1,7 +1,7 @@
 #!/bin/bash
 set -exo pipefail
 
-# Copyright 2019 by
+# Copyright 2018-2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -17,10 +17,8 @@ path_to_freetype=$( readlink -f "../../../external/freetype2" )
 
 if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
-    git submodule init "${path_to_freetype}"
-
     # We always want to run the latest version of FreeType:
-    git submodule update --depth 1 --remote "${path_to_freetype}"
+    git submodule update --init --depth 1 --remote "${path_to_freetype}"
 
     cd "${path_to_freetype}"
 

@@ -6,7 +6,7 @@
 //     - `FUZZ_TARGET_CLASS_NAME':
 //         The class name of the target.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,6 +20,7 @@
 
 
 namespace {
+
 
   FUZZ_TARGET_CLASS_NAME  target;
 

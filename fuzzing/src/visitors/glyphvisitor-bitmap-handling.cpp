@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphVisitorBitmapHandling.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,14 +22,18 @@
 #include "utils/logging.h"
 
 
-  const FT_Color  GlyphVisitorBitmapHandling::COLOUR_PINK =
+  const FT_Color
+  freetype::GlyphVisitorBitmapHandling::
+  COLOUR_PINK =
   {
     192, 168, 0, 128
   };
 
   // Offset vectors are in 26.6 fixed-point format.
 
-  const FT_Vector  GlyphVisitorBitmapHandling::SOURCE_OFFSET =
+  const FT_Vector
+  freetype::GlyphVisitorBitmapHandling::
+  SOURCE_OFFSET =
   {
     static_cast<FT_Pos>( 0x40 * -3.5 ),
     static_cast<FT_Pos>( 0x40 *  2.5 )
@@ -37,7 +41,7 @@
 
 
   void
-  GlyphVisitorBitmapHandling::
+  freetype::GlyphVisitorBitmapHandling::
   run( Unique_FT_Glyph  glyph )
   {
     FT_Error  error;
@@ -89,7 +93,7 @@
 
 
   bool
-  GlyphVisitorBitmapHandling::
+  freetype::GlyphVisitorBitmapHandling::
   extract_bitmap( Unique_FT_Glyph&  glyph,
                   FT_Bitmap&        bitmap )
   {
@@ -100,7 +104,7 @@
 
 
   bool
-  GlyphVisitorBitmapHandling::
+  freetype::GlyphVisitorBitmapHandling::
   copy_bitmap( FT_Library        library,
                const FT_Bitmap&  source,
                FT_Bitmap&        target )
@@ -116,7 +120,7 @@
 
 
   void
-  GlyphVisitorBitmapHandling::
+  freetype::GlyphVisitorBitmapHandling::
   embolden( FT_Library  library,
             FT_Bitmap&  bitmap,
             FT_Pos      xStrength,
@@ -133,7 +137,7 @@
 
 
   void
-  GlyphVisitorBitmapHandling::
+  freetype::GlyphVisitorBitmapHandling::
   blend( FT_Library        library,
          const FT_Bitmap&  source,
          FT_Bitmap&        target )
@@ -161,7 +165,7 @@
 
     
   void
-  GlyphVisitorBitmapHandling::
+  freetype::GlyphVisitorBitmapHandling::
   convert( Unique_FT_Glyph&  glyph,
            FT_Bitmap&        bitmap,
            FT_Int            alignment )

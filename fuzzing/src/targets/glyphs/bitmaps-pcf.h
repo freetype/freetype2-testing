@@ -2,7 +2,7 @@
 //
 //   Fuzz target for PCF glyph bitmaps.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/glyphs/bitmaps.h"
 
 
+namespace freetype {
+
+
   class GlyphsBitmapsPcfFuzzTarget
     : public GlyphsBitmapsFuzzTarget
   {
   public:
 
 
-    GlyphsBitmapsPcfFuzzTarget( void );
+    GlyphsBitmapsPcfFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_GLYPHS_BITMAPS_PCF_H_

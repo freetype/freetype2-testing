@@ -2,7 +2,7 @@
 //
 //   Implementation of TarReader.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,11 +22,8 @@
 #include "utils/logging.h"
 
 
-  using namespace fuzzing;
-
-
   bool
-  TarReader::
+  freetype::TarReader::
   extract_data( const uint8_t*  data,
                 size_t          size )
   {
@@ -68,7 +65,7 @@
       size_t          buffer_size;
       off_t           offset;
 
-      vector<FT_Byte>  entry_data;
+      std::vector<FT_Byte>  entry_data;
 
 
       LOG( INFO ) << "extracting: "

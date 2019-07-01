@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorKerning.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,7 +20,7 @@
 
 
   void
-  FaceVisitorKerning::
+  freetype::FaceVisitorKerning::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;

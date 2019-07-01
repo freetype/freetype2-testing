@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphLoadIterator.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -17,7 +17,7 @@
 #include "utils/logging.h"
 
 
-  GlyphLoadIterator::
+  freetype::GlyphLoadIterator::
   GlyphLoadIterator( FT_Long  num_load_glyphs )
   {
     (void) set_num_load_glyphs( num_load_glyphs );
@@ -25,7 +25,7 @@
 
 
   void
-  GlyphLoadIterator::
+  freetype::GlyphLoadIterator::
   set_num_load_glyphs( FT_Long  glyphs )
   {
     num_load_glyphs = glyphs;
@@ -34,7 +34,7 @@
 
 
   void
-  GlyphLoadIterator::
+  freetype::GlyphLoadIterator::
   add_load_flags( FT_Int32  flags )
   {
     load_flags |= flags;
@@ -42,23 +42,23 @@
 
 
   void
-  GlyphLoadIterator::
-  add_visitor( unique_ptr<GlyphVisitor>  visitor )
+  freetype::GlyphLoadIterator::
+  add_visitor( std::unique_ptr<GlyphVisitor>  visitor )
   {
     (void) glyph_visitors.emplace_back( move( visitor ) );
   }
 
 
   void
-  GlyphLoadIterator::
-  add_iterator( unique_ptr<GlyphRenderIterator>  iterator )
+  freetype::GlyphLoadIterator::
+  add_iterator( std::unique_ptr<GlyphRenderIterator>  iterator )
   {
     (void) glyph_render_iterators.emplace_back( move( iterator ) );
   }
 
 
   void
-  GlyphLoadIterator::
+  freetype::GlyphLoadIterator::
   invoke_visitors_and_iterators( const Unique_FT_Glyph&  glyph )
   {
     Unique_FT_Glyph  buffer_glyph = make_unique_glyph();

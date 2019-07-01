@@ -2,7 +2,7 @@
 //
 //   Render Type 1 faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class Type1RenderFuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    Type1RenderFuzzTarget( void );
+    Type1RenderFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TYPE_1_RENDER_H_

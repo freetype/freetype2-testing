@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorCharCodes.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,30 +19,30 @@
 #include "utils/logging.h"
 
 
-  FaceVisitorCharCodes::
-  FaceVisitorCharCodes( void )
+  freetype::FaceVisitorCharCodes::
+  FaceVisitorCharCodes()
   {
     encodings = {
-      make_pair( FT_ENCODING_NONE,           "none"           ),
-      make_pair( FT_ENCODING_MS_SYMBOL,      "ms symbol"      ),
-      make_pair( FT_ENCODING_UNICODE,        "unicode"        ),
-      make_pair( FT_ENCODING_SJIS,           "sjis"           ),
-      make_pair( FT_ENCODING_PRC,            "prc"            ),
-      make_pair( FT_ENCODING_BIG5,           "big5"           ),
-      make_pair( FT_ENCODING_WANSUNG,        "wansung"        ),
-      make_pair( FT_ENCODING_JOHAB,          "johab"          ),
-      make_pair( FT_ENCODING_ADOBE_STANDARD, "adobe standard" ),
-      make_pair( FT_ENCODING_ADOBE_EXPERT,   "adobe expert"   ),
-      make_pair( FT_ENCODING_ADOBE_CUSTOM,   "adobe custom"   ),
-      make_pair( FT_ENCODING_ADOBE_LATIN_1,  "adobe latin 1"  ),
-      make_pair( FT_ENCODING_OLD_LATIN_2,    "old latin 2"    ),
-      make_pair( FT_ENCODING_APPLE_ROMAN,    "apple roman"    )
+      std::make_pair( FT_ENCODING_NONE,           "none"           ),
+      std::make_pair( FT_ENCODING_MS_SYMBOL,      "ms symbol"      ),
+      std::make_pair( FT_ENCODING_UNICODE,        "unicode"        ),
+      std::make_pair( FT_ENCODING_SJIS,           "sjis"           ),
+      std::make_pair( FT_ENCODING_PRC,            "prc"            ),
+      std::make_pair( FT_ENCODING_BIG5,           "big5"           ),
+      std::make_pair( FT_ENCODING_WANSUNG,        "wansung"        ),
+      std::make_pair( FT_ENCODING_JOHAB,          "johab"          ),
+      std::make_pair( FT_ENCODING_ADOBE_STANDARD, "adobe standard" ),
+      std::make_pair( FT_ENCODING_ADOBE_EXPERT,   "adobe expert"   ),
+      std::make_pair( FT_ENCODING_ADOBE_CUSTOM,   "adobe custom"   ),
+      std::make_pair( FT_ENCODING_ADOBE_LATIN_1,  "adobe latin 1"  ),
+      std::make_pair( FT_ENCODING_OLD_LATIN_2,    "old latin 2"    ),
+      std::make_pair( FT_ENCODING_APPLE_ROMAN,    "apple roman"    )
     };
   }
   
 
   void
-  FaceVisitorCharCodes::
+  freetype::FaceVisitorCharCodes::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
@@ -99,7 +99,7 @@
 
 
   void
-  FaceVisitorCharCodes::
+  freetype::FaceVisitorCharCodes::
   slide_along( const Unique_FT_Face&  face )
   {
     FT_Error  error;

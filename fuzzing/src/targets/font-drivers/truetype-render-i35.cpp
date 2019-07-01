@@ -2,7 +2,7 @@
 //
 //   Implementation of TrueTypeRenderI35FuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,8 +15,8 @@
 #include "targets/font-drivers/truetype-render-i35.h"
 
 
-  TrueTypeRenderI35FuzzTarget::
-  TrueTypeRenderI35FuzzTarget( void )
+  freetype::TrueTypeRenderI35FuzzTarget::
+  TrueTypeRenderI35FuzzTarget()
   {
     (void) set_property( "truetype",
                          "interpreter-version",

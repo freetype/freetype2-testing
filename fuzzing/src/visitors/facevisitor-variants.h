@@ -4,7 +4,7 @@
 //
 //   Drivers: all
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,24 +22,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorVariants
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorVariants( void ) {}
-
-
-    FaceVisitorVariants( const FaceVisitorVariants& ) = delete;
-    FaceVisitorVariants& operator= ( const FaceVisitorVariants& ) = delete;
-
-
-    virtual
-    ~FaceVisitorVariants( void ) {}
 
 
     void
@@ -53,6 +42,7 @@
     static const size_t  VARIANT_SELECTORS_MAX =  10;
     static const size_t  LOCAL_CHARCODES_MAX   =  50;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_VARIANTS_H_

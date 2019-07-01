@@ -10,7 +10,7 @@
 //     - Type 1
 //     - Type 42
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -24,31 +24,20 @@
 #define VISITORS_FACE_VISITOR_AUTOHINTER_H_
 
 
+#include <string>
 #include <vector>
 
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorAutohinter
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorAutohinter( void ) {}
-
-
-    FaceVisitorAutohinter( const FaceVisitorAutohinter& ) = delete;
-    FaceVisitorAutohinter& operator= (
-      const FaceVisitorAutohinter& ) = delete;
-
-
-    virtual
-    ~FaceVisitorAutohinter( void ) {}
 
 
     void
@@ -63,18 +52,19 @@
     static const FT_Int32  LOAD_FLAGS      = FT_LOAD_FORCE_AUTOHINT |
                                              FT_LOAD_NO_BITMAP;
 
-    FT_Bool          default_warping = 0;
-    vector<FT_Bool>  warpings{ 0, 1 };
+    FT_Bool               default_warping = 0;
+    std::vector<FT_Bool>  warpings{ 0, 1 };
 
 
     void
-    set_property( Unique_FT_Face&  face,
-                  const string     property_name,
-                  const void*      value );
+    set_property( Unique_FT_Face&    face,
+                  const std::string  property_name,
+                  const void*        value );
 
     void
     load_glyphs( Unique_FT_Face&  face );
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_AUTOHINTER_H_

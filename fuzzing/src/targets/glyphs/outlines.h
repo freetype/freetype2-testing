@@ -2,7 +2,7 @@
 //
 //   Fuzz target for glyph outlines.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,13 +19,16 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class GlyphsOutlinesFuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    GlyphsOutlinesFuzzTarget( void );
+    GlyphsOutlinesFuzzTarget();
 
 
   private:
@@ -33,6 +36,7 @@
 
     static const FT_Long  NUM_LOAD_GLYPHS;
   };
+}
 
 
 #endif // TARGETS_GLYPHS_OUTLINES_H_

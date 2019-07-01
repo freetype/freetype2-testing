@@ -7,7 +7,7 @@
 //     - lcd
 //     - lcd v
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -24,32 +24,19 @@
 #include "iterators/glyphloaditerator.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class GlyphRenderIteratorAllModes
-  : public GlyphRenderIterator
+    : public GlyphRenderIterator
   {
   public:
-
-
-    GlyphRenderIteratorAllModes( void ) {}
-    
-
-    GlyphRenderIteratorAllModes(
-      const GlyphRenderIteratorAllModes& ) = delete;
-    GlyphRenderIteratorAllModes& operator= (
-      const GlyphRenderIteratorAllModes& ) = delete;
-
-
-    virtual
-    ~GlyphRenderIteratorAllModes( void ) {}
 
 
     void
     run( Unique_FT_Glyph  glyph )
     override;
   };
-
+}
 
 #endif // ITERATORS_GLYPH_RENDER_ITERATOR_ALL_MODES_H_

@@ -2,7 +2,7 @@
 //
 //   Implementation of CidType1FuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -14,6 +14,8 @@
 
 #include "targets/font-drivers/cidtype1.h"
 
+#include <utility> // std::move
+
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
 #include "iterators/faceprepiterator-outlines.h"
@@ -23,16 +25,13 @@
 #include "visitors/facevisitor-variants.h"
 
 
-  using namespace std;
-
-
-  CidType1FuzzTarget::
-  CidType1FuzzTarget( void )
+  freetype::CidType1FuzzTarget::
+  CidType1FuzzTarget()
   {
-    auto  fli = fuzzing::make_unique<FaceLoadIterator>();
+    auto  fli = freetype::make_unique<FaceLoadIterator>();
 
-    auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
-    auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
+    auto  fpi_bitmaps  = freetype::make_unique<FacePrepIteratorBitmaps>();
+    auto  fpi_outlines = freetype::make_unique<FacePrepIteratorOutlines>();
 
 
     // -----------------------------------------------------------------------
@@ -41,22 +40,22 @@
     (void) fli
       ->set_supported_font_format( FaceLoader::FontFormat::CID_TYPE_1 );
 
-    (void) fli->add_iterator( move( fpi_bitmaps  ) );
-    (void) fli->add_iterator( move( fpi_outlines ) );
+    (void) fli->add_iterator( std::move( fpi_bitmaps  ) );
+    (void) fli->add_iterator( std::move( fpi_outlines ) );
 
-    (void) fli->add_once_visitor( fuzzing::make_unique<FaceVisitorCid>() );
+    (void) fli->add_once_visitor( freetype::make_unique<FaceVisitorCid>() );
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorCharCodes>() );
+      ->add_once_visitor( freetype::make_unique<FaceVisitorCharCodes>() );
     (void) fli
-      ->add_once_visitor( fuzzing::make_unique<FaceVisitorVariants>() );
+      ->add_once_visitor( freetype::make_unique<FaceVisitorVariants>() );
 
     (void) fli
-      ->add_always_visitor( fuzzing::make_unique<FaceVisitorType1Tables>() );
+      ->add_always_visitor( freetype::make_unique<FaceVisitorType1Tables>() );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
 
     (void) set_property( "t1cid", "hinting-engine", &HINTING_ADOBE );
 
-    (void) set_iterator( move( fli ) );
+    (void) set_iterator( std::move( fli ) );
   }

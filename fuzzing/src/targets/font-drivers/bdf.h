@@ -2,7 +2,7 @@
 //
 //   Fuzz BDF faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class BdfFuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    BdfFuzzTarget( void );
+    BdfFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_BDF_H_

@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphVisitorOutlines.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,8 +22,8 @@
 #include "utils/logging.h"
 
 
-  GlyphVisitorOutlines::
-  GlyphVisitorOutlines( void )
+  freetype::GlyphVisitorOutlines::
+  GlyphVisitorOutlines()
   {
     (void) callbacks.emplace_back( reverse    );
     (void) callbacks.emplace_back( embolden_1 );
@@ -34,7 +34,7 @@
 
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   run( Unique_FT_Glyph  glyph )
   {
     FT_Error     error;
@@ -73,7 +73,7 @@
 
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   reverse( FT_Outline&  outline )
   {
     LOG( INFO ) << "reversing outline";
@@ -83,7 +83,7 @@
 
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   embolden( FT_Outline&  outline,
             FT_Pos       strength )
   {
@@ -98,7 +98,7 @@
 
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   embolden( FT_Outline&  outline,
             FT_Pos       xstrength,
             FT_Pos       ystrength )
@@ -115,7 +115,7 @@
 
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   embolden_1( FT_Outline&  outline )
   {
     // Note: the strength is in 26.6 format.
@@ -124,7 +124,7 @@
 
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   embolden_2( FT_Outline&  outline )
   {
     // Note: the strength is in 26.6 format.
@@ -133,7 +133,7 @@
 
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   embolden_3( FT_Outline&  outline )
   {
     // Note: the strength is in 26.6 format.
@@ -141,7 +141,7 @@
   }
 
   void
-  GlyphVisitorOutlines::
+  freetype::GlyphVisitorOutlines::
   embolden_4( FT_Outline&  outline )
   {
     // Note: the strength is in 26.6 format.

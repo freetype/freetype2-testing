@@ -2,7 +2,7 @@
 //
 //   Base class of iterators over glyphs.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,22 +15,23 @@
 #ifndef ITERATORS_GLYPH_LOAD_ITERATOR_H_
 #define ITERATORS_GLYPH_LOAD_ITERATOR_H_
 
+#include <memory> // std::unique_ptr
 #include <vector>
+
+#include <boost/core/noncopyable.hpp>
 
 #include "iterators/glyphrenderiterator.h"
 #include "utils/utils.h"
 #include "visitors/glyphvisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class GlyphLoadIterator
+    : private boost::noncopyable
   {
   public:
-
-
-    GlyphLoadIterator( void ) {}
 
 
     // @See: `GlyphLoadIterator::set_num_load_glyphs()'.
@@ -38,12 +39,8 @@
     GlyphLoadIterator( FT_Long  num_load_glyphs );
 
 
-    GlyphLoadIterator( const GlyphLoadIterator& ) = delete;
-    GlyphLoadIterator& operator= ( const GlyphLoadIterator& ) = delete;
-
-
     virtual
-    ~GlyphLoadIterator( void ) {}
+    ~GlyphLoadIterator() = default;
 
 
     virtual void
@@ -78,7 +75,7 @@
     //   A reference to the added visitor.
 
     void
-    add_visitor( unique_ptr<GlyphVisitor>  visitor );
+    add_visitor( std::unique_ptr<GlyphVisitor>  visitor );
 
 
     // @Description:
@@ -92,18 +89,17 @@
     //   A reference to the added iterator.
 
     void
-    add_iterator( unique_ptr<GlyphRenderIterator>  iterator );
+    add_iterator( std::unique_ptr<GlyphRenderIterator>  iterator );
 
     
   protected:
 
 
-    FT_Long  num_load_glyphs = -1;
+    FT_Long   num_load_glyphs = -1;
+    FT_Int32  load_flags      = FT_LOAD_DEFAULT;
 
-    FT_Int32  load_flags = FT_LOAD_DEFAULT;
-
-    vector<unique_ptr<GlyphVisitor>>         glyph_visitors;
-    vector<unique_ptr<GlyphRenderIterator>>  glyph_render_iterators;
+    std::vector<std::unique_ptr<GlyphVisitor>>         glyph_visitors;
+    std::vector<std::unique_ptr<GlyphRenderIterator>>  glyph_render_iterators;
 
 
     // @Description:
@@ -117,6 +113,7 @@
     void
     invoke_visitors_and_iterators( const Unique_FT_Glyph&  glyph );
   };
+}
 
 
 #endif // ITERATORS_GLYPH_LOAD_ITERATOR_H_

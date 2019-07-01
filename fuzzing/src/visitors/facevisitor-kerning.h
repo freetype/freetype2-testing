@@ -8,7 +8,7 @@
 //     - TrueType
 //     - Type 1
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -26,24 +26,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorKerning
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorKerning( void ) {}
-
-
-    FaceVisitorKerning( const FaceVisitorKerning& ) = delete;
-    FaceVisitorKerning& operator= ( const FaceVisitorKerning& ) = delete;
-
-    
-    virtual
-    ~FaceVisitorKerning( void ) {}
 
 
     void
@@ -60,6 +49,7 @@
     //   - 3 kerning modes
     static const FT_Long  MAX_GLYPH_INDEX = 20;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_KERNING_H_

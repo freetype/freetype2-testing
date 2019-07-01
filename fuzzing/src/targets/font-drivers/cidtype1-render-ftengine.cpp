@@ -2,7 +2,7 @@
 //
 //   Implementation of CidType1RenderFtEngineFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,8 +15,8 @@
 #include "targets/font-drivers/cidtype1-render-ftengine.h"
 
 
-  CidType1RenderFtEngineFuzzTarget::
-  CidType1RenderFtEngineFuzzTarget( void )
+  freetype::CidType1RenderFtEngineFuzzTarget::
+  CidType1RenderFtEngineFuzzTarget()
   {
     (void) set_property( "t1cid", "hinting-engine", &HINTING_FREETYPE );
   }

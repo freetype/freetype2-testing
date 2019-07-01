@@ -2,7 +2,7 @@
 //
 //   Base class of visitors of faces.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,27 +15,26 @@
 #ifndef VISITORS_FACE_VISITOR_H_
 #define VISITORS_FACE_VISITOR_H_
 
+
+#include <boost/core/noncopyable.hpp>
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "utils/utils.h"
 
 
-  using namespace fuzzing;
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitor
+    : private boost::noncopyable
   {
   public:
 
 
-    FaceVisitor( void ) {}
-
-
-    FaceVisitor( const FaceVisitor& ) = delete;
-    FaceVisitor& operator= ( const FaceVisitor& ) = delete;
-
-
     virtual
-    ~FaceVisitor( void ) {}
+    ~FaceVisitor() = default;
 
 
     // @Description:
@@ -54,6 +53,7 @@
 
     FT_Library  library;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_H_

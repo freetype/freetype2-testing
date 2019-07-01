@@ -2,7 +2,7 @@
 //
 //   Rendering CID Type 1 faces with FreeType's hinting engine.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/font-drivers/cidtype1-render.h"
 
 
+namespace freetype {
+
+
   class CidType1RenderFtEngineFuzzTarget
     : public CidType1RenderFuzzTarget
   {
   public:
 
 
-    CidType1RenderFtEngineFuzzTarget( void );
+    CidType1RenderFtEngineFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_CID_TYPE_1_RENDER_FT_ENGINE_H_

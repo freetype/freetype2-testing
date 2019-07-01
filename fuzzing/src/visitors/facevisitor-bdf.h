@@ -6,7 +6,7 @@
 //     - BDF
 //     - PCF
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -25,24 +25,16 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorBdf
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
 
 
     FaceVisitorBdf( FaceLoader::FontFormat  format );
-
-
-    FaceVisitorBdf( const FaceVisitorBdf& ) = delete;
-    FaceVisitorBdf& operator= ( const FaceVisitorBdf& ) = delete;
-
-    
-    virtual
-    ~FaceVisitorBdf( void ) {}
 
 
     void
@@ -55,6 +47,7 @@
 
     FaceLoader::FontFormat  font_format;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_BDF_H_

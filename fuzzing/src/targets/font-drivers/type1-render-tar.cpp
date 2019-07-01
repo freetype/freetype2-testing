@@ -2,7 +2,7 @@
 //
 //   Implementation of Type1RenderTarFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,8 +15,8 @@
 #include "targets/font-drivers/type1-render-tar.h"
 
 
-  Type1RenderTarFuzzTarget::
-  Type1RenderTarFuzzTarget( void )
+  freetype::Type1RenderTarFuzzTarget::
+  Type1RenderTarFuzzTarget()
   {
     (void) set_data_is_tar_archive( true );
   }

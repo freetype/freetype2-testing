@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceLoadIterator.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -15,16 +15,12 @@
 #include "iterators/faceloaditerator.h"
 
 #include <cassert>
-#include <memory>
-
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 #include "utils/logging.h"
 
 
   void
-  FaceLoadIterator::
+  freetype::FaceLoadIterator::
   set_supported_font_format( FaceLoader::FontFormat  format )
   {
     assert( face_loader != nullptr );
@@ -33,7 +29,7 @@
 
 
   void
-  FaceLoadIterator::
+  freetype::FaceLoadIterator::
   set_library( FT_Library  library )
   {
     assert( face_loader != nullptr );
@@ -42,7 +38,7 @@
 
 
   void
-  FaceLoadIterator::
+  freetype::FaceLoadIterator::
   set_raw_bytes( const uint8_t*  data,
                  size_t          size )
   {
@@ -52,7 +48,7 @@
 
 
   void
-  FaceLoadIterator::
+  freetype::FaceLoadIterator::
   set_data_is_tar_archive( bool  is_tar_archive )
   {
     assert( face_loader != nullptr );
@@ -61,32 +57,32 @@
 
 
   void
-  FaceLoadIterator::
-  add_once_visitor( unique_ptr<FaceVisitor>  visitor )
+  freetype::FaceLoadIterator::
+  add_once_visitor( std::unique_ptr<FaceVisitor>  visitor )
   {
     (void) once_face_visitors.emplace_back( move( visitor ) );
   }
 
 
   void
-  FaceLoadIterator::
-  add_always_visitor( unique_ptr<FaceVisitor>  visitor )
+  freetype::FaceLoadIterator::
+  add_always_visitor( std::unique_ptr<FaceVisitor>  visitor )
   {
     (void) always_face_visitors.emplace_back( move( visitor ) );
   }
 
 
   void
-  FaceLoadIterator::
-  add_iterator( unique_ptr<FacePrepIterator>  iterator )
+  freetype::FaceLoadIterator::
+  add_iterator( std::unique_ptr<FacePrepIterator>  iterator )
   {
     (void) face_prep_iterators.emplace_back( move( iterator ) );
   }
 
 
   void
-  FaceLoadIterator::
-  run( void )
+  freetype::FaceLoadIterator::
+  run()
   {
     Unique_FT_Face  face = make_unique_face();
 
@@ -115,7 +111,7 @@
 
       if ( face_index == 0 )
       {
-        LOG( INFO ) << "fs type flags: 0x" << hex
+        LOG( INFO ) << "fs type flags: 0x" << std::hex
                     << FT_Get_FSType_Flags( face.get() );
 
         for ( auto&  visitor : once_face_visitors )

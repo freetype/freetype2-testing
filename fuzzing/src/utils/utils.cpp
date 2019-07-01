@@ -2,7 +2,7 @@
 //
 //   Implementation of utils.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -24,27 +24,24 @@
 #include "utils/logging.h"
 
 
-  using namespace fuzzing;
-
-
-  Unique_FT_Face
-  fuzzing::
+  freetype::Unique_FT_Face
+  freetype::
   make_unique_face( FT_Face  face )
   {
     return Unique_FT_Face( face, FT_Done_Face );
   }
 
 
-  Unique_FT_Glyph
-  fuzzing::
+  freetype::Unique_FT_Glyph
+  freetype::
   make_unique_glyph( FT_Glyph  glyph )
   {
     return Unique_FT_Glyph( glyph, FT_Done_Glyph );
   }
 
 
-  Unique_FT_Glyph
-  fuzzing::
+  freetype::Unique_FT_Glyph
+  freetype::
   copy_unique_glyph( const Unique_FT_Glyph&  glyph )
   {
     FT_Error  error;
@@ -58,8 +55,8 @@
   }
 
 
-  Unique_FT_Glyph
-  fuzzing::
+  freetype::Unique_FT_Glyph
+  freetype::
   get_unique_glyph_from_face( const Unique_FT_Face&  face )
   {
     FT_Error  error;
@@ -74,7 +71,7 @@
 
 
   bool
-  fuzzing::
+  freetype::
   glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
                              FT_Pos                  reasonable_pixels )
   {
@@ -83,13 +80,13 @@
 
 
   bool
-  fuzzing::
+  freetype::
   glyph_has_reasonable_size( const Unique_FT_Glyph&  glyph,
                              FT_Pos                  reasonable_pixels,
                              FT_Pos                  reasonable_width,
                              FT_Pos                  reasonable_height )
   {
-    static const auto  POS_MAX = numeric_limits<FT_Pos>::max();
+    static const auto  POS_MAX = std::numeric_limits<FT_Pos>::max();
 
     FT_BBox  box;
     FT_Pos   pixels;
@@ -105,8 +102,8 @@
 
     (void) FT_Glyph_Get_CBox( glyph.get(), FT_GLYPH_BBOX_PIXELS, &box );
 
-    width  = abs( box.xMin - box.xMax );
-    height = abs( box.yMin - box.yMax );
+    width  = std::abs( box.xMin - box.xMax );
+    height = std::abs( box.yMin - box.yMax );
 
     LOG( INFO ) << "glyph size: " << width << " x " << height << " px\n";
 
@@ -131,7 +128,7 @@
 
 
   bool
-  fuzzing::
+  freetype::
   glyph_has_reasonable_work_size( const Unique_FT_Glyph&  glyph )
   {
     // August 2018:
@@ -144,7 +141,7 @@
 
 
   bool
-  fuzzing::
+  freetype::
   glyph_has_reasonable_render_size( const Unique_FT_Glyph&  glyph )
   {
     // August 2018:

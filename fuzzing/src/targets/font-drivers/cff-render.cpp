@@ -2,7 +2,7 @@
 //
 //   Implementation of CffRenderFuzzTarget.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -13,6 +13,8 @@
 
 
 #include "targets/font-drivers/cff-render.h"
+
+#include <utility> // std::move
 
 #include "iterators/faceloaditerator.h"
 #include "iterators/faceprepiterator-bitmaps.h"
@@ -25,57 +27,54 @@
 #include "visitors/facevisitor-subglyphs.h"
 
 
-  using namespace std;
-
-
-  CffRenderFuzzTarget::
-  CffRenderFuzzTarget( void )
+  freetype::CffRenderFuzzTarget::
+  CffRenderFuzzTarget()
   {
-    auto  fli = fuzzing::make_unique<FaceLoadIterator>();
+    auto  fli = freetype::make_unique<FaceLoadIterator>();
 
-    auto  fpi_bitmaps  = fuzzing::make_unique<FacePrepIteratorBitmaps>();
-    auto  fpi_outlines = fuzzing::make_unique<FacePrepIteratorOutlines>();
+    auto  fpi_bitmaps  = freetype::make_unique<FacePrepIteratorBitmaps>();
+    auto  fpi_outlines = freetype::make_unique<FacePrepIteratorOutlines>();
     auto  fpi_mm =
-      fuzzing::make_unique<FacePrepIteratorMultipleMasters>();
+      freetype::make_unique<FacePrepIteratorMultipleMasters>();
 
 
     // -----------------------------------------------------------------------
     // Face preparation iterators:
 
     (void) fpi_bitmaps
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorLoadGlyphsBitmaps>() );
 
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorLoadGlyphsOutlines>() );
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorRenderGlyphs>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorRenderGlyphs>() );
     (void) fpi_outlines
-      ->add_visitor( fuzzing::make_unique<FaceVisitorSubGlyphs>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorSubGlyphs>() );
 
     (void) fpi_mm
-      ->add_visitor( fuzzing::make_unique<FaceVisitorAutohinter>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorAutohinter>() );
     (void) fpi_mm
-      ->add_visitor( fuzzing::make_unique<FaceVisitorLoadGlyphsOutlines>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorLoadGlyphsOutlines>() );
     (void) fpi_mm
-      ->add_visitor( fuzzing::make_unique<FaceVisitorRenderGlyphs>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorRenderGlyphs>() );
     (void) fpi_mm
-      ->add_visitor( fuzzing::make_unique<FaceVisitorSubGlyphs>() );
+      ->add_visitor( freetype::make_unique<FaceVisitorSubGlyphs>() );
 
     // -----------------------------------------------------------------------
     // Face load iterators:
 
     (void) fli->set_supported_font_format( FaceLoader::FontFormat::CFF );
-    
-    (void) fli->add_iterator( move( fpi_bitmaps  ) );
-    (void) fli->add_iterator( move( fpi_outlines ) );
-    (void) fli->add_iterator( move( fpi_mm       ) );
+
+    (void) fli->add_iterator( std::move( fpi_bitmaps  ) );
+    (void) fli->add_iterator( std::move( fpi_outlines ) );
+    (void) fli->add_iterator( std::move( fpi_mm       ) );
 
     // -----------------------------------------------------------------------
     // Fuzz target:
 
     (void) set_property( "cff", "hinting-engine", &HINTING_ADOBE );
 
-    (void) set_iterator( move( fli ) );
+    (void) set_iterator( std::move( fli ) );
   }

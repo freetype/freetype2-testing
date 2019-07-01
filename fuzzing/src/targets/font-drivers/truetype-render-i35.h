@@ -2,7 +2,7 @@
 //
 //   Render TrueType faces using interpreter version 35.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/font-drivers/truetype-render.h"
 
 
+namespace freetype {
+
+
   class TrueTypeRenderI35FuzzTarget
     : public TrueTypeRenderFuzzTarget
   {
   public:
 
 
-    TrueTypeRenderI35FuzzTarget( void );
+    TrueTypeRenderI35FuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_TRUETYPE_RENDER_I35_H_

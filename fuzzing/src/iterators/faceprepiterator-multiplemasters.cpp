@@ -2,7 +2,7 @@
 //
 //   Implementation of FacePrepIteratorMultipleMasters.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -17,19 +17,19 @@
 #include "utils/logging.h"
 
 
-  Unique_FT_Face
-  FacePrepIteratorMultipleMasters::
-  get_prepared_face( const unique_ptr<FaceLoader>&     face_loader,
-                     vector<CharSizeTuple>::size_type  index )
+  freetype::Unique_FT_Face
+  freetype::FacePrepIteratorMultipleMasters::
+  get_prepared_face( const std::unique_ptr<FaceLoader>&  face_loader,
+                     CharSizeTuples::size_type           index )
   {
     FT_Error  error;
 
     Unique_FT_Face  face =
       FacePrepIteratorOutlines::get_prepared_face( face_loader, index );
 
-    FT_Library        library;
-    FT_MM_Var*        master;
-    vector<FT_Fixed>  coords;
+    FT_Library             library;
+    FT_MM_Var*             master;
+    std::vector<FT_Fixed>  coords;
 
 
     if ( face == nullptr )
@@ -68,8 +68,8 @@
   }
 
 
-  Unique_FT_Face
-  FacePrepIteratorMultipleMasters::
+  freetype::Unique_FT_Face
+  freetype::FacePrepIteratorMultipleMasters::
   free_and_return( FT_Library      library,
                    FT_MM_Var*      master,
                    Unique_FT_Face  face )

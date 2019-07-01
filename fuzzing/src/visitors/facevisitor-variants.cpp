@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorVariants.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -22,17 +22,17 @@
 
 
   void
-  FaceVisitorVariants::
+  freetype::FaceVisitorVariants::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
 
-    FT_UInt32*         raw_selectors;
-    vector<FT_UInt32>  selectors;
+    FT_UInt32*              raw_selectors;
+    std::vector<FT_UInt32>  selectors;
 
-    FT_UInt32*      raw_chars;
-    set<FT_UInt32>  local_charcodes;
-    set<FT_UInt32>  global_charcodes;
+    FT_UInt32*           raw_chars;
+    std::set<FT_UInt32>  local_charcodes;
+    std::set<FT_UInt32>  global_charcodes;
 
     FT_Int   is_default;
     FT_UInt  glyph_index;
@@ -73,14 +73,14 @@
           break;
       }
 
-      for ( FT_UInt32  charcode : local_charcodes )
+      for ( auto  charcode : local_charcodes )
       {
         is_default = FT_Face_GetCharVariantIsDefault( face.get(),
                                                       charcode,
                                                       selector );
         LOG( INFO ) << "variant "
-                    << hex << "0x" << charcode << "/"
-                    << dec << selector
+                    << std::hex << "0x" << charcode << "/"
+                    << std::dec << selector
                     << " is default: " << is_default;
 
         glyph_index = FT_Face_GetCharVariantIndex( face.get(),
@@ -88,8 +88,8 @@
                                                    selector );
 
         LOG( INFO ) << "glpyh index of variant "
-                    << hex << "0x" << charcode << "/"
-                    << dec << selector << ": "
+                    << std::hex << "0x" << charcode << "/"
+                    << std::dec << selector << ": "
                     << glyph_index;
       }
     }
@@ -98,6 +98,6 @@
     // should check if this function works in tandem with
     // `FT_Face_GetCharsOfVariant' but this is not in the scope of fuzzers.
 
-    for ( FT_UInt32  charcode : global_charcodes )
+    for ( auto  charcode : global_charcodes )
       (void) FT_Face_GetVariantsOfChar( face.get(), charcode );
   }

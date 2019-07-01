@@ -2,7 +2,7 @@
 //
 //   Iterator that prepares faces for bitmap usage.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,36 +16,20 @@
 #define ITERATORS_FACE_PREP_ITERATOR_BITMAPS_H_
 
 
-#include <vector>
-
 #include "iterators/faceprepiterator.h"
 
 
-  using namespace fuzzing;
-  using namespace std;
+namespace freetype {
 
 
   class FacePrepIteratorBitmaps
-  : public FacePrepIterator
+    : public FacePrepIterator
   {
   public:
 
 
-    FacePrepIteratorBitmaps( void ) {}
-    
-
-    FacePrepIteratorBitmaps(
-      const FacePrepIteratorBitmaps& ) = delete;
-    FacePrepIteratorBitmaps& operator= (
-      const FacePrepIteratorBitmaps& ) = delete;
-
-
-    virtual
-    ~FacePrepIteratorBitmaps( void ) {}
-
-
     void
-    run( const unique_ptr<FaceLoader>&  face_loader )
+    run( const std::unique_ptr<FaceLoader>&  face_loader )
     override;
 
 
@@ -56,9 +40,10 @@
 
 
     Unique_FT_Face
-    get_prepared_face( const unique_ptr<FaceLoader>&  face_loader,
-                       FT_Int                         index );
+    get_prepared_face( const std::unique_ptr<FaceLoader>&  face_loader,
+                       FT_Int                              index );
   };
+}
 
 
 #endif // ITERATORS_FACE_PREP_ITERATOR_BITMAPS_H_

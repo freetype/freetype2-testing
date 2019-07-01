@@ -2,7 +2,7 @@
 //
 //   Implementation of SfntNames.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -23,7 +23,7 @@
 
 
   void
-  FaceVisitorSfntNames::
+  freetype::FaceVisitorSfntNames::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
@@ -57,8 +57,8 @@
         << sfnt_name.encoding_id << "/"
         << sfnt_name.language_id << "/"
         << sfnt_name.name_id << ": "
-        << "'" << string( reinterpret_cast<char*>( sfnt_name.string ),
-                          sfnt_name.string_len ) << "'";
+        << "'" << std::string( reinterpret_cast<char*>( sfnt_name.string ),
+                               sfnt_name.string_len ) << "'";
 
       // [...] values equal or larger than 0x8000 [...] indicate a language
       // tag string [...]. Use [...] `FT_Get_Sfnt_LangTag' [...] to retrieve
@@ -75,8 +75,8 @@
       LOG_IF( INFO, error == 0 )
         << "sfnt lang tag "
         << ( index + 1 ) << "/" << num_sfnt_names << ": "
-        << "'" << string( reinterpret_cast<char*>( sfnt_lang.string ),
-                          sfnt_lang.string_len ) << "'";
+        << "'" << std::string( reinterpret_cast<char*>( sfnt_lang.string ),
+                               sfnt_lang.string_len ) << "'";
     }
 
     WARN_ABOUT_IGNORED_VALUES( num_sfnt_names, SFNT_NAME_MAX, "names" );

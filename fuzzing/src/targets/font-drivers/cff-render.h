@@ -2,7 +2,7 @@
 //
 //   Render CFF faces.
 //
-// Copyright 2019 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,14 +19,18 @@
 #include "targets/FaceFuzzTarget.h"
 
 
+namespace freetype {
+
+
   class CffRenderFuzzTarget
     : public FaceFuzzTarget
   {
   public:
 
 
-    CffRenderFuzzTarget( void );
+    CffRenderFuzzTarget();
   };
+}
 
 
 #endif // TARGETS_FONT_DRIVERS_CFF_RENDER_H_

@@ -5,7 +5,7 @@
 //   Drivers:
 //     - Windows FNT
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -23,31 +23,20 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorWindowsFnt
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorWindowsFnt( void ) {}
-
-
-    FaceVisitorWindowsFnt( const FaceVisitorWindowsFnt& ) = delete;
-    FaceVisitorWindowsFnt& operator= (
-      const FaceVisitorWindowsFnt& ) = delete;
-
-    
-    virtual
-    ~FaceVisitorWindowsFnt( void ) {}
 
 
     void
     run( Unique_FT_Face  face )
     override;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_WINDWOS_FNT_H_

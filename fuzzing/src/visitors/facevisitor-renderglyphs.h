@@ -10,7 +10,7 @@
 //     - Type 1
 //     - Type 42
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -25,30 +25,19 @@
 
 
 #include <vector>
+#include <utility> // std::pair
 
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorRenderGlyphs
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorRenderGlyphs( void ) {}
-
-
-    FaceVisitorRenderGlyphs( const FaceVisitorRenderGlyphs& ) = delete;
-    FaceVisitorRenderGlyphs& operator= (
-      const FaceVisitorRenderGlyphs& ) = delete;
-
-
-    virtual
-    ~FaceVisitorRenderGlyphs( void ) {}
 
 
     void
@@ -59,10 +48,12 @@
   private:
 
 
-    static const FT_Long  GLYPH_INDEX_MAX = 5;
+    typedef std::vector<std::pair<FT_Int32, FT_Render_Mode>>  RenderModes;
 
-    static const vector<pair<FT_Int32, FT_Render_Mode>>  RENDER_MODES;
+    static const FT_Long      GLYPH_INDEX_MAX = 5;
+    static const RenderModes  RENDER_MODES;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_RENDER_GLYPHS_H_

@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceVisitorSubGlyphs.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,7 +20,7 @@
 
 
   void
-  FaceVisitorSubGlyphs::
+  freetype::FaceVisitorSubGlyphs::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;
@@ -77,7 +77,7 @@
         LOG_IF( INFO, error == 0 )
           << "subglyph " << ( sub_index + 1 ) << "/" << num_subglyphs << ": "
           << "glyph #" << sg_index << ", "
-          << "flags 0x" << hex << sg_flags;
+          << "flags 0x" << std::hex << sg_flags;
       }
 
       WARN_ABOUT_IGNORED_VALUES( num_subglyphs,

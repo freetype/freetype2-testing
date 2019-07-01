@@ -2,7 +2,7 @@
 //
 //   Visitor that transform a given glyph.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -19,25 +19,13 @@
 #include "visitors/glyphvisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class GlyphVisitorTransform
-  : public GlyphVisitor
+    : public GlyphVisitor
   {
   public:
-
-
-    GlyphVisitorTransform( void ) {}
-
-
-    GlyphVisitorTransform( const GlyphVisitorTransform& ) = delete;
-    GlyphVisitorTransform& operator= (
-      const GlyphVisitorTransform& ) = delete;
-
-
-    virtual
-    ~GlyphVisitorTransform( void ) {}
 
 
     void
@@ -53,6 +41,7 @@
                FT_Matrix*              matrix,
                FT_Vector*              delta );
   };
+}
 
 
 #endif // VISITORS_GLYPH_VISITOR_TRANSFORM_H_

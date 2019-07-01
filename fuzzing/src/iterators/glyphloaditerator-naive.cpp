@@ -2,7 +2,7 @@
 //
 //   Implementation of GlyphLoadIteratorNaive.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -20,7 +20,7 @@
 
 
   void
-  GlyphLoadIteratorNaive::
+  freetype::GlyphLoadIteratorNaive::
   run( Unique_FT_Face  face )
   {
     FT_Error  error;

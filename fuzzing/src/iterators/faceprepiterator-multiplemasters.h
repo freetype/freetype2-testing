@@ -2,7 +2,7 @@
 //
 //   Iterator that prepares faces for outline usage with multiple masters.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,42 +16,24 @@
 #define ITERATORS_FACE_PREP_ITERATOR_MULTIPLE_MASTERS_H_
 
 
-#include <vector>
-
 #include <ft2build.h>
 #include FT_MULTIPLE_MASTERS_H
 
 #include "iterators/faceprepiterator-outlines.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FacePrepIteratorMultipleMasters
-  : public FacePrepIteratorOutlines
+    : public FacePrepIteratorOutlines
   {
-  public:
-
-
-    FacePrepIteratorMultipleMasters( void ) {}
-    
-
-    FacePrepIteratorMultipleMasters(
-      const FacePrepIteratorMultipleMasters& ) = delete;
-    FacePrepIteratorMultipleMasters& operator= (
-      const FacePrepIteratorMultipleMasters& ) = delete;
-
-
-    virtual
-    ~FacePrepIteratorMultipleMasters( void ) {}
-
-
   protected:
 
 
-    virtual Unique_FT_Face
-    get_prepared_face( const unique_ptr<FaceLoader>&     face_loader,
-                       vector<CharSizeTuple>::size_type  index )
+    Unique_FT_Face
+    get_prepared_face( const std::unique_ptr<FaceLoader>&  face_loader,
+                       CharSizeTuples::size_type           index )
     override;
 
 
@@ -66,6 +48,7 @@
                      FT_MM_Var*      master,
                      Unique_FT_Face  face );
   };
+}
 
 
 #endif // ITERATORS_FACE_PREP_ITERATOR_MULTIPLE_MASTERS_H_

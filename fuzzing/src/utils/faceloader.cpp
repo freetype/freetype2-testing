@@ -2,7 +2,7 @@
 //
 //   Implementation of FaceLoader.
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka, David Turner, Robert Wilhelm, and Werner Lemberg.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -16,14 +16,13 @@
 
 #include <cassert>
 
-#include <ft2build.h>
 #include FT_FONT_FORMATS_H
 
 #include "utils/logging.h"
 
 
   void
-  FaceLoader::
+  freetype::FaceLoader::
   set_supported_font_format( FontFormat  format )
   {
     supported_font_format = format;
@@ -45,7 +44,7 @@
 
 
   void
-  FaceLoader::
+  freetype::FaceLoader::
   set_library( FT_Library  library )
   {
     this->library = library;
@@ -53,7 +52,7 @@
 
 
   void
-  FaceLoader::
+  freetype::FaceLoader::
   set_raw_bytes( const uint8_t*  data,
                  size_t          size )
   {
@@ -72,7 +71,7 @@
 
 
   void
-  FaceLoader::
+  freetype::FaceLoader::
   set_data_is_tar_archive( bool  is_tar_archive )
   {
     data_is_tar_archive = is_tar_archive;
@@ -80,7 +79,7 @@
 
 
   void
-  FaceLoader::
+  freetype::FaceLoader::
   set_face_index( FT_Long  index )
   {
     if ( index != face_index )
@@ -97,7 +96,7 @@
 
     
   void
-  FaceLoader::
+  freetype::FaceLoader::
   set_instance_index( FT_Long  index )
   {
     if ( index < 0 || index >= get_num_instances() )
@@ -111,8 +110,8 @@
 
 
   FT_Long
-  FaceLoader::
-  get_num_faces( void )
+  freetype::FaceLoader::
+  get_num_faces()
   {
     if ( num_faces < 0 )
     {
@@ -132,8 +131,8 @@
 
 
   FT_Long
-  FaceLoader::
-  get_num_instances( void )
+  freetype::FaceLoader::
+  get_num_instances()
   {
     if ( num_instances < 0 )
     {
@@ -152,16 +151,16 @@
   }
 
 
-  Unique_FT_Face
-  FaceLoader::
-  load( void )
+  freetype::Unique_FT_Face
+  freetype::FaceLoader::
+  load()
   {
     return load_face( face_index, instance_index );
   }
 
 
-  Unique_FT_Face
-  FaceLoader::
+  freetype::Unique_FT_Face
+  freetype::FaceLoader::
   load_face( FT_Long  face_index,
              FT_Long  instance_index )
   {
@@ -215,7 +214,7 @@
       }
     }
 
-    string  font_format( FT_Get_Font_Format( face ) );
+    std::string  font_format( FT_Get_Font_Format( face ) );
     if ( font_format != supported_font_format_string )
     {
       LOG( ERROR ) << "invalid font format: "

@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euxo pipefail
 
-# Copyright 2018 by
+# Copyright 2018-2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -23,8 +23,7 @@ if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
     # conditionally, based on the installed version of `git', is possible and
     # would save some time when updating submodule.  #goodFirstIssue
 
-    git submodule init   "${path_to_src}"
-    git submodule update "${path_to_src}"
+    git submodule update --init "${path_to_src}"
 
     cd "${path_to_src}"
 

@@ -6,7 +6,7 @@
 //     - CID Type 1
 //     - CFF
 //
-// Copyright 2018 by
+// Copyright 2018-2019 by
 // Armin Hasitzka.
 //
 // This file is part of the FreeType project, and may only be used,
@@ -24,24 +24,13 @@
 #include "visitors/facevisitor.h"
 
 
-  using namespace std;
+namespace freetype {
 
 
   class FaceVisitorCid
-  : public FaceVisitor
+    : public FaceVisitor
   {
   public:
-
-
-    FaceVisitorCid( void ) {}
-
-
-    FaceVisitorCid( const FaceVisitorCid& ) = delete;
-    FaceVisitorCid& operator= ( const FaceVisitorCid& ) = delete;
-
-
-    virtual
-    ~FaceVisitorCid( void ) {}
 
 
     void
@@ -54,6 +43,7 @@
 
     static const FT_Long  GLYPH_INDEX_MAX = 50;
   };
+}
 
 
 #endif // VISITORS_FACE_VISITOR_CID_H_

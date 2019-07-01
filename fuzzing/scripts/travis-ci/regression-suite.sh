@@ -1,7 +1,7 @@
 #!/bin/bash
 set -exo pipefail
 
-# Copyright 2019 by
+# Copyright 2018-2019 by
 # Armin Hasitzka.
 #
 # This file is part of the FreeType project, and may only be used, modified,
@@ -30,6 +30,7 @@ cd ..
 bash build/libarchive.sh
 bash build/bzip2.sh
 bash build/freetype.sh
+bash build/boost.sh
 bash build/targets.sh
 
 cd ../build
