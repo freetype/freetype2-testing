@@ -14,8 +14,6 @@ git:
 matrix:
   include:
     - os: linux
-      language: cpp
-      compiler: clang
       addons:
         apt:
           sources: llvm-toolchain-trusty-5.0
