@@ -46,7 +46,8 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
        --with-bzip2       \
        --without-harfbuzz \
        --without-png      \
-       --without-zlib
+       --without-zlib     \
+       --without-brotli
 fi
 
 cd "${path_to_freetype}"
