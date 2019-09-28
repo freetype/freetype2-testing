@@ -66,6 +66,12 @@ set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
 set(BZIP2_BASE_DIR       "${SUBMODULES_DIR}/bzip2")
 set(BZIP2_STATIC_LIBRARY "${BZIP2_BASE_DIR}/libbz2.a")
 
+set(BROTLI_BASE_DIR  "${SUBMODULES_DIR}/brotli")
+set(BROTLI_BUILD_DIR "${BROTLI_BASE_DIR}/build")
+set(BROTLI_STATIC_LIBRARY
+  "${BROTLI_BUILD_DIR}/libbrotlidec-static.a"
+  "${BROTLI_BUILD_DIR}/libbrotlicommon-static.a")
+
 # ----------------------------------------------------------------------------
 # functions:
 

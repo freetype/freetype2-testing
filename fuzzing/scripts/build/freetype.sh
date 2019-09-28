@@ -36,6 +36,9 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     export BZIP2_CFLAGS="-I../bzip2"
     export BZIP2_LIBS="-l../bzip2/libbz2.a"
 
+    export BROTLI_CFLAGS="-I../brotli/c/include"
+    export BROTLI_LIBS="-l../brotli/build/libbrotlidec-static.a"
+
     # Having additional libraries is pain since they have to be linked
     # statically for OSS-Fuzz.  Should additional libraries be required, they
     # have to be linked properly in `fuzzing/src/fuzzers/CMakeLists.txt'.
@@ -43,11 +46,11 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     sh configure          \
        --enable-static    \
        --disable-shared   \
+       --with-brotli      \
        --with-bzip2       \
        --without-harfbuzz \
        --without-png      \
-       --without-zlib     \
-       --without-brotli
+       --without-zlib
 fi
 
 cd "${path_to_freetype}"

@@ -21,7 +21,8 @@ target_link_libraries(driver
   "${LIBARCHIVE_STATIC_LIBRARY}"
   fuzztargets
   "${FREETYPE_STATIC_LIBRARY}"
-  "${BZIP2_STATIC_LIBRARY}")
+  "${BZIP2_STATIC_LIBRARY}"
+  "${BROTLI_STATIC_LIBRARY}")
 
 if("${LOGGER_NAME}" STREQUAL "LOGGER_GLOG")
   target_compile_definitions(driver PRIVATE "LOGGER_GLOG")
