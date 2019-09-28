@@ -16,3 +16,6 @@
 [submodule "external/boost"]
 	path = external/boost
 	url = https://github.com/boostorg/boost.git
+[submodule "external/brotli"]
+	path = external/brotli
+	url = https://github.com/google/brotli.git
