@@ -63,7 +63,7 @@
 
       const FT_Byte*  buffer;
       size_t          buffer_size;
-      off_t           offset;
+      la_int64_t      offset;
 
       std::vector<FT_Byte>  entry_data;
 
