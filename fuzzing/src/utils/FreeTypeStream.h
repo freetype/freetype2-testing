@@ -22,8 +22,7 @@
 
 #include <ft2build.h>
 #include FT_FREETYPE_H
-#include <freetype/internal/internal.h>
-#include FT_INTERNAL_STREAM_H
+#include <freetype/internal/ftstream.h>
 
 
 namespace freetype {
