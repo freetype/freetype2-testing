@@ -18,18 +18,17 @@
 
 #include <cstdint>
 
-#include <boost/core/noncopyable.hpp>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <freetype/internal/ftobjs.h>
 
+#include "utils/noncopyable.h"
 
 namespace freetype {
 
 
   class FuzzTarget
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 

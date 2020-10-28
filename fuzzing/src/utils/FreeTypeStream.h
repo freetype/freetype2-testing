@@ -18,18 +18,17 @@
 
 #include <cstdint>
 
-#include <boost/core/noncopyable.hpp>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include <freetype/internal/ftstream.h>
 
+#include "utils/noncopyable.h"
 
 namespace freetype {
 
 
   class FreeTypeStream
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 

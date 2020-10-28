@@ -16,16 +16,14 @@
 #define VISITORS_GLYPH_VISITOR_H_
 
 
+#include "utils/noncopyable.h"
 #include "utils/utils.h"
-
-#include <boost/core/noncopyable.hpp>
-
 
 namespace freetype {
 
 
   class GlyphVisitor
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 

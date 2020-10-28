@@ -18,13 +18,12 @@
 
 #include <memory> // std::unique_ptr
 
-#include <boost/core/noncopyable.hpp>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
 #include "iterators/faceprepiterator.h"
 #include "utils/faceloader.h"
+#include "utils/noncopyable.h"
 #include "utils/utils.h"
 #include "visitors/facevisitor.h"
 
@@ -33,11 +32,10 @@ namespace freetype {
 
 
   class FaceLoadIterator
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 
-    
     FaceLoadIterator()
       : face_loader( new FaceLoader ) {}
 

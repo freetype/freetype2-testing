@@ -20,14 +20,13 @@
 #include <unordered_map>
 #include <vector>
 
-#include <boost/core/noncopyable.hpp>
-
+#include "utils/noncopyable.h"
 
 namespace freetype {
 
 
   class DriverInternals
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 

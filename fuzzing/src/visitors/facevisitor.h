@@ -16,11 +16,10 @@
 #define VISITORS_FACE_VISITOR_H_
 
 
-#include <boost/core/noncopyable.hpp>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include "utils/noncopyable.h"
 #include "utils/utils.h"
 
 
@@ -28,14 +27,13 @@ namespace freetype {
 
 
   class FaceVisitor
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 
 
     virtual
     ~FaceVisitor() = default;
-
 
     // @Description:
     //   Run an arbitrary action on a face.
@@ -46,7 +44,6 @@ namespace freetype {
 
     virtual void
     run( Unique_FT_Face  face ) = 0;
-
 
   protected:
 
