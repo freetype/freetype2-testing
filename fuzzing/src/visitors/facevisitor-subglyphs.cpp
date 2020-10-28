@@ -59,8 +59,8 @@
       }
 
       num_subglyphs = face->glyph->num_subglyphs;
-      
-      for ( auto  sub_index = 0;
+
+      for ( FT_UInt sub_index = 0;
             sub_index < num_subglyphs &&
               sub_index < SUBGLYPH_INDEX_MAX;
             sub_index++ )

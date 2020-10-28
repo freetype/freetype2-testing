@@ -47,7 +47,7 @@
       return free_and_return( library, master, make_unique_face() );
 
     // Select arbitrary coordinates:
-    for ( auto  i = 0;
+    for ( auto  i = 0u;
           i < master->num_axis &&
             i < AXIS_INDEX_MAX;
           i++ )
@@ -75,5 +75,5 @@
                    Unique_FT_Face  face )
   {
     (void) FT_Done_MM_Var( library, master );
-    return move( face );
+    return face;
   }

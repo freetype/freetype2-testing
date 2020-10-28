@@ -34,7 +34,7 @@
   freetype::FacePrepIteratorOutlines::
   run( const std::unique_ptr<FaceLoader>&  face_loader )
   {
-    for ( auto  index = 0; index < char_sizes.size(); index++ )
+    for ( size_t index = 0; index < char_sizes.size(); index++ )
     {
       LOG( INFO )
         << "using char size "
