@@ -36,11 +36,6 @@ namespace freetype {
     run( Unique_FT_Face  face )
     override;
 
-
-  private:
-    
-
-    bool  last_load_successful = false;
   };
 }
 
