@@ -28,18 +28,18 @@
 
 #include <memory>
 
-#include <archive.h>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #include FT_GLYPH_H
 
 
+struct archive;
+
 namespace freetype
 {
 
-  typedef std::unique_ptr<struct archive,
-                          decltype( archive_read_free )*>  Unique_Archive;
+  typedef std::unique_ptr<archive,
+                          int( * )( archive* ) >  Unique_Archive;
 
   typedef std::unique_ptr<FT_FaceRec,
                           decltype( FT_Done_Face )*>  Unique_FT_Face;
