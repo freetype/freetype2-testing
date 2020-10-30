@@ -74,6 +74,7 @@ namespace freetype {
     set_data_is_tar_archive( bool  is_tar_archive );
 #endif
 
+
     // @Description:
     //   Set a FreeType property via `FT_Property_Set'.
     //

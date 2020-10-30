@@ -46,6 +46,7 @@
     (void) face_loader->set_raw_bytes( data, size );
   }
 
+
 #ifdef HAVE_ARCHIVE
   void
   freetype::FaceLoadIterator::
