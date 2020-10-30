@@ -22,7 +22,9 @@
 #include FT_FREETYPE_H
 #include <freetype/internal/ftstream.h>
 
+
 #include "utils/noncopyable.h"
+
 
 namespace freetype {
 
