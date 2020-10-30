@@ -52,8 +52,6 @@ set(FREETYPE_BASE_DIR       "${SUBMODULES_DIR}/freetype2")
 set(FREETYPE_SRC_DIR        "${FREETYPE_BASE_DIR}/src")
 set(FREETYPE_STATIC_LIBRARY "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
 
-set(BOOST_BASE_DIR "${SUBMODULES_DIR}/boost")
-
 set(GLOG_BASE_DIR       "${SUBMODULES_DIR}/glog")
 set(GLOG_SRC_DIR        "${GLOG_BASE_DIR}/src")
 set(GLOG_BUILD_DIR      "${GLOG_BASE_DIR}/build")
@@ -253,7 +251,6 @@ endif()
 
 include_directories(
   "${FREETYPE_BASE_DIR}/include"
-  "${BOOST_BASE_DIR}"
   "${FUZZING_SRC_DIR}"
   "${LIBARCHIVE_BASE_DIR}/libarchive")
 

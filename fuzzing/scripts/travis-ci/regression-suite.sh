@@ -31,7 +31,6 @@ bash "build/libarchive.sh"
 bash "build/brotli.sh"
 bash "build/bzip2.sh"
 bash "build/freetype.sh"
-bash "build/boost.sh"
 bash "build/targets.sh"
 
 cd ../build

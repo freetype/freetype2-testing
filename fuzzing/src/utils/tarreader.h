@@ -17,11 +17,10 @@
 
 #include <vector>
 
-#include <boost/core/noncopyable.hpp>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+#include "utils/noncopyable.h"
 #include "utils/utils.h"
 
 
@@ -29,7 +28,7 @@ namespace freetype {
 
 
   class TarReader
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 

@@ -19,12 +19,11 @@
 #include <string>
 #include <vector>
 
-#include <boost/core/noncopyable.hpp>
-
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
 #include "utils/tarreader.h"
+#include "utils/noncopyable.h"
 #include "utils/utils.h"
 
 
@@ -32,7 +31,7 @@ namespace freetype {
 
 
   class FaceLoader
-    : private boost::noncopyable
+    : private noncopyable
   {
   public:
 
