@@ -57,6 +57,7 @@
   }
 
 
+#ifdef HAVE_ARCHIVE
   void
   freetype::FaceFuzzTarget::
   set_data_is_tar_archive( bool  is_tar_archive )
@@ -64,6 +65,7 @@
     assert( face_load_iterator != nullptr );
     (void) face_load_iterator->set_data_is_tar_archive( is_tar_archive );
   }
+#endif
 
 
   bool

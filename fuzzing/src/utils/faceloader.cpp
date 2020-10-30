@@ -60,22 +60,25 @@
 
     (void) files.clear();
 
+#ifdef HAVE_ARCHIVE
     if ( data_is_tar_archive == true )
       (void) tarreader.extract_data( data, size );
     else
+#endif
       (void) files.emplace_back( data, data + size );
 
     num_faces     = -1;
     num_instances = -1;
   }
 
-
+#ifdef HAVE_ARCHIVE
   void
   freetype::FaceLoader::
   set_data_is_tar_archive( bool  is_tar_archive )
   {
     data_is_tar_archive = is_tar_archive;
   }
+#endif
 
 
   void

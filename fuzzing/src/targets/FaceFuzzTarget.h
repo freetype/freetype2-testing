@@ -67,10 +67,12 @@ namespace freetype {
     set_supported_font_format( FaceLoader::FontFormat  format );
 
 
+#ifdef HAVE_ARCHIVE
     // @See: `FaceLoader::set_data_is_tar_archive()'
 
     void
     set_data_is_tar_archive( bool  is_tar_archive );
+#endif
 
 
     // @Description:

@@ -98,6 +98,7 @@ namespace freetype {
                    size_t          size );
 
 
+#ifdef HAVE_ARCHIVE
     // @Description:
     //   Choose whether this target should treat incoming data as a tar
     //   archive or as a plain font file.  Mind that this only makes sense
@@ -109,6 +110,7 @@ namespace freetype {
 
     void
     set_data_is_tar_archive( bool  is_tar_archive );
+#endif
 
 
     void
@@ -165,7 +167,9 @@ namespace freetype {
     FontFormat   supported_font_format        = FontFormat::NONE;
     std::string  supported_font_format_string = "";
 
+#ifdef HAVE_ARCHIVE
     bool  data_is_tar_archive = false;
+#endif
 
     FT_Long  num_faces  = -1;
     FT_Long  face_index =  0;

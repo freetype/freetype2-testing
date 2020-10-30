@@ -88,7 +88,8 @@ add_library(fuzztargets
 
 target_compile_definitions(fuzztargets
   PRIVATE
-  "${LOGGER_NAME}")
+  "${LOGGER_NAME}"
+  HAVE_ARCHIVE)
 
 if("${FUZZ_TARGET_TYPE}" STREQUAL "libfuzzer")
 

@@ -47,6 +47,7 @@
   }
 
 
+#ifdef HAVE_ARCHIVE
   void
   freetype::FaceLoadIterator::
   set_data_is_tar_archive( bool  is_tar_archive )
@@ -54,6 +55,7 @@
     assert( face_loader != nullptr );
     (void) face_loader->set_data_is_tar_archive( is_tar_archive );
   }
+#endif
 
 
   void
