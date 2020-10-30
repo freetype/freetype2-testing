@@ -36,6 +36,7 @@ namespace freetype {
   {
   public:
 
+
     FaceLoadIterator()
       : face_loader( new FaceLoader ) {}
 

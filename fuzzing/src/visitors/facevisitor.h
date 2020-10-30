@@ -35,6 +35,7 @@ namespace freetype {
     virtual
     ~FaceVisitor() = default;
 
+
     // @Description:
     //   Run an arbitrary action on a face.
     //
@@ -44,6 +45,7 @@ namespace freetype {
 
     virtual void
     run( Unique_FT_Face  face ) = 0;
+
 
   protected:
 
