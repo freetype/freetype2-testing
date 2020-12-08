@@ -43,9 +43,17 @@ if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
 
     mkdir -p "${path_to_build}" && cd "${path_to_build}"
 
+    # Depending on the OS, the library gets installed in `.../lib` or
+    # `.../lib64` (or maybe even somewhere else).  For simplicity, however,
+    # we want a location that is independent of the OS, thus the `--libdir`
+    # argument.
     CPPFLAGS="-I${path_to_zlib}/usr/include" \
-    LDFLAGS="-L${path_to_zlib}/usr/lib" \
-    sh ../configure --with-libpng-prefix=OSS_FUZZ_ --prefix="${path_to_install}" --enable-static --disable-shared
+    LDFLAGS="-L${path_to_zlib}/usr/lib-asan" \
+    sh ../configure --with-libpng-prefix=OSS_FUZZ_ \
+                    --prefix="${path_to_install}" \
+                    --libdir="${path_to_install}/lib-asan" \
+                    --enable-static \
+                    --disable-shared
 fi
 
 if [[ -d "${path_to_build}" ]]; then

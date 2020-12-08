@@ -29,7 +29,13 @@ if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
     git rev-parse HEAD
 
     mkdir -p "${path_to_build}" && cd "${path_to_build}"
-    sh ./configure --zprefix --prefix="${path_to_install}" --static
+    # 'zlib' is a dependency of 'libpng'; the library must thus be installed
+    # in the same directory as 'libpng'.  See `libpng.sh` for more
+    # information why `--libdir` is necessary.
+    sh ./configure --zprefix \
+                   --prefix="${path_to_install}" \
+                   --libdir="${path_to_install}/lib-asan" \
+                   --static
 fi
 
 if [[ -d "${path_to_build}" ]]; then

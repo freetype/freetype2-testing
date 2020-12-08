@@ -40,10 +40,10 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     export BROTLI_LIBS="-l../brotli/build/libbrotlidec-static.a"
 
     export ZLIB_CFLAGS="-I../zlib/usr/include"
-    export ZLIB_LIBS="-l../zlib/usr/lib/libz.a"
+    export ZLIB_LIBS="-l../zlib/usr/lib-asan/libz.a"
 
     export LIBPNG_CFLAGS="-I../libpng/usr/include"
-    export LIBPNG_LIBS="-l../libpng/usr/lib/libpng.a"
+    export LIBPNG_LIBS="-l../libpng/usr/lib-asan/libpng.a"
 
     # Having additional libraries is pain since they have to be linked
     # statically for OSS-Fuzz.  Should additional libraries be required, they
