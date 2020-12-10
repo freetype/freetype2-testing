@@ -71,10 +71,10 @@ set(BROTLI_STATIC_LIBRARY
   "${BROTLI_BUILD_DIR}/libbrotlicommon-static.a")
 
 set(ZLIB_BASE_DIR  "${SUBMODULES_DIR}/zlib")
-set(ZLIB_STATIC_LIBRARY "${ZLIB_BASE_DIR}/usr/lib/libz.a")
+set(ZLIB_STATIC_LIBRARY "${ZLIB_BASE_DIR}/usr/lib-asan/libz.a")
 
 set(LIBPNG_BASE_DIR  "${SUBMODULES_DIR}/libpng")
-set(LIBPNG_STATIC_LIBRARY "${LIBPNG_BASE_DIR}/usr/lib/libpng.a")
+set(LIBPNG_STATIC_LIBRARY "${LIBPNG_BASE_DIR}/usr/lib-asan/libpng.a")
 
 # ----------------------------------------------------------------------------
 # functions:
