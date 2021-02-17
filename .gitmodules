@@ -1,6 +1,6 @@
 [submodule "freetype2"]
   path = external/freetype2
-  url = git://git.savannah.nongnu.org/freetype/freetype2.git
+  url = https://gitlab.freedesktop.org/freetype/freetype.git
   branch = master
 [submodule "glog"]
   path = external/glog
