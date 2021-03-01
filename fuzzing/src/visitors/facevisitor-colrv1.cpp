@@ -52,6 +52,8 @@ void iterate_color_stops ( FT_Face                face,
 
 void colrv1_draw_paint( FT_Face        face,
                         FT_COLR_Paint  colrv1_paint ) {
+
+
   switch (colrv1_paint.format) {
     case FT_COLR_PAINTFORMAT_GLYPH:
     {
@@ -154,7 +156,8 @@ bool colrv1_traverse_paint( FT_Face         face,
     // recursion, cancel recursion when a paint retrieval fails.
     bool traverse_result = true;
     switch (paint.format) {
-        case FT_COLR_PAINTFORMAT_COLR_LAYERS: {
+        case FT_COLR_PAINTFORMAT_COLR_LAYERS:
+        {
             FT_LayerIterator& layer_iterator = paint.u.colr_layers.layer_iterator;
             FT_OpaquePaint opaque_paint_fetch;
             opaque_paint_fetch.p = nullptr;
@@ -184,7 +187,8 @@ bool colrv1_traverse_paint( FT_Face         face,
             colrv1_draw_paint( face, paint );
             traverse_result = colrv1_traverse_paint( face, paint.u.skew.paint );
             break;
-        case FT_COLR_PAINTFORMAT_COMPOSITE: {
+        case FT_COLR_PAINTFORMAT_COMPOSITE:
+        {
             traverse_result =
                     colrv1_traverse_paint( face, paint.u.composite.backdrop_paint );
             traverse_result =
@@ -195,7 +199,8 @@ bool colrv1_traverse_paint( FT_Face         face,
         case FT_COLR_PAINTFORMAT_SOLID:
         case FT_COLR_PAINTFORMAT_LINEAR_GRADIENT:
         case FT_COLR_PAINTFORMAT_RADIAL_GRADIENT:
-        case FT_COLR_PAINTFORMAT_SWEEP_GRADIENT: {
+        case FT_COLR_PAINTFORMAT_SWEEP_GRADIENT:
+        {
             colrv1_draw_paint( face, paint );
             break;
         }

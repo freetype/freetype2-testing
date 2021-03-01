@@ -1,6 +1,6 @@
 // colrv1.cpp
 //
-//   Implementation of CffFuzzTarget.
+//   Implementation of ColrV1FuzzTarget.
 //
 // Copyright 2021 by
 // Dominik Röttsches, Armin Hasitzka, David Turner, Robert Wilhelm,

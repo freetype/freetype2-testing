@@ -1,6 +1,6 @@
-// cff.h
+// colrv1.h
 //
-//   Fuzz CFF faces.
+//   Fuzz ColrV1 color font faces.
 //
 // Copyright 2021 by
 // Dominik Röttsches
