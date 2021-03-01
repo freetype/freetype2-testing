@@ -22,10 +22,12 @@
 #include "iterators/faceprepiterator-outlines.h"
 #include "visitors/facevisitor-colrv1.h"
 
+
   freetype::ColrV1FuzzTarget::
   ColrV1FuzzTarget()
   {
     auto  fli = freetype::make_unique<FaceLoadIterator>();
+
 
     // -----------------------------------------------------------------------
     // Face load iterators:

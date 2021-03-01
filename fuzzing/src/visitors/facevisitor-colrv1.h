@@ -2,8 +2,8 @@
 //
 //   Access and traverse COLRv1 glyph formation.
 //
-// Copyright 2018-2019 by
-// Armin Hasitzka.
+// Copyright 2018-2021 by
+// Armin Hasitzka, Dominik Röttsches.
 //
 // This file is part of the FreeType project, and may only be used,
 // modified, and distributed under the terms of the FreeType project
@@ -32,6 +32,7 @@ namespace freetype {
     void
     run( Unique_FT_Face  face )
     override;
+
 
   private:
 

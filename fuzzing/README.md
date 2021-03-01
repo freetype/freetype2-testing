@@ -376,13 +376,12 @@ https://www.freetype.org/freetype2/docs/reference/ft2-bitmap_handling.html
 
 Not yet released, see documentation in [freetype.h](https://gitlab.freedesktop.org/freetype/freetype/-/blob/master/include/freetype/freetype.h#L4137)
 
-|    | Function                   | Fuzzed             |
-| -- | -------------------------- | :----------------: |
-|    | `FT_Get_Color_Glyph_Paint` | :heavy_check_mark: |
-|    | `FT_Get_Paint_Layers`      | :heavy_check_mark: |
-|    | `FT_Get_Paint_Layers`      | :heavy_check_mark: |
-|    | `FT_Get_Colorline_Stops`   | :heavy_check_mark: |
-|    | `FT_Get_Paint`             | :heavy_check_mark: |
+|    | Function                   | Fuzzed             | Resouces                        |
+| -- | -------------------------- | :----------------: | ------------------------------- |
+|    | `FT_Get_Color_Glyph_Paint` | :heavy_check_mark: | Face <br> Glyph Index           |
+|    | `FT_Get_Paint_Layers`      | :heavy_check_mark: | Face <br> COLRv1 Layer Iterator |
+|    | `FT_Get_Colorline_Stops`   | :heavy_check_mark: | Face <br> COLRv1 Color Iterator |
+|    | `FT_Get_Paint`             | :heavy_check_mark: | Face <br> COLRv1 Opaque Paint   |
 
 
 ### GZIP Streams
