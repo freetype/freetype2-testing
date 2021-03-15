@@ -137,6 +137,14 @@ namespace {
       break;
     }
 
+    case FT_COLR_PAINTFORMAT_TRANSLATE:
+    {
+      LOG( INFO ) << "PaintTranslate,"
+                  << " dx " << colrv1_paint.u.translate.dx
+                  << " dy " << colrv1_paint.u.translate.dy;
+      break;
+    }
+
     case FT_COLR_PAINTFORMAT_ROTATE:
     {
       LOG( INFO ) << "PaintRotate,"
@@ -156,8 +164,15 @@ namespace {
       break;
     }
 
-    default:
-      break;
+    case FT_COLR_PAINTFORMAT_COLR_GLYPH:
+    case FT_COLR_PAINTFORMAT_COLR_LAYERS:
+    case FT_COLR_PAINTFORMAT_COMPOSITE:
+    case FT_COLR_PAINT_FORMAT_MAX:
+    case FT_COLR_PAINTFORMAT_UNSUPPORTED:
+    {
+        // No action for these paint format types in drawing.
+        break;
+    }
     }
   }
 
@@ -186,6 +201,8 @@ namespace {
       FT_LayerIterator&  layer_iterator = paint.u.colr_layers.layer_iterator;
       FT_OpaquePaint     opaque_paint_fetch;
 
+      LOG( INFO ) << "PaintColrLayers,"
+                  << " num_layers " << layer_iterator.num_layers;
 
       opaque_paint_fetch.p = nullptr;
       while ( FT_Get_Paint_Layers( face,
@@ -202,9 +219,19 @@ namespace {
       break;
 
     case FT_COLR_PAINTFORMAT_COLR_GLYPH:
+
+      LOG( INFO ) << "PaintColrGlyph,"
+                  << " glyphId " << paint.u.colr_glyph.glyphID;
+
       traverse_result = colrv1_start_glyph( face,
                                             paint.u.colr_glyph.glyphID,
                                             FT_COLOR_NO_ROOT_TRANSFORM );
+      break;
+
+    case FT_COLR_PAINTFORMAT_TRANSLATE:
+      colrv1_draw_paint( face, paint );
+      traverse_result = colrv1_traverse_paint( face,
+                                               paint.u.translate.paint );
       break;
 
     case FT_COLR_PAINTFORMAT_TRANSFORMED:
@@ -225,6 +252,9 @@ namespace {
 
     case FT_COLR_PAINTFORMAT_COMPOSITE:
     {
+      LOG( INFO ) << "PaintComposite,"
+                  << " composite_mode " << paint.u.composite.composite_mode;
+
       traverse_result = colrv1_traverse_paint( face,
                                                paint.u.composite.backdrop_paint );
       traverse_result =
@@ -242,7 +272,8 @@ namespace {
       break;
     }
 
-    default:
+    case FT_COLR_PAINT_FORMAT_MAX:
+    case FT_COLR_PAINTFORMAT_UNSUPPORTED:
       LOG ( INFO ) << "Invalid paint format.";
       break;
     }
