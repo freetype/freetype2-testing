@@ -383,7 +383,6 @@ Not yet released, see documentation in [freetype.h](https://gitlab.freedesktop.o
 |    | `FT_Get_Colorline_Stops`   | :heavy_check_mark: | Face <br> COLRv1 Color Iterator |
 |    | `FT_Get_Paint`             | :heavy_check_mark: | Face <br> COLRv1 Opaque Paint   |
 
-
 ### GZIP Streams
 
 https://www.freetype.org/freetype2/docs/reference/ft2-gzip.html
