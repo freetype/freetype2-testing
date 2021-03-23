@@ -47,6 +47,7 @@ namespace {
                                     color_stop_iterator ) )
     {
       LOG( INFO ) << "Color stop " << color_stop_index
+                  << "/" << num_color_stops - 1
                   << " stop offset: " << color_stop.stop_offset
                   << " palette index: " << color_stop.color.palette_index
                   << " alpha: " << color_stop.color.alpha;
@@ -310,7 +311,6 @@ namespace {
   freetype::FaceVisitorColrV1::
   run( Unique_FT_Face  face )
   {
-    FT_Error        error;
     FT_OpaquePaint  opaque_paint;
     unsigned long   num_glyphs;
 
