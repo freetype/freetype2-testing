@@ -23,18 +23,22 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+
 template<> struct std::hash<FT_OpaquePaint>
 {
 
 
   std::size_t
-  operator()( FT_OpaquePaint const& p ) const
+  operator()( const FT_OpaquePaint&  p ) const
   {
     std::size_t h1 = std::hash<FT_Byte*>{}( p.p );
     std::size_t h2 = std::hash<FT_Bool>{}( p.insert_root_transform );
+
+
     return h1 ^ (h2 << 1);
   }
 };
+
 
 template<> struct std::equal_to<FT_OpaquePaint>
 {
@@ -44,42 +48,49 @@ template<> struct std::equal_to<FT_OpaquePaint>
   operator()( const FT_OpaquePaint&  lhs,
               const FT_OpaquePaint&  rhs ) const
   {
-    return lhs.p == rhs.p && lhs.insert_root_transform == rhs.insert_root_transform;
+    return lhs.p == rhs.p &&
+           lhs.insert_root_transform == rhs.insert_root_transform;
   }
 };
+
 
 namespace {
 
 
-  constexpr unsigned long  MAX_TRAVERSE_GLYPHS = 5;
-
   using VisitedSet = std::unordered_set<FT_OpaquePaint>;
 
 
+  constexpr unsigned long  MAX_TRAVERSE_GLYPHS = 5;
+
+
   class ScopedSetInserter
-    : private freetype::noncopyable {
-   public:
+    : private freetype::noncopyable
+  {
+  public:
 
 
     ScopedSetInserter( VisitedSet*     set,
                        FT_OpaquePaint  paint)
       : visited_set( set ),
-        p( paint ) {
+        p( paint )
+    {
 
 
       visited_set->insert(p);
     }
 
 
-    ~ScopedSetInserter() {
+    ~ScopedSetInserter()
+    {
       visited_set->erase(p);
     }
 
-   private:
+
+  private:
 
 
-    VisitedSet* visited_set;
-    FT_OpaquePaint p;
+    VisitedSet*     visited_set;
+    FT_OpaquePaint  p;
   };
 
 
@@ -240,13 +251,16 @@ namespace {
 
     bool  traverse_result = true;
 
+
     if ( visited_set->find( opaque_paint ) != visited_set->end() )
     {
       LOG( ERROR ) << "Paint cycle detected, aborting.";
       return false;
     }
 
-    ScopedSetInserter scoped_set_inserter( visited_set, opaque_paint );
+
+    ScopedSetInserter  scoped_set_inserter( visited_set, opaque_paint );
+
 
     if ( !FT_Get_Paint( face, opaque_paint, &paint ) )
     {
