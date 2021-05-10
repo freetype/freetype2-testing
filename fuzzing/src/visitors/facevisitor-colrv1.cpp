@@ -69,27 +69,27 @@ namespace {
   public:
 
 
-    ScopedSetInserter( VisitedSet*     set,
+    ScopedSetInserter( VisitedSet&     set,
                        FT_OpaquePaint  paint)
       : visited_set( set ),
         p( paint )
     {
 
 
-      visited_set->insert(p);
+      visited_set.insert(p);
     }
 
 
     ~ScopedSetInserter()
     {
-      visited_set->erase(p);
+      visited_set.erase(p);
     }
 
 
   private:
 
 
-    VisitedSet*     visited_set;
+    VisitedSet&     visited_set;
     FT_OpaquePaint  p;
   };
 
@@ -245,14 +245,14 @@ namespace {
 
   bool colrv1_traverse_paint( FT_Face         face,
                               FT_OpaquePaint  opaque_paint,
-                              VisitedSet*     visited_set )
+                              VisitedSet&     visited_set )
   {
     FT_COLR_Paint  paint;
 
     bool  traverse_result = true;
 
 
-    if ( visited_set->find( opaque_paint ) != visited_set->end() )
+    if ( visited_set.find( opaque_paint ) != visited_set.end() )
     {
       LOG( ERROR ) << "Paint cycle detected, aborting.";
       return false;
@@ -388,7 +388,7 @@ namespace {
     {
       VisitedSet visited_set;
       has_colrv1_layers = true;
-      colrv1_traverse_paint( ft_face, opaque_paint, &visited_set );
+      colrv1_traverse_paint( ft_face, opaque_paint, visited_set );
     }
 
     return has_colrv1_layers;
