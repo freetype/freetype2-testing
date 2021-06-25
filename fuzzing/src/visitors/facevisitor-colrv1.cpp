@@ -20,8 +20,8 @@
 
 #include "utils/logging.h"
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include <freetype/freetype.h>
+#include <freetype/ftcolor.h>
 
 
 template<> struct std::hash<FT_OpaquePaint>
@@ -191,15 +191,15 @@ namespace {
       break;
     }
 
-    case FT_COLR_PAINTFORMAT_TRANSFORMED:
+    case FT_COLR_PAINTFORMAT_TRANSFORM:
     {
       LOG( INFO ) << "PaintTransformed,"
-                  << " xx " << colrv1_paint.u.transformed.affine.xx
-                  << " xy " << colrv1_paint.u.transformed.affine.xy
-                  << " yx " << colrv1_paint.u.transformed.affine.yx
-                  << " yy " << colrv1_paint.u.transformed.affine.yy
-                  << " dx " << colrv1_paint.u.transformed.affine.dx
-                  << " dy " << colrv1_paint.u.transformed.affine.dy;
+                  << " xx " << colrv1_paint.u.transform.affine.xx
+                  << " xy " << colrv1_paint.u.transform.affine.xy
+                  << " yx " << colrv1_paint.u.transform.affine.yx
+                  << " yy " << colrv1_paint.u.transform.affine.yy
+                  << " dx " << colrv1_paint.u.transform.affine.dx
+                  << " dy " << colrv1_paint.u.transform.affine.dy;
       break;
     }
 
@@ -316,10 +316,10 @@ namespace {
                                                visited_set );
       break;
 
-    case FT_COLR_PAINTFORMAT_TRANSFORMED:
+    case FT_COLR_PAINTFORMAT_TRANSFORM:
       colrv1_draw_paint( face, paint );
       traverse_result = colrv1_traverse_paint( face,
-                                               paint.u.transformed.paint,
+                                               paint.u.transform.paint,
                                                visited_set );
       break;
 
