@@ -12,4 +12,5 @@ FreeType is a freely available software library to render fonts.
 This is a selection of the `glyf` variant files from the [Google color-fonts
 repository](https://github.com/googlefonts/color-fonts/tree/main/fonts)
 subsetted and split into smaller files, see
-https://github.com/googlefonts/color-fonts/issues/48
+https://github.com/googlefonts/color-fonts/issues/48 and the script in
+https://github.com/googlefonts/color-fonts/pull/79/
