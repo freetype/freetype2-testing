@@ -87,6 +87,7 @@ ansi_yellow="\e[33m"
 build_type=      # d|f
 build_asan=      # y|n
 build_ubsan=     # y|n
+build_msan=      # y|n
 build_coverage=  # y|n
 build_debugging= # 0|1|2|3|n
 build_ft_trace=  # y|n
@@ -261,6 +262,21 @@ if [[ "${build_ubsan}" == "y" ]]; then
     driver_name="${driver_name}-ubsan"
 fi
 
+print_q   "Add the MemorySanitizer?"
+print_url "https://clang.llvm.org/docs/MemorySanitizer.html"
+print_nl
+
+build_msan=$( ask_user "y|n" "y" )
+print_sel_yes_no "${build_msan}"
+
+if [[ "${build_msan}" == "y" ]]; then
+    cflags="  ${cflags}   -fsanitize=memory -fsanitize-memory-track-origins"
+    cxxflags="${cxxflags} -fsanitize=memory -fsanitize-memory-track-origins"
+    ldflags=" ${ldflags}  -fsanitize=memory"
+
+    driver_name="${driver_name}-msan"
+fi
+
 print_q   "Add coverage instrumentation?"
 print_url "https://clang.llvm.org/docs/SourceBasedCodeCoverage.html"
 print_nl
@@ -276,7 +292,7 @@ if [[ "${build_coverage}" == "y" ]]; then
     driver_name="${driver_name}-cov"
 fi
 
-if [[ "${build_asan}" == "y" || "${build_ubsan}" == "y" ]]; then
+if [[ "${build_asan}" == "y" || "${build_ubsan}" == "y" || "${build_msan}" == "y" ]]; then
     print_q    "Choose the optimisation level:"
     print_info "0" "compile with '-g -O0'"
     print_info "1" "compile with '-g -O1'"
