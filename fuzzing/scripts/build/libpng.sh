@@ -21,7 +21,7 @@ path_to_install="${path_to_src}/usr"
 
 if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
 
-    git submodule update --init "${path_to_src}"
+    git submodule update --init --depth 1 "${path_to_src}"
 
     cd "${path_to_src}"
 
