@@ -33,13 +33,13 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
          ! -name bin       \
          -exec rm -r {} \;
 
-    cmake -DCMAKE_BUILD_TYPE=Debug ..
+    env | sort
+    cmake -GNinja -DCMAKE_BUILD_TYPE=Debug ..
 fi
 
-if [[ -d "${path_to_build}" ]]; then
-
+if [[ -f "${path_to_build}/build.ninja" ]]; then
    cd "${path_to_build}"
-   make -j$( nproc )
+   ninja
    cd "bin"
 
    # link ./driver -> ./target (if the target has a different name):

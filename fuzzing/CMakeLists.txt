@@ -76,6 +76,17 @@ set(ZLIB_STATIC_LIBRARY "${ZLIB_BASE_DIR}/usr/lib-asan/libz.a")
 set(LIBPNG_BASE_DIR  "${SUBMODULES_DIR}/libpng")
 set(LIBPNG_STATIC_LIBRARY "${LIBPNG_BASE_DIR}/usr/lib-asan/libpng.a")
 
+set(LIBCXX_BASE_DIR  "${SUBMODULES_DIR}/llvm-project")
+set(LIBCXX_BUILD_DIR "${LIBCXX_BASE_DIR}/build")
+set(LIBCXX_STATIC_LIBRARY
+  "${LIBCXX_BUILD_DIR}/lib/libc++.a"
+  "${LIBCXX_BUILD_DIR}/lib/libc++abi.a")
+add_compile_options(
+  "-I${LIBCXX_BUILD_DIR}/include"
+  "-I${LIBCXX_BUILD_DIR}/include/c++/v1"
+  "-nostdinc++")
+add_link_options("-nostdlib++")
+
 # ----------------------------------------------------------------------------
 # functions:
 

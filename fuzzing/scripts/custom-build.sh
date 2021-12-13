@@ -68,9 +68,13 @@ fi
 # rebuild shortcut:
 
 if [[ "${opt_rebuild}" == "1" ]]; then
-    bash build/glog.sh       --no-init
+    bash build/zlib.sh       --no-init
+    bash build/bzip2.sh      --no-init
     bash build/libarchive.sh --no-init
+    bash build/brotli.sh     --no-init
+    bash build/libpng.sh     --no-init
     bash build/freetype.sh   --no-init
+    bash build/libcxx.sh     --no-init
     bash build/targets.sh    --no-init
     exit
 fi
@@ -232,6 +236,8 @@ if [[ "${build_type}" == "f" ]]; then
     export CMAKE_FUZZING_ENGINE="-fsanitize=fuzzer"
 fi
 
+llvm_sanitizer=""
+
 print_q   "Add the AddressSanitizer?"
 print_url "https://clang.llvm.org/docs/AddressSanitizer.html"
 print_nl
@@ -245,6 +251,7 @@ if [[ "${build_asan}" == "y" ]]; then
     ldflags=" ${ldflags}  -fsanitize=address"
 
     driver_name="${driver_name}-asan"
+    llvm_sanitizer="address"
 fi
 
 print_q   "Add the UndefinedBehaviorSanitizer?"
@@ -260,6 +267,7 @@ if [[ "${build_ubsan}" == "y" ]]; then
     ldflags=" ${ldflags}  -fsanitize=undefined"
 
     driver_name="${driver_name}-ubsan"
+    llvm_sanitizer="undefined"
 fi
 
 print_q   "Add the MemorySanitizer?"
@@ -275,6 +283,7 @@ if [[ "${build_msan}" == "y" ]]; then
     ldflags=" ${ldflags}  -fsanitize=memory"
 
     driver_name="${driver_name}-msan"
+    llvm_sanitizer="memory"
 fi
 
 print_q   "Add coverage instrumentation?"
@@ -398,6 +407,7 @@ export CFLAGS="${cflags}"
 export CXXFLAGS="${cxxflags}"
 export LDFLAGS="${ldflags}"
 
+export SANITIZER="${llvm_sanitizer}"
 export CMAKE_DRIVER_EXE_NAME="${driver_name}"
 
 if [[ "${build_glog}" == "y" ]]; then
@@ -410,6 +420,7 @@ bash "build/libpng.sh"
 bash "build/brotli.sh"
 bash "build/bzip2.sh"
 bash "build/freetype.sh"
+LDFLAGS= bash "build/libcxx.sh"
 bash "build/targets.sh"
 
 cd "${dir}"
