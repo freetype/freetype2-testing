@@ -35,14 +35,14 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
     cmake -H.                 \
           -Bbuild             \
-          -G "Unix Makefiles" \
+          -GNinja \
           -DWITH_GFLAGS=OFF   \
           -DBUILD_TESTING=OFF
 fi
 
-if [[ -d "${path_to_build}" ]]; then
+if [[ -f "${path_to_build}/build.ninja" ]]; then
     cd "${path_to_build}"
-    make -j$( nproc )
+    ninja
 fi
 
 cd "${dir}"
