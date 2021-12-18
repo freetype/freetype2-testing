@@ -11,7 +11,8 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts/build'
+path_to_self=$( dirname $( readlink -f "${0}" ) )
+cd "${path_to_self}" # go to `/fuzzing/scripts/build'
 
 path_to_src=$( readlink -f "../../../external/llvm-project" )
 path_to_build="${path_to_src}/build"
@@ -25,6 +26,9 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     git clean -dfqx
     git reset --hard
     git rev-parse HEAD
+
+    # See https://github.com/google/oss-fuzz/pull/7033
+    git apply ${path_to_self}/0001-Add-trace-pc-guard-to-fno-sanitize-coverage.patch
 
     mkdir "${path_to_build}" && cd "${path_to_build}"
 
