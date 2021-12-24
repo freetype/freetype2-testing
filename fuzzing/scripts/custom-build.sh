@@ -68,6 +68,7 @@ fi
 # rebuild shortcut:
 
 if [[ "${opt_rebuild}" == "1" ]]; then
+    # Each project must be listed after any project it depends on.
     bash build/zlib.sh       --no-init
     bash build/bzip2.sh      --no-init
     bash build/libarchive.sh --no-init
@@ -75,6 +76,7 @@ if [[ "${opt_rebuild}" == "1" ]]; then
     bash build/libpng.sh     --no-init
     bash build/freetype.sh   --no-init
     bash build/libcxx.sh     --no-init
+    #bash build/glog.sh       --no-init
     bash build/targets.sh    --no-init
     exit
 fi
@@ -413,17 +415,18 @@ export LDFLAGS="${ldflags}"
 export SANITIZER="${llvm_sanitizer}"
 export CMAKE_DRIVER_EXE_NAME="${driver_name}"
 
-if [[ "${build_glog}" == "y" ]]; then
-    bash "build/glog.sh"
-fi
-
-bash "build/libarchive.sh"
+# Each project must be listed after any project it depends on.
 bash "build/zlib.sh"
-bash "build/libpng.sh"
-bash "build/brotli.sh"
 bash "build/bzip2.sh"
+bash "build/libarchive.sh"
+bash "build/brotli.sh"
+bash "build/libpng.sh"
 bash "build/freetype.sh"
 LDFLAGS= bash "build/libcxx.sh"
+if [[ "${build_glog}" == "y" ]]; then
+    #TODO: use the static libcxx
+    bash "build/glog.sh"
+fi
 bash "build/targets.sh"
 
 cd "${dir}"

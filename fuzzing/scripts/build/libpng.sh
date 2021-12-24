@@ -56,7 +56,7 @@ if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
                     --disable-shared
 fi
 
-if [[ -d "${path_to_build}" ]]; then
+if [[ -f "${path_to_build}/Makefile" ]]; then
     cd "${path_to_build}"
     make -j$(nproc) clean
     make -j$(nproc)

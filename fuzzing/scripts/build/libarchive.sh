@@ -61,9 +61,8 @@ if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
        --without-expat
 fi
 
-cd "${path_to_src}"
-
-if [[ -f "Makefile" ]]; then
+if [[ -f "${path_to_src}/Makefile" ]]; then
+    cd "${path_to_src}"
     make -j$( nproc )
 fi
 

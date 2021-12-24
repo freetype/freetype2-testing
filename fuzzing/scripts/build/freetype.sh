@@ -59,9 +59,8 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
        --without-harfbuzz
 fi
 
-cd "${path_to_freetype}"
-
-if [[ -f "Makefile" ]]; then
+if [[ -f "${path_to_freetype}/Makefile" ]]; then
+    cd "${path_to_freetype}"
     make -j$( nproc )
 fi
 
