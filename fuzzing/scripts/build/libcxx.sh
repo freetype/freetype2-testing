@@ -28,7 +28,7 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     git rev-parse HEAD
 
     # See https://github.com/google/oss-fuzz/pull/7033
-    git apply ${path_to_self}/0001-Add-trace-pc-guard-to-fno-sanitize-coverage.patch
+    git apply "${path_to_self}/0001-Add-trace-pc-guard-to-fno-sanitize-coverage.patch"
 
     mkdir "${path_to_build}" && cd "${path_to_build}"
 
@@ -44,8 +44,8 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
       -GNinja ../llvm \
       -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" \
-      -DCMAKE_C_COMPILER=${CC} \
-      -DCMAKE_CXX_COMPILER=${CXX} \
+      -DCMAKE_C_COMPILER="${CC}" \
+      -DCMAKE_CXX_COMPILER="${CXX}" \
       -DLLVM_USE_SANITIZER="${LLVM_SANITIZER}" \
       -DLIBCXX_ENABLE_SHARED=OFF \
       -DLIBCXXABI_ENABLE_SHARED=OFF
