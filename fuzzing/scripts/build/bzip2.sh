@@ -17,7 +17,7 @@ path_to_src=$( readlink -f "../../../external/bzip2" )
 
 if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
-    git submodule update --init "${path_to_src}"
+    git submodule update --init --depth 1 "${path_to_src}"
 
     cd "${path_to_src}"
 
