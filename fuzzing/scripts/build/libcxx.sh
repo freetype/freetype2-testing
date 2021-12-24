@@ -32,10 +32,12 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
     mkdir "${path_to_build}" && cd "${path_to_build}"
 
-    case ${SANITIZER} in
-      address) LLVM_SANITIZER="Address" ;;
-      undefined) LLVM_SANITIZER="Undefined" ;;
-      memory) LLVM_SANITIZER="MemoryWithOrigins" ;;
+    case "${SANITIZER}" in
+      "address") LLVM_SANITIZER="Address" ;;
+      "address;undefined") LLVM_SANITIZER="Address;Undefined" ;;
+      "undefined") LLVM_SANITIZER="Undefined" ;;
+      "memory") LLVM_SANITIZER="MemoryWithOrigins" ;;
+      "thread") LLVM_SANITIZER="Thread" ;;
       *) LLVM_SANITIZER="" ;;
     esac
 

@@ -89,9 +89,8 @@ ansi_red="\e[31m"
 ansi_yellow="\e[33m"
 
 build_type=      # d|f
-build_asan=      # y|n
+build_amtsan=    # a|m|t|n
 build_ubsan=     # y|n
-build_msan=      # y|n
 build_coverage=  # y|n
 build_debugging= # 0|1|2|3|n
 build_ft_trace=  # y|n
@@ -238,20 +237,35 @@ fi
 
 llvm_sanitizer=""
 
-print_q   "Add the AddressSanitizer?"
+# Address, Memory, and Thread Sanitizers are incompatibile.
+# See clang/lib/Driver/SanitizerArgs.cpp#IncompatibleGroups
+print_q   "Add AddressSanitizer, MemorySanitizer, or ThreadSanitizer?"
 print_url "https://clang.llvm.org/docs/AddressSanitizer.html"
+print_url "https://clang.llvm.org/docs/MemorySanitizer.html"
+print_url "https://clang.llvm.org/docs/ThreadSanitizer.html"
 print_nl
 
-build_asan=$( ask_user "y|n" "y" )
-print_sel_yes_no "${build_asan}"
+build_amtsan=$( ask_user "a|m|t|n" "a" )
+print_sel "${build_amtsan}" "a" "AddressSanitizer" "m" "MemorySanitizer" "t" "ThreadSanitizer" "n" "None"
 
-if [[ "${build_asan}" == "y" ]]; then
+if [[ "${build_amtsan}" == "a" ]]; then
     cflags="  ${cflags}   -fsanitize=address -fsanitize-address-use-after-scope"
     cxxflags="${cxxflags} -fsanitize=address -fsanitize-address-use-after-scope"
     ldflags=" ${ldflags}  -fsanitize=address"
-
     driver_name="${driver_name}-asan"
     llvm_sanitizer="address"
+elif [[ "${build_amtsan}" == "m" ]]; then
+    cflags="  ${cflags}   -fsanitize=memory -fsanitize-memory-track-origins"
+    cxxflags="${cxxflags} -fsanitize=memory -fsanitize-memory-track-origins"
+    ldflags=" ${ldflags}  -fsanitize=memory"
+    driver_name="${driver_name}-msan"
+    llvm_sanitizer="memory"
+elif [[ "${build_amtsan}" == "t" ]]; then
+    cflags="  ${cflags}   -fsanitize=thread"
+    cxxflags="${cxxflags} -fsanitize=thread"
+    ldflags=" ${ldflags}  -fsanitize=thread"
+    driver_name="${driver_name}-tsan"
+    llvm_sanitizer="thread"
 fi
 
 print_q   "Add the UndefinedBehaviorSanitizer?"
@@ -265,25 +279,14 @@ if [[ "${build_ubsan}" == "y" ]]; then
     cflags="  ${cflags}   -fsanitize=undefined"
     cxxflags="${cxxflags} -fsanitize=undefined"
     ldflags=" ${ldflags}  -fsanitize=undefined"
-
     driver_name="${driver_name}-ubsan"
-    llvm_sanitizer="undefined"
-fi
 
-print_q   "Add the MemorySanitizer?"
-print_url "https://clang.llvm.org/docs/MemorySanitizer.html"
-print_nl
-
-build_msan=$( ask_user "y|n" "y" )
-print_sel_yes_no "${build_msan}"
-
-if [[ "${build_msan}" == "y" ]]; then
-    cflags="  ${cflags}   -fsanitize=memory -fsanitize-memory-track-origins"
-    cxxflags="${cxxflags} -fsanitize=memory -fsanitize-memory-track-origins"
-    ldflags=" ${ldflags}  -fsanitize=memory"
-
-    driver_name="${driver_name}-msan"
-    llvm_sanitizer="memory"
+    # The libcxx build allows ubsan or asan+ubsan but no other xsan+ubsan.
+    if [[ "${build_amtsan}" == "n" ]]; then
+      llvm_sanitizer="undefined"
+    elif [[ "${build_amtsan}" == "a" ]]; then
+      llvm_sanitizer="${llvm_sanitizer};undefined"
+    fi
 fi
 
 print_q   "Add coverage instrumentation?"
@@ -301,7 +304,7 @@ if [[ "${build_coverage}" == "y" ]]; then
     driver_name="${driver_name}-cov"
 fi
 
-if [[ "${build_asan}" == "y" || "${build_ubsan}" == "y" || "${build_msan}" == "y" ]]; then
+if [[ "${build_amtsan}" != "n" || "${build_ubsan}" != "n"  ]]; then
     print_q    "Choose the optimisation level:"
     print_info "0" "compile with '-g -O0'"
     print_info "1" "compile with '-g -O1'"
