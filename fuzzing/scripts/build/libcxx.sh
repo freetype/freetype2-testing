@@ -46,8 +46,6 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
       -GNinja ../llvm \
       -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" \
-      -DCMAKE_C_COMPILER="${CC}" \
-      -DCMAKE_CXX_COMPILER="${CXX}" \
       -DLLVM_USE_SANITIZER="${LLVM_SANITIZER}" \
       -DLIBCXX_ENABLE_SHARED=OFF \
       -DLIBCXXABI_ENABLE_SHARED=OFF
