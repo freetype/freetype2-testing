@@ -98,9 +98,6 @@ build_debugging= # 0|1|2|3|n
 build_ft_trace=  # y|n
 build_ccache=    # y|n
 
-cc="clang"
-cxx="clang++"
-
 cflags="${CFLAGS}"
 cxxflags="${CXXFLAGS} -std=c++11"
 ldflags="${LDFLAGS}"
@@ -221,6 +218,40 @@ printf "| |  | |\ \| |__| |__  | |  / /  | |   | |__\n"
 printf "|_|  |_| \_\____)____) |_| /_/   |_|   |____)\n\n"
 printf "${ansi_reset}"
 printf "               Custom Build\n"
+
+clang_version_regex='.*clang version ([0-9]+)\.[0-9]+.*'
+
+if [[ "${CC}" =~ .*"clang".* ]]; then
+    cc="${CC}"
+else
+    cc="clang"
+fi
+print_info "cc" "${cc}"
+cc_version_output=$("${cc}" --version)
+if [[ "${cc_version_output}" =~ ${clang_version_regex} ]]; then
+    cc_version="${BASH_REMATCH[1]}"
+    print_info "cc version" "${cc_version}"
+else
+    print_info "cc version not detected"
+fi
+
+if [[ "${CXX}" =~ .*"clang".* ]]; then
+    cxx="${CXX}"
+else
+    cxx="clang++"
+fi
+print_info "cxx" "${cxx}"
+cxx_version_output=$("${cxx}" --version)
+if [[ "${cxx_version_output}" =~ ${clang_version_regex} ]]; then
+    cxx_version="${BASH_REMATCH[1]}"
+    print_info "cxx version" "${cxx_version}"
+    if [ "${cxx_version}" -lt "10" ]; then
+        print_info "cxx version too old. Need clang 10 or newer."
+        exit 66
+    fi
+else
+    print_info "cxx version not detected"
+fi
 
 print_q    "Build the driver or the fuzzer?"
 print_info "driver" "run selected samples or failed instances"
