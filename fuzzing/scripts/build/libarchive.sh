@@ -11,9 +11,9 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts/build'
+cd "$( dirname "$( readlink -f "${0}" )" )" # go to `/fuzzing/scripts/build'
 
-path_to_src=$( readlink -f "../../../external/libarchive" )
+path_to_src="$( readlink -f "../../../external/libarchive" )"
 
 if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
 

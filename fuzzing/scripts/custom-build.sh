@@ -11,7 +11,7 @@ set -eo pipefail
 # fully.
 
 dir="${PWD}"
-cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts'
+cd "$( dirname "$( readlink -f "${0}" )" )" # go to `/fuzzing/scripts'
 
 # ----------------------------------------------------------------------------
 # collect parameters:
