@@ -11,9 +11,10 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts/build'
+path_to_self="$( dirname "$( readlink -f "${0}" )" )"
+cd "${path_to_self}" # go to `/fuzzing/scripts/build'
 
-path_to_src=$( readlink -f "../../../external/bzip2" )
+path_to_src="$( readlink -f "../../../external/bzip2" )"
 
 if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
 
@@ -24,6 +25,10 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     git clean -dfqx
     git reset --hard
     git rev-parse HEAD
+
+    # The bzip Makefile overrides CC, CFLAGS, and LDFLAGS.
+    # Patch out these overrides.
+    git apply "${path_to_self}/0001-Don-t-override-CC-CFLAGS-and-LDFLAGS.patch"
 fi
 
 if [[ -f "${path_to_src}/Makefile" ]]; then
