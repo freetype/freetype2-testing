@@ -11,11 +11,11 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts/build'
+cd "$( dirname "$( readlink -f "${0}" )" )" # go to `/fuzzing/scripts/build'
 
-path_to_zlib=$( readlink -f "../../../external/zlib" )
+path_to_zlib="$( readlink -f "../../../external/zlib" )"
 
-path_to_src=$( readlink -f "../../../external/libpng" )
+path_to_src="$( readlink -f "../../../external/libpng" )"
 path_to_build="${path_to_src}/build"
 path_to_install="${path_to_src}/usr"
 

@@ -11,9 +11,9 @@ set -euxo pipefail
 # fully.
 
 dir="${PWD}"
-cd $( dirname $( readlink -f "${0}" ) ) # go to `/fuzzing/scripts/build'
+cd "$( dirname "$( readlink -f "${0}" )" )" # go to `/fuzzing/scripts/build'
 
-path_to_src=$( readlink -f "../../../external/zlib" )
+path_to_src="$( readlink -f "../../../external/zlib" )"
 # Cannot do out of source build with zprefix, too many zconf.h
 path_to_build="${path_to_src}"
 path_to_install="${path_to_src}/usr"
