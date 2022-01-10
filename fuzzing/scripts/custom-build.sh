@@ -227,7 +227,7 @@ else
     cc="clang"
 fi
 print_info "cc" "${cc}"
-cc_version_output=$("${cc}" --version)
+cc_version_output=$(${cc} --version)
 if [[ "${cc_version_output}" =~ ${clang_version_regex} ]]; then
     cc_version="${BASH_REMATCH[1]}"
     print_info "cc version" "${cc_version}"
@@ -241,7 +241,7 @@ else
     cxx="clang++"
 fi
 print_info "cxx" "${cxx}"
-cxx_version_output=$("${cxx}" --version)
+cxx_version_output=$(${cxx} --version)
 if [[ "${cxx_version_output}" =~ ${clang_version_regex} ]]; then
     cxx_version="${BASH_REMATCH[1]}"
     print_info "cxx version" "${cxx_version}"
