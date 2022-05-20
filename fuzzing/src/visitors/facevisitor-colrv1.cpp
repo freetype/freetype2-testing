@@ -96,7 +96,8 @@ namespace {
 
   bool colrv1_start_glyph( const FT_Face&           ft_face,
                            uint16_t                 glyph_id,
-                           FT_Color_Root_Transform  root_transform );
+                           FT_Color_Root_Transform  root_transform,
+                           VisitedSet&              visited_set );
 
 
   void iterate_color_stops ( FT_Face                face,
@@ -316,7 +317,8 @@ namespace {
 
       traverse_result = colrv1_start_glyph( face,
                                             paint.u.colr_glyph.glyphID,
-                                            FT_COLOR_NO_ROOT_TRANSFORM );
+                                            FT_COLOR_NO_ROOT_TRANSFORM,
+                                            visited_set );
       break;
 
     case FT_COLR_PAINTFORMAT_TRANSFORM:
@@ -390,7 +392,8 @@ namespace {
 
   bool colrv1_start_glyph( const FT_Face&           ft_face,
                            uint16_t                 glyph_id,
-                           FT_Color_Root_Transform  root_transform )
+                           FT_Color_Root_Transform  root_transform,
+                           VisitedSet&              visited_set )
   {
     FT_OpaquePaint  opaque_paint;
     bool            has_colrv1_layers = false;
@@ -420,7 +423,6 @@ namespace {
                   << colr_glyph_clip_box.bottom_right.x << ", "
                   << colr_glyph_clip_box.bottom_right.y << ")";
 
-      VisitedSet visited_set;
       has_colrv1_layers = true;
       colrv1_traverse_paint( ft_face, opaque_paint, visited_set );
     }
@@ -458,9 +460,11 @@ namespace {
         return;
       }
 
+      VisitedSet visited_set;
       if ( !colrv1_start_glyph( face.get(),
                                 glyph_id,
-                                FT_COLOR_INCLUDE_ROOT_TRANSFORM ) )
+                                FT_COLOR_INCLUDE_ROOT_TRANSFORM,
+                                visited_set ) )
       {
         LOG( INFO ) << "No COLRv1 glyph for glyph id " << glyph_id << ".";
         continue;
