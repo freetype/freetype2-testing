@@ -195,7 +195,7 @@
         if ( r != ARCHIVE_OK )
           break;
 
-        files.push_back( move( entry_data ) );
+        files.push_back( std::move( entry_data ) );
       }
     }
 

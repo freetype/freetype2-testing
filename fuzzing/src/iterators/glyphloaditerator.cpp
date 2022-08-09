@@ -45,7 +45,7 @@
   freetype::GlyphLoadIterator::
   add_visitor( std::unique_ptr<GlyphVisitor>  visitor )
   {
-    (void) glyph_visitors.emplace_back( move( visitor ) );
+    (void) glyph_visitors.emplace_back( std::move( visitor ) );
   }
 
 
@@ -53,7 +53,7 @@
   freetype::GlyphLoadIterator::
   add_iterator( std::unique_ptr<GlyphRenderIterator>  iterator )
   {
-    (void) glyph_render_iterators.emplace_back( move( iterator ) );
+    (void) glyph_render_iterators.emplace_back( std::move( iterator ) );
   }
 
 
@@ -70,7 +70,7 @@
       if ( buffer_glyph == nullptr )
         return; // we can expect this to fail again; bail out!
       
-      visitor->run( move( buffer_glyph ) );
+      visitor->run( std::move( buffer_glyph ) );
     }
 
     for ( auto&  iterator : glyph_render_iterators )
@@ -79,6 +79,6 @@
       if ( buffer_glyph == nullptr )
         return; // we can expect this to fail again; bail out!
       
-      iterator->run( move( buffer_glyph ) );
+      iterator->run( std::move( buffer_glyph ) );
     }
   }

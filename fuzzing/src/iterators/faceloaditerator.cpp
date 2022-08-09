@@ -62,7 +62,7 @@
   freetype::FaceLoadIterator::
   add_once_visitor( std::unique_ptr<FaceVisitor>  visitor )
   {
-    (void) once_face_visitors.emplace_back( move( visitor ) );
+    (void) once_face_visitors.emplace_back( std::move( visitor ) );
   }
 
 
@@ -70,7 +70,7 @@
   freetype::FaceLoadIterator::
   add_always_visitor( std::unique_ptr<FaceVisitor>  visitor )
   {
-    (void) always_face_visitors.emplace_back( move( visitor ) );
+    (void) always_face_visitors.emplace_back( std::move( visitor ) );
   }
 
 
@@ -78,7 +78,7 @@
   freetype::FaceLoadIterator::
   add_iterator( std::unique_ptr<FacePrepIterator>  iterator )
   {
-    (void) face_prep_iterators.emplace_back( move( iterator ) );
+    (void) face_prep_iterators.emplace_back( std::move( iterator ) );
   }
 
 

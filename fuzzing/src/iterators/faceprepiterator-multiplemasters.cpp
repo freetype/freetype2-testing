@@ -64,7 +64,7 @@
     if ( error != 0 )
       return free_and_return( library, master, make_unique_face() );
 
-    return free_and_return( library, master, move( face ) );
+    return free_and_return( library, master, std::move( face ) );
   }
 
 

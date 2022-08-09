@@ -83,5 +83,5 @@
     error = FT_Select_Size( face.get(), index );
     LOG_FT_ERROR( "FT_Select_Size", error );
     
-    return error == 0 ? move( face ) : make_unique_face();
+    return error == 0 ? std::move( face ) : make_unique_face();
   }

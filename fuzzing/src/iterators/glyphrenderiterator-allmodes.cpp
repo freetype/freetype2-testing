@@ -67,7 +67,7 @@
         if ( buffer_glyph == nullptr )
           break; // we can expect this to fail again; bail out!
 
-        visitor->run( move( buffer_glyph ) );
+        visitor->run( std::move( buffer_glyph ) );
       }
     }
   }
