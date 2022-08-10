@@ -95,6 +95,6 @@
   freetype::FaceFuzzTarget::
   set_iterator( std::unique_ptr<FaceLoadIterator>  iterator )
   {
-    face_load_iterator = move( iterator );
+    face_load_iterator = std::move( iterator );
     return face_load_iterator;
   }

@@ -127,7 +127,7 @@
         if ( entry_data.size() == 0 )
           continue;
 
-        files.push_back( move( entry_data ) );
+        files.push_back( std::move( entry_data ) );
         if ( r != ARCHIVE_OK )
           break;
       }

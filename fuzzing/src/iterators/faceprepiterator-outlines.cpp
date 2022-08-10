@@ -90,7 +90,7 @@
                               std::get<5>( char_sizes[index] ) );
     LOG_FT_ERROR( "FT_Set_Char_Size", error );
 
-    return error == 0 ? move( face ) : make_unique_face();
+    return error == 0 ? std::move( face ) : make_unique_face();
   }
 
 
