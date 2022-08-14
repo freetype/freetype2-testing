@@ -18,6 +18,7 @@
 #define VISITORS_FACE_VISITOR_CHARCODES_H_
 
 
+#include <string>
 #include <utility> // std::pair
 #include <vector>
 
