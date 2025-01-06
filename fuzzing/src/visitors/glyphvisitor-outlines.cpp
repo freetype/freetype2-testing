@@ -42,8 +42,9 @@
     FT_Outline*  glyph_outline;
 
 
-    assert( glyph         != nullptr                 &&
-            glyph->format == FT_GLYPH_FORMAT_OUTLINE );
+    assert( glyph != nullptr );
+    if ( glyph->format != FT_GLYPH_FORMAT_OUTLINE )
+      return;
 
     glyph_outline = &( (FT_OutlineGlyph)glyph.get() )->outline;
 
