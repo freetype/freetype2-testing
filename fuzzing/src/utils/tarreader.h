@@ -15,6 +15,8 @@
 #ifndef UTILS_TAR_READER_H_
 #define UTILS_TAR_READER_H_
 
+#include <stdint.h>
+
 #include <vector>
 
 #include <ft2build.h>
