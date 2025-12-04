@@ -16,6 +16,7 @@
 #define DRIVER_DRIVERINTERNALS_H_
 
 
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <vector>

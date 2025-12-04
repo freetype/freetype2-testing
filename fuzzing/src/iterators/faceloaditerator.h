@@ -37,8 +37,9 @@ namespace freetype {
   public:
 
 
-    FaceLoadIterator()
-      : face_loader( new FaceLoader ) {}
+    FaceLoadIterator();
+
+    ~FaceLoadIterator();
 
 
     // @See: FaceLoader::set_supported_font_format
@@ -60,12 +61,11 @@ namespace freetype {
                    size_t          size );
 
 
-#ifdef HAVE_ARCHIVE
     // @See: FaceLoader::set_data_is_tar_archive()
 
     void
     set_data_is_tar_archive( bool  is_tar_archive );
-#endif
+
 
     // @Description:
     //   Add a face visitor that is called once, with the first loaded face.

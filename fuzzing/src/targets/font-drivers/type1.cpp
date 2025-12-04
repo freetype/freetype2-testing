@@ -82,7 +82,5 @@
 
     (void) set_iterator( std::move( fli ) );
 
-#ifdef HAVE_ARCHIVE
     (void) set_data_is_tar_archive( false );
-#endif
   }

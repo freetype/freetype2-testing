@@ -71,14 +71,12 @@
     num_instances = -1;
   }
 
-#ifdef HAVE_ARCHIVE
   void
   freetype::FaceLoader::
   set_data_is_tar_archive( bool  is_tar_archive )
   {
     data_is_tar_archive = is_tar_archive;
   }
-#endif
 
 
   void
