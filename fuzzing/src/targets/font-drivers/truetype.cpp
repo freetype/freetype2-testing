@@ -27,6 +27,7 @@
 #include "visitors/facevisitor-sfntnames.h"
 #include "visitors/facevisitor-truetypetables.h"
 #include "visitors/facevisitor-variants.h"
+#include "visitors/facevisitor-properties.h"
 
 
   freetype::TrueTypeFuzzTarget::
@@ -80,6 +81,8 @@
         freetype::make_unique<FaceVisitorTrueTypeTables>() );
     (void) fli
       ->add_once_visitor( freetype::make_unique<FaceVisitorVariants>() );
+    (void) fli
+      ->add_once_visitor( freetype::make_unique<FaceVisitorProperties>() );
     
     // -----------------------------------------------------------------------
     // Fuzz target:

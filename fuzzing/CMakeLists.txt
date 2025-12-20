@@ -48,44 +48,27 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 set(SUBMODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external")
 
-set(FREETYPE_BASE_DIR       "${SUBMODULES_DIR}/freetype2")
+set(FREETYPE_BASE_DIR       "/home/sky/freetype")
 set(FREETYPE_SRC_DIR        "${FREETYPE_BASE_DIR}/src")
-set(FREETYPE_STATIC_LIBRARY "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
+set(FREETYPE_STATIC_LIBRARY "/home/sky/freetype/build/libfreetype.a")
 
-set(GLOG_BASE_DIR       "${SUBMODULES_DIR}/glog")
-set(GLOG_SRC_DIR        "${GLOG_BASE_DIR}/src")
-set(GLOG_BUILD_DIR      "${GLOG_BASE_DIR}/build")
-set(GLOG_STATIC_LIBRARY "${GLOG_BUILD_DIR}/libglog.a")
+set(GLOG_STATIC_LIBRARY "")
 
 set(LIBARCHIVE_BASE_DIR       "${SUBMODULES_DIR}/libarchive")
 set(LIBARCHIVE_SRC_DIR        "${LIBARCHIVE_BASE_DIR}/src")
-set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
+set(LIBARCHIVE_STATIC_LIBRARY "/home/sky/freetype/freetype-testing/external/libarchive/build_cmake/libarchive/libarchive.a")
 
-set(BZIP2_BASE_DIR       "${SUBMODULES_DIR}/bzip2")
-set(BZIP2_STATIC_LIBRARY "${BZIP2_BASE_DIR}/libbz2.a")
+set(BZIP2_STATIC_LIBRARY "bz2")
 
-set(BROTLI_BASE_DIR  "${SUBMODULES_DIR}/brotli")
-set(BROTLI_BUILD_DIR "${BROTLI_BASE_DIR}/build")
-set(BROTLI_STATIC_LIBRARY
-  "${BROTLI_BUILD_DIR}/libbrotlidec-static.a"
-  "${BROTLI_BUILD_DIR}/libbrotlicommon-static.a")
+set(BROTLI_STATIC_LIBRARY "brotlidec" "brotlicommon")
 
-set(ZLIB_BASE_DIR  "${SUBMODULES_DIR}/zlib")
-set(ZLIB_STATIC_LIBRARY "${ZLIB_BASE_DIR}/usr/lib-asan/libz.a")
+set(ZLIB_STATIC_LIBRARY "z")
 
-set(LIBPNG_BASE_DIR  "${SUBMODULES_DIR}/libpng")
-set(LIBPNG_STATIC_LIBRARY "${LIBPNG_BASE_DIR}/usr/lib-asan/libpng.a")
+set(LIBPNG_STATIC_LIBRARY "png")
 
-set(LIBCXX_BASE_DIR  "${SUBMODULES_DIR}/llvm-project")
-set(LIBCXX_BUILD_DIR "${LIBCXX_BASE_DIR}/build")
-set(LIBCXX_STATIC_LIBRARY
-  "${LIBCXX_BUILD_DIR}/lib/libc++.a"
-  "${LIBCXX_BUILD_DIR}/lib/libc++abi.a")
-add_compile_options(
-  "-I${LIBCXX_BUILD_DIR}/include"
-  "-I${LIBCXX_BUILD_DIR}/include/c++/v1"
-  "-nostdinc++")
-add_link_options("-nostdlib++")
+set(LIBCXX_STATIC_LIBRARY "")
+add_compile_options("-I${LIBARCHIVE_BASE_DIR}/libarchive")
+
 
 # ----------------------------------------------------------------------------
 # functions:
@@ -114,6 +97,11 @@ endfunction()
 
 # ----------------------------------------------------------------------------
 # fuzz targets:
+
+add_fuzz_target(
+  "cache"
+  "freetype::CacheFuzzTarget"
+  "targets/CacheFuzzTarget.h")
 
 add_fuzz_target(
   "bdf"
@@ -166,6 +154,11 @@ add_fuzz_target(
   "pcf-render"
   "freetype::PcfRenderFuzzTarget"
   "targets/font-drivers/pcf-render.h")
+
+add_fuzz_target(
+  "pfr"
+  "freetype::PfrFuzzTarget"
+  "targets/font-drivers/pfr.h")
 
 add_fuzz_target(
   "truetype"

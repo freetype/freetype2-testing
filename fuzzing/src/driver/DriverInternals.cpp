@@ -34,6 +34,8 @@
 #include "targets/font-drivers/pcf.h"
 #include "targets/font-drivers/pcf-render.h"
 
+#include "targets/font-drivers/pfr.h"
+
 #include "targets/font-drivers/truetype.h"
 #include "targets/font-drivers/truetype-render.h"
 #include "targets/font-drivers/truetype-render-i35.h"
@@ -58,6 +60,8 @@
 #include "targets/support/Bzip2FuzzTarget.h"
 #include "targets/support/GzipFuzzTarget.h"
 #include "targets/support/LzwFuzzTarget.h"
+
+#include "targets/CacheFuzzTarget.h"
 
 
   // The legacy fuzzer is a monolith but it is the only target that calls
@@ -90,6 +94,8 @@
     (void) add<PcfFuzzTarget>(       "pcf" );
     (void) add<PcfRenderFuzzTarget>( "pcf-render" );
 
+    (void) add<PfrFuzzTarget>( "pfr" );
+
     (void) add<TrueTypeFuzzTarget>(          "truetype" );
     (void) add<TrueTypeRenderFuzzTarget>(    "truetype-render" );
     (void) add<TrueTypeRenderI35FuzzTarget>( "truetype-render-i35" );
@@ -114,6 +120,8 @@
     (void) add<GzipFuzzTarget>(  "gzip" );
     (void) add<LzwFuzzTarget>(   "lzw" );
     (void) add<Bzip2FuzzTarget>( "bzip2" );
+
+    (void) add<CacheFuzzTarget>( "cache" );
   }
 
 

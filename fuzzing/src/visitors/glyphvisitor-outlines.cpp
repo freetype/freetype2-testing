@@ -18,8 +18,22 @@
 
 #include <ft2build.h>
 #include FT_OUTLINE_H
+#include FT_BITMAP_H
 
 #include "utils/logging.h"
+
+
+  static void
+  dummy_gray_spans( int             y,
+                    int             count,
+                    const FT_Span*  spans,
+                    void*           user )
+  {
+    (void) y;
+    (void) count;
+    (void) spans;
+    (void) user;
+  }
 
 
   freetype::GlyphVisitorOutlines::
@@ -30,6 +44,8 @@
     (void) callbacks.emplace_back( embolden_2 );
     (void) callbacks.emplace_back( embolden_3 );
     (void) callbacks.emplace_back( embolden_4 );
+    (void) callbacks.emplace_back( get_bitmap );
+    (void) callbacks.emplace_back( render     );
   }
 
 
@@ -65,7 +81,7 @@
       if ( error != 0 )
         continue;
 
-      (void) fn( outline );
+      (void) fn( glyph->library, outline );
     }
 
     error = FT_Outline_Done( glyph->library, &outline );
@@ -75,8 +91,10 @@
 
   void
   freetype::GlyphVisitorOutlines::
-  reverse( FT_Outline&  outline )
+  reverse( FT_Library   library,
+           FT_Outline&  outline )
   {
+    (void) library;
     LOG( INFO ) << "reversing outline";
 
     (void) FT_Outline_Reverse( &outline );
@@ -117,8 +135,10 @@
 
   void
   freetype::GlyphVisitorOutlines::
-  embolden_1( FT_Outline&  outline )
+  embolden_1( FT_Library   library,
+              FT_Outline&  outline )
   {
+    (void) library;
     // Note: the strength is in 26.6 format.
     (void) embolden( outline, 3 * 64 );
   }
@@ -126,8 +146,10 @@
 
   void
   freetype::GlyphVisitorOutlines::
-  embolden_2( FT_Outline&  outline )
+  embolden_2( FT_Library   library,
+              FT_Outline&  outline )
   {
+    (void) library;
     // Note: the strength is in 26.6 format.
     (void) embolden( outline, -2 * 64 );
   }
@@ -135,16 +157,61 @@
 
   void
   freetype::GlyphVisitorOutlines::
-  embolden_3( FT_Outline&  outline )
+  embolden_3( FT_Library   library,
+              FT_Outline&  outline )
   {
+    (void) library;
     // Note: the strength is in 26.6 format.
     (void) embolden( outline, 3 * 64, -2 * 64 );
   }
 
   void
   freetype::GlyphVisitorOutlines::
-  embolden_4( FT_Outline&  outline )
+  embolden_4( FT_Library   library,
+              FT_Outline&  outline )
   {
+    (void) library;
     // Note: the strength is in 26.6 format.
     (void) embolden( outline, -2 * 64, 3 * 64 );
   }
+
+  void
+  freetype::GlyphVisitorOutlines::
+  get_bitmap( FT_Library   library,
+              FT_Outline&  outline )
+  {
+    FT_Error   error;
+    FT_Bitmap  bitmap;
+
+    FT_Bitmap_Init( &bitmap );
+
+    LOG( INFO ) << "getting bitmap from outline";
+
+    error = FT_Outline_Get_Bitmap( library, &outline, &bitmap );
+    LOG_FT_ERROR( "FT_Outline_Get_Bitmap", error );
+
+    FT_Bitmap_Done( library, &bitmap );
+  }
+
+  void
+  freetype::GlyphVisitorOutlines::
+  render( FT_Library   library,
+          FT_Outline&  outline )
+  {
+    FT_Error          error;
+    FT_Raster_Params  params;
+
+    params.target = nullptr;
+    params.flags  = FT_RASTER_FLAG_AA | FT_RASTER_FLAG_DIRECT;
+    params.user   = nullptr;
+    params.black_spans = nullptr;
+    params.bit_test    = nullptr;
+    params.bit_set     = nullptr;
+    params.gray_spans  = dummy_gray_spans;
+
+    LOG( INFO ) << "rendering outline";
+
+    error = FT_Outline_Render( library, &outline, &params );
+    LOG_FT_ERROR( "FT_Outline_Render", error );
+  }
+

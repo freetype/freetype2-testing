@@ -51,7 +51,7 @@ namespace freetype {
   private:
 
 
-    typedef void  (*OutlineFunc)( FT_Outline& );
+    typedef void  (*OutlineFunc)( FT_Library, FT_Outline& );
 
     std::vector<OutlineFunc>  callbacks;
 
@@ -60,7 +60,8 @@ namespace freetype {
     //   `FT_Outline_Reverse( outline )'.
 
     static void 
-    reverse( FT_Outline&  outline );
+    reverse( FT_Library   library,
+             FT_Outline&  outline );
 
 
     // @Description:
@@ -84,28 +85,41 @@ namespace freetype {
     //   `GlyphVisitorOutlines::embolden( outline, ... )'.
 
     static void
-    embolden_1( FT_Outline&  outline );
+    embolden_1( FT_Library   library,
+                FT_Outline&  outline );
 
 
     // @Description:
     //   `GlyphVisitorOutlines::embolden( outline, ... )'.
 
     static void
-    embolden_2( FT_Outline&  outline );
+    embolden_2( FT_Library   library,
+                FT_Outline&  outline );
 
 
     // @Description:
     //   `GlyphVisitorOutlines::embolden( outline, ... )'.
 
     static void
-    embolden_3( FT_Outline&  outline );
+    embolden_3( FT_Library   library,
+                FT_Outline&  outline );
 
 
     // @Description:
     //   `GlyphVisitorOutlines::embolden( outline, ... )'.
 
     static void
-    embolden_4( FT_Outline&  outline );
+    embolden_4( FT_Library   library,
+                FT_Outline&  outline );
+
+    static void
+    get_bitmap( FT_Library   library,
+                FT_Outline&  outline );
+
+    static void
+    render( FT_Library   library,
+            FT_Outline&  outline );
+
   };
 }
 
