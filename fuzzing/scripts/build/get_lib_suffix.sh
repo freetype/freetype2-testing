@@ -4,6 +4,10 @@
 
 if [[ "${CFLAGS:-}" == *"-fsanitize=memory"* ]]; then
   echo "lib-msan"
+elif [[ "${CFLAGS:-}" == *"-fsanitize=address"* ]]; then
+  echo "lib-asan"
+elif [[ "${CFLAGS:-}" == *"-fsanitize=undefined"* ]]; then
+  echo "lib-ubsan"
 else
   echo "lib-asan"
 fi
