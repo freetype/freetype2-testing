@@ -22,6 +22,7 @@ add_library(fuzztargets
   "${FUZZING_SRC_DIR}/iterators/glyphrenderiterator-allmodes.cpp"
 
   "${FUZZING_SRC_DIR}/targets/FaceFuzzTarget.cpp"
+  "${FUZZING_SRC_DIR}/targets/PropertiesFuzzTarget.cpp"
   "${FUZZING_SRC_DIR}/targets/CacheFuzzTarget.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/bdf.cpp"
   "${FUZZING_SRC_DIR}/targets/font-drivers/bdf-render.cpp"

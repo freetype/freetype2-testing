@@ -62,6 +62,7 @@
 #include "targets/support/LzwFuzzTarget.h"
 
 #include "targets/CacheFuzzTarget.h"
+#include "targets/PropertiesFuzzTarget.h"
 
 
   // The legacy fuzzer is a monolith but it is the only target that calls
@@ -122,6 +123,7 @@
     (void) add<Bzip2FuzzTarget>( "bzip2" );
 
     (void) add<CacheFuzzTarget>( "cache" );
+    (void) add<PropertiesFuzzTarget>( "properties" );
   }
 
 

@@ -104,6 +104,11 @@ add_fuzz_target(
   "targets/CacheFuzzTarget.h")
 
 add_fuzz_target(
+  "properties"
+  "freetype::PropertiesFuzzTarget"
+  "targets/PropertiesFuzzTarget.h")
+
+add_fuzz_target(
   "bdf"
   "freetype::BdfFuzzTarget"
   "targets/font-drivers/bdf.h")
