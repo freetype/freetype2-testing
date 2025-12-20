@@ -48,15 +48,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 set(SUBMODULES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../external")
 
-set(FREETYPE_BASE_DIR       "/home/sky/freetype")
+set(FREETYPE_BASE_DIR       "${SUBMODULES_DIR}/freetype2")
 set(FREETYPE_SRC_DIR        "${FREETYPE_BASE_DIR}/src")
-set(FREETYPE_STATIC_LIBRARY "/home/sky/freetype/build/libfreetype.a")
+set(FREETYPE_STATIC_LIBRARY "${FREETYPE_BASE_DIR}/objs/.libs/libfreetype.a")
 
 set(GLOG_STATIC_LIBRARY "")
 
 set(LIBARCHIVE_BASE_DIR       "${SUBMODULES_DIR}/libarchive")
 set(LIBARCHIVE_SRC_DIR        "${LIBARCHIVE_BASE_DIR}/src")
-set(LIBARCHIVE_STATIC_LIBRARY "/home/sky/freetype/freetype-testing/external/libarchive/build_cmake/libarchive/libarchive.a")
+set(LIBARCHIVE_STATIC_LIBRARY "${LIBARCHIVE_BASE_DIR}/.libs/libarchive.a")
 
 set(BZIP2_STATIC_LIBRARY "bz2")
 
