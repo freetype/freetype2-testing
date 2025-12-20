@@ -39,11 +39,13 @@ if [[ "${#}" == "0" || "${1}" != "--no-init" ]]; then
     export BROTLI_CFLAGS="-I../brotli/c/include"
     export BROTLI_LIBS="-l../brotli/build/libbrotlidec-static.a"
 
+    lib_suffix=$( bash "$( dirname "$0" )/get_lib_suffix.sh" )
+
     export ZLIB_CFLAGS="-I../zlib/usr/include"
-    export ZLIB_LIBS="-l../zlib/usr/lib-asan/libz.a"
+    export ZLIB_LIBS="-l../zlib/usr/${lib_suffix}/libz.a"
 
     export LIBPNG_CFLAGS="-I../libpng/usr/include"
-    export LIBPNG_LIBS="-l../libpng/usr/lib-asan/libpng.a"
+    export LIBPNG_LIBS="-l../libpng/usr/${lib_suffix}/libpng.a"
 
     # Having additional libraries is pain since they have to be linked
     # statically for OSS-Fuzz.  Should additional libraries be required, they
