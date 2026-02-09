@@ -16,6 +16,7 @@
 #include "visitors/facevisitor-colrv1.h"
 
 #include <cassert>
+#include <cstdint>
 #include <unordered_set>
 
 #include "utils/logging.h"
