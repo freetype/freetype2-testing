@@ -215,11 +215,12 @@
       }
     }
 
-    std::string  font_format( FT_Get_Font_Format( face ) );
-    if ( font_format != supported_font_format_string )
+    const char*  font_format = FT_Get_Font_Format( face );
+    std::string  font_format_string( font_format ? font_format : "NULL" );
+    if ( font_format_string != supported_font_format_string )
     {
       LOG( ERROR ) << "invalid font format: "
-                   << "received '" << font_format << "' but "
+                   << "received '" << font_format_string << "' but "
                    << "expected '" << supported_font_format_string << "'";
       (void) FT_Done_Face( face );
       return make_unique_face();
