@@ -87,7 +87,7 @@ https://www.freetype.org/freetype2/docs/reference/ft2-base_interface.html
 | 2.2.2 | `FT_Done_Face`       | :heavy_check_mark: | Face                     | 6.1.1 |                  |
 | 2.2.3 | `FT_Reference_Face`  |                    | Face                     |       |                  |
 | 2.2.4 | `FT_New_Memory_Face` | :heavy_check_mark: | Library <br> Bytes       | 2.2.6 |                  |
-| 2.2.5 | `FT_Face_Properties` |                    | Face                     |       |                  |
+| 2.2.5 | `FT_Face_Properties` | :heavy_check_mark: | Face                     |       |                  |
 | 2.2.6 | `FT_Open_Face`       | :heavy_check_mark: | Library                  | 6.1.2 | 2.2.4 <br> 2.2.8 |
 | 2.2.7 | `FT_Attach_File`     |                    | Face <br> File Path      |       |                  |
 | 2.2.8 | `FT_Attach_Stream`   | :heavy_check_mark: | Face <br> Bytes          | 2.2.6 |                  |
@@ -257,11 +257,11 @@ https://www.freetype.org/freetype2/docs/reference/ft2-cid_fonts.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-pfr_fonts.html
 
-|        | Function             | Fuzzed |
-| ------ | -------------------- | :----: |
-| 13.1.1 | `FT_Get_PFR_Metrics` |        |
-| 13.1.2 | `FT_Get_PFR_Kerning` |        |
-| 13.1.3 | `FT_Get_PFR_Advance` |        |
+|        | Function             | Fuzzed             |
+| ------ | -------------------- | :----------------: |
+| 13.1.1 | `FT_Get_PFR_Metrics` | :heavy_check_mark: |
+| 13.1.2 | `FT_Get_PFR_Kerning` | :heavy_check_mark: |
+| 13.1.3 | `FT_Get_PFR_Advance` | :heavy_check_mark: |
 
 ### Window FNT Files
 
@@ -318,23 +318,23 @@ https://www.freetype.org/freetype2/docs/reference/ft2-properties.html
 
 https://www.freetype.org/freetype2/docs/reference/ft2-cache_subsystem.html
 
-|         | Function                      | Fuzzed |
-| ------- | ----------------------------- | :----: |
-| 18.1.1  | `FTC_Manager_New`             |        |
-| 18.1.2  | `FTC_Manager_Reset`           |        |
-| 18.1.3  | `FTC_Manager_Done`            |        |
-| 18.1.4  | `FTC_Manager_LookupFace`      |        |
-| 18.1.5  | `FTC_Manager_LookupSize`      |        |
-| 18.1.6  | `FTC_Manager_RemoveFaceID`    |        |
-| 18.1.7  | `FTC_Node_Unref`              |        |
-| 18.1.8  | `FTC_ImageCache_New`          |        |
-| 18.1.9  | `FTC_ImageCache_Lookup`       |        |
-| 18.1.10 | `FTC_SBitCache_New`           |        |
-| 18.1.11 | `FTC_SBitCache_Lookup`        |        |
-| 18.1.12 | `FTC_CMapCache_New`           |        |
-| 18.1.13 | `FTC_CMapCache_Lookup`        |        |
-| 18.1.14 | `FTC_ImageCache_LookupScaler` |        |
-| 18.1.15 | `FTC_SBitCache_LookupScaler`  |        |
+|         | Function                      | Fuzzed             |
+| ------- | ----------------------------- | :----------------: |
+| 18.1.1  | `FTC_Manager_New`             | :heavy_check_mark: |
+| 18.1.2  | `FTC_Manager_Reset`           | :heavy_check_mark: |
+| 18.1.3  | `FTC_Manager_Done`            | :heavy_check_mark: |
+| 18.1.4  | `FTC_Manager_LookupFace`      | :heavy_check_mark: |
+| 18.1.5  | `FTC_Manager_LookupSize`      | :heavy_check_mark: |
+| 18.1.6  | `FTC_Manager_RemoveFaceID`    | :heavy_check_mark: |
+| 18.1.7  | `FTC_Node_Unref`              | :heavy_check_mark: |
+| 18.1.8  | `FTC_ImageCache_New`          | :heavy_check_mark: |
+| 18.1.9  | `FTC_ImageCache_Lookup`       | :heavy_check_mark: |
+| 18.1.10 | `FTC_SBitCache_New`           | :heavy_check_mark: |
+| 18.1.11 | `FTC_SBitCache_Lookup`        | :heavy_check_mark: |
+| 18.1.12 | `FTC_CMapCache_New`           | :heavy_check_mark: |
+| 18.1.13 | `FTC_CMapCache_Lookup`        | :heavy_check_mark: |
+| 18.1.14 | `FTC_ImageCache_LookupScaler` | :heavy_check_mark: |
+| 18.1.15 | `FTC_SBitCache_LookupScaler`  | :heavy_check_mark: |
 
 ### Outline Processing
 

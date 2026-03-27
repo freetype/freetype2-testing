@@ -54,5 +54,8 @@
         LOG( INFO ) << "BDF charset registry: "
                     << std::string( charset_registry );
       }
+
+      BDF_PropertyRec  property;
+      (void) FT_Get_BDF_Property( face.get(), "FAMILY_NAME", &property );
     }
   }

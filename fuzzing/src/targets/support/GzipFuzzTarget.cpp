@@ -38,4 +38,12 @@
 
     (void) uncompressed.read_forwards();
     (void) uncompressed.read_backwards();
+
+    // Fuzz FT_Gzip_Uncompress
+    FT_ULong  uncompressed_size = (FT_ULong)size * 4; // Arbitrary guess
+    FT_Byte*  buffer = (FT_Byte*)malloc( uncompressed_size );
+    if ( buffer ) {
+      (void) FT_Gzip_Uncompress( get_ft_memory(), buffer, &uncompressed_size, data, (FT_ULong)size );
+      free( buffer );
+    }
   }

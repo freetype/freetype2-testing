@@ -43,15 +43,17 @@ if [[ "${#}" -lt "1" || "${1}" != "--no-init" ]]; then
 
     mkdir -p "${path_to_build}" && cd "${path_to_build}"
 
+    lib_suffix=$( bash "$( dirname "$0" )/get_lib_suffix.sh" )
+
     # Depending on the OS, the library gets installed in `.../lib` or
     # `.../lib64` (or maybe even somewhere else).  For simplicity, however,
     # we want a location that is independent of the OS, thus the `--libdir`
     # argument.
     CPPFLAGS="-I${path_to_zlib}/usr/include" \
-    LDFLAGS="-L${path_to_zlib}/usr/lib-asan" \
+    LDFLAGS="-L${path_to_zlib}/usr/${lib_suffix}" \
     sh ../configure --with-libpng-prefix=OSS_FUZZ_ \
                     --prefix="${path_to_install}" \
-                    --libdir="${path_to_install}/lib-asan" \
+                    --libdir="${path_to_install}/${lib_suffix}" \
                     --enable-static \
                     --disable-shared
 fi
